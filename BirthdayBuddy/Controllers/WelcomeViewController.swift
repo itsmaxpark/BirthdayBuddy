@@ -77,7 +77,8 @@ class WelcomeViewController: UIViewController {
     private let signUpButton: UIButton = {
         
         let button = UIButton()
-//        button.titleLabel.font = 
+        button.titleLabel?.font = UIFont.appFont(size: 36)
+        button.setTitle("Sign Up", for: .normal)
         
         return button
     }()
@@ -85,9 +86,13 @@ class WelcomeViewController: UIViewController {
     private let logInButton: UIButton = {
         
         let button = UIButton()
+        button.titleLabel?.font = UIFont.appFont(size: 36)
+        button.setTitle("Log In", for: .normal)
         
         return button
     }()
+    
+    // MARK: - View
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,18 +102,21 @@ class WelcomeViewController: UIViewController {
         view.layer.addSublayer(bottomCircleView)
         view.addSubview(logoImageView)
         view.addSubview(birthdayBuddyTextLabel)
+        
+        view.addSubview(signUpButton)
+        view.addSubview(logInButton)
     
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        let width = Int(view.bounds.width)
-        let height = Int(view.bounds.height)
-        let circleDiameter = 800
-        let logoSize = 260
-        let topCircleHeight = 188 // 188 pixels of the top circle is showing
-        let bottomCircleHeight = 344 // 344 pixels of the bottom circle is showing
+        let width = view.bounds.width
+        let height = view.bounds.height
+        let circleDiameter: CGFloat = 800
+        let logoSize: CGFloat = 260
+        let topCircleHeight: CGFloat = 188 // 188 pixels of the top circle is showing
+        let bottomCircleHeight:CGFloat = 344 // 344 pixels of the bottom circle is showing
         
         topCircleView.frame = CGRect(
             x: (width-circleDiameter)/2,
@@ -116,28 +124,39 @@ class WelcomeViewController: UIViewController {
             width: circleDiameter,
             height: circleDiameter
         )
-        
         bottomCircleView.frame = CGRect(
             x: (width-circleDiameter)/2,
             y: height-bottomCircleHeight,
             width: circleDiameter,
             height: circleDiameter
         )
-
         logoImageView.frame = CGRect(
             x: (width-logoSize)/2,
             y: topCircleHeight+(height-logoSize-topCircleHeight-bottomCircleHeight)/2,
             width: logoSize,
             height: logoSize
         )
-        
         birthdayBuddyTextLabel.frame = CGRect(
-            x: (width-300)/2,
-            y: (topCircleHeight-Int(view.safeAreaInsets.top))/2,
-            width: width,
-            height: 100
+            x: (width-birthdayBuddyTextLabel.intrinsicContentSize.width)/2,
+            y: (topCircleHeight-view.safeAreaInsets.top)/2,
+            width: birthdayBuddyTextLabel.intrinsicContentSize.width,
+            height: birthdayBuddyTextLabel.intrinsicContentSize.height
         )
-
+        
+        signUpButton.frame = CGRect(
+            x: (width-signUpButton.intrinsicContentSize.width)/2,
+            y: height-bottomCircleHeight+20,
+            width: signUpButton.intrinsicContentSize.width,
+            height: signUpButton.intrinsicContentSize.height
+            
+        )
+        logInButton.frame = CGRect(
+            x: (width-logInButton.intrinsicContentSize.width)/2,
+            y: height-100,
+            width: logInButton.intrinsicContentSize.width,
+            height: logInButton.intrinsicContentSize.height
+            
+        )
     }
 }
 
