@@ -66,11 +66,9 @@ class WelcomeViewController: UIViewController {
     private let birthdayBuddyTextLabel: UILabel = {
         
         let label = UILabel()
-        guard let font = UIFont(name: "IndieFlower", size: 44) else {
-            fatalError("Unable to retrieve font")
-        }
-        label.font = font
+        label.font = UIFont.appFont(size: 44)
         label.text = "Birthday Buddy"
+        
         return label
     }()
     
@@ -79,6 +77,7 @@ class WelcomeViewController: UIViewController {
     private let signUpButton: UIButton = {
         
         let button = UIButton()
+//        button.titleLabel.font = 
         
         return button
     }()

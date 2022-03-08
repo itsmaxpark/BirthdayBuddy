@@ -16,6 +16,7 @@
 		5093F99D27D6ED6400378967 /* AddBirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99C27D6ED6400378967 /* AddBirthdayViewController.swift */; };
 		5093F99F27D6ED6A00378967 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99E27D6ED6A00378967 /* SettingsViewController.swift */; };
 		5093F9A327D7123200378967 /* IndieFlower-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5093F9A127D7123200378967 /* IndieFlower-Regular.ttf */; };
+		5093F9A827D71B2400378967 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F9A727D71B2400378967 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		5093F99C27D6ED6400378967 /* AddBirthdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBirthdayViewController.swift; sourceTree = "<group>"; };
 		5093F99E27D6ED6A00378967 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5093F9A127D7123200378967 /* IndieFlower-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IndieFlower-Regular.ttf"; sourceTree = "<group>"; };
+		5093F9A727D71B2400378967 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +64,6 @@
 		5056AF1D27D6B803008601FF /* BirthdayBuddy */ = {
 			isa = PBXGroup;
 			children = (
-				5093F9A027D7123200378967 /* Fonts */,
 				5056AF2C27D6B803008601FF /* Info.plist */,
 				5056AF3627D6E458008601FF /* Resources */,
 				5056AF3527D6E450008601FF /* Controllers */,
@@ -106,6 +107,7 @@
 		5056AF3627D6E458008601FF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5093F9A027D7123200378967 /* Fonts */,
 				5056AF1E27D6B803008601FF /* AppDelegate.swift */,
 				5056AF2027D6B803008601FF /* SceneDelegate.swift */,
 				5056AF2727D6B803008601FF /* Assets.xcassets */,
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				5093F9A127D7123200378967 /* IndieFlower-Regular.ttf */,
+				5093F9A727D71B2400378967 /* Extensions.swift */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 				5093F99D27D6ED6400378967 /* AddBirthdayViewController.swift in Sources */,
 				5056AF1F27D6B803008601FF /* AppDelegate.swift in Sources */,
 				5093F99827D6ED3900378967 /* TabBarViewController.swift in Sources */,
+				5093F9A827D71B2400378967 /* Extensions.swift in Sources */,
 				5056AF2127D6B803008601FF /* SceneDelegate.swift in Sources */,
 				5093F99B27D6ED5700378967 /* HomeViewController.swift in Sources */,
 				5093F99F27D6ED6A00378967 /* SettingsViewController.swift in Sources */,
