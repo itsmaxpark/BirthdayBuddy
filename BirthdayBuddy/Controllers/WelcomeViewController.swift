@@ -9,6 +9,8 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
     
+    // MARK: - Background Views
+    
     private let topCircleView: CAGradientLayer = {
         
         let circleFrame = CGRect(x: 0, y: 0, width: 800, height: 800)
@@ -60,6 +62,33 @@ class WelcomeViewController: UIViewController {
         return imageView
         
     }()
+    
+    private let birthdayBuddyTextLabel: UILabel = {
+        
+        let label = UILabel()
+        guard let font = UIFont(name: "IndieFlower", size: 44) else {
+            fatalError("Unable to retrieve font")
+        }
+        label.font = font
+        label.text = "Birthday Buddy"
+        return label
+    }()
+    
+    // MARK: - Buttons
+    
+    private let signUpButton: UIButton = {
+        
+        let button = UIButton()
+        
+        return button
+    }()
+    
+    private let logInButton: UIButton = {
+        
+        let button = UIButton()
+        
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +97,7 @@ class WelcomeViewController: UIViewController {
         view.layer.addSublayer(topCircleView)
         view.layer.addSublayer(bottomCircleView)
         view.addSubview(logoImageView)
+        view.addSubview(birthdayBuddyTextLabel)
     
     }
     
@@ -100,6 +130,13 @@ class WelcomeViewController: UIViewController {
             y: topCircleHeight+(height-logoSize-topCircleHeight-bottomCircleHeight)/2,
             width: logoSize,
             height: logoSize
+        )
+        
+        birthdayBuddyTextLabel.frame = CGRect(
+            x: (width-300)/2,
+            y: (topCircleHeight-Int(view.safeAreaInsets.top))/2,
+            width: width,
+            height: 100
         )
 
     }

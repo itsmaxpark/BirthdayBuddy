@@ -15,6 +15,7 @@
 		5093F99B27D6ED5700378967 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99A27D6ED5700378967 /* HomeViewController.swift */; };
 		5093F99D27D6ED6400378967 /* AddBirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99C27D6ED6400378967 /* AddBirthdayViewController.swift */; };
 		5093F99F27D6ED6A00378967 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99E27D6ED6A00378967 /* SettingsViewController.swift */; };
+		5093F9A327D7123200378967 /* IndieFlower-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5093F9A127D7123200378967 /* IndieFlower-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		5093F99A27D6ED5700378967 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5093F99C27D6ED6400378967 /* AddBirthdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBirthdayViewController.swift; sourceTree = "<group>"; };
 		5093F99E27D6ED6A00378967 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		5093F9A127D7123200378967 /* IndieFlower-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IndieFlower-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		5056AF1D27D6B803008601FF /* BirthdayBuddy */ = {
 			isa = PBXGroup;
 			children = (
+				5093F9A027D7123200378967 /* Fonts */,
 				5056AF2C27D6B803008601FF /* Info.plist */,
 				5056AF3627D6E458008601FF /* Resources */,
 				5056AF3527D6E450008601FF /* Controllers */,
@@ -121,6 +124,14 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		5093F9A027D7123200378967 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				5093F9A127D7123200378967 /* IndieFlower-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -179,6 +190,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5093F9A327D7123200378967 /* IndieFlower-Regular.ttf in Resources */,
 				5056AF2827D6B803008601FF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
