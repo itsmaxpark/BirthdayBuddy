@@ -10,6 +10,7 @@
 		5056AF1F27D6B803008601FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5056AF1E27D6B803008601FF /* AppDelegate.swift */; };
 		5056AF2127D6B803008601FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5056AF2027D6B803008601FF /* SceneDelegate.swift */; };
 		5056AF2827D6B803008601FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5056AF2727D6B803008601FF /* Assets.xcassets */; };
+		506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */; };
 		5093F99627D6EB4800378967 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99527D6EB4800378967 /* WelcomeViewController.swift */; };
 		5093F99827D6ED3900378967 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99727D6ED3900378967 /* TabBarViewController.swift */; };
 		5093F99B27D6ED5700378967 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99A27D6ED5700378967 /* HomeViewController.swift */; };
@@ -20,11 +21,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		503E68BE27D8484E00D4D0AA /* BirthdayBuddyRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BirthdayBuddyRelease.entitlements; sourceTree = "<group>"; };
 		5056AF1B27D6B803008601FF /* BirthdayBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BirthdayBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5056AF1E27D6B803008601FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5056AF2027D6B803008601FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5056AF2727D6B803008601FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5056AF2C27D6B803008601FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenBackgroundView.swift; sourceTree = "<group>"; };
 		5093F99527D6EB4800378967 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		5093F99727D6ED3900378967 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		5093F99A27D6ED5700378967 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -32,6 +35,7 @@
 		5093F99E27D6ED6A00378967 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5093F9A127D7123200378967 /* IndieFlower-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IndieFlower-Regular.ttf"; sourceTree = "<group>"; };
 		5093F9A727D71B2400378967 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		5093F9A927D844B000378967 /* BirthdayBuddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BirthdayBuddy.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 		5056AF1D27D6B803008601FF /* BirthdayBuddy */ = {
 			isa = PBXGroup;
 			children = (
+				503E68BE27D8484E00D4D0AA /* BirthdayBuddyRelease.entitlements */,
+				5093F9A927D844B000378967 /* BirthdayBuddy.entitlements */,
 				5056AF2C27D6B803008601FF /* Info.plist */,
 				5056AF3627D6E458008601FF /* Resources */,
 				5056AF3527D6E450008601FF /* Controllers */,
@@ -77,6 +83,7 @@
 		5056AF3227D6E430008601FF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -211,6 +218,7 @@
 				5093F99827D6ED3900378967 /* TabBarViewController.swift in Sources */,
 				5093F9A827D71B2400378967 /* Extensions.swift in Sources */,
 				5056AF2127D6B803008601FF /* SceneDelegate.swift in Sources */,
+				506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */,
 				5093F99B27D6ED5700378967 /* HomeViewController.swift in Sources */,
 				5093F99F27D6ED6A00378967 /* SettingsViewController.swift in Sources */,
 			);
@@ -342,6 +350,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BirthdayBuddy/BirthdayBuddy.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C5L746M7FW;
@@ -358,6 +368,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = itsmaxpark.BirthdayBuddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -369,6 +380,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BirthdayBuddy/BirthdayBuddyRelease.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C5L746M7FW;
@@ -385,6 +398,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = itsmaxpark.BirthdayBuddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
