@@ -11,6 +11,7 @@
 		5056AF2127D6B803008601FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5056AF2027D6B803008601FF /* SceneDelegate.swift */; };
 		5056AF2827D6B803008601FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5056AF2727D6B803008601FF /* Assets.xcassets */; };
 		506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */; };
+		506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */; };
 		5093F99627D6EB4800378967 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99527D6EB4800378967 /* WelcomeViewController.swift */; };
 		5093F99827D6ED3900378967 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99727D6ED3900378967 /* TabBarViewController.swift */; };
 		5093F99B27D6ED5700378967 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99A27D6ED5700378967 /* HomeViewController.swift */; };
@@ -28,6 +29,7 @@
 		5056AF2727D6B803008601FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5056AF2C27D6B803008601FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenBackgroundView.swift; sourceTree = "<group>"; };
+		506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenButtonsView.swift; sourceTree = "<group>"; };
 		5093F99527D6EB4800378967 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		5093F99727D6ED3900378967 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		5093F99A27D6ED5700378967 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */,
+				506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -115,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				5093F9A027D7123200378967 /* Fonts */,
+				5093F9A727D71B2400378967 /* Extensions.swift */,
 				5056AF1E27D6B803008601FF /* AppDelegate.swift */,
 				5056AF2027D6B803008601FF /* SceneDelegate.swift */,
 				5056AF2727D6B803008601FF /* Assets.xcassets */,
@@ -137,7 +141,6 @@
 			isa = PBXGroup;
 			children = (
 				5093F9A127D7123200378967 /* IndieFlower-Regular.ttf */,
-				5093F9A727D71B2400378967 /* Extensions.swift */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				5056AF1F27D6B803008601FF /* AppDelegate.swift in Sources */,
 				5093F99827D6ED3900378967 /* TabBarViewController.swift in Sources */,
 				5093F9A827D71B2400378967 /* Extensions.swift in Sources */,
+				506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */,
 				5056AF2127D6B803008601FF /* SceneDelegate.swift in Sources */,
 				506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */,
 				5093F99B27D6ED5700378967 /* HomeViewController.swift in Sources */,
