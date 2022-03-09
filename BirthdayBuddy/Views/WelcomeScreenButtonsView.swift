@@ -70,7 +70,7 @@ class WelcomeScreenButtonsView: UIView {
         
         signUpButton.frame = CGRect(
             x: (width-signUpButton.intrinsicContentSize.width)/2,
-            y: height-340,
+            y: height-330,
             width: signUpButton.intrinsicContentSize.width,
             height: signUpButton.intrinsicContentSize.height
         )

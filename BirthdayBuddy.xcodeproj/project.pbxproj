@@ -27,7 +27,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		503E68BE27D8484E00D4D0AA /* BirthdayBuddyRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BirthdayBuddyRelease.entitlements; sourceTree = "<group>"; };
 		5056AF1B27D6B803008601FF /* BirthdayBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BirthdayBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5056AF1E27D6B803008601FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5056AF2027D6B803008601FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,7 +80,6 @@
 			isa = PBXGroup;
 			children = (
 				506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */,
-				503E68BE27D8484E00D4D0AA /* BirthdayBuddyRelease.entitlements */,
 				5093F9A927D844B000378967 /* BirthdayBuddy.entitlements */,
 				5056AF2C27D6B803008601FF /* Info.plist */,
 				5056AF3627D6E458008601FF /* Resources */,

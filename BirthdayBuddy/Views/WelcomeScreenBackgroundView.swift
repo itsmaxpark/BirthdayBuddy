@@ -67,6 +67,7 @@ class WelcomeScreenBackgroundView: UIView {
         let label = UILabel()
         label.font = UIFont.appFont(size: 44)
         label.text = "Birthday Buddy"
+        label.textColor = UIColor.white
         
         return label
     }()
@@ -112,7 +113,7 @@ class WelcomeScreenBackgroundView: UIView {
         )
         birthdayBuddyTextLabel.frame = CGRect(
             x: (width-birthdayBuddyTextLabel.intrinsicContentSize.width)/2,
-            y: (topCircleHeight-safeAreaInsets.top)/2,
+            y: (topCircleHeight-20)/2,
             width: birthdayBuddyTextLabel.intrinsicContentSize.width,
             height: birthdayBuddyTextLabel.intrinsicContentSize.height
         )
