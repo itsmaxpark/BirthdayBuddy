@@ -35,8 +35,6 @@ class WelcomeViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         hideKeyboardWhenTappedAround()
-        
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -62,7 +60,6 @@ class WelcomeViewController: UIViewController {
         print("Presenting Tab Bar VC after successful login")
         let vc = TabBarViewController()
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(vc)
-
     }
 }
 
