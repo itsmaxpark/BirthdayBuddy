@@ -24,6 +24,7 @@
 		50DAC19527D877C0006098D6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 50DAC19427D877C0006098D6 /* FirebaseAuth */; };
 		50DAC19727D877C0006098D6 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 50DAC19627D877C0006098D6 /* FirebaseDatabase */; };
 		50DAC19927D877C0006098D6 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 50DAC19827D877C0006098D6 /* FirebaseStorage */; };
+		50DAC19B27DAC274006098D6 /* AppleUserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC19A27DAC274006098D6 /* AppleUserAuth.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		5093F9A127D7123200378967 /* IndieFlower-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IndieFlower-Regular.ttf"; sourceTree = "<group>"; };
 		5093F9A727D71B2400378967 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		5093F9A927D844B000378967 /* BirthdayBuddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BirthdayBuddy.entitlements; sourceTree = "<group>"; };
+		50DAC19A27DAC274006098D6 /* AppleUserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleUserAuth.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		5056AF3327D6E43E008601FF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				50DAC19A27DAC274006098D6 /* AppleUserAuth.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				5093F9A827D71B2400378967 /* Extensions.swift in Sources */,
 				506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */,
 				5056AF2127D6B803008601FF /* SceneDelegate.swift in Sources */,
+				50DAC19B27DAC274006098D6 /* AppleUserAuth.swift in Sources */,
 				506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */,
 				5093F99B27D6ED5700378967 /* HomeViewController.swift in Sources */,
 				5093F99F27D6ED6A00378967 /* SettingsViewController.swift in Sources */,
@@ -389,7 +393,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.itsmaxpark.BirthdayBuddy;
+				PRODUCT_BUNDLE_IDENTIFIER = itsmaxpark.BirthdayBuddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
