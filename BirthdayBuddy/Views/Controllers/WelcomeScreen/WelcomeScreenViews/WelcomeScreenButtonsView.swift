@@ -120,10 +120,16 @@ class WelcomeScreenButtonsView: UIView {
                 NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 19)
             ]
         )
+        field.attributedText = NSAttributedString(
+            string: "",
+            attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor.black,
+                NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 19)
+            ]
+        )
         field.backgroundColor = .white
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
         field.leftViewMode = .always
-        field.isSecureTextEntry = true
         
         return field
     }()
@@ -136,6 +142,13 @@ class WelcomeScreenButtonsView: UIView {
         field.layer.cornerRadius = 20
         field.attributedPlaceholder = NSAttributedString(
             string: "Password",
+            attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor.black,
+                NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 19)
+            ]
+        )
+        field.attributedText = NSAttributedString(
+            string: "",
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.black,
                 NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 19)
@@ -331,8 +344,15 @@ class WelcomeScreenButtonsView: UIView {
         signInGoogleButton.isHidden = false
         signInFacebookButton.isHidden = false
         logInButton.isHidden = false
+        
+        emailTextField.text = ""
+        passwordTextField.text = ""
     }
     @objc private func didTapEnter() {
+        
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        
         guard let email = emailTextField.text, let password = passwordTextField.text else {
             return
         }
@@ -347,6 +367,10 @@ class WelcomeScreenButtonsView: UIView {
     }
     
     @objc private func didTapRegister() {
+        
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        
         guard let email = emailTextField.text, let password = passwordTextField.text else {
             return
         }
