@@ -22,7 +22,6 @@ class AppleSignInHelper {
         authorizationController.presentationContextProvider = view
         
         authorizationController.performRequests()
-        print("performing requests")
     }
     
     func createAppleIDRequest() -> ASAuthorizationAppleIDRequest {
@@ -88,7 +87,8 @@ extension WelcomeScreenButtonsView: ASAuthorizationControllerDelegate {
                 if let user = authDataResult?.user {
                     print("Awesome! You are signed in as \(user.uid) using \(user.email ?? "Unknown Email")")
                 }
-                AppleUserAuth.login()
+                WelcomeViewController.login()
+                print("Signing in using Apple Credentials")
             }
         }
     }
@@ -96,7 +96,6 @@ extension WelcomeScreenButtonsView: ASAuthorizationControllerDelegate {
 
 extension WelcomeScreenButtonsView: ASAuthorizationControllerPresentationContextProviding {
     public func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        print("Inside presentation anchor")
         return window!
     }
 }

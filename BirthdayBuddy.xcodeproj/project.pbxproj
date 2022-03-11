@@ -24,13 +24,14 @@
 		50DAC19527D877C0006098D6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 50DAC19427D877C0006098D6 /* FirebaseAuth */; };
 		50DAC19727D877C0006098D6 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 50DAC19627D877C0006098D6 /* FirebaseDatabase */; };
 		50DAC19927D877C0006098D6 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 50DAC19827D877C0006098D6 /* FirebaseStorage */; };
-		50DAC19B27DAC274006098D6 /* AppleUserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC19A27DAC274006098D6 /* AppleUserAuth.swift */; };
 		50DAC19D27DAE342006098D6 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC19C27DAE342006098D6 /* DatabaseManager.swift */; };
 		50DAC1A127DAEC71006098D6 /* BirthdayBuddyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1A027DAEC71006098D6 /* BirthdayBuddyUser.swift */; };
 		50DAC1A427DAEEB6006098D6 /* AppleSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1A327DAEEB6006098D6 /* AppleSignInHelper.swift */; };
 		50DAC1A627DAF237006098D6 /* EmailSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1A527DAF237006098D6 /* EmailSignInHelper.swift */; };
 		50DAC1A827DAF4D2006098D6 /* LogInSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1A727DAF4D2006098D6 /* LogInSheetViewController.swift */; };
 		50DAC1AA27DAF4DF006098D6 /* SignUpSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1A927DAF4DF006098D6 /* SignUpSheetViewController.swift */; };
+		50DAC1B127DBEA44006098D6 /* SignOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1B027DBEA43006098D6 /* SignOutCell.swift */; };
+		50DAC1B327DBEC97006098D6 /* SignOutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1B227DBEC97006098D6 /* SignOutHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,13 +51,14 @@
 		5093F9A127D7123200378967 /* IndieFlower-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IndieFlower-Regular.ttf"; sourceTree = "<group>"; };
 		5093F9A727D71B2400378967 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		5093F9A927D844B000378967 /* BirthdayBuddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BirthdayBuddy.entitlements; sourceTree = "<group>"; };
-		50DAC19A27DAC274006098D6 /* AppleUserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleUserAuth.swift; sourceTree = "<group>"; };
 		50DAC19C27DAE342006098D6 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		50DAC1A027DAEC71006098D6 /* BirthdayBuddyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayBuddyUser.swift; sourceTree = "<group>"; };
 		50DAC1A327DAEEB6006098D6 /* AppleSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInHelper.swift; sourceTree = "<group>"; };
 		50DAC1A527DAF237006098D6 /* EmailSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSignInHelper.swift; sourceTree = "<group>"; };
 		50DAC1A727DAF4D2006098D6 /* LogInSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInSheetViewController.swift; sourceTree = "<group>"; };
 		50DAC1A927DAF4DF006098D6 /* SignUpSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSheetViewController.swift; sourceTree = "<group>"; };
+		50DAC1B027DBEA43006098D6 /* SignOutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutCell.swift; sourceTree = "<group>"; };
+		50DAC1B227DBEC97006098D6 /* SignOutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 		5056AF1D27D6B803008601FF /* BirthdayBuddy */ = {
 			isa = PBXGroup;
 			children = (
+				50DAC1AD27DBE6DD006098D6 /* Archives */,
 				506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */,
 				5093F9A927D844B000378967 /* BirthdayBuddy.entitlements */,
 				5056AF2C27D6B803008601FF /* Info.plist */,
@@ -107,7 +110,8 @@
 		5056AF3227D6E430008601FF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5056AF3527D6E450008601FF /* Controllers */,
+				5093F99927D6ED4100378967 /* Main */,
+				50DAC19E27DAEA87006098D6 /* WelcomeScreen */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -115,7 +119,6 @@
 		5056AF3327D6E43E008601FF /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				50DAC19A27DAC274006098D6 /* AppleUserAuth.swift */,
 				50DAC1A027DAEC71006098D6 /* BirthdayBuddyUser.swift */,
 			);
 			path = Models;
@@ -126,15 +129,6 @@
 			children = (
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		5056AF3527D6E450008601FF /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				50DAC19E27DAEA87006098D6 /* WelcomeScreen */,
-				5093F99927D6ED4100378967 /* Main */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		5056AF3627D6E458008601FF /* Resources */ = {
@@ -156,7 +150,7 @@
 				5093F99727D6ED3900378967 /* TabBarViewController.swift */,
 				5093F99A27D6ED5700378967 /* HomeViewController.swift */,
 				5093F99C27D6ED6400378967 /* AddBirthdayViewController.swift */,
-				5093F99E27D6ED6A00378967 /* SettingsViewController.swift */,
+				50DAC1AE27DBEA0D006098D6 /* Settings */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -174,9 +168,7 @@
 			children = (
 				5093F99527D6EB4800378967 /* WelcomeViewController.swift */,
 				50DAC19F27DAEA9D006098D6 /* WelcomeScreenViews */,
-				50DAC1A227DAEEA3006098D6 /* SignInHelpers */,
-				50DAC1A727DAF4D2006098D6 /* LogInSheetViewController.swift */,
-				50DAC1A927DAF4DF006098D6 /* SignUpSheetViewController.swift */,
+				50DAC1A227DAEEA3006098D6 /* SignInOutHelpers */,
 			);
 			path = WelcomeScreen;
 			sourceTree = "<group>";
@@ -190,13 +182,40 @@
 			path = WelcomeScreenViews;
 			sourceTree = "<group>";
 		};
-		50DAC1A227DAEEA3006098D6 /* SignInHelpers */ = {
+		50DAC1A227DAEEA3006098D6 /* SignInOutHelpers */ = {
 			isa = PBXGroup;
 			children = (
 				50DAC1A327DAEEB6006098D6 /* AppleSignInHelper.swift */,
 				50DAC1A527DAF237006098D6 /* EmailSignInHelper.swift */,
+				50DAC1B227DBEC97006098D6 /* SignOutHelper.swift */,
 			);
-			path = SignInHelpers;
+			path = SignInOutHelpers;
+			sourceTree = "<group>";
+		};
+		50DAC1AD27DBE6DD006098D6 /* Archives */ = {
+			isa = PBXGroup;
+			children = (
+				50DAC1A727DAF4D2006098D6 /* LogInSheetViewController.swift */,
+				50DAC1A927DAF4DF006098D6 /* SignUpSheetViewController.swift */,
+			);
+			path = Archives;
+			sourceTree = "<group>";
+		};
+		50DAC1AE27DBEA0D006098D6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5093F99E27D6ED6A00378967 /* SettingsViewController.swift */,
+				50DAC1AF27DBEA20006098D6 /* SettingsViews */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		50DAC1AF27DBEA20006098D6 /* SettingsViews */ = {
+			isa = PBXGroup;
+			children = (
+				50DAC1B027DBEA43006098D6 /* SignOutCell.swift */,
+			);
+			path = SettingsViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,10 +305,11 @@
 				5056AF1F27D6B803008601FF /* AppDelegate.swift in Sources */,
 				5093F99827D6ED3900378967 /* TabBarViewController.swift in Sources */,
 				5093F9A827D71B2400378967 /* Extensions.swift in Sources */,
+				50DAC1B127DBEA44006098D6 /* SignOutCell.swift in Sources */,
 				506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */,
 				50DAC1A627DAF237006098D6 /* EmailSignInHelper.swift in Sources */,
 				5056AF2127D6B803008601FF /* SceneDelegate.swift in Sources */,
-				50DAC19B27DAC274006098D6 /* AppleUserAuth.swift in Sources */,
+				50DAC1B327DBEC97006098D6 /* SignOutHelper.swift in Sources */,
 				50DAC1A827DAF4D2006098D6 /* LogInSheetViewController.swift in Sources */,
 				50DAC1A127DAEC71006098D6 /* BirthdayBuddyUser.swift in Sources */,
 				50DAC19D27DAE342006098D6 /* DatabaseManager.swift in Sources */,

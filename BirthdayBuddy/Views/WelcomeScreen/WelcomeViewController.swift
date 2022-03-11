@@ -16,6 +16,13 @@ class WelcomeViewController: UIViewController {
         let scrollView = UIScrollView()
         return scrollView
     }()
+    
+    static var isLoggedIn: Bool = false
+    
+    static func login() {
+        presentTabBarVC()
+        isLoggedIn = true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +33,10 @@ class WelcomeViewController: UIViewController {
         scrollView.addSubview(buttonsView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-          
-              // call the 'keyboardWillHide' function when the view controlelr receive notification that keyboard is going to be hidden
-            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        hideKeyboardWhenTappedAround()
+        
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -40,23 +48,23 @@ class WelcomeViewController: UIViewController {
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
-            
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
-           // if keyboard size is not available for some reason, dont do anything
            return
         }
-      
-      // move the root view up by the distance of keyboard height
-        
       self.view.frame.origin.y = 0 - keyboardSize.height
-        
     }
 
     @objc func keyboardWillHide(notification: NSNotification) {
-      // move back the root view origin to zero
       self.view.frame.origin.y = 0
     }
-  }
+    
+    private static func presentTabBarVC() {
+        print("Presenting Tab Bar VC after successful login")
+        let vc = TabBarViewController()
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(vc)
+
+    }
+}
 
     
 

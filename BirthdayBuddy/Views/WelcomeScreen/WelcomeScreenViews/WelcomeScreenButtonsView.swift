@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 
 class WelcomeScreenButtonsView: UIView {
@@ -124,6 +125,7 @@ class WelcomeScreenButtonsView: UIView {
         field.backgroundColor = .white
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
         field.leftViewMode = .always
+        field.textContentType = .oneTimeCode
         
         return field
     }()
@@ -146,23 +148,27 @@ class WelcomeScreenButtonsView: UIView {
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
         field.leftViewMode = .always
         field.isSecureTextEntry = true
+        field.textContentType = .oneTimeCode
+    
         
         return field
     }()
     
     private let enterButton: UIButton = {
         
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.titleLabel?.font = UIFont.appFont(size: 36)
         button.setTitle("Enter", for: .normal)
+        button.setTitleColor(.white, for: .normal)
         
         return button
     }()
     
     private let registerButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.titleLabel?.font = UIFont.appFont(size: 36)
         button.setTitle("Register", for: .normal)
+        button.setTitleColor(.white, for: .normal)
         
         return button
     }()
@@ -280,6 +286,8 @@ class WelcomeScreenButtonsView: UIView {
         )
     }
     
+    // MARK: - Selectors
+    
     @objc private func didTapEmailSignUp() {
         
         signUpButton.isHidden = true
@@ -338,6 +346,7 @@ class WelcomeScreenButtonsView: UIView {
     }
     @objc private func didTapEnter() {
         
+        print("didTapEnter: Button pressed")
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         
@@ -352,9 +361,12 @@ class WelcomeScreenButtonsView: UIView {
             alertPasswordLength()
             return
         }
+        
+        EmailSignInHelper.shared.performSignIn(email: email, password: password)
     }
     
     @objc private func didTapRegister() {
+        print("didTapRegister: Button pressed")
         
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
@@ -370,17 +382,26 @@ class WelcomeScreenButtonsView: UIView {
             alertPasswordLength()
             return
         }
+        
+        EmailSignInHelper.shared.performCreateUser(email: email, password: password)
     }
+    
+    // MARK: Alerts
     
     func alertEmptyEmail() {
         let alert = UIAlertController(title: "Whoops", message: "Please enter an email address", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-        self.window?.rootViewController?.present(alert, animated: true)
+        alert.view.layoutIfNeeded()
+        let vc = findViewController()
+        vc?.present(alert, animated: true)
+        
     }
     func alertPasswordLength() {
         let alert = UIAlertController(title: "Whoops", message: "Please enter a password. Password must be at least 6 characters", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-        self.window?.rootViewController?.present(alert, animated: true)
+        alert.view.layoutIfNeeded()
+        let vc = findViewController()
+        vc?.present(alert, animated: true)
     }
 }
 

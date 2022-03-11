@@ -31,4 +31,16 @@ class TabBarViewController: UITabBarController {
         setViewControllers([nav1,nav2,nav3], animated: false)
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if !WelcomeViewController.isLoggedIn {
+            print("TabBarViewController: Presenting WelcomeViewController")
+            let vc = WelcomeViewController()
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: false)
+        }
+    }
 }

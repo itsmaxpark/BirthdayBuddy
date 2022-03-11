@@ -21,17 +21,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
     
-//        if AppleUserAuth.isLoggedIn {
+//        if WelcomeViewController.isLoggedIn {
 //            print("SceneDelegate: Showing TabBarViewController")
 //            window.rootViewController = TabBarViewController()
 //        } else {
 //            print("SceneDelegate: Showing WelcomeViewController")
 //            window.rootViewController = WelcomeViewController()
 //        }
-        window.rootViewController = WelcomeViewController()
+        window.rootViewController = TabBarViewController()
        
         window.makeKeyAndVisible()
         self.window = window
+    }
+    
+    func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
+        guard let window = self.window else {
+            return
+        }
+        
+        // change the root view controller to your specific view controller
+        window.rootViewController = vc
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
