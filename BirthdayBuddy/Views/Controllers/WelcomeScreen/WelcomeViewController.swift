@@ -12,29 +12,30 @@ class WelcomeViewController: UIViewController {
     private let backgroundView = WelcomeScreenBackgroundView()
     private let buttonsView = WelcomeScreenButtonsView()
     
-//    static let shared = WelcomeViewController()
-    
-//    private let appleLoginAuth = AppleUserAuth()
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.clipsToBounds = true
+
+        return scrollView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        view.addSubview(backgroundView)
-        view.addSubview(buttonsView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(backgroundView)
+        scrollView.addSubview(buttonsView)
         
-    
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        backgroundView.frame = view.bounds
-        buttonsView.frame = view.bounds
-        
-        
-        
+        scrollView.frame = view.bounds
+        backgroundView.frame = scrollView.bounds
+        buttonsView.frame = scrollView.bounds
     }
 }
-
+    
 

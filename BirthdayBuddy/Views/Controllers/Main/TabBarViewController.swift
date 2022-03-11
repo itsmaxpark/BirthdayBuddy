@@ -11,7 +11,6 @@ class TabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
         
         let vc1 = HomeViewController()
         let vc2 = AddBirthdayViewController()

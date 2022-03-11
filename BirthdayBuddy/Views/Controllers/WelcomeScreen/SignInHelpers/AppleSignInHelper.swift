@@ -1,106 +1,25 @@
 //
-//  WelcomeScreenButtonsView.swift
+//  AppleSignInHelper.swift
 //  BirthdayBuddy
 //
-//  Created by Max Park on 3/8/22.
+//  Created by Max Park on 3/10/22.
 //
 
-import UIKit
+import Foundation
+import CryptoKit
 import AuthenticationServices
 import FirebaseAuth
 
-class WelcomeScreenButtonsView: UIView {
+class AppleSignInHelper {
     
-    private let signUpButton: UIButton = {
-        
-        let button = UIButton()
-        button.titleLabel?.font = UIFont.appFont(size: 36)
-        button.setTitle("Sign Up", for: .normal)
-        
-        return button
-    }()
+    static let shared = AppleSignInHelper()
     
-    private let logInButton: UIButton = {
-        
-        let button = UIButton()
-        button.titleLabel?.font = UIFont.appFont(size: 36)
-        button.setTitle("Log In", for: .normal)
-        
-        return button
-    }()
-    
-    private let signInAppleButton: UIButton = {
-        
-        var container = AttributeContainer()
-        container.font = UIFont.boldSystemFont(ofSize: 19)
-        
-        var config = UIButton.Configuration.filled()
-        config.attributedTitle = AttributedString("Continue with Apple", attributes: container)
-        
-        config.buttonSize = .large
-        config.cornerStyle = .capsule
-        config.baseBackgroundColor = .white
-        config.baseForegroundColor = .black
-        
-        config.image = UIImage(systemName: "applelogo")
-        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 19)
-        config.imagePadding = 20
-        config.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 20, bottom: 2, trailing: 40)
-        
-        let button = UIButton(configuration: config, primaryAction: nil)
-        
-        return button
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        addSubview(signUpButton)
-        addSubview(signInAppleButton)
-        addSubview(logInButton)
-        
-        signInAppleButton.addTarget(self, action: #selector(didTapAppleSignIn), for: .touchUpInside)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        signUpButton.frame = CGRect(
-            x: (width-signUpButton.intrinsicContentSize.width)/2,
-            y: height-330,
-            width: signUpButton.intrinsicContentSize.width,
-            height: signUpButton.intrinsicContentSize.height
-        )
-        logInButton.frame = CGRect(
-            x: (width-logInButton.intrinsicContentSize.width)/2,
-            y: height-100,
-            width: logInButton.intrinsicContentSize.width,
-            height: logInButton.intrinsicContentSize.height
-        )
-        signInAppleButton.frame = CGRect(
-            x: (width-300)/2,
-            y: signUpButton.frame.maxY,
-            width: 300,
-            height: 44
-        )
-    }
-    
-    @objc private func didTapAppleSignIn() {
-        performSignIn()
-    }
-    
-//    private var presentingViewController: UIViewController?
-    
-    func performSignIn() {
+    func performSignIn(with view: WelcomeScreenButtonsView) {
         let request = createAppleIDRequest()
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         
-        authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
+        authorizationController.delegate = view
+        authorizationController.presentationContextProvider = view
         
         authorizationController.performRequests()
         print("performing requests")
@@ -217,7 +136,6 @@ private func randomNonceString(length: Int = 32) -> String {
     return result
 }
 
-import CryptoKit
 
 private func sha256(_ input: String) -> String {
     let inputData = Data(input.utf8)
@@ -228,6 +146,3 @@ private func sha256(_ input: String) -> String {
     
     return hashString
 }
-
-
-

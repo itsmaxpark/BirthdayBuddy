@@ -21,22 +21,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
     
-        if AppleUserAuth.isLoggedIn {
-//            let vc = TabBarViewController()
-//            let nav = UINavigationController(rootViewController: vc)
-//            nav.modalPresentationStyle = .fullScreen
-//            present(nav, animated: false)
-            print("SceneDelegate: Showing TabBarViewController")
-            window.rootViewController = TabBarViewController()
-        } else {
-//            let vc = WelcomeViewController()
-//            let nav = UINavigationController(rootViewController: vc)
-//            nav.modalPresentationStyle = .fullScreen
-//            present(nav, animated: false)
-            print("SceneDelegate: Showing WelcomeViewController")
-            window.rootViewController = WelcomeViewController()
-        }
-        
+//        if AppleUserAuth.isLoggedIn {
+//            print("SceneDelegate: Showing TabBarViewController")
+//            window.rootViewController = TabBarViewController()
+//        } else {
+//            print("SceneDelegate: Showing WelcomeViewController")
+//            window.rootViewController = WelcomeViewController()
+//        }
+        window.rootViewController = WelcomeViewController()
        
         window.makeKeyAndVisible()
         self.window = window
