@@ -10,8 +10,8 @@ import UIKit
 
 extension UIFont {
     
-    static func appFont(size: CGFloat) -> UIFont {
-        guard let customFont = UIFont(name: "IndieFlower", size: size) else {
+    static func appFont(name: String, size: CGFloat) -> UIFont {
+        guard let customFont = UIFont(name: name, size: size) else {
             return UIFont.systemFont(ofSize: size)
         }
         return customFont
@@ -60,6 +60,18 @@ extension UIView {
         } else {
             return nil
         }
+    }
+}
+
+extension UIImage {
+    
+    func resizeImageTo(size: CGSize) -> UIImage? {
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        self.draw(in: CGRect(origin: CGPoint.zero, size: size))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return resizedImage
     }
 }
 

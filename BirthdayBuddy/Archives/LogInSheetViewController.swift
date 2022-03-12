@@ -18,7 +18,7 @@ class LogInSheetViewController: UIViewController {
     
     private let birthdayBuddyTextLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.appFont(size: 44)
+        label.font = UIFont.appFont(name: "IndieFlower", size: 44)
         label.text = "Birthday Buddy"
         label.textColor = UIColor.white
         

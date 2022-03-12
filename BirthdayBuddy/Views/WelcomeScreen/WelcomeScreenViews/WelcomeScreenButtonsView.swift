@@ -12,89 +12,45 @@ import FirebaseAuth
 class WelcomeScreenButtonsView: UIView {
     
     private let signUpButton: UIButton = {
-        
         let button = UIButton()
-        button.titleLabel?.font = UIFont.appFont(size: 36)
+        button.titleLabel?.font = UIFont.appFont(name: "IndieFlower", size: 36)
         button.setTitle("Sign Up", for: .normal)
-        
         return button
     }()
-    
     private let logInButton: UIButton = {
-        
         let button = UIButton()
-        button.titleLabel?.font = UIFont.appFont(size: 36)
+        button.titleLabel?.font = UIFont.appFont(name: "IndieFlower", size: 36)
         button.setTitle("Log In", for: .normal)
-        
         return button
     }()
-    
     private let signInAppleButton: UIButton = {
-        
-        var container = AttributeContainer()
-        container.font = UIFont.boldSystemFont(ofSize: 19)
-        
-        var config = UIButton.Configuration.filled()
-        config.attributedTitle = AttributedString("Continue with Apple", attributes: container)
-        
-        config.buttonSize = .large
-        config.cornerStyle = .capsule
-        config.baseBackgroundColor = .white
-        config.baseForegroundColor = .black
-        
-        config.image = UIImage(systemName: "applelogo")
-        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 19)
-        config.imagePadding = 20
-        config.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 20, bottom: 2, trailing: 40)
-        
+        let text = "Continue with Apple"
+        let image = UIImage(systemName: "applelogo")
+        let insets = NSDirectionalEdgeInsets(top: 2, leading: 20, bottom: 2, trailing: 40)
+        let font = UIFont.boldSystemFont(ofSize: 19)
+        let config = CustomDesigns.shared.createCustomButtonConfig(text: text, font: font, image: image ?? UIImage(), insets: insets)
         let button = UIButton(configuration: config, primaryAction: nil)
-        
         return button
     }()
     
     private let signInGoogleButton: UIButton = {
-        
-        var container = AttributeContainer()
-        container.font = UIFont.boldSystemFont(ofSize: 19)
-        
-        var config = UIButton.Configuration.filled()
-        config.attributedTitle = AttributedString("Continue with Google", attributes: container)
-        
-        config.buttonSize = .large
-        config.cornerStyle = .capsule
-        config.baseBackgroundColor = .white
-        config.baseForegroundColor = .black
-        
-        config.image = UIImage(systemName: "applelogo")
-        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 19)
-        config.imagePadding = 20
-        config.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 20, bottom: 2, trailing: 40)
-        
+        let text = "Continue with Google"
+        let image = UIImage(named: "googleLogo")?.resizeImageTo(size: CGSize(width: 22, height: 22))
+        let insets = NSDirectionalEdgeInsets(top: 2, leading: 10, bottom: 2, trailing: 20)
+//        let font = UIFont.appFont(name: "Roboto-Medium", size: 19)
+        let font = UIFont.boldSystemFont(ofSize: 19)
+        let config = CustomDesigns.shared.createCustomButtonConfig(text: text, font: font, image: image ?? UIImage(), insets: insets)
         let button = UIButton(configuration: config, primaryAction: nil)
-        
         return button
     }()
     
     private let signInFacebookButton: UIButton = {
-        
-        var container = AttributeContainer()
-        container.font = UIFont.boldSystemFont(ofSize: 19)
-        
-        var config = UIButton.Configuration.filled()
-        config.attributedTitle = AttributedString("Continue with Facebook", attributes: container)
-        
-        config.buttonSize = .large
-        config.cornerStyle = .capsule
-        config.baseBackgroundColor = .white
-        config.baseForegroundColor = .black
-        
-        config.image = UIImage(systemName: "applelogo")
-        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 19)
-        config.imagePadding = 20
-        config.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 20, bottom: 2, trailing: 10)
-        
+        let text = "Continue with Facebook"
+        let image = UIImage(named: "facebookLogo")?.resizeImageTo(size: CGSize(width: 24, height: 24))
+        let insets = NSDirectionalEdgeInsets(top: 2, leading: 20, bottom: 2, trailing: 10)
+        let font = UIFont.boldSystemFont(ofSize: 19)
+        let config = CustomDesigns.shared.createCustomButtonConfig(text: text, font: font, image: image ?? UIImage(), insets: insets)
         let button = UIButton(configuration: config, primaryAction: nil)
-        
         return button
     }()
     
@@ -102,7 +58,7 @@ class WelcomeScreenButtonsView: UIView {
     
     private let returnButton: UIButton = {
         let button = UIButton()
-        button.titleLabel?.font = UIFont.appFont(size: 36)
+        button.titleLabel?.font = UIFont.appFont(name: "IndieFlower", size: 36)
         button.setTitle("Return", for: .normal)
         
         return button
@@ -157,7 +113,7 @@ class WelcomeScreenButtonsView: UIView {
     private let enterButton: UIButton = {
         
         let button = UIButton(type: .system)
-        button.titleLabel?.font = UIFont.appFont(size: 36)
+        button.titleLabel?.font = UIFont.appFont(name: "IndieFlower", size: 36)
         button.setTitle("Enter", for: .normal)
         button.setTitleColor(.white, for: .normal)
         
@@ -166,7 +122,7 @@ class WelcomeScreenButtonsView: UIView {
     
     private let registerButton: UIButton = {
         let button = UIButton(type: .system)
-        button.titleLabel?.font = UIFont.appFont(size: 36)
+        button.titleLabel?.font = UIFont.appFont(name: "IndieFlower", size: 36)
         button.setTitle("Register", for: .normal)
         button.setTitleColor(.white, for: .normal)
         
@@ -382,6 +338,7 @@ class WelcomeScreenButtonsView: UIView {
             alertPasswordLength()
             return
         }
+//        DatabaseManager.shared.addUser(for: BirthdayBuddyUser(firstName: , lastName: <#T##String#>, emailAddress: <#T##String#>))
         
         EmailSignInHelper.shared.performCreateUser(email: email, password: password)
     }
