@@ -32,7 +32,6 @@ class WelcomeScreenButtonsView: UIView {
         let button = UIButton(configuration: config, primaryAction: nil)
         return button
     }()
-    
     private let signInGoogleButton: UIButton = {
         let text = "Continue with Google"
         let image = UIImage(named: "googleLogo")?.resizeImageTo(size: CGSize(width: 22, height: 22))
@@ -43,7 +42,6 @@ class WelcomeScreenButtonsView: UIView {
         let button = UIButton(configuration: config, primaryAction: nil)
         return button
     }()
-    
     private let signInFacebookButton: UIButton = {
         let text = "Continue with Facebook"
         let image = UIImage(named: "facebookLogo")?.resizeImageTo(size: CGSize(width: 24, height: 24))
@@ -60,74 +58,59 @@ class WelcomeScreenButtonsView: UIView {
         let button = UIButton()
         button.titleLabel?.font = UIFont.appFont(name: "IndieFlower", size: 36)
         button.setTitle("Return", for: .normal)
-        
         return button
     }()
-    
     private let emailTextField: UITextField = {
-        let field = UITextField()
-        field.autocapitalizationType = .none
-        field.autocorrectionType = .no
-        field.returnKeyType = .continue
-        field.layer.cornerRadius = 20
-        field.attributedPlaceholder = NSAttributedString(
-            string: "Email Address",
-            attributes: [
-                NSAttributedString.Key.foregroundColor: UIColor.black,
-                NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 19)
-            ]
+        return CustomDesigns.shared.createCustomTextField(
+            previewText: "Email Address",
+            isSecure: false
         )
-        field.textColor = .black
-        field.backgroundColor = .white
-        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
-        field.leftViewMode = .always
-        field.textContentType = .oneTimeCode
-        
-        return field
     }()
-    
     private let passwordTextField: UITextField = {
-        let field = UITextField()
-        field.autocapitalizationType = .none
-        field.autocorrectionType = .no
-        field.returnKeyType = .done
-        field.layer.cornerRadius = 20
-        field.attributedPlaceholder = NSAttributedString(
-            string: "Password",
-            attributes: [
-                NSAttributedString.Key.foregroundColor: UIColor.black,
-                NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 19)
-            ]
+        return CustomDesigns.shared.createCustomTextField(
+            previewText: "Password",
+            isSecure: true
         )
-        field.textColor = .black
-        field.backgroundColor = .white
-        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
-        field.leftViewMode = .always
-        field.isSecureTextEntry = true
-        field.textContentType = .oneTimeCode
-    
-        
-        return field
     }()
-    
     private let enterButton: UIButton = {
-        
         let button = UIButton(type: .system)
         button.titleLabel?.font = UIFont.appFont(name: "IndieFlower", size: 36)
         button.setTitle("Enter", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        
         return button
     }()
+    
+    // MARK: - Sign Up Pressed
     
     private let registerButton: UIButton = {
         let button = UIButton(type: .system)
         button.titleLabel?.font = UIFont.appFont(name: "IndieFlower", size: 36)
         button.setTitle("Register", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        
         return button
     }()
+    private let firstNameField: UITextField = {
+        return CustomDesigns.shared.createCustomTextField(
+            previewText: "First Name",
+            isSecure: false
+        )
+    }()
+    private let lastNameField: UITextField = {
+        return CustomDesigns.shared.createCustomTextField(
+            previewText: "Last Name",
+            isSecure: false
+        )
+    }()
+    private let nextButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.titleLabel?.font = UIFont.appFont(name: "IndieFlower", size: 36)
+        button.setTitle("Next", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        return button
+    }()
+    
+    private var firstName = String()
+    private var lastName = String()
     
     // MARK: - INIT
     
@@ -162,13 +145,22 @@ class WelcomeScreenButtonsView: UIView {
         
         // Sign Up
         registerButton.isHidden = true
+        firstNameField.isHidden = true
+        lastNameField.isHidden = true
+        nextButton.isHidden = true
         
         addSubview(registerButton)
+        addSubview(firstNameField)
+        addSubview(lastNameField)
+        addSubview(nextButton)
 
         registerButton.addTarget(self, action: #selector(didTapRegister), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(didTapNext), for: .touchUpInside)
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        firstNameField.delegate = self
+        lastNameField.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -240,6 +232,24 @@ class WelcomeScreenButtonsView: UIView {
             width: registerButton.intrinsicContentSize.width,
             height: registerButton.intrinsicContentSize.height
         )
+        firstNameField.frame = CGRect(
+            x: (width-300)/2,
+            y: returnButton.bottom,
+            width: 300,
+            height: 44
+        )
+        lastNameField.frame = CGRect(
+            x: (width-300)/2,
+            y: emailTextField.bottom+10,
+            width: 300,
+            height: 44
+        )
+        nextButton.frame = CGRect(
+            x: (width-registerButton.intrinsicContentSize.width)/2,
+            y: height-100,
+            width: registerButton.intrinsicContentSize.width,
+            height: registerButton.intrinsicContentSize.height
+        )
     }
     
     // MARK: - Selectors
@@ -252,12 +262,11 @@ class WelcomeScreenButtonsView: UIView {
         signInFacebookButton.isHidden = true
         logInButton.isHidden = true
         
-        enterButton.isHidden = true
-        
         returnButton.isHidden = false
-        emailTextField.isHidden = false
-        passwordTextField.isHidden = false
-        registerButton.isHidden = false
+        
+        firstNameField.isHidden = false
+        lastNameField.isHidden = false
+        nextButton.isHidden = false
         
     }
     @objc private func didTapAppleSignIn() {
@@ -280,7 +289,6 @@ class WelcomeScreenButtonsView: UIView {
         emailTextField.isHidden = false
         passwordTextField.isHidden = false
         enterButton.isHidden = false
-        
     }
     
     @objc private func didTapReturn() {
@@ -288,8 +296,10 @@ class WelcomeScreenButtonsView: UIView {
         emailTextField.isHidden = true
         passwordTextField.isHidden = true
         enterButton.isHidden = true
-        
         registerButton.isHidden = true
+        firstNameField.isHidden = true
+        lastNameField.isHidden = true
+        nextButton.isHidden = true
         
         signUpButton.isHidden = false
         signInAppleButton.isHidden = false
@@ -299,10 +309,10 @@ class WelcomeScreenButtonsView: UIView {
         
         emailTextField.text = ""
         passwordTextField.text = ""
+        firstNameField.text = ""
+        lastNameField.text = ""
     }
     @objc private func didTapEnter() {
-        
-        print("didTapEnter: Button pressed")
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         
@@ -322,8 +332,6 @@ class WelcomeScreenButtonsView: UIView {
     }
     
     @objc private func didTapRegister() {
-        print("didTapRegister: Button pressed")
-        
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         
@@ -338,9 +346,34 @@ class WelcomeScreenButtonsView: UIView {
             alertPasswordLength()
             return
         }
-//        DatabaseManager.shared.addUser(for: BirthdayBuddyUser(firstName: , lastName: <#T##String#>, emailAddress: <#T##String#>))
+        EmailSignInHelper.shared.performCreateUser(firstName: firstName, lastName: lastName, email: email, password: password)
+        alertUserRegistered()
+        didTapReturn()
+    }
+    
+    @objc private func didTapNext() {
+        firstNameField.resignFirstResponder()
+        lastNameField.resignFirstResponder()
         
-        EmailSignInHelper.shared.performCreateUser(email: email, password: password)
+        guard let first = firstNameField.text , let last = lastNameField.text else {
+            return
+        }
+        guard !first.isEmpty else {
+            alertFirstName()
+            return
+        }
+        
+        firstName = first
+        lastName = last
+        
+        firstNameField.isHidden = true
+        lastNameField.isHidden = true
+        nextButton.isHidden = true
+        
+        emailTextField.isHidden = false
+        passwordTextField.isHidden = false
+        registerButton.isHidden = false
+        
     }
     
     // MARK: Alerts
@@ -351,10 +384,23 @@ class WelcomeScreenButtonsView: UIView {
         alert.view.layoutIfNeeded()
         let vc = findViewController()
         vc?.present(alert, animated: true)
-        
     }
     func alertPasswordLength() {
         let alert = UIAlertController(title: "Whoops", message: "Please enter a password. Password must be at least 6 characters", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        alert.view.layoutIfNeeded()
+        let vc = findViewController()
+        vc?.present(alert, animated: true)
+    }
+    func alertFirstName() {
+        let alert = UIAlertController(title: "Whoops", message: "Please enter your first name", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        alert.view.layoutIfNeeded()
+        let vc = findViewController()
+        vc?.present(alert, animated: true)
+    }
+    func alertUserRegistered() {
+        let alert = UIAlertController(title: "Awesome", message: "Your account was successfully created!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
         alert.view.layoutIfNeeded()
         let vc = findViewController()
@@ -368,7 +414,17 @@ extension WelcomeScreenButtonsView: UITextFieldDelegate {
         if textField == emailTextField {
             passwordTextField.becomeFirstResponder()
         } else if textField == passwordTextField {
-            didTapEnter()
+            if !enterButton.isHidden {
+                didTapEnter()
+            } else {
+                didTapRegister()
+            }
+        }
+        
+        if textField == firstNameField {
+            lastNameField.becomeFirstResponder()
+        } else if textField == lastNameField {
+            self.endEditing(true)
         }
         return true
     }

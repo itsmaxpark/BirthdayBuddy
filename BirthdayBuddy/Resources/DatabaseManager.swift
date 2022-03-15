@@ -14,10 +14,18 @@ class DatabaseManager {
     
     private let database = Database.database().reference()
     
+    
+}
+// MARK: - Account Management
+
+extension DatabaseManager {
+    
+    /// Insert new user to database
     public func addUser(for user: BirthdayBuddyUser) {
-        database.child(user.emailAddress).setValue([
+        database.child(user.id).setValue([
             "first_name": user.firstName,
-            "last_name": user.lastName
+            "last_name": user.lastName,
+            "email": user.emailAddress
         ])
     }
 }

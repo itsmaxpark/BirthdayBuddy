@@ -34,6 +34,31 @@ class CustomDesigns {
         
         return config
     }
+    
+    func createCustomTextField(previewText: String, isSecure: Bool) -> UITextField {
+        
+        let field = UITextField()
+        field.autocapitalizationType = .none
+        field.autocorrectionType = .no
+        field.returnKeyType = .done
+        field.layer.cornerRadius = 20
+        field.attributedPlaceholder = NSAttributedString(
+            string: previewText,
+            attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor.black,
+                NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 19)
+            ]
+        )
+        field.textColor = .black
+        field.backgroundColor = .white
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
+        field.leftViewMode = .always
+        field.isSecureTextEntry = isSecure
+        field.textContentType = .oneTimeCode
+        
+        return field
+        
+    }
 }
 
 

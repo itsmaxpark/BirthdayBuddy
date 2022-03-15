@@ -12,19 +12,18 @@ class SettingsViewController: UIViewController {
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(SignOutCell.self, forCellReuseIdentifier: SignOutCell.identifier)
         return tableView
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .blue
         view.addSubview(tableView)
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .blue
         
         
     }
@@ -47,7 +46,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SignOutCell.identifier, for: indexPath) as? SignOutCell else {
+            return UITableViewCell()
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

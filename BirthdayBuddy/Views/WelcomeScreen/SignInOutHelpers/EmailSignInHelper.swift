@@ -12,29 +12,30 @@ class EmailSignInHelper {
     
     static let shared = EmailSignInHelper()
     
-    func performCreateUser(email: String, password: String) {
+    func performCreateUser(firstName: String, lastName: String, email: String, password: String) {
+        
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             guard let result = authResult, error == nil else {
-                print("didTapRegister: Error creating a new user")
+                print("performCreateUser: Error creating a new user")
                 return
             }
-            let user = result.user
-            print("didTapRegister: User successfully created - \(user)")
+            let userID = result.user.uid
+            DatabaseManager.shared.addUser(for: BirthdayBuddyUser(id: userID, firstName: firstName, lastName: lastName, emailAddress: email))
+            print("performCreateUser: New user with id: \(userID) added to database")
         }
     }
     
     func performSignIn(email: String, password: String) {
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             
-            guard let strongSelf = self else { return }
             guard let result = authResult, error == nil else {
-                print("performSignIn: Error creating user")
+                print("performSignIn: Error signing in user")
                 return
             }
             
-            let user = result.user
-            print("didTapSignIn: User successfully signed In - \(user)")
-            
+            let userID = result.user.uid
+            print("didTapSignIn: User successfully signed In - \(userID)")
+        
             WelcomeViewController.login()
             print("Signing in using Email Credentials")
         }
