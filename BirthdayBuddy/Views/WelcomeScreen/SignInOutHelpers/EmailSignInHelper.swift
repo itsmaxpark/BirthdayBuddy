@@ -16,12 +16,12 @@ class EmailSignInHelper {
         
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             guard let result = authResult, error == nil else {
-                print("performCreateUser: Error creating a new user")
+                print("EmailSignInHelper: Error creating a new user")
                 return
             }
             let userID = result.user.uid
             DatabaseManager.shared.addUser(for: BirthdayBuddyUser(id: userID, firstName: firstName, lastName: lastName, emailAddress: email))
-            print("performCreateUser: New user with id: \(userID) added to database")
+            print("EmailSignInHelper: New user with id: \(userID) added to database")
         }
     }
     
@@ -29,15 +29,15 @@ class EmailSignInHelper {
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             
             guard let result = authResult, error == nil else {
-                print("performSignIn: Error signing in user")
+                print("EmailSignInHelper: Error signing in user")
                 return
             }
             
             let userID = result.user.uid
-            print("didTapSignIn: User successfully signed In - \(userID)")
+            print("EmailSignInHelper: User successfully signed In - \(userID)")
         
             WelcomeViewController.login()
-            print("Signing in using Email Credentials")
+            print("EmailSignInHelper: Signing in using Email Credentials")
         }
         
     }

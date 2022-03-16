@@ -13,6 +13,7 @@
 		506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */; };
 		506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */; };
 		506D5B5D27D87325009A9F39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */; };
+		508EB38D27E2706700986FC8 /* FacebookSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508EB38C27E2706700986FC8 /* FacebookSignInHelper.swift */; };
 		5093F99627D6EB4800378967 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99527D6EB4800378967 /* WelcomeViewController.swift */; };
 		5093F99827D6ED3900378967 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99727D6ED3900378967 /* TabBarViewController.swift */; };
 		5093F99B27D6ED5700378967 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99A27D6ED5700378967 /* HomeViewController.swift */; };
@@ -20,10 +21,6 @@
 		5093F99F27D6ED6A00378967 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99E27D6ED6A00378967 /* SettingsViewController.swift */; };
 		5093F9A327D7123200378967 /* IndieFlower-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5093F9A127D7123200378967 /* IndieFlower-Regular.ttf */; };
 		5093F9A827D71B2400378967 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F9A727D71B2400378967 /* Extensions.swift */; };
-		50DAC19327D877C0006098D6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 50DAC19227D877C0006098D6 /* FirebaseAnalytics */; };
-		50DAC19527D877C0006098D6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 50DAC19427D877C0006098D6 /* FirebaseAuth */; };
-		50DAC19727D877C0006098D6 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 50DAC19627D877C0006098D6 /* FirebaseDatabase */; };
-		50DAC19927D877C0006098D6 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 50DAC19827D877C0006098D6 /* FirebaseStorage */; };
 		50DAC19D27DAE342006098D6 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC19C27DAE342006098D6 /* DatabaseManager.swift */; };
 		50DAC1A127DAEC71006098D6 /* BirthdayBuddyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1A027DAEC71006098D6 /* BirthdayBuddyUser.swift */; };
 		50DAC1A427DAEEB6006098D6 /* AppleSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1A327DAEEB6006098D6 /* AppleSignInHelper.swift */; };
@@ -34,6 +31,7 @@
 		50DAC1B327DBEC97006098D6 /* SignOutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1B227DBEC97006098D6 /* SignOutHelper.swift */; };
 		50DAC1B527DC0E79006098D6 /* CustomDesigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1B427DC0E79006098D6 /* CustomDesigns.swift */; };
 		50DAC1B727DC20A4006098D6 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50DAC1B627DC1D66006098D6 /* Roboto-Medium.ttf */; };
+		FC7F25B11AED31A401487838 /* Pods_BirthdayBuddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0D254D2988053B2B0F9FC3D /* Pods_BirthdayBuddy.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +43,7 @@
 		506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenBackgroundView.swift; sourceTree = "<group>"; };
 		506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenButtonsView.swift; sourceTree = "<group>"; };
 		506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		508EB38C27E2706700986FC8 /* FacebookSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookSignInHelper.swift; sourceTree = "<group>"; };
 		5093F99527D6EB4800378967 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		5093F99727D6ED3900378967 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		5093F99A27D6ED5700378967 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +62,9 @@
 		50DAC1B227DBEC97006098D6 /* SignOutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutHelper.swift; sourceTree = "<group>"; };
 		50DAC1B427DC0E79006098D6 /* CustomDesigns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDesigns.swift; sourceTree = "<group>"; };
 		50DAC1B627DC1D66006098D6 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		60E1FF7DC06DDA8DCEEE7555 /* Pods-BirthdayBuddy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirthdayBuddy.debug.xcconfig"; path = "Target Support Files/Pods-BirthdayBuddy/Pods-BirthdayBuddy.debug.xcconfig"; sourceTree = "<group>"; };
+		B7549727F0E613B6A71E0DD0 /* Pods-BirthdayBuddy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirthdayBuddy.release.xcconfig"; path = "Target Support Files/Pods-BirthdayBuddy/Pods-BirthdayBuddy.release.xcconfig"; sourceTree = "<group>"; };
+		C0D254D2988053B2B0F9FC3D /* Pods_BirthdayBuddy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BirthdayBuddy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,21 +72,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50DAC19727D877C0006098D6 /* FirebaseDatabase in Frameworks */,
-				50DAC19927D877C0006098D6 /* FirebaseStorage in Frameworks */,
-				50DAC19327D877C0006098D6 /* FirebaseAnalytics in Frameworks */,
-				50DAC19527D877C0006098D6 /* FirebaseAuth in Frameworks */,
+				FC7F25B11AED31A401487838 /* Pods_BirthdayBuddy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		34F8B7B31822F5809A07F4CF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C0D254D2988053B2B0F9FC3D /* Pods_BirthdayBuddy.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		437E2D55EA64FB6839D52344 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				60E1FF7DC06DDA8DCEEE7555 /* Pods-BirthdayBuddy.debug.xcconfig */,
+				B7549727F0E613B6A71E0DD0 /* Pods-BirthdayBuddy.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		5056AF1227D6B803008601FF = {
 			isa = PBXGroup;
 			children = (
 				5056AF1D27D6B803008601FF /* BirthdayBuddy */,
 				5056AF1C27D6B803008601FF /* Products */,
+				437E2D55EA64FB6839D52344 /* Pods */,
+				34F8B7B31822F5809A07F4CF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,10 +156,10 @@
 		5056AF3627D6E458008601FF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5093F9A727D71B2400378967 /* Extensions.swift */,
-				50DAC19C27DAE342006098D6 /* DatabaseManager.swift */,
 				5056AF1E27D6B803008601FF /* AppDelegate.swift */,
 				5056AF2027D6B803008601FF /* SceneDelegate.swift */,
+				5093F9A727D71B2400378967 /* Extensions.swift */,
+				50DAC19C27DAE342006098D6 /* DatabaseManager.swift */,
 				50DAC1B427DC0E79006098D6 /* CustomDesigns.swift */,
 				5093F9A027D7123200378967 /* Fonts */,
 				5056AF2727D6B803008601FF /* Assets.xcassets */,
@@ -194,6 +212,7 @@
 				50DAC1A327DAEEB6006098D6 /* AppleSignInHelper.swift */,
 				50DAC1A527DAF237006098D6 /* EmailSignInHelper.swift */,
 				50DAC1B227DBEC97006098D6 /* SignOutHelper.swift */,
+				508EB38C27E2706700986FC8 /* FacebookSignInHelper.swift */,
 			);
 			path = SignInOutHelpers;
 			sourceTree = "<group>";
@@ -231,9 +250,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5056AF2F27D6B803008601FF /* Build configuration list for PBXNativeTarget "BirthdayBuddy" */;
 			buildPhases = (
+				CB33E85470E1DEF862DE72C0 /* [CP] Check Pods Manifest.lock */,
 				5056AF1727D6B803008601FF /* Sources */,
 				5056AF1827D6B803008601FF /* Frameworks */,
 				5056AF1927D6B803008601FF /* Resources */,
+				3AFDB124671B164B9836D774 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -241,10 +262,6 @@
 			);
 			name = BirthdayBuddy;
 			packageProductDependencies = (
-				50DAC19227D877C0006098D6 /* FirebaseAnalytics */,
-				50DAC19427D877C0006098D6 /* FirebaseAuth */,
-				50DAC19627D877C0006098D6 /* FirebaseDatabase */,
-				50DAC19827D877C0006098D6 /* FirebaseStorage */,
 			);
 			productName = BirthdayBuddy;
 			productReference = 5056AF1B27D6B803008601FF /* BirthdayBuddy.app */;
@@ -275,7 +292,6 @@
 			);
 			mainGroup = 5056AF1227D6B803008601FF;
 			packageReferences = (
-				50DAC19127D877C0006098D6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 5056AF1C27D6B803008601FF /* Products */;
 			projectDirPath = "";
@@ -300,6 +316,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3AFDB124671B164B9836D774 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BirthdayBuddy/Pods-BirthdayBuddy-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BirthdayBuddy/Pods-BirthdayBuddy-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BirthdayBuddy/Pods-BirthdayBuddy-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB33E85470E1DEF862DE72C0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BirthdayBuddy-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5056AF1727D6B803008601FF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -320,6 +378,7 @@
 				50DAC1A827DAF4D2006098D6 /* LogInSheetViewController.swift in Sources */,
 				50DAC1A127DAEC71006098D6 /* BirthdayBuddyUser.swift in Sources */,
 				50DAC19D27DAE342006098D6 /* DatabaseManager.swift in Sources */,
+				508EB38D27E2706700986FC8 /* FacebookSignInHelper.swift in Sources */,
 				50DAC1B527DC0E79006098D6 /* CustomDesigns.swift in Sources */,
 				506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */,
 				5093F99B27D6ED5700378967 /* HomeViewController.swift in Sources */,
@@ -450,6 +509,7 @@
 		};
 		5056AF3027D6B803008601FF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60E1FF7DC06DDA8DCEEE7555 /* Pods-BirthdayBuddy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -480,6 +540,7 @@
 		};
 		5056AF3127D6B803008601FF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7549727F0E613B6A71E0DD0 /* Pods-BirthdayBuddy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -530,40 +591,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		50DAC19127D877C0006098D6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		50DAC19227D877C0006098D6 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 50DAC19127D877C0006098D6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		50DAC19427D877C0006098D6 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 50DAC19127D877C0006098D6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
-		};
-		50DAC19627D877C0006098D6 /* FirebaseDatabase */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 50DAC19127D877C0006098D6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseDatabase;
-		};
-		50DAC19827D877C0006098D6 /* FirebaseStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 50DAC19127D877C0006098D6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseStorage;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5056AF1327D6B803008601FF /* Project object */;
 }

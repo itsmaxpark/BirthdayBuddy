@@ -59,7 +59,7 @@ class WelcomeViewController: UIViewController {
     private static func presentTabBarVC() {
         print("Presenting Tab Bar VC after successful login")
         let vc = TabBarViewController()
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(vc)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(vc, animated: true)
     }
 }
 

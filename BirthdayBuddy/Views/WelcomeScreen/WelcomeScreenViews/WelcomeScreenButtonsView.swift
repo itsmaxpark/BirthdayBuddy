@@ -7,6 +7,8 @@
 
 import UIKit
 import FirebaseAuth
+import FBSDKLoginKit
+import FBSDKCoreKit
 
 
 class WelcomeScreenButtonsView: UIView {
@@ -161,6 +163,7 @@ class WelcomeScreenButtonsView: UIView {
         passwordTextField.delegate = self
         firstNameField.delegate = self
         lastNameField.delegate = self
+
     }
     
     required init?(coder: NSCoder) {
@@ -276,7 +279,7 @@ class WelcomeScreenButtonsView: UIView {
         
     }
     @objc private func didTapFacebookSignIn() {
-        
+        FacebookSignInHelper.shared.performSignIn(with: self)
     }
     @objc private func didTapEmailLogIn() {
         signUpButton.isHidden = true
@@ -429,3 +432,4 @@ extension WelcomeScreenButtonsView: UITextFieldDelegate {
         return true
     }
 }
+
