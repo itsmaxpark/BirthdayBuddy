@@ -276,7 +276,7 @@ class WelcomeScreenButtonsView: UIView {
         AppleSignInHelper.shared.performSignIn(with: self)
     }
     @objc private func didTapGoogleSignIn() {
-        
+        GoogleSignInHelper.shared.performSignIn(with: self)
     }
     @objc private func didTapFacebookSignIn() {
         FacebookSignInHelper.shared.performSignIn(with: self)

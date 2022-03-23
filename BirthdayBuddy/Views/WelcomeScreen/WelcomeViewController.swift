@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class WelcomeViewController: UIViewController {
     
@@ -23,6 +24,8 @@ class WelcomeViewController: UIViewController {
         presentTabBarVC()
         isLoggedIn = true
     }
+    
+    private var handle: AuthStateDidChangeListenerHandle?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +46,25 @@ class WelcomeViewController: UIViewController {
         scrollView.frame = view.bounds
         backgroundView.frame = scrollView.bounds
         buttonsView.frame = scrollView.bounds
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        handle = Auth.auth().addStateDidChangeListener({ auth, user in
+//
+//            let credential = auth.
+//
+//            auth.currentUser?.link(with: credential, completion: { linkResult, error in
+//                print("FacebookSignInHelper: Linking providers")
+//                guard let link = linkResult, error == nil else {
+//                    print(error!)
+//                    return
+//                }
+//                print("FacebookSignInHelper: link - \(link)")
+//                print("FacebookSignInHelper: Providers successfully linked")
+//            })
+//        })
+        
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {

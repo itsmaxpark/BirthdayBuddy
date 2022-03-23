@@ -80,13 +80,33 @@ extension WelcomeScreenButtonsView: ASAuthorizationControllerDelegate {
                 print("Unable to serialize token string from data: \(appleIDtoken.debugDescription)")
                 return
             }
+            
+            UserDefaults.standard.set(appleIDCredential.user, forKey: "appleAuthorizedUserIdKey")
+           
             print("Creating credentials")
             let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
             
-            Auth.auth().signIn(with: credential) { authDataResult, error in
-                if let user = authDataResult?.user {
-                    print("Awesome! You are signed in as \(user.uid) using \(user.email ?? "Unknown Email")")
+            Auth.auth().signIn(with: credential) { authResult, error in
+
+                guard let result = authResult else {
+                    print("AppleSignInHelper: Error creating a new user")
+                    return
                 }
+                print("AppleSignInHelper: Initializing user")
+                let userID = result.user.uid
+                print("UserID: \(userID)")
+                guard let email = result.user.email else { return }
+                print("Email: \(email)")
+                guard let fullName = appleIDCredential.fullName else { return }
+                
+                guard let firstName = fullName.givenName else {
+                    WelcomeViewController.login()
+                    print("Signing in using Apple Credentials")
+                    return }
+                guard let lastName = fullName.familyName else { return }
+                print("Saving apple user to database")
+                DatabaseManager.shared.addUser(for: BirthdayBuddyUser(id: userID, firstName: firstName, lastName: lastName, emailAddress: email))
+                
                 WelcomeViewController.login()
                 print("Signing in using Apple Credentials")
             }
