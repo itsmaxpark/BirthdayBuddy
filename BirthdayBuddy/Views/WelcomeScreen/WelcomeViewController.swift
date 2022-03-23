@@ -48,25 +48,6 @@ class WelcomeViewController: UIViewController {
         buttonsView.frame = scrollView.bounds
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        handle = Auth.auth().addStateDidChangeListener({ auth, user in
-//
-//            let credential = auth.
-//
-//            auth.currentUser?.link(with: credential, completion: { linkResult, error in
-//                print("FacebookSignInHelper: Linking providers")
-//                guard let link = linkResult, error == nil else {
-//                    print(error!)
-//                    return
-//                }
-//                print("FacebookSignInHelper: link - \(link)")
-//                print("FacebookSignInHelper: Providers successfully linked")
-//            })
-//        })
-        
-    }
-    
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
            return
