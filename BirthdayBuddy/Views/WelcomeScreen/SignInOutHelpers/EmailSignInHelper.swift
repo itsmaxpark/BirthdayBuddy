@@ -26,14 +26,17 @@ class EmailSignInHelper {
                 if providers.contains("google.com"){
                     providersBool.Google = true
                 }
+                
                 self.alertLinkProviders(providersBool, view: view)
                 
                 Auth.auth().addStateDidChangeListener({ auth, user in
                     auth.currentUser?.link(with: credential, completion: { linkResult, error in
                         guard error == nil else { return }
                         print("EmailSignInHelper: Providers successfully linked")
+                        self.alertUserRegistered(view: view)
                     })
                 })
+                
             } else { // Alternate provider does not exists so create new user
                 Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                     guard let result = authResult, error == nil else {
@@ -43,7 +46,9 @@ class EmailSignInHelper {
                     let userID = result.user.uid
                     DatabaseManager.shared.addUser(for: BirthdayBuddyUser(id: userID, firstName: firstName, lastName: lastName, emailAddress: email))
                     print("EmailSignInHelper: New user with id: \(userID) added to database")
+                    self.alertUserRegistered(view: view)
                 }
+                
             }
         }
     }
@@ -89,6 +94,13 @@ class EmailSignInHelper {
                 GoogleSignInHelper.shared.performSignIn(with: view)
             }))
         }
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
+        alert.view.layoutIfNeeded()
+        let vc = view.findViewController()
+        vc?.present(alert, animated: true)
+    }
+    private func alertUserRegistered(view: WelcomeScreenButtonsView) {
+        let alert = UIAlertController(title: "Awesome", message: "Your account was successfully created!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
         alert.view.layoutIfNeeded()
         let vc = view.findViewController()

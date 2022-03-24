@@ -350,7 +350,8 @@ class WelcomeScreenButtonsView: UIView {
         }
         print("WelcomeScreenButtonsView: Calling emailsigninhelper")
         EmailSignInHelper.shared.performCreateUser(firstName: firstName, lastName: lastName, email: email, password: password, view: self)
-        alertUserRegistered()
+        // TODO: Fix alertUserRegistered's UIAlertController overriding the alertLinkProviders UIAlertController from EmailSignInHelper
+//        alertUserRegistered()
         didTapReturn()
     }
     
@@ -402,13 +403,7 @@ class WelcomeScreenButtonsView: UIView {
         let vc = findViewController()
         vc?.present(alert, animated: true)
     }
-    func alertUserRegistered() {
-        let alert = UIAlertController(title: "Awesome", message: "Your account was successfully created!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-        alert.view.layoutIfNeeded()
-        let vc = findViewController()
-        vc?.present(alert, animated: true)
-    }
+    
 }
 
 extension WelcomeScreenButtonsView: UITextFieldDelegate {
@@ -420,7 +415,7 @@ extension WelcomeScreenButtonsView: UITextFieldDelegate {
             if !enterButton.isHidden {
                 didTapEnter()
             } else {
-                await didTapRegister()
+                didTapRegister()
             }
         }
         
