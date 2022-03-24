@@ -45,20 +45,15 @@ class FacebookSignInHelper {
                 
                 Auth.auth().fetchSignInMethods(forEmail: email) { fetchResult, error in
                     guard let providers = fetchResult, error == nil else { return }
-
-//                    var containsApple = false
-//                    var containsGoogle = false
                     var providersBool = (Apple: false, Google: false)
                     
                     if !providers.contains("facebook.com") && !providers.isEmpty { // if credentials exist with apple/google ask user to link
-                        //TODO: Add UIAlert for linking accounts
                         if providers.contains("apple.com") {
                             providersBool.Apple = true
                         }
                         if providers.contains("google.com"){
                             providersBool.Google = true
                         }
-                        print(providersBool)
                         self.alertLinkProviders(providersBool, view: view)
                         
                         Auth.auth().addStateDidChangeListener({ auth, user in
@@ -69,10 +64,7 @@ class FacebookSignInHelper {
                         })
                     } else { // Alternate provider does not exists so create new user
                         Auth.auth().signIn(with: credential) { authResult, error in
-                            guard let result = authResult, error == nil else {
-                                print(error)
-                                return
-                            }
+                            guard let result = authResult, error == nil else { return }
                             let userID = result.user.uid
                             DatabaseManager.shared.addUser(for: BirthdayBuddyUser(id: userID, firstName: firstName, lastName: lastName, emailAddress: email))
                             WelcomeViewController.login()

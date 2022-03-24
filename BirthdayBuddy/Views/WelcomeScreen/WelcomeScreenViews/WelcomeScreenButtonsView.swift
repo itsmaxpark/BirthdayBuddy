@@ -333,7 +333,6 @@ class WelcomeScreenButtonsView: UIView {
         
         EmailSignInHelper.shared.performSignIn(email: email, password: password)
     }
-    
     @objc private func didTapRegister() {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
@@ -349,7 +348,8 @@ class WelcomeScreenButtonsView: UIView {
             alertPasswordLength()
             return
         }
-        EmailSignInHelper.shared.performCreateUser(firstName: firstName, lastName: lastName, email: email, password: password)
+        print("WelcomeScreenButtonsView: Calling emailsigninhelper")
+        EmailSignInHelper.shared.performCreateUser(firstName: firstName, lastName: lastName, email: email, password: password, view: self)
         alertUserRegistered()
         didTapReturn()
     }
@@ -412,7 +412,7 @@ class WelcomeScreenButtonsView: UIView {
 }
 
 extension WelcomeScreenButtonsView: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    private func textFieldShouldReturn(_ textField: UITextField) async -> Bool {
         
         if textField == emailTextField {
             passwordTextField.becomeFirstResponder()
@@ -420,7 +420,7 @@ extension WelcomeScreenButtonsView: UITextFieldDelegate {
             if !enterButton.isHidden {
                 didTapEnter()
             } else {
-                didTapRegister()
+                await didTapRegister()
             }
         }
         
