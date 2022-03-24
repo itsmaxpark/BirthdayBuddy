@@ -349,10 +349,12 @@ class WelcomeScreenButtonsView: UIView {
             return
         }
         print("WelcomeScreenButtonsView: Calling emailsigninhelper")
-        EmailSignInHelper.shared.performCreateUser(firstName: firstName, lastName: lastName, email: email, password: password, view: self)
+        EmailSignInHelper.shared.performCreateUser(firstName: firstName, lastName: lastName, email: email, password: password, view: self) { [weak self] in
+            print("WelcomeScreenButtonsView: completion handler")
+            self?.didTapReturn()
+            self?.alertUserRegistered()
+        }
         // TODO: Fix alertUserRegistered's UIAlertController overriding the alertLinkProviders UIAlertController from EmailSignInHelper
-//        alertUserRegistered()
-        didTapReturn()
     }
     
     @objc private func didTapNext() {
@@ -403,12 +405,17 @@ class WelcomeScreenButtonsView: UIView {
         let vc = findViewController()
         vc?.present(alert, animated: true)
     }
-    
+    func alertUserRegistered() {
+        let alert = UIAlertController(title: "Awesome", message: "Your account was successfully created! Please log in to continue.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        alert.view.layoutIfNeeded()
+        let vc = findViewController()
+        vc?.present(alert, animated: true)
+    }
 }
 
 extension WelcomeScreenButtonsView: UITextFieldDelegate {
-    private func textFieldShouldReturn(_ textField: UITextField) async -> Bool {
-        
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailTextField {
             passwordTextField.becomeFirstResponder()
         } else if textField == passwordTextField {
@@ -418,7 +425,6 @@ extension WelcomeScreenButtonsView: UITextFieldDelegate {
                 didTapRegister()
             }
         }
-        
         if textField == firstNameField {
             lastNameField.becomeFirstResponder()
         } else if textField == lastNameField {

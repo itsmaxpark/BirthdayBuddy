@@ -2606,8 +2606,8 @@ static _Nullable id<GTMUIApplicationProtocol> gSubstituteUIApp;
     }
   }
 
-  GTMSESSION_LOG_DEBUG(@"GTMSessionFetcher invoking fetch callbacks, data %@, error %@", data,
-                       error);
+//  GTMSESSION_LOG_DEBUG(@"GTMSessionFetcher invoking fetch callbacks, data %@, error %@", data,
+//                       error);
 
   // Callbacks will be released in the method stopFetchReleasingCallbacks:
   GTMSessionFetcherCompletionHandler handler;
