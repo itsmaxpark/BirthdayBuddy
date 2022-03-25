@@ -331,7 +331,7 @@ class WelcomeScreenButtonsView: UIView {
             return
         }
         
-        EmailSignInHelper.shared.performSignIn(email: email, password: password)
+        EmailSignInHelper.shared.performSignIn(email: email, password: password, view: self)
     }
     @objc private func didTapRegister() {
         emailTextField.resignFirstResponder()

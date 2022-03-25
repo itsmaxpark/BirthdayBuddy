@@ -19,10 +19,7 @@ class EmailSignInHelper {
             print("EmailSignInHelper: Fetching sign in methods")
             
             guard error == nil else {
-                print("Inside guard")
-                print("Error: \(String(describing: error))")
                 if let error = error as NSError? {
-                    print("Inside error as nserror")
                     if let errorCode = AuthErrorCode(rawValue: error.code) {
                         switch errorCode {
                         case .invalidEmail:
@@ -79,11 +76,30 @@ class EmailSignInHelper {
         }
     }
     
-    func performSignIn(email: String, password: String) {
+    func performSignIn(email: String, password: String, view: WelcomeScreenButtonsView) {
+        
+        Auth.auth().fetchSignInMethods(forEmail: email) { fetchResult, error in
+            guard fetchResult != nil else {
+                //providers is nil so email does not exist in database
+                print("invalidEmail")
+                self.alertInvalidEmail(view: view)
+                return
+            }
+        }
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-            
             guard let result = authResult, error == nil else {
                 print("EmailSignInHelper: Error signing in user")
+                if let error = error as NSError? {
+                    if let errorCode = AuthErrorCode(rawValue: error._code) {
+                        switch errorCode {
+                        case .wrongPassword:
+                            print("EmailSignInHelper: Wrong Password")
+                            self.alertInvalidPassword(view: view)
+                        default:
+                            print(errorCode)
+                        }
+                    }
+                }
                 return
             }
             
@@ -125,7 +141,19 @@ class EmailSignInHelper {
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { _ in
             completion()
         }))
-        alert.view.layoutIfNeeded()
+//        alert.view.layoutIfNeeded()
+        let vc = view.findViewController()
+        vc?.present(alert, animated: true)
+    }
+    private func alertInvalidEmail(view: WelcomeScreenButtonsView) {
+        let alert = UIAlertController(title: "Invalid Email", message: "The email used is not registered with Birthday Buddy", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        let vc = view.findViewController()
+        vc?.present(alert, animated: true)
+    }
+    private func alertInvalidPassword(view: WelcomeScreenButtonsView) {
+        let alert = UIAlertController(title: "Invalid Password", message: "The password you entered is incorrect", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
         let vc = view.findViewController()
         vc?.present(alert, animated: true)
     }

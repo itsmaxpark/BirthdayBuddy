@@ -25,8 +25,6 @@ class WelcomeViewController: UIViewController {
         isLoggedIn = true
     }
     
-    private var handle: AuthStateDidChangeListenerHandle?
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -48,6 +46,8 @@ class WelcomeViewController: UIViewController {
         buttonsView.frame = scrollView.bounds
     }
     
+    
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
            return
@@ -63,8 +63,11 @@ class WelcomeViewController: UIViewController {
         print("Presenting Tab Bar VC after successful login")
         let vc = TabBarViewController()
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(vc, animated: true)
+        
     }
 }
+
+
 
     
 
