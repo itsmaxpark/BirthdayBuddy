@@ -28,6 +28,13 @@ class TabBarViewController: UITabBarController {
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
+        
+        nav1.additionalSafeAreaInsets.top = CGFloat(20)
+        nav2.additionalSafeAreaInsets.top = CGFloat(20)
+        nav3.additionalSafeAreaInsets.top = CGFloat(20)
+        
+        nav1.navigationBar.standardAppearance = appearance
+        nav2.navigationBar.standardAppearance = appearance
         nav3.navigationBar.standardAppearance = appearance
         
         setViewControllers([nav1,nav2,nav3], animated: false)

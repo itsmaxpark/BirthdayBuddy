@@ -15,6 +15,10 @@
 		5066BA9A27ED3748008873BB /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5066BA9927ED3748008873BB /* AnimationHelper.swift */; };
 		5068B65027F2B12E00F1EEE5 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B64F27F2B12E00F1EEE5 /* CustomTabBar.swift */; };
 		5068B65227F2B40300F1EEE5 /* TabBarBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65127F2B40300F1EEE5 /* TabBarBackgroundView.swift */; };
+		5068B65627F2C7E800F1EEE5 /* CarouselViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65527F2C7E800F1EEE5 /* CarouselViewCell.swift */; };
+		5068B65827F2C9E800F1EEE5 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65727F2C9E800F1EEE5 /* CollectionViewCell.swift */; };
+		5068B65A27F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65927F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift */; };
+		5068B65C27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65B27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift */; };
 		506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */; };
 		506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */; };
 		506D5B5D27D87325009A9F39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */; };
@@ -50,6 +54,10 @@
 		5066BA9927ED3748008873BB /* AnimationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationHelper.swift; sourceTree = "<group>"; };
 		5068B64F27F2B12E00F1EEE5 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		5068B65127F2B40300F1EEE5 /* TabBarBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarBackgroundView.swift; sourceTree = "<group>"; };
+		5068B65527F2C7E800F1EEE5 /* CarouselViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewCell.swift; sourceTree = "<group>"; };
+		5068B65727F2C9E800F1EEE5 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		5068B65927F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewCellViewModel.swift; sourceTree = "<group>"; };
+		5068B65B27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenBackgroundView.swift; sourceTree = "<group>"; };
 		506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenButtonsView.swift; sourceTree = "<group>"; };
 		506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -159,6 +167,8 @@
 		5056AF3427D6E447008601FF /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				5068B65927F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift */,
+				5068B65B27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -186,11 +196,21 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		5068B65427F2C7B700F1EEE5 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				5093F99A27D6ED5700378967 /* HomeViewController.swift */,
+				5068B65527F2C7E800F1EEE5 /* CarouselViewCell.swift */,
+				5068B65727F2C9E800F1EEE5 /* CollectionViewCell.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
 		5093F99927D6ED4100378967 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				5068B65327F2BC9200F1EEE5 /* TabBar */,
-				5093F99A27D6ED5700378967 /* HomeViewController.swift */,
+				5068B65427F2C7B700F1EEE5 /* HomeView */,
 				5093F99C27D6ED6400378967 /* AddBirthdayViewController.swift */,
 				50DAC1AE27DBEA0D006098D6 /* Settings */,
 			);
@@ -402,11 +422,15 @@
 				50DAC1A627DAF237006098D6 /* EmailSignInHelper.swift in Sources */,
 				5056AF2127D6B803008601FF /* SceneDelegate.swift in Sources */,
 				50DAC1B327DBEC97006098D6 /* SignOutHelper.swift in Sources */,
+				5068B65627F2C7E800F1EEE5 /* CarouselViewCell.swift in Sources */,
 				5068B65227F2B40300F1EEE5 /* TabBarBackgroundView.swift in Sources */,
 				50DAC1A827DAF4D2006098D6 /* LogInSheetViewController.swift in Sources */,
+				5068B65A27F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift in Sources */,
 				50DAC1A127DAEC71006098D6 /* BirthdayBuddyUser.swift in Sources */,
+				5068B65827F2C9E800F1EEE5 /* CollectionViewCell.swift in Sources */,
 				50DAC19D27DAE342006098D6 /* DatabaseManager.swift in Sources */,
 				508EB38D27E2706700986FC8 /* FacebookSignInHelper.swift in Sources */,
+				5068B65C27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift in Sources */,
 				50DAC1B527DC0E79006098D6 /* CustomDesigns.swift in Sources */,
 				506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */,
 				5093F99B27D6ED5700378967 /* HomeViewController.swift in Sources */,
