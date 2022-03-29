@@ -23,8 +23,8 @@ class WelcomeScreenBackgroundView: UIView {
         gradient.startPoint = CGPoint(x: 0.5, y: 0)
         gradient.endPoint = CGPoint(x: 0.5, y: 1)
         gradient.colors = [
-                  UIColor(red: 0.293, green: 0.125, blue: 0.961, alpha: 0.71).cgColor,
-                  UIColor(red: 0.125, green: 0.863, blue: 0.961, alpha: 1).cgColor
+            UIColor(named: "Blue")?.cgColor as Any,
+            UIColor(named: "Light Blue")?.cgColor as Any
                 ]
         gradient.mask = circle
         
@@ -44,8 +44,8 @@ class WelcomeScreenBackgroundView: UIView {
         gradient.startPoint = CGPoint(x: 0.5, y: 0)
         gradient.endPoint = CGPoint(x: 0.5, y: 1)
         gradient.colors = [
-                UIColor(red: 0.125, green: 0.863, blue: 0.961, alpha: 1).cgColor,
-                  UIColor(red: 0.293, green: 0.125, blue: 0.961, alpha: 0.71).cgColor,
+            UIColor(named: "Light Blue")?.cgColor as Any,
+            UIColor(named: "Blue")?.cgColor as Any
                 ]
         gradient.mask = circle
         
@@ -95,7 +95,7 @@ class WelcomeScreenBackgroundView: UIView {
         // Background
         topCircleView.frame = CGRect(
             x: (width-circleDiameter)/2,
-            y: -circleDiameter+topCircleHeight,
+            y: topCircleHeight-circleDiameter,
             width: circleDiameter,
             height: circleDiameter
         )
