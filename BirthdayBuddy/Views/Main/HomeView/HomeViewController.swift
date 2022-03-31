@@ -21,18 +21,18 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     private let viewModels: [CarouselViewCellViewModel] = [
         CarouselViewCellViewModel(
             viewModels: [
-                CollectionViewCellViewModel(name: "March", backgroundColor: .blue),
-                CollectionViewCellViewModel(name: "April", backgroundColor: .red),
-                CollectionViewCellViewModel(name: "May", backgroundColor: .green),
-                CollectionViewCellViewModel(name: "June", backgroundColor: .orange),
-                CollectionViewCellViewModel(name: "July", backgroundColor: .blue),
-                CollectionViewCellViewModel(name: "August", backgroundColor: .red),
-                CollectionViewCellViewModel(name: "September", backgroundColor: .green),
-                CollectionViewCellViewModel(name: "October", backgroundColor: .orange),
-                CollectionViewCellViewModel(name: "November", backgroundColor: .blue),
-                CollectionViewCellViewModel(name: "December", backgroundColor: .red),
-                CollectionViewCellViewModel(name: "January", backgroundColor: .green),
-                CollectionViewCellViewModel(name: "February", backgroundColor: .orange),
+                CollectionViewCellViewModel(name: "March", backgroundColor: .blue, id: 3),
+                CollectionViewCellViewModel(name: "April", backgroundColor: .green, id: 4),
+                CollectionViewCellViewModel(name: "May", backgroundColor: .yellow, id: 5),
+                CollectionViewCellViewModel(name: "June", backgroundColor: .orange, id: 6),
+                CollectionViewCellViewModel(name: "July", backgroundColor: .purple, id: 7),
+                CollectionViewCellViewModel(name: "August", backgroundColor: .pink, id: 8),
+                CollectionViewCellViewModel(name: "September", backgroundColor: .blue, id: 9),
+                CollectionViewCellViewModel(name: "October", backgroundColor: .green, id: 10),
+                CollectionViewCellViewModel(name: "November", backgroundColor: .yellow, id: 11),
+                CollectionViewCellViewModel(name: "December", backgroundColor: .orange, id: 12),
+                CollectionViewCellViewModel(name: "January", backgroundColor: .purple, id: 1),
+                CollectionViewCellViewModel(name: "February", backgroundColor: .pink, id: 2),
             ]
         )
     ]
@@ -52,6 +52,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
     }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count

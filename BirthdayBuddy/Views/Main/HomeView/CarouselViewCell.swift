@@ -18,9 +18,9 @@ class CarouselViewCell: UITableViewCell, UICollectionViewDataSource, UICollectio
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 2, left: 22, bottom: 2, right: 2)
         layout.minimumLineSpacing = 22
+        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
-        collectionView.backgroundColor = .systemBackground
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
         
@@ -28,12 +28,10 @@ class CarouselViewCell: UITableViewCell, UICollectionViewDataSource, UICollectio
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .systemBackground
         
         contentView.addSubview(collectionView)
         collectionView.delegate = self
         collectionView.dataSource = self
-        
     }
     
     required init?(coder: NSCoder) {
@@ -43,7 +41,6 @@ class CarouselViewCell: UITableViewCell, UICollectionViewDataSource, UICollectio
     override func layoutSubviews() {
         super.layoutSubviews()
         collectionView.frame = contentView.bounds
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -57,7 +54,21 @@ class CarouselViewCell: UITableViewCell, UICollectionViewDataSource, UICollectio
         ) as? CollectionViewCell else {
             fatalError()
         }
-        cell.configure(with: viewModels[indexPath.row])
+        // if cell is dequeued, it retains the custom uiview
+        // we need to reset the uiview if it is dequeued
+        let model = viewModels[indexPath.row]
+        for sublayer in cell.layer.sublayers! {
+            if let _ = sublayer as? CAGradientLayer { // Check only gradient layers
+                if sublayer.name != model.name { // need to update gradient since cell is reused
+                    sublayer.removeFromSuperlayer()
+                    cell.configure(with: model)
+                    cell.setGradientBackground(id: model.id)
+                }
+            } else { // cell is not dequeued
+                cell.configure(with: model)
+                cell.setGradientBackground(id: model.id)
+            }
+        }
         return cell
     }
     

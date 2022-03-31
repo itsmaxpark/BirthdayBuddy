@@ -19,6 +19,8 @@
 		5068B65827F2C9E800F1EEE5 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65727F2C9E800F1EEE5 /* CollectionViewCell.swift */; };
 		5068B65A27F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65927F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift */; };
 		5068B65C27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65B27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift */; };
+		5068B65E27F3B3C300F1EEE5 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65D27F3B3C300F1EEE5 /* GradientBackgroundView.swift */; };
+		5068B66027F3BA1C00F1EEE5 /* CustomGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65F27F3BA1C00F1EEE5 /* CustomGradientLayer.swift */; };
 		506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */; };
 		506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */; };
 		506D5B5D27D87325009A9F39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */; };
@@ -58,6 +60,8 @@
 		5068B65727F2C9E800F1EEE5 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		5068B65927F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewCellViewModel.swift; sourceTree = "<group>"; };
 		5068B65B27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		5068B65D27F3B3C300F1EEE5 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
+		5068B65F27F3BA1C00F1EEE5 /* CustomGradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGradientLayer.swift; sourceTree = "<group>"; };
 		506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenBackgroundView.swift; sourceTree = "<group>"; };
 		506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenButtonsView.swift; sourceTree = "<group>"; };
 		506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -183,6 +187,7 @@
 				50DAC1B427DC0E79006098D6 /* CustomDesigns.swift */,
 				5093F9A027D7123200378967 /* Fonts */,
 				5056AF2727D6B803008601FF /* Assets.xcassets */,
+				5068B65F27F3BA1C00F1EEE5 /* CustomGradientLayer.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -260,6 +265,7 @@
 		50DAC1AD27DBE6DD006098D6 /* Archives */ = {
 			isa = PBXGroup;
 			children = (
+				5068B65D27F3B3C300F1EEE5 /* GradientBackgroundView.swift */,
 				5068B64F27F2B12E00F1EEE5 /* CustomTabBar.swift */,
 				50DAC1A727DAF4D2006098D6 /* LogInSheetViewController.swift */,
 				50DAC1A927DAF4DF006098D6 /* SignUpSheetViewController.swift */,
@@ -430,6 +436,8 @@
 				5068B65827F2C9E800F1EEE5 /* CollectionViewCell.swift in Sources */,
 				50DAC19D27DAE342006098D6 /* DatabaseManager.swift in Sources */,
 				508EB38D27E2706700986FC8 /* FacebookSignInHelper.swift in Sources */,
+				5068B65E27F3B3C300F1EEE5 /* GradientBackgroundView.swift in Sources */,
+				5068B66027F3BA1C00F1EEE5 /* CustomGradientLayer.swift in Sources */,
 				5068B65C27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift in Sources */,
 				50DAC1B527DC0E79006098D6 /* CustomDesigns.swift in Sources */,
 				506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */,

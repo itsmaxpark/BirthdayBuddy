@@ -18,9 +18,17 @@ class CollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private let previewView: UIView = {
+        let view = UIView()
+        
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         contentView.addSubview(monthLabel)
+        // Shadow Layer
         contentView.layer.cornerRadius = 20
         contentView.layer.shadowColor = UIColor.black.cgColor
         contentView.layer.shadowOffset = CGSize(width: -10, height: 10)
@@ -40,12 +48,13 @@ class CollectionViewCell: UICollectionViewCell {
             width: monthLabel.intrinsicContentSize.width,
             height: monthLabel.intrinsicContentSize.height
         )
-        
-        
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
     }
     
     func configure(with viewModel: CollectionViewCellViewModel) {
-        contentView.backgroundColor = viewModel.backgroundColor
         monthLabel.text = viewModel.name
     }
 }

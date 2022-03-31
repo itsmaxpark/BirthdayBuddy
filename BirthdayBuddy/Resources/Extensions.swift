@@ -75,5 +75,104 @@ extension UIImage {
     }
 }
 
+extension UIView {
+    func setGradientBackground(id: Int) {
+        switch id {
+        case 3,9:
+            let gradient = CAGradientLayer()
+            gradient.frame = bounds
+            gradient.name = String(id)
+            gradient.colors = [
+                UIColor(named: "Light Blue")?.cgColor as Any,
+                UIColor(named: "Blue")?.cgColor as Any
+            ]
+            gradient.locations = [0.25, 1]
+            gradient.startPoint = CGPoint(x: 0.0, y: 0.1)
+            gradient.endPoint = CGPoint(x: 0.75, y: 1)
+            gradient.cornerRadius = 20
+            layer.insertSublayer(gradient, at: 0)
+        case 4,10:
+            let gradient = CAGradientLayer()
+            gradient.frame = bounds
+            gradient.name = String(id)
+            gradient.colors = [
+                UIColor(named: "Green")?.cgColor as Any,
+                UIColor(named: "Yellow Green")?.cgColor as Any
+            ]
+            gradient.locations = [0.25, 1]
+            gradient.startPoint = CGPoint(x: 0.25, y: 0.1)
+            gradient.endPoint = CGPoint(x: 0.75, y: 1)
+            gradient.cornerRadius = 20
+            layer.insertSublayer(gradient, at: 0)
+        case 5,11:
+            let gradient = CAGradientLayer()
+            gradient.frame = bounds
+            gradient.name = String(id)
+            gradient.colors = [
+                UIColor(named: "Yellow Orange")?.cgColor as Any,
+                UIColor(named: "Light Orange")?.cgColor as Any
+            ]
+            gradient.locations = [0.25, 1]
+            gradient.startPoint = CGPoint(x: 0.25, y: 0.1)
+            gradient.endPoint = CGPoint(x: 0.75, y: 1)
+            gradient.cornerRadius = 20
+            layer.insertSublayer(gradient, at: 0)
+            
+        case 6,12:
+            let gradient = CAGradientLayer()
+            gradient.frame = bounds
+            gradient.name = String(id)
+            gradient.colors = [
+                UIColor(named: "Orange")?.cgColor as Any,
+                UIColor(named: "Dark Orange")?.cgColor as Any
+            ]
+            gradient.locations = [0.25, 1]
+            gradient.startPoint = CGPoint(x: 0.25, y: 0.1)
+            gradient.endPoint = CGPoint(x: 0.75, y: 1)
+            gradient.cornerRadius = 20
+            layer.insertSublayer(gradient, at: 0)
+        case 1,7:
+            let gradient = CAGradientLayer()
+            gradient.frame = bounds
+            gradient.name = String(id)
+            gradient.colors = [
+                UIColor(named: "Light Purple")?.cgColor as Any,
+                UIColor(named: "Purple")?.cgColor as Any
+            ]
+            gradient.locations = [0.25, 1]
+            gradient.startPoint = CGPoint(x: 0.25, y: 0.1)
+            gradient.endPoint = CGPoint(x: 0.75, y: 1)
+            gradient.cornerRadius = 20
+            layer.insertSublayer(gradient, at: 0)
+        case 2,8:
+            let gradient = CAGradientLayer()
+            gradient.frame = bounds
+            gradient.name = String(id)
+            gradient.colors = [
+                UIColor(named: "Pink")?.cgColor as Any,
+                UIColor(named: "Magenta")?.cgColor as Any
+            ]
+            gradient.locations = [0.25, 1]
+            gradient.startPoint = CGPoint(x: 0.25, y: 0.1)
+            gradient.endPoint = CGPoint(x: 0.75, y: 1)
+            gradient.cornerRadius = 20
+            layer.insertSublayer(gradient, at: 0)
+        default:
+            let gradient = CAGradientLayer()
+            gradient.frame = bounds
+            gradient.name = String(id)
+            gradient.colors = [
+                UIColor(named: "Pink")?.cgColor as Any,
+                UIColor(named: "Magenta")?.cgColor as Any
+            ]
+            gradient.locations = [0.25, 1]
+            gradient.startPoint = CGPoint(x: 0.25, y: 0.1)
+            gradient.endPoint = CGPoint(x: 0.75, y: 1)
+            gradient.cornerRadius = 20
+            layer.insertSublayer(gradient, at: 0)
+        }
+    }
+}
+
 
 

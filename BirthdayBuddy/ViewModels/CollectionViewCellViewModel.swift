@@ -10,5 +10,6 @@ import UIKit
 
 struct CollectionViewCellViewModel {
     let name: String
-    let backgroundColor: UIColor
+    let backgroundColor: GradientType
+    let id: Int
 }
