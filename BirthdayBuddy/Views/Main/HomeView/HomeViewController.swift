@@ -21,18 +21,18 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     private let viewModels: [CarouselViewCellViewModel] = [
         CarouselViewCellViewModel(
             viewModels: [
-                CollectionViewCellViewModel(name: "March", backgroundColor: .blue, id: 3),
-                CollectionViewCellViewModel(name: "April", backgroundColor: .green, id: 4),
-                CollectionViewCellViewModel(name: "May", backgroundColor: .yellow, id: 5),
-                CollectionViewCellViewModel(name: "June", backgroundColor: .orange, id: 6),
-                CollectionViewCellViewModel(name: "July", backgroundColor: .purple, id: 7),
-                CollectionViewCellViewModel(name: "August", backgroundColor: .pink, id: 8),
-                CollectionViewCellViewModel(name: "September", backgroundColor: .blue, id: 9),
-                CollectionViewCellViewModel(name: "October", backgroundColor: .green, id: 10),
-                CollectionViewCellViewModel(name: "November", backgroundColor: .yellow, id: 11),
-                CollectionViewCellViewModel(name: "December", backgroundColor: .orange, id: 12),
-                CollectionViewCellViewModel(name: "January", backgroundColor: .purple, id: 1),
-                CollectionViewCellViewModel(name: "February", backgroundColor: .pink, id: 2),
+                CollectionViewCellViewModel(name: "March", id: 3),
+                CollectionViewCellViewModel(name: "April", id: 4),
+                CollectionViewCellViewModel(name: "May", id: 5),
+                CollectionViewCellViewModel(name: "June", id: 6),
+                CollectionViewCellViewModel(name: "July", id: 7),
+                CollectionViewCellViewModel(name: "August", id: 8),
+                CollectionViewCellViewModel(name: "September", id: 9),
+                CollectionViewCellViewModel(name: "October", id: 10),
+                CollectionViewCellViewModel(name: "November", id: 11),
+                CollectionViewCellViewModel(name: "December", id: 12),
+                CollectionViewCellViewModel(name: "January", id: 1),
+                CollectionViewCellViewModel(name: "February", id: 2),
             ]
         )
     ]

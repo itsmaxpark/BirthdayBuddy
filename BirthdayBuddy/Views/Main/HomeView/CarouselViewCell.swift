@@ -14,14 +14,15 @@ class CarouselViewCell: UITableViewCell, UICollectionViewDataSource, UICollectio
     private var viewModels: [CollectionViewCellViewModel] = []
     
     private let collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
+        let layout = CustomCollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 2, left: 22, bottom: 2, right: 2)
-        layout.minimumLineSpacing = 22
+        layout.sectionInset = UIEdgeInsets(top: 2, left: 60, bottom: 2, right: 100)
+        layout.minimumLineSpacing = 40
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
         return collectionView
         
     }()
@@ -69,7 +70,34 @@ class CarouselViewCell: UITableViewCell, UICollectionViewDataSource, UICollectio
                 cell.setGradientBackground(id: model.id)
             }
         }
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        //First, set cell to starting position when off screen
+        let rotation = CATransform3DMakeRotation(CGFloat.pi/3, 0, 0.5, 0)
+        let rotationInverse = CATransform3DMakeRotation(-CGFloat.pi/3, 0, 0.5, 0)
+
+        let translation = CATransform3DMakeTranslation(50, 0, 0)
+        let translationInverse = CATransform3DMakeTranslation(-50, 0, 0)
+        
+        let scale = CATransform3DMakeScale(0.8, 0.8, 0.8)
+        
+        let direction = collectionView.panGestureRecognizer.translation(in: collectionView.superview)
+        if direction.x > 0 { // Scrolling left to right
+            cell.layer.transform = rotationInverse
+            cell.layer.transform = translationInverse
+            cell.layer.transform = scale
+        } else { // Scrolling right to left
+            cell.layer.transform = rotation
+            cell.layer.transform = translation
+            cell.layer.transform = scale
+        }
+        // Then, reset back to original position
+        UIView.animate(withDuration: 0.5) {
+            cell.layer.transform = CATransform3DIdentity
+        }
     }
     
     func configure(with viewModel: CarouselViewCellViewModel) {

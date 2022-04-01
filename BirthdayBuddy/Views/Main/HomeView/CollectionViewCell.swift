@@ -14,7 +14,7 @@ class CollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont.appFont(name: "IndieFlower", size: 50)
+        label.font = UIFont.appFont(name: "IndieFlower", size: 40)
         return label
     }()
     
@@ -29,12 +29,6 @@ class CollectionViewCell: UICollectionViewCell {
         
         contentView.addSubview(monthLabel)
         // Shadow Layer
-        contentView.layer.cornerRadius = 20
-        contentView.layer.shadowColor = UIColor.black.cgColor
-        contentView.layer.shadowOffset = CGSize(width: -10, height: 10)
-        contentView.layer.shadowRadius = 4
-        contentView.layer.shadowOpacity = 0.4
-        contentView.layer.masksToBounds = false
     }
     required init?(coder: NSCoder) {
         fatalError()
@@ -52,7 +46,14 @@ class CollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        // Need to reset SubLayer or else layers are used twice
+        for sublayer in self.layer.sublayers! {
+            if let _ = sublayer as? CAGradientLayer { // Check only gradient layers
+                sublayer.removeFromSuperlayer()
+           }
+        }
     }
+    
     
     func configure(with viewModel: CollectionViewCellViewModel) {
         monthLabel.text = viewModel.name

@@ -90,7 +90,13 @@ extension UIView {
             gradient.startPoint = CGPoint(x: 0.0, y: 0.1)
             gradient.endPoint = CGPoint(x: 0.75, y: 1)
             gradient.cornerRadius = 20
+            gradient.shadowColor = UIColor.black.cgColor
+            gradient.shadowOffset = CGSize(width: -10, height: 10)
+            gradient.shadowRadius = 4
+            gradient.shadowOpacity = 0.4
+            gradient.masksToBounds = false
             layer.insertSublayer(gradient, at: 0)
+            
         case 4,10:
             let gradient = CAGradientLayer()
             gradient.frame = bounds
@@ -103,6 +109,11 @@ extension UIView {
             gradient.startPoint = CGPoint(x: 0.25, y: 0.1)
             gradient.endPoint = CGPoint(x: 0.75, y: 1)
             gradient.cornerRadius = 20
+            gradient.shadowColor = UIColor.black.cgColor
+            gradient.shadowOffset = CGSize(width: -10, height: 10)
+            gradient.shadowRadius = 4
+            gradient.shadowOpacity = 0.4
+            gradient.masksToBounds = false
             layer.insertSublayer(gradient, at: 0)
         case 5,11:
             let gradient = CAGradientLayer()
@@ -116,6 +127,11 @@ extension UIView {
             gradient.startPoint = CGPoint(x: 0.25, y: 0.1)
             gradient.endPoint = CGPoint(x: 0.75, y: 1)
             gradient.cornerRadius = 20
+            gradient.shadowColor = UIColor.black.cgColor
+            gradient.shadowOffset = CGSize(width: -10, height: 10)
+            gradient.shadowRadius = 4
+            gradient.shadowOpacity = 0.4
+            gradient.masksToBounds = false
             layer.insertSublayer(gradient, at: 0)
             
         case 6,12:
@@ -130,6 +146,11 @@ extension UIView {
             gradient.startPoint = CGPoint(x: 0.25, y: 0.1)
             gradient.endPoint = CGPoint(x: 0.75, y: 1)
             gradient.cornerRadius = 20
+            gradient.shadowColor = UIColor.black.cgColor
+            gradient.shadowOffset = CGSize(width: -10, height: 10)
+            gradient.shadowRadius = 4
+            gradient.shadowOpacity = 0.4
+            gradient.masksToBounds = false
             layer.insertSublayer(gradient, at: 0)
         case 1,7:
             let gradient = CAGradientLayer()
@@ -143,6 +164,11 @@ extension UIView {
             gradient.startPoint = CGPoint(x: 0.25, y: 0.1)
             gradient.endPoint = CGPoint(x: 0.75, y: 1)
             gradient.cornerRadius = 20
+            gradient.shadowColor = UIColor.black.cgColor
+            gradient.shadowOffset = CGSize(width: -10, height: 10)
+            gradient.shadowRadius = 4
+            gradient.shadowOpacity = 0.4
+            gradient.masksToBounds = false
             layer.insertSublayer(gradient, at: 0)
         case 2,8:
             let gradient = CAGradientLayer()
@@ -156,6 +182,11 @@ extension UIView {
             gradient.startPoint = CGPoint(x: 0.25, y: 0.1)
             gradient.endPoint = CGPoint(x: 0.75, y: 1)
             gradient.cornerRadius = 20
+            gradient.shadowColor = UIColor.black.cgColor
+            gradient.shadowOffset = CGSize(width: -10, height: 10)
+            gradient.shadowRadius = 4
+            gradient.shadowOpacity = 0.4
+            gradient.masksToBounds = false
             layer.insertSublayer(gradient, at: 0)
         default:
             let gradient = CAGradientLayer()
@@ -169,10 +200,16 @@ extension UIView {
             gradient.startPoint = CGPoint(x: 0.25, y: 0.1)
             gradient.endPoint = CGPoint(x: 0.75, y: 1)
             gradient.cornerRadius = 20
+            gradient.shadowColor = UIColor.black.cgColor
+            gradient.shadowOffset = CGSize(width: -10, height: 10)
+            gradient.shadowRadius = 4
+            gradient.shadowOpacity = 0.2
+            gradient.masksToBounds = false
             layer.insertSublayer(gradient, at: 0)
         }
     }
 }
+
 
 
 
