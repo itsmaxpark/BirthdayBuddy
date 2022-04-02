@@ -21,6 +21,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     private let viewModels: [CarouselViewCellViewModel] = [
         CarouselViewCellViewModel(
             viewModels: [
+                CollectionViewCellViewModel(name: "January", id: 1),
+                CollectionViewCellViewModel(name: "February", id: 2),
                 CollectionViewCellViewModel(name: "March", id: 3),
                 CollectionViewCellViewModel(name: "April", id: 4),
                 CollectionViewCellViewModel(name: "May", id: 5),
@@ -31,8 +33,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 CollectionViewCellViewModel(name: "October", id: 10),
                 CollectionViewCellViewModel(name: "November", id: 11),
                 CollectionViewCellViewModel(name: "December", id: 12),
-                CollectionViewCellViewModel(name: "January", id: 1),
-                CollectionViewCellViewModel(name: "February", id: 2),
             ]
         )
     ]
@@ -66,6 +66,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         ) as? CarouselViewCell else {
             fatalError()
         }
+//        let layout = createCarouselSection()
         cell.configure(with: viewModel)
         return cell
     }
@@ -73,4 +74,25 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 350
     }
+    
+//    func createCarouselSection() -> UICollectionViewLayout {
+//        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+//        
+//        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
+//        
+//        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(300))
+//        
+//        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitems: [layoutItem])
+//        
+//        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
+//        
+//        layoutSection.orthogonalScrollingBehavior = .groupPaging
+//        
+//        let config = UICollectionViewCompositionalLayoutConfiguration()
+//        config.interSectionSpacing = 20
+//        let layout = UICollectionViewCompositionalLayout(section: layoutSection)
+//        layout.configuration = config
+//        
+//        return layout
+//    }
 }

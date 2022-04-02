@@ -14,6 +14,8 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "TabBarController"
+        
         let vc1 = HomeViewController()
         let vc2 = AddBirthdayViewController()
         let vc3 = SettingsViewController()
@@ -22,16 +24,22 @@ class TabBarViewController: UITabBarController {
         let nav2 = UINavigationController(rootViewController: vc2)
         let nav3 = UINavigationController(rootViewController: vc3)
         
-        nav1.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house.fill"), tag: 1)
-        nav2.tabBarItem = UITabBarItem(title: "AddBirthday", image: UIImage(systemName: "plus.app.fill"), tag: 1)
-        nav3.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(systemName: "gearshape.fill"), tag: 1)
+        nav1.title = "HomeViewController"
+        nav2.title = "AddBirthdayViewController"
+        nav3.title = "SettingsViewController"
         
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
+        let config = UIImage.SymbolConfiguration(scale: .large)
+        
+        nav1.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house.fill", withConfiguration: config), tag: 1)
+        nav2.tabBarItem = UITabBarItem(title: "Add Birthday", image: UIImage(systemName: "plus.app.fill", withConfiguration: config), tag: 1)
+        nav3.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(systemName: "gearshape.fill", withConfiguration: config), tag: 1)
         
         nav1.additionalSafeAreaInsets.top = CGFloat(20)
         nav2.additionalSafeAreaInsets.top = CGFloat(20)
         nav3.additionalSafeAreaInsets.top = CGFloat(20)
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
         
         nav1.navigationBar.standardAppearance = appearance
         nav2.navigationBar.standardAppearance = appearance
@@ -68,10 +76,7 @@ class TabBarViewController: UITabBarController {
     
     func setupTabBar() {
         tabBar.backgroundColor = UIColor(named: "Light Blue")
-//        tabBar.layer.cornerRadius = 30
         tabBar.layer.masksToBounds = true
-//        tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        
         tabBar.tintColor = .systemBlue
         tabBar.unselectedItemTintColor = .white
     }

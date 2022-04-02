@@ -16,9 +16,10 @@ class CarouselViewCell: UITableViewCell, UICollectionViewDataSource, UICollectio
     private let collectionView: UICollectionView = {
         let layout = CustomCollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 2, left: 60, bottom: 2, right: 100)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 0)
         layout.minimumLineSpacing = 40
         
+//        let layout = createCarouselSection()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
         collectionView.showsHorizontalScrollIndicator = false
@@ -95,13 +96,44 @@ class CarouselViewCell: UITableViewCell, UICollectionViewDataSource, UICollectio
             cell.layer.transform = scale
         }
         // Then, reset back to original position
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.3) {
             cell.layer.transform = CATransform3DIdentity
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = CollectionViewCellDetailViewController()
+        let model = viewModels[indexPath.row]
+        vc.title = model.name
+        vc.navigationItem.largeTitleDisplayMode = .never
+        vc.view.setGradientBackground(id: model.id)
+        vc.view.layer.sublayers?[0].cornerRadius = 0
+        
+        let nav = UINavigationController(rootViewController: vc)
+        
+//        let cell = collectionView.cellForItem(at: indexPath)
+        
+//        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: []) {
+//            cell?.frame = CGRect(
+//                x: 0,
+//                y: 100,
+//                width: collectionView.width,
+//                height: 400
+//            )
+//            collectionView.isScrollEnabled = false
+//        }
+
+        self.findNavigationController()?.present(nav, animated: true)
+        
+        
+    }
+    
+    
     func configure(with viewModel: CarouselViewCellViewModel) {
+        
         self.viewModels = viewModel.viewModels
+        let month = Calendar.current.component(.month, from: Date())
+        self.viewModels.rotate(array: &self.viewModels, k: -(month-1)) // rotate viewModels so that first month is current month
         collectionView.reloadData()
     }
     
@@ -110,4 +142,40 @@ class CarouselViewCell: UITableViewCell, UICollectionViewDataSource, UICollectio
         let height: CGFloat = 300
         return CGSize(width: width, height: height)
     }
+    
+//    func createCarouselSection() -> UICollectionViewLayout {
+//        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+//
+//        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
+//
+//        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(300))
+//
+//        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitems: [layoutItem])
+//
+//        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
+//
+//        layoutSection.orthogonalScrollingBehavior = .groupPaging
+//
+//        let config = UICollectionViewCompositionalLayoutConfiguration()
+//        config.interSectionSpacing = 20
+//        let layout = UICollectionViewCompositionalLayout(section: layoutSection)
+//        layout.configuration = config
+//
+//        return layout
+//    }
+    
+//    func createCompositionalLayout() -> UICollectionViewLayout {
+//        let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
+//            let section = self.sections[sectionIndex]
+//
+//            switch section.type  {
+//            default:
+//                return self.createCarouselSection()
+//            }
+//
+//
+//
+//        }
+//    }
 }
+

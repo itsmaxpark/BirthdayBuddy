@@ -21,6 +21,7 @@
 		5068B65C27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65B27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift */; };
 		5068B66027F3BA1C00F1EEE5 /* CustomGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65F27F3BA1C00F1EEE5 /* CustomGradientLayer.swift */; };
 		5068B66227F6D38D00F1EEE5 /* CustomCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66127F6D38D00F1EEE5 /* CustomCollectionViewFlowLayout.swift */; };
+		5068B66427F7EA2A00F1EEE5 /* CollectionViewCellDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66327F7EA2A00F1EEE5 /* CollectionViewCellDetailViewController.swift */; };
 		506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */; };
 		506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */; };
 		506D5B5D27D87325009A9F39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */; };
@@ -62,6 +63,7 @@
 		5068B65B27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		5068B65F27F3BA1C00F1EEE5 /* CustomGradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGradientLayer.swift; sourceTree = "<group>"; };
 		5068B66127F6D38D00F1EEE5 /* CustomCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		5068B66327F7EA2A00F1EEE5 /* CollectionViewCellDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellDetailViewController.swift; sourceTree = "<group>"; };
 		506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenBackgroundView.swift; sourceTree = "<group>"; };
 		506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenButtonsView.swift; sourceTree = "<group>"; };
 		506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				5093F99A27D6ED5700378967 /* HomeViewController.swift */,
 				5068B65527F2C7E800F1EEE5 /* CarouselViewCell.swift */,
 				5068B65727F2C9E800F1EEE5 /* CollectionViewCell.swift */,
+				5068B66327F7EA2A00F1EEE5 /* CollectionViewCellDetailViewController.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5068B66427F7EA2A00F1EEE5 /* CollectionViewCellDetailViewController.swift in Sources */,
 				5068B66227F6D38D00F1EEE5 /* CustomCollectionViewFlowLayout.swift in Sources */,
 				5066BA9A27ED3748008873BB /* AnimationHelper.swift in Sources */,
 				5093F99627D6EB4800378967 /* WelcomeViewController.swift in Sources */,
@@ -582,6 +586,7 @@
 				INFOPLIST_FILE = BirthdayBuddy/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -613,6 +618,7 @@
 				INFOPLIST_FILE = BirthdayBuddy/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
