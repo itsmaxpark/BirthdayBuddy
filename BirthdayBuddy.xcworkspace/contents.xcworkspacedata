@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/max/Desktop/App Portfolio/BirthdayBuddy/BirthdayBuddy/Models/Person+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/max/Desktop/App Portfolio/BirthdayBuddy/BirthdayBuddy/Models/Person+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
       location = "group:BirthdayBuddy.xcodeproj">
    </FileRef>
    <FileRef

@@ -13,13 +13,17 @@ class CarouselViewCell: UITableViewCell, UICollectionViewDataSource, UICollectio
     
     private var viewModels: [CollectionViewCellViewModel] = []
     
+    private let transitioningDelegate = CustomTransitioningDelegate()
+    
+    var selectedCell = UICollectionViewCell()
+    
     private let collectionView: UICollectionView = {
         let layout = CustomCollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 0)
         layout.minimumLineSpacing = 40
         
-//        let layout = createCarouselSection()
+        //        let layout = createCarouselSection()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
         collectionView.showsHorizontalScrollIndicator = false
@@ -27,7 +31,7 @@ class CarouselViewCell: UITableViewCell, UICollectionViewDataSource, UICollectio
         return collectionView
         
     }()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -79,7 +83,7 @@ class CarouselViewCell: UITableViewCell, UICollectionViewDataSource, UICollectio
         //First, set cell to starting position when off screen
         let rotation = CATransform3DMakeRotation(CGFloat.pi/3, 0, 0.5, 0)
         let rotationInverse = CATransform3DMakeRotation(-CGFloat.pi/3, 0, 0.5, 0)
-
+        
         let translation = CATransform3DMakeTranslation(50, 0, 0)
         let translationInverse = CATransform3DMakeTranslation(-50, 0, 0)
         
@@ -102,6 +106,8 @@ class CarouselViewCell: UITableViewCell, UICollectionViewDataSource, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedCell = collectionView.cellForItem(at: indexPath)!
+        
         let vc = CollectionViewCellDetailViewController()
         let model = viewModels[indexPath.row]
         vc.title = model.name
@@ -111,20 +117,7 @@ class CarouselViewCell: UITableViewCell, UICollectionViewDataSource, UICollectio
         
         let nav = UINavigationController(rootViewController: vc)
         
-//        let cell = collectionView.cellForItem(at: indexPath)
-        
-//        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: []) {
-//            cell?.frame = CGRect(
-//                x: 0,
-//                y: 100,
-//                width: collectionView.width,
-//                height: 400
-//            )
-//            collectionView.isScrollEnabled = false
-//        }
-
         self.findNavigationController()?.present(nav, animated: true)
-        
         
     }
     
@@ -143,39 +136,18 @@ class CarouselViewCell: UITableViewCell, UICollectionViewDataSource, UICollectio
         return CGSize(width: width, height: height)
     }
     
-//    func createCarouselSection() -> UICollectionViewLayout {
-//        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-//
-//        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-//
-//        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(300))
-//
-//        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitems: [layoutItem])
-//
-//        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-//
-//        layoutSection.orthogonalScrollingBehavior = .groupPaging
-//
-//        let config = UICollectionViewCompositionalLayoutConfiguration()
-//        config.interSectionSpacing = 20
-//        let layout = UICollectionViewCompositionalLayout(section: layoutSection)
-//        layout.configuration = config
-//
-//        return layout
-//    }
-    
-//    func createCompositionalLayout() -> UICollectionViewLayout {
-//        let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
-//            let section = self.sections[sectionIndex]
-//
-//            switch section.type  {
-//            default:
-//                return self.createCarouselSection()
-//            }
-//
-//
-//
-//        }
-//    }
 }
 
+//extension CarouselViewCell: UIViewControllerTransitioningDelegate {
+//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        let animator = PresentAnimator(originFrame: selectedCell.frame)
+//        print("Presenting")
+//        return animator
+//    }
+//    
+//    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        let animator = DismissAnimator(destinationFrame: selectedCell.frame)
+//        print("Dismissing")
+//        return animator
+//    }
+//}

@@ -22,6 +22,13 @@
 		5068B66027F3BA1C00F1EEE5 /* CustomGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65F27F3BA1C00F1EEE5 /* CustomGradientLayer.swift */; };
 		5068B66227F6D38D00F1EEE5 /* CustomCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66127F6D38D00F1EEE5 /* CustomCollectionViewFlowLayout.swift */; };
 		5068B66427F7EA2A00F1EEE5 /* CollectionViewCellDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66327F7EA2A00F1EEE5 /* CollectionViewCellDetailViewController.swift */; };
+		5068B66627F829A200F1EEE5 /* PresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66527F829A200F1EEE5 /* PresentAnimator.swift */; };
+		5068B66827F82A4F00F1EEE5 /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66727F82A4F00F1EEE5 /* DismissAnimator.swift */; };
+		5068B66A27F8F71C00F1EEE5 /* CustomAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66927F8F71C00F1EEE5 /* CustomAnimationController.swift */; };
+		5068B66D27F90FC400F1EEE5 /* BirthdayBuddy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66B27F90FC400F1EEE5 /* BirthdayBuddy.xcdatamodeld */; };
+		5068B67027F9129100F1EEE5 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66F27F9129100F1EEE5 /* Person+CoreDataClass.swift */; };
+		5068B67127F9129100F1EEE5 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66E27F9129100F1EEE5 /* Person+CoreDataProperties.swift */; };
+		506C5A7A27FA51D90011A5B7 /* PersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A7927FA51D90011A5B7 /* PersonTableViewCell.swift */; };
 		506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */; };
 		506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */; };
 		506D5B5D27D87325009A9F39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */; };
@@ -64,6 +71,13 @@
 		5068B65F27F3BA1C00F1EEE5 /* CustomGradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGradientLayer.swift; sourceTree = "<group>"; };
 		5068B66127F6D38D00F1EEE5 /* CustomCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		5068B66327F7EA2A00F1EEE5 /* CollectionViewCellDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellDetailViewController.swift; sourceTree = "<group>"; };
+		5068B66527F829A200F1EEE5 /* PresentAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentAnimator.swift; sourceTree = "<group>"; };
+		5068B66727F82A4F00F1EEE5 /* DismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
+		5068B66927F8F71C00F1EEE5 /* CustomAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimationController.swift; sourceTree = "<group>"; };
+		5068B66C27F90FC400F1EEE5 /* BirthdayBuddy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BirthdayBuddy.xcdatamodel; sourceTree = "<group>"; };
+		5068B66E27F9129100F1EEE5 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Person+CoreDataProperties.swift"; path = "/Users/max/Desktop/App Portfolio/BirthdayBuddy/BirthdayBuddy/Models/Person+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		5068B66F27F9129100F1EEE5 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Person+CoreDataClass.swift"; path = "/Users/max/Desktop/App Portfolio/BirthdayBuddy/BirthdayBuddy/Models/Person+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		506C5A7927FA51D90011A5B7 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell.swift; sourceTree = "<group>"; };
 		506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenBackgroundView.swift; sourceTree = "<group>"; };
 		506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenButtonsView.swift; sourceTree = "<group>"; };
 		506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -149,6 +163,7 @@
 				5056AF3427D6E447008601FF /* ViewModels */,
 				5056AF3327D6E43E008601FF /* Models */,
 				5056AF3227D6E430008601FF /* Views */,
+				5068B66B27F90FC400F1EEE5 /* BirthdayBuddy.xcdatamodeld */,
 			);
 			path = BirthdayBuddy;
 			sourceTree = "<group>";
@@ -165,6 +180,7 @@
 		5056AF3327D6E43E008601FF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5068B67227F9129D00F1EEE5 /* Person */,
 				50DAC1A027DAEC71006098D6 /* BirthdayBuddyUser.swift */,
 			);
 			path = Models;
@@ -182,15 +198,18 @@
 		5056AF3627D6E458008601FF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5093F9A027D7123200378967 /* Fonts */,
+				5056AF2727D6B803008601FF /* Assets.xcassets */,
 				5056AF1E27D6B803008601FF /* AppDelegate.swift */,
 				5056AF2027D6B803008601FF /* SceneDelegate.swift */,
 				5093F9A727D71B2400378967 /* Extensions.swift */,
 				50DAC19C27DAE342006098D6 /* DatabaseManager.swift */,
 				50DAC1B427DC0E79006098D6 /* CustomDesigns.swift */,
-				5093F9A027D7123200378967 /* Fonts */,
-				5056AF2727D6B803008601FF /* Assets.xcassets */,
 				5068B65F27F3BA1C00F1EEE5 /* CustomGradientLayer.swift */,
 				5068B66127F6D38D00F1EEE5 /* CustomCollectionViewFlowLayout.swift */,
+				5068B66527F829A200F1EEE5 /* PresentAnimator.swift */,
+				5068B66727F82A4F00F1EEE5 /* DismissAnimator.swift */,
+				5068B66927F8F71C00F1EEE5 /* CustomAnimationController.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -215,12 +234,30 @@
 			path = HomeView;
 			sourceTree = "<group>";
 		};
+		5068B67227F9129D00F1EEE5 /* Person */ = {
+			isa = PBXGroup;
+			children = (
+				5068B66F27F9129100F1EEE5 /* Person+CoreDataClass.swift */,
+				5068B66E27F9129100F1EEE5 /* Person+CoreDataProperties.swift */,
+			);
+			path = Person;
+			sourceTree = "<group>";
+		};
+		506C5A7827FA2D8C0011A5B7 /* AddBirthday */ = {
+			isa = PBXGroup;
+			children = (
+				5093F99C27D6ED6400378967 /* AddBirthdayViewController.swift */,
+				506C5A7927FA51D90011A5B7 /* PersonTableViewCell.swift */,
+			);
+			path = AddBirthday;
+			sourceTree = "<group>";
+		};
 		5093F99927D6ED4100378967 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				5068B65327F2BC9200F1EEE5 /* TabBar */,
 				5068B65427F2C7B700F1EEE5 /* HomeView */,
-				5093F99C27D6ED6400378967 /* AddBirthdayViewController.swift */,
+				506C5A7827FA2D8C0011A5B7 /* AddBirthday */,
 				50DAC1AE27DBEA0D006098D6 /* Settings */,
 			);
 			path = Main;
@@ -421,13 +458,18 @@
 				5093F99627D6EB4800378967 /* WelcomeViewController.swift in Sources */,
 				5066BA9627EA89DF008873BB /* GoogleSignInHelper.swift in Sources */,
 				5093F99D27D6ED6400378967 /* AddBirthdayViewController.swift in Sources */,
+				5068B66A27F8F71C00F1EEE5 /* CustomAnimationController.swift in Sources */,
 				5068B65027F2B12E00F1EEE5 /* CustomTabBar.swift in Sources */,
 				5066BA9827ED35EC008873BB /* FlipPresentAnimationController.swift in Sources */,
 				50DAC1AA27DAF4DF006098D6 /* SignUpSheetViewController.swift in Sources */,
 				50DAC1A427DAEEB6006098D6 /* AppleSignInHelper.swift in Sources */,
+				5068B66627F829A200F1EEE5 /* PresentAnimator.swift in Sources */,
+				5068B67127F9129100F1EEE5 /* Person+CoreDataProperties.swift in Sources */,
 				5056AF1F27D6B803008601FF /* AppDelegate.swift in Sources */,
 				5093F99827D6ED3900378967 /* TabBarViewController.swift in Sources */,
+				5068B66827F82A4F00F1EEE5 /* DismissAnimator.swift in Sources */,
 				5093F9A827D71B2400378967 /* Extensions.swift in Sources */,
+				5068B67027F9129100F1EEE5 /* Person+CoreDataClass.swift in Sources */,
 				50DAC1B127DBEA44006098D6 /* SignOutCell.swift in Sources */,
 				506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */,
 				50DAC1A627DAF237006098D6 /* EmailSignInHelper.swift in Sources */,
@@ -437,6 +479,7 @@
 				5068B65227F2B40300F1EEE5 /* TabBarBackgroundView.swift in Sources */,
 				50DAC1A827DAF4D2006098D6 /* LogInSheetViewController.swift in Sources */,
 				5068B65A27F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift in Sources */,
+				506C5A7A27FA51D90011A5B7 /* PersonTableViewCell.swift in Sources */,
 				50DAC1A127DAEC71006098D6 /* BirthdayBuddyUser.swift in Sources */,
 				5068B65827F2C9E800F1EEE5 /* CollectionViewCell.swift in Sources */,
 				50DAC19D27DAE342006098D6 /* DatabaseManager.swift in Sources */,
@@ -445,6 +488,7 @@
 				5068B65C27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift in Sources */,
 				50DAC1B527DC0E79006098D6 /* CustomDesigns.swift in Sources */,
 				506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */,
+				5068B66D27F90FC400F1EEE5 /* BirthdayBuddy.xcdatamodeld in Sources */,
 				5093F99B27D6ED5700378967 /* HomeViewController.swift in Sources */,
 				5093F99F27D6ED6A00378967 /* SettingsViewController.swift in Sources */,
 			);
@@ -657,6 +701,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5068B66B27F90FC400F1EEE5 /* BirthdayBuddy.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5068B66C27F90FC400F1EEE5 /* BirthdayBuddy.xcdatamodel */,
+			);
+			currentVersion = 5068B66C27F90FC400F1EEE5 /* BirthdayBuddy.xcdatamodel */;
+			path = BirthdayBuddy.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5056AF1327D6B803008601FF /* Project object */;
 }

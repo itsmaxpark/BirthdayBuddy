@@ -18,8 +18,8 @@ class CollectionViewCellDetailViewController: UIViewController {
     
     @objc func backButtonPressed() {
         print("Back button pressed")
-        dismiss(animated: true)
-        self.navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
+//        self.navigationController?.popViewController(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

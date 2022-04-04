@@ -13,12 +13,12 @@ final class CustomCollectionViewFlowLayout: UICollectionViewFlowLayout {
         guard let collectionView = collectionView else {
             return super.targetContentOffset(forProposedContentOffset: proposedContentOffset, withScrollingVelocity: velocity)
         }
-        // proposedContentOffset is the point where scrolling stops based off the top left of the contentView
+        // proposedContentOffset is the point where scrolling stops based off the top left of the contentView (always 0)
         var offsetAdjusment = CGFloat.greatestFiniteMagnitude // greatest finite number that isnt infinity
         let cellWidth: CGFloat = 220
         let leftMargin: CGFloat = 40
         
-        let horizontalCenter = proposedContentOffset.x + cellWidth/2 //(collectionView.frame.width/2)//center of contentview
+        let horizontalCenter = proposedContentOffset.x + cellWidth/2 //center of contentview
         
         let targetRect = CGRect(x: proposedContentOffset.x, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height)
         
@@ -37,13 +37,12 @@ final class CustomCollectionViewFlowLayout: UICollectionViewFlowLayout {
                     offsetAdjusment = itemHorizontalCenter - horizontalCenter + cellWidth
 //                    print("2: \(offsetAdjusment)")
                 } else { // velocity.x < -0.3 | triggered on small swipes to the right
-                    print("velocity: \(velocity.x)")
+//                    print("velocity: \(velocity.x)")
                     offsetAdjusment = itemHorizontalCenter - horizontalCenter - leftMargin - leftMargin - cellWidth
 //                    print("3: \(itemHorizontalCenter) - \(horizontalCenter) - \(layoutAttributes.bounds.width) = \(offsetAdjusment)")
                 }
             }
         })
-        print()
         return CGPoint(x: proposedContentOffset.x + offsetAdjusment, y: proposedContentOffset.y)
     }
     

@@ -8,8 +8,10 @@
 import UIKit
 
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    public var selectedCell = UITableViewCell()
 
-    private let tableView: UITableView = {
+    public let tableView: UITableView = {
         let table = UITableView()
         table.register(
             CarouselViewCell.self,
@@ -75,24 +77,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return 350
     }
     
-//    func createCarouselSection() -> UICollectionViewLayout {
-//        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-//        
-//        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-//        
-//        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(300))
-//        
-//        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitems: [layoutItem])
-//        
-//        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-//        
-//        layoutSection.orthogonalScrollingBehavior = .groupPaging
-//        
-//        let config = UICollectionViewCompositionalLayoutConfiguration()
-//        config.interSectionSpacing = 20
-//        let layout = UICollectionViewCompositionalLayout(section: layoutSection)
-//        layout.configuration = config
-//        
-//        return layout
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedCell = tableView.cellForRow(at: indexPath)!
+    }
 }
