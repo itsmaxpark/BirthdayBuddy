@@ -29,6 +29,8 @@ class TabBarViewController: UITabBarController {
         nav3.title = "SettingsViewController"
         
         vc1.navigationItem.largeTitleDisplayMode = .automatic
+        vc1.navigationController?.navigationBar.tintColor = .systemBackground
+        vc1.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
         tabBar.isTranslucent = true
         tabBar.tintColor = .clear
         
@@ -43,8 +45,9 @@ class TabBarViewController: UITabBarController {
         appearance.configureWithTransparentBackground()
         appearance.shadowColor = .clear
         
-        tabBar.standardAppearance = appearance
-        tabBar.scrollEdgeAppearance = appearance
+//        tabBar.standardAppearance = appearance
+//        tabBar.scrollEdgeAppearance = appearance
+//        tabBar.unselectedItemTintColor = .white
         
         setViewControllers([nav1,nav2,nav3], animated: false)
         
@@ -62,6 +65,10 @@ class TabBarViewController: UITabBarController {
         super.viewDidAppear(animated)
         presentWelcomeVC()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     func presentWelcomeVC() {
