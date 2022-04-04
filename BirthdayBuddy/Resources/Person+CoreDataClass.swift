@@ -2,7 +2,7 @@
 //  Person+CoreDataClass.swift
 //  
 //
-//  Created by Max Park on 4/2/22.
+//  Created by Max Park on 4/4/22.
 //
 //
 

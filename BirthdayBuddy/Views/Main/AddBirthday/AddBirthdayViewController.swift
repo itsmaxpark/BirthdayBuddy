@@ -24,16 +24,24 @@ class AddBirthdayViewController: UIViewController {
     
     private let backgroundAddView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 20
+        view.layer.cornerRadius = 10
         view.backgroundColor = UIColor(named: "Light Blue")
         
+        return view
+    }()
+    
+    private let pictureBackgroundView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 65
+        view.backgroundColor = .white
         return view
     }()
     
     private let pictureView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(systemName: "person.crop.circle.fill.badge.plus")
+        imageView.image = UIImage(systemName: "person.crop.circle.fill")
+        imageView.isUserInteractionEnabled = true
 
         return imageView
     }()
@@ -48,7 +56,7 @@ class AddBirthdayViewController: UIViewController {
     }()
     private let lastNameField: UITextField = {
         let field = CustomDesigns.shared.createCustomTextField(
-            previewText: "Lsat Name",
+            previewText: "Last Name",
             isSecure: false
         )
         field.autocapitalizationType = .words
@@ -106,7 +114,7 @@ class AddBirthdayViewController: UIViewController {
     
     private let backgroundTableView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 20
+        view.layer.cornerRadius = 10
         view.backgroundColor = UIColor(named: "Light Blue")
         
         return view
@@ -129,17 +137,19 @@ class AddBirthdayViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        datePicker.addTarget(self, action: #selector(dateChange(datePicker:)), for: UIControl.Event.valueChanged)
         dateTextField.inputView = datePicker
-        dateTextField.text = formatDate(date: Date())
         
         view.addSubview(addBirthdayLabel)
         view.addSubview(backgroundAddView)
-        view.addSubview(pictureView)
+        view.addSubview(pictureBackgroundView)
+        pictureBackgroundView.addSubview(pictureView)
         view.addSubview(firstNameField)
         view.addSubview(lastNameField)
         view.addSubview(datePicker)
         view.addSubview(addButton)
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapPicture))
+        pictureView.addGestureRecognizer(gesture)
         
         view.addSubview(recentLabel)
         view.addSubview(backgroundTableView)
@@ -155,6 +165,10 @@ class AddBirthdayViewController: UIViewController {
         
         fetchPerson()
         
+    }
+    
+    @objc func didTapPicture() {
+        print("Picture tapped")
     }
     
     func fetchPerson() {
@@ -180,20 +194,26 @@ class AddBirthdayViewController: UIViewController {
             height: 50
         )
         backgroundAddView.frame = CGRect(
-            x: 30,
+            x: 10,
             y: view.top+150,
-            width: view.width-60,
+            width: view.width-20,
             height: (view.height/2)-60
         )
-        pictureView.frame = CGRect(
-            x: backgroundAddView.center.x-(150/2),
+        pictureBackgroundView.frame = CGRect(
+            x: backgroundAddView.center.x-(130/2),
             y: backgroundAddView.top+20,
-            width: 150,
-            height: 150
+            width: 130,
+            height: 130
+        )
+        pictureView.frame = CGRect(
+            x: 5,
+            y: 5,
+            width: 120,
+            height: 120
         )
         firstNameField.frame = CGRect(
             x: backgroundAddView.center.x-(250/2),
-            y: pictureView.bottom+20,
+            y: pictureBackgroundView.bottom+20,
             width: 250,
             height: 40
         )
@@ -225,9 +245,9 @@ class AddBirthdayViewController: UIViewController {
             height: 50
         )
         backgroundTableView.frame = CGRect(
-            x: 30,
+            x: 10,
             y: recentLabel.bottom,
-            width: view.width-60,
+            width: view.width-20,
             height: 200
         )
         tableView.frame = CGRect(
@@ -253,7 +273,9 @@ class AddBirthdayViewController: UIViewController {
         person.firstName = firstNameField.text
         person.lastName = lastNameField.text
         person.birthday = datePicker.date
-        
+        let nextBirthday = getNextBirthday(date: person.birthday!)
+        let daysLeft = Calendar.current.numberOfDaysBetween(Date(), and: nextBirthday)
+        person.daysLeft = Int64(daysLeft)
         // Save object to CoreData
         do {
             try self.context.save()
@@ -270,6 +292,25 @@ class AddBirthdayViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd/yyyy"
         return formatter.string(from: date)
+    }
+    
+    func getNextBirthday(date: Date) -> Date {
+        // Get current date
+        let currentDate = Calendar.current.dateComponents([.day, .month, .year], from: Date())
+        // get birthday date
+        var birthday = Calendar.current.dateComponents([.day,.month,.year], from: date)
+        // set birthday year to current year
+        birthday.year = currentDate.year
+        // if birthday already happened this year, add 1 to year
+        let numberOfDays = Calendar.current.dateComponents([.day], from: currentDate, to: birthday).day!
+        if numberOfDays < 0 {
+            birthday.year! += 1
+        }
+        
+        let nextBirthday = Calendar.current.date(from: birthday)
+        
+        return nextBirthday!
+        
     }
 }
 

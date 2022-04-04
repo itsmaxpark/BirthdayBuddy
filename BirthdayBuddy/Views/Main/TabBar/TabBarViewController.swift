@@ -16,7 +16,7 @@ class TabBarViewController: UITabBarController {
         
         title = "TabBarController"
         
-        let vc1 = HomeViewController()
+        let vc1 = BetterHomeViewController()
         let vc2 = AddBirthdayViewController()
         let vc3 = SettingsViewController()
                         
@@ -24,9 +24,14 @@ class TabBarViewController: UITabBarController {
         let nav2 = UINavigationController(rootViewController: vc2)
         let nav3 = UINavigationController(rootViewController: vc3)
         
-        nav1.title = "HomeViewController"
+        vc1.title = "Birthday Buddy"
         nav2.title = "AddBirthdayViewController"
         nav3.title = "SettingsViewController"
+        
+        vc1.navigationItem.largeTitleDisplayMode = .automatic
+        tabBar.isTranslucent = true
+        tabBar.tintColor = .clear
+        
         
         let config = UIImage.SymbolConfiguration(scale: .large)
         
@@ -34,22 +39,16 @@ class TabBarViewController: UITabBarController {
         nav2.tabBarItem = UITabBarItem(title: "Add Birthday", image: UIImage(systemName: "plus.app.fill", withConfiguration: config), tag: 1)
         nav3.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(systemName: "gearshape.fill", withConfiguration: config), tag: 1)
         
-        nav1.additionalSafeAreaInsets.top = CGFloat(20)
-        nav2.additionalSafeAreaInsets.top = CGFloat(20)
-        nav3.additionalSafeAreaInsets.top = CGFloat(20)
-        
-        let appearance = UINavigationBarAppearance()
+        let appearance = UITabBarAppearance()
         appearance.configureWithTransparentBackground()
+        appearance.shadowColor = .clear
         
-        nav1.navigationBar.standardAppearance = appearance
-        nav2.navigationBar.standardAppearance = appearance
-        nav3.navigationBar.standardAppearance = appearance
+        tabBar.standardAppearance = appearance
+        tabBar.scrollEdgeAppearance = appearance
         
         setViewControllers([nav1,nav2,nav3], animated: false)
         
         self.setupTabBar()
-        
-        view.addSubview(backgroundView)
         
     }
     

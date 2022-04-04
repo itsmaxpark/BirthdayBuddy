@@ -26,9 +26,13 @@
 		5068B66827F82A4F00F1EEE5 /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66727F82A4F00F1EEE5 /* DismissAnimator.swift */; };
 		5068B66A27F8F71C00F1EEE5 /* CustomAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66927F8F71C00F1EEE5 /* CustomAnimationController.swift */; };
 		5068B66D27F90FC400F1EEE5 /* BirthdayBuddy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66B27F90FC400F1EEE5 /* BirthdayBuddy.xcdatamodeld */; };
-		5068B67027F9129100F1EEE5 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66F27F9129100F1EEE5 /* Person+CoreDataClass.swift */; };
-		5068B67127F9129100F1EEE5 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66E27F9129100F1EEE5 /* Person+CoreDataProperties.swift */; };
 		506C5A7A27FA51D90011A5B7 /* PersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A7927FA51D90011A5B7 /* PersonTableViewCell.swift */; };
+		506C5A7C27FA889C0011A5B7 /* BetterHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A7B27FA889C0011A5B7 /* BetterHomeViewController.swift */; };
+		506C5A7E27FA90B10011A5B7 /* LargeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A7D27FA90B10011A5B7 /* LargeCollectionViewCell.swift */; };
+		506C5A8027FA99D90011A5B7 /* SmallCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A7F27FA99D90011A5B7 /* SmallCollectionViewCell.swift */; };
+		506C5A8327FAA1240011A5B7 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8227FAA1240011A5B7 /* SectionHeaderView.swift */; };
+		506C5A8627FAC4460011A5B7 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8527FAC4460011A5B7 /* Person+CoreDataClass.swift */; };
+		506C5A8727FAC4460011A5B7 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8427FAC4460011A5B7 /* Person+CoreDataProperties.swift */; };
 		506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */; };
 		506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */; };
 		506D5B5D27D87325009A9F39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */; };
@@ -75,9 +79,13 @@
 		5068B66727F82A4F00F1EEE5 /* DismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
 		5068B66927F8F71C00F1EEE5 /* CustomAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimationController.swift; sourceTree = "<group>"; };
 		5068B66C27F90FC400F1EEE5 /* BirthdayBuddy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BirthdayBuddy.xcdatamodel; sourceTree = "<group>"; };
-		5068B66E27F9129100F1EEE5 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Person+CoreDataProperties.swift"; path = "/Users/max/Desktop/App Portfolio/BirthdayBuddy/BirthdayBuddy/Models/Person+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
-		5068B66F27F9129100F1EEE5 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Person+CoreDataClass.swift"; path = "/Users/max/Desktop/App Portfolio/BirthdayBuddy/BirthdayBuddy/Models/Person+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		506C5A7927FA51D90011A5B7 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell.swift; sourceTree = "<group>"; };
+		506C5A7B27FA889C0011A5B7 /* BetterHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterHomeViewController.swift; sourceTree = "<group>"; };
+		506C5A7D27FA90B10011A5B7 /* LargeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeCollectionViewCell.swift; sourceTree = "<group>"; };
+		506C5A7F27FA99D90011A5B7 /* SmallCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCollectionViewCell.swift; sourceTree = "<group>"; };
+		506C5A8227FAA1240011A5B7 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
+		506C5A8427FAC4460011A5B7 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Person+CoreDataProperties.swift"; path = "/Users/max/Desktop/App Portfolio/BirthdayBuddy/BirthdayBuddy/Resources/Person+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		506C5A8527FAC4460011A5B7 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Person+CoreDataClass.swift"; path = "/Users/max/Desktop/App Portfolio/BirthdayBuddy/BirthdayBuddy/Resources/Person+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenBackgroundView.swift; sourceTree = "<group>"; };
 		506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenButtonsView.swift; sourceTree = "<group>"; };
 		506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -226,10 +234,10 @@
 		5068B65427F2C7B700F1EEE5 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				5093F99A27D6ED5700378967 /* HomeViewController.swift */,
-				5068B65527F2C7E800F1EEE5 /* CarouselViewCell.swift */,
-				5068B65727F2C9E800F1EEE5 /* CollectionViewCell.swift */,
-				5068B66327F7EA2A00F1EEE5 /* CollectionViewCellDetailViewController.swift */,
+				506C5A7B27FA889C0011A5B7 /* BetterHomeViewController.swift */,
+				506C5A7D27FA90B10011A5B7 /* LargeCollectionViewCell.swift */,
+				506C5A7F27FA99D90011A5B7 /* SmallCollectionViewCell.swift */,
+				506C5A8227FAA1240011A5B7 /* SectionHeaderView.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -237,8 +245,8 @@
 		5068B67227F9129D00F1EEE5 /* Person */ = {
 			isa = PBXGroup;
 			children = (
-				5068B66F27F9129100F1EEE5 /* Person+CoreDataClass.swift */,
-				5068B66E27F9129100F1EEE5 /* Person+CoreDataProperties.swift */,
+				506C5A8527FAC4460011A5B7 /* Person+CoreDataClass.swift */,
+				506C5A8427FAC4460011A5B7 /* Person+CoreDataProperties.swift */,
 			);
 			path = Person;
 			sourceTree = "<group>";
@@ -250,6 +258,17 @@
 				506C5A7927FA51D90011A5B7 /* PersonTableViewCell.swift */,
 			);
 			path = AddBirthday;
+			sourceTree = "<group>";
+		};
+		506C5A8127FAA09B0011A5B7 /* OldHomeView */ = {
+			isa = PBXGroup;
+			children = (
+				5093F99A27D6ED5700378967 /* HomeViewController.swift */,
+				5068B65527F2C7E800F1EEE5 /* CarouselViewCell.swift */,
+				5068B65727F2C9E800F1EEE5 /* CollectionViewCell.swift */,
+				5068B66327F7EA2A00F1EEE5 /* CollectionViewCellDetailViewController.swift */,
+			);
+			path = OldHomeView;
 			sourceTree = "<group>";
 		};
 		5093F99927D6ED4100378967 /* Main */ = {
@@ -306,6 +325,7 @@
 		50DAC1AD27DBE6DD006098D6 /* Archives */ = {
 			isa = PBXGroup;
 			children = (
+				506C5A8127FAA09B0011A5B7 /* OldHomeView */,
 				5068B64F27F2B12E00F1EEE5 /* CustomTabBar.swift */,
 				50DAC1A727DAF4D2006098D6 /* LogInSheetViewController.swift */,
 				50DAC1A927DAF4DF006098D6 /* SignUpSheetViewController.swift */,
@@ -456,22 +476,25 @@
 				5068B66227F6D38D00F1EEE5 /* CustomCollectionViewFlowLayout.swift in Sources */,
 				5066BA9A27ED3748008873BB /* AnimationHelper.swift in Sources */,
 				5093F99627D6EB4800378967 /* WelcomeViewController.swift in Sources */,
+				506C5A8727FAC4460011A5B7 /* Person+CoreDataProperties.swift in Sources */,
 				5066BA9627EA89DF008873BB /* GoogleSignInHelper.swift in Sources */,
 				5093F99D27D6ED6400378967 /* AddBirthdayViewController.swift in Sources */,
 				5068B66A27F8F71C00F1EEE5 /* CustomAnimationController.swift in Sources */,
+				506C5A7C27FA889C0011A5B7 /* BetterHomeViewController.swift in Sources */,
+				506C5A8627FAC4460011A5B7 /* Person+CoreDataClass.swift in Sources */,
 				5068B65027F2B12E00F1EEE5 /* CustomTabBar.swift in Sources */,
 				5066BA9827ED35EC008873BB /* FlipPresentAnimationController.swift in Sources */,
 				50DAC1AA27DAF4DF006098D6 /* SignUpSheetViewController.swift in Sources */,
 				50DAC1A427DAEEB6006098D6 /* AppleSignInHelper.swift in Sources */,
 				5068B66627F829A200F1EEE5 /* PresentAnimator.swift in Sources */,
-				5068B67127F9129100F1EEE5 /* Person+CoreDataProperties.swift in Sources */,
+				506C5A8027FA99D90011A5B7 /* SmallCollectionViewCell.swift in Sources */,
 				5056AF1F27D6B803008601FF /* AppDelegate.swift in Sources */,
 				5093F99827D6ED3900378967 /* TabBarViewController.swift in Sources */,
 				5068B66827F82A4F00F1EEE5 /* DismissAnimator.swift in Sources */,
 				5093F9A827D71B2400378967 /* Extensions.swift in Sources */,
-				5068B67027F9129100F1EEE5 /* Person+CoreDataClass.swift in Sources */,
 				50DAC1B127DBEA44006098D6 /* SignOutCell.swift in Sources */,
 				506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */,
+				506C5A7E27FA90B10011A5B7 /* LargeCollectionViewCell.swift in Sources */,
 				50DAC1A627DAF237006098D6 /* EmailSignInHelper.swift in Sources */,
 				5056AF2127D6B803008601FF /* SceneDelegate.swift in Sources */,
 				50DAC1B327DBEC97006098D6 /* SignOutHelper.swift in Sources */,
@@ -490,6 +513,7 @@
 				506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */,
 				5068B66D27F90FC400F1EEE5 /* BirthdayBuddy.xcdatamodeld in Sources */,
 				5093F99B27D6ED5700378967 /* HomeViewController.swift in Sources */,
+				506C5A8327FAA1240011A5B7 /* SectionHeaderView.swift in Sources */,
 				5093F99F27D6ED6A00378967 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

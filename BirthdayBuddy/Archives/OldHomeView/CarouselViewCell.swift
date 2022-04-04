@@ -20,14 +20,14 @@ class CarouselViewCell: UITableViewCell, UICollectionViewDataSource, UICollectio
     private let collectionView: UICollectionView = {
         let layout = CustomCollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 40)
         layout.minimumLineSpacing = 40
         
-        //        let layout = createCarouselSection()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
+        collectionView.backgroundColor = UIColor(named: "Light Blue")
         return collectionView
         
     }()

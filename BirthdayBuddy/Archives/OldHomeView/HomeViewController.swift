@@ -10,6 +10,14 @@ import UIKit
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     public var selectedCell = UITableViewCell()
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Birthday Buddy"
+        label.font = UIFont.boldSystemFont(ofSize: 30.0)
+        label.textColor = .black
+        return label
+    }()
 
     public let tableView: UITableView = {
         let table = UITableView()
@@ -17,6 +25,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             CarouselViewCell.self,
             forCellReuseIdentifier: CarouselViewCell.identifier
         )
+        table.layer.cornerRadius = 10
+        table.backgroundColor = UIColor(named: "Light Blue")
         return table
     }()
     
@@ -41,6 +51,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(titleLabel)
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
@@ -52,12 +63,32 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
+        titleLabel.frame = CGRect(
+            x: view.center.x-(titleLabel.intrinsicContentSize.width/2),
+            y: view.top+50,
+            width: 400,
+            height: 50
+        )
+        tableView.frame = CGRect(
+            x: 10,
+            y: titleLabel.bottom,
+            width: view.width-20,
+            height: 730
+        )
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModels.count
+        
+        if section == 0 {
+            return viewModels.count
+        } else {
+            return 5
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

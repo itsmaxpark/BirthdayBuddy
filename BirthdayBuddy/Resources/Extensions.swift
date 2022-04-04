@@ -8,6 +8,16 @@
 import Foundation
 import UIKit
 
+extension Calendar {
+    func numberOfDaysBetween(_ from: Date, and to: Date) -> Int {
+            let fromDate = startOfDay(for: from) // <1>
+            let toDate = startOfDay(for: to) // <2>
+            let numberOfDays = dateComponents([.day], from: fromDate, to: toDate) // <3>
+            
+            return numberOfDays.day!
+        }
+}
+
 extension Array {
     func rotate(array: inout [Element], k: Int) {
         // Check for edge cases
@@ -119,14 +129,14 @@ extension UIView {
             gradient.frame = bounds
             gradient.name = String(id)
             gradient.colors = [
-                UIColor(named: "Light Blue")?.cgColor as Any,
+                UIColor(named: "Baby Blue")?.cgColor as Any,
                 UIColor(named: "Blue")?.cgColor as Any
             ]
             gradient.locations = [0.25, 1]
             gradient.startPoint = CGPoint(x: 0.0, y: 0.1)
             gradient.endPoint = CGPoint(x: 0.75, y: 1)
             gradient.cornerRadius = 20
-            gradient.shadowColor = UIColor.black.cgColor
+            gradient.shadowColor = UIColor.white.cgColor
             gradient.shadowOffset = CGSize(width: -10, height: 10)
             gradient.shadowRadius = 4
             gradient.shadowOpacity = 0.4
@@ -145,10 +155,6 @@ extension UIView {
             gradient.startPoint = CGPoint(x: 0.25, y: 0.1)
             gradient.endPoint = CGPoint(x: 0.75, y: 1)
             gradient.cornerRadius = 20
-            gradient.shadowColor = UIColor.black.cgColor
-            gradient.shadowOffset = CGSize(width: -10, height: 10)
-            gradient.shadowRadius = 4
-            gradient.shadowOpacity = 0.4
             gradient.masksToBounds = false
             layer.insertSublayer(gradient, at: 0)
         case 5,11:
@@ -163,10 +169,6 @@ extension UIView {
             gradient.startPoint = CGPoint(x: 0.25, y: 0.1)
             gradient.endPoint = CGPoint(x: 0.75, y: 1)
             gradient.cornerRadius = 20
-            gradient.shadowColor = UIColor.black.cgColor
-            gradient.shadowOffset = CGSize(width: -10, height: 10)
-            gradient.shadowRadius = 4
-            gradient.shadowOpacity = 0.4
             gradient.masksToBounds = false
             layer.insertSublayer(gradient, at: 0)
             
@@ -182,10 +184,6 @@ extension UIView {
             gradient.startPoint = CGPoint(x: 0.25, y: 0.1)
             gradient.endPoint = CGPoint(x: 0.75, y: 1)
             gradient.cornerRadius = 20
-            gradient.shadowColor = UIColor.black.cgColor
-            gradient.shadowOffset = CGSize(width: -10, height: 10)
-            gradient.shadowRadius = 4
-            gradient.shadowOpacity = 0.4
             gradient.masksToBounds = false
             layer.insertSublayer(gradient, at: 0)
         case 1,7:
@@ -200,10 +198,6 @@ extension UIView {
             gradient.startPoint = CGPoint(x: 0.25, y: 0.1)
             gradient.endPoint = CGPoint(x: 0.75, y: 1)
             gradient.cornerRadius = 20
-            gradient.shadowColor = UIColor.black.cgColor
-            gradient.shadowOffset = CGSize(width: -10, height: 10)
-            gradient.shadowRadius = 4
-            gradient.shadowOpacity = 0.4
             gradient.masksToBounds = false
             layer.insertSublayer(gradient, at: 0)
         case 2,8:
@@ -218,10 +212,6 @@ extension UIView {
             gradient.startPoint = CGPoint(x: 0.25, y: 0.1)
             gradient.endPoint = CGPoint(x: 0.75, y: 1)
             gradient.cornerRadius = 20
-            gradient.shadowColor = UIColor.black.cgColor
-            gradient.shadowOffset = CGSize(width: -10, height: 10)
-            gradient.shadowRadius = 4
-            gradient.shadowOpacity = 0.4
             gradient.masksToBounds = false
             layer.insertSublayer(gradient, at: 0)
         default:
@@ -236,16 +226,11 @@ extension UIView {
             gradient.startPoint = CGPoint(x: 0.25, y: 0.1)
             gradient.endPoint = CGPoint(x: 0.75, y: 1)
             gradient.cornerRadius = 20
-            gradient.shadowColor = UIColor.black.cgColor
-            gradient.shadowOffset = CGSize(width: -10, height: 10)
-            gradient.shadowRadius = 4
-            gradient.shadowOpacity = 0.2
             gradient.masksToBounds = false
             layer.insertSublayer(gradient, at: 0)
         }
     }
 }
-
 
 
 
