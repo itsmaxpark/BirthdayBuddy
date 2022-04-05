@@ -33,6 +33,10 @@
 		506C5A8327FAA1240011A5B7 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8227FAA1240011A5B7 /* SectionHeaderView.swift */; };
 		506C5A8627FAC4460011A5B7 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8527FAC4460011A5B7 /* Person+CoreDataClass.swift */; };
 		506C5A8727FAC4460011A5B7 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8427FAC4460011A5B7 /* Person+CoreDataProperties.swift */; };
+		506C5A8927FBE55E0011A5B7 /* AddBirthdayBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8827FBE55E0011A5B7 /* AddBirthdayBottomSheetViewController.swift */; };
+		506C5A8B27FBED5C0011A5B7 /* AddBirthdayBottomSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8A27FBED5C0011A5B7 /* AddBirthdayBottomSheetTableViewCell.swift */; };
+		506C5A8D27FBF1810011A5B7 /* AddBirthdayBottomSheetTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8C27FBF1810011A5B7 /* AddBirthdayBottomSheetTableViewCellViewModel.swift */; };
+		506C5A8F27FBFABD0011A5B7 /* BetterAddBirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8E27FBFABD0011A5B7 /* BetterAddBirthdayViewController.swift */; };
 		506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */; };
 		506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */; };
 		506D5B5D27D87325009A9F39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */; };
@@ -86,6 +90,10 @@
 		506C5A8227FAA1240011A5B7 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		506C5A8427FAC4460011A5B7 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Person+CoreDataProperties.swift"; path = "/Users/max/Desktop/App Portfolio/BirthdayBuddy/BirthdayBuddy/Resources/Person+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		506C5A8527FAC4460011A5B7 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Person+CoreDataClass.swift"; path = "/Users/max/Desktop/App Portfolio/BirthdayBuddy/BirthdayBuddy/Resources/Person+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		506C5A8827FBE55E0011A5B7 /* AddBirthdayBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBirthdayBottomSheetViewController.swift; sourceTree = "<group>"; };
+		506C5A8A27FBED5C0011A5B7 /* AddBirthdayBottomSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBirthdayBottomSheetTableViewCell.swift; sourceTree = "<group>"; };
+		506C5A8C27FBF1810011A5B7 /* AddBirthdayBottomSheetTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBirthdayBottomSheetTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		506C5A8E27FBFABD0011A5B7 /* BetterAddBirthdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterAddBirthdayViewController.swift; sourceTree = "<group>"; };
 		506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenBackgroundView.swift; sourceTree = "<group>"; };
 		506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenButtonsView.swift; sourceTree = "<group>"; };
 		506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -199,6 +207,7 @@
 			children = (
 				5068B65927F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift */,
 				5068B65B27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift */,
+				506C5A8C27FBF1810011A5B7 /* AddBirthdayBottomSheetTableViewCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -254,6 +263,9 @@
 		506C5A7827FA2D8C0011A5B7 /* AddBirthday */ = {
 			isa = PBXGroup;
 			children = (
+				506C5A8827FBE55E0011A5B7 /* AddBirthdayBottomSheetViewController.swift */,
+				506C5A8A27FBED5C0011A5B7 /* AddBirthdayBottomSheetTableViewCell.swift */,
+				506C5A8E27FBFABD0011A5B7 /* BetterAddBirthdayViewController.swift */,
 				5093F99C27D6ED6400378967 /* AddBirthdayViewController.swift */,
 				506C5A7927FA51D90011A5B7 /* PersonTableViewCell.swift */,
 			);
@@ -479,6 +491,7 @@
 				506C5A8727FAC4460011A5B7 /* Person+CoreDataProperties.swift in Sources */,
 				5066BA9627EA89DF008873BB /* GoogleSignInHelper.swift in Sources */,
 				5093F99D27D6ED6400378967 /* AddBirthdayViewController.swift in Sources */,
+				506C5A8F27FBFABD0011A5B7 /* BetterAddBirthdayViewController.swift in Sources */,
 				5068B66A27F8F71C00F1EEE5 /* CustomAnimationController.swift in Sources */,
 				506C5A7C27FA889C0011A5B7 /* BetterHomeViewController.swift in Sources */,
 				506C5A8627FAC4460011A5B7 /* Person+CoreDataClass.swift in Sources */,
@@ -494,12 +507,15 @@
 				5093F9A827D71B2400378967 /* Extensions.swift in Sources */,
 				50DAC1B127DBEA44006098D6 /* SignOutCell.swift in Sources */,
 				506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */,
+				506C5A8927FBE55E0011A5B7 /* AddBirthdayBottomSheetViewController.swift in Sources */,
 				506C5A7E27FA90B10011A5B7 /* LargeCollectionViewCell.swift in Sources */,
 				50DAC1A627DAF237006098D6 /* EmailSignInHelper.swift in Sources */,
+				506C5A8B27FBED5C0011A5B7 /* AddBirthdayBottomSheetTableViewCell.swift in Sources */,
 				5056AF2127D6B803008601FF /* SceneDelegate.swift in Sources */,
 				50DAC1B327DBEC97006098D6 /* SignOutHelper.swift in Sources */,
 				5068B65627F2C7E800F1EEE5 /* CarouselViewCell.swift in Sources */,
 				5068B65227F2B40300F1EEE5 /* TabBarBackgroundView.swift in Sources */,
+				506C5A8D27FBF1810011A5B7 /* AddBirthdayBottomSheetTableViewCellViewModel.swift in Sources */,
 				50DAC1A827DAF4D2006098D6 /* LogInSheetViewController.swift in Sources */,
 				5068B65A27F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift in Sources */,
 				506C5A7A27FA51D90011A5B7 /* PersonTableViewCell.swift in Sources */,
