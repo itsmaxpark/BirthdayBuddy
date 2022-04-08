@@ -37,6 +37,11 @@
 		506C5A8B27FBED5C0011A5B7 /* AddBirthdayBottomSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8A27FBED5C0011A5B7 /* AddBirthdayBottomSheetTableViewCell.swift */; };
 		506C5A8D27FBF1810011A5B7 /* AddBirthdayBottomSheetTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8C27FBF1810011A5B7 /* AddBirthdayBottomSheetTableViewCellViewModel.swift */; };
 		506C5A8F27FBFABD0011A5B7 /* BetterAddBirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8E27FBFABD0011A5B7 /* BetterAddBirthdayViewController.swift */; };
+		506C5A9127FF7C090011A5B7 /* AddBirthdayTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A9027FF7C090011A5B7 /* AddBirthdayTextFieldCell.swift */; };
+		506C5A9327FFA2150011A5B7 /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A9227FFA2150011A5B7 /* DatePickerCell.swift */; };
+		506C5A9727FFB2000011A5B7 /* BirthdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A9627FFB2000011A5B7 /* BirthdayCell.swift */; };
+		506C5A9927FFB3A70011A5B7 /* YearToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A9827FFB3A70011A5B7 /* YearToggleCell.swift */; };
+		506C5A9B27FFC0A60011A5B7 /* CustomPickerDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A9A27FFC0A60011A5B7 /* CustomPickerDataModel.swift */; };
 		506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */; };
 		506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */; };
 		506D5B5D27D87325009A9F39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */; };
@@ -94,6 +99,11 @@
 		506C5A8A27FBED5C0011A5B7 /* AddBirthdayBottomSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBirthdayBottomSheetTableViewCell.swift; sourceTree = "<group>"; };
 		506C5A8C27FBF1810011A5B7 /* AddBirthdayBottomSheetTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBirthdayBottomSheetTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		506C5A8E27FBFABD0011A5B7 /* BetterAddBirthdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterAddBirthdayViewController.swift; sourceTree = "<group>"; };
+		506C5A9027FF7C090011A5B7 /* AddBirthdayTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBirthdayTextFieldCell.swift; sourceTree = "<group>"; };
+		506C5A9227FFA2150011A5B7 /* DatePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
+		506C5A9627FFB2000011A5B7 /* BirthdayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayCell.swift; sourceTree = "<group>"; };
+		506C5A9827FFB3A70011A5B7 /* YearToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearToggleCell.swift; sourceTree = "<group>"; };
+		506C5A9A27FFC0A60011A5B7 /* CustomPickerDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerDataModel.swift; sourceTree = "<group>"; };
 		506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenBackgroundView.swift; sourceTree = "<group>"; };
 		506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenButtonsView.swift; sourceTree = "<group>"; };
 		506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -198,6 +208,7 @@
 			children = (
 				5068B67227F9129D00F1EEE5 /* Person */,
 				50DAC1A027DAEC71006098D6 /* BirthdayBuddyUser.swift */,
+				506C5A9A27FFC0A60011A5B7 /* CustomPickerDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -222,7 +233,6 @@
 				5093F9A727D71B2400378967 /* Extensions.swift */,
 				50DAC19C27DAE342006098D6 /* DatabaseManager.swift */,
 				50DAC1B427DC0E79006098D6 /* CustomDesigns.swift */,
-				5068B65F27F3BA1C00F1EEE5 /* CustomGradientLayer.swift */,
 				5068B66127F6D38D00F1EEE5 /* CustomCollectionViewFlowLayout.swift */,
 				5068B66527F829A200F1EEE5 /* PresentAnimator.swift */,
 				5068B66727F82A4F00F1EEE5 /* DismissAnimator.swift */,
@@ -263,9 +273,8 @@
 		506C5A7827FA2D8C0011A5B7 /* AddBirthday */ = {
 			isa = PBXGroup;
 			children = (
-				506C5A8827FBE55E0011A5B7 /* AddBirthdayBottomSheetViewController.swift */,
-				506C5A8A27FBED5C0011A5B7 /* AddBirthdayBottomSheetTableViewCell.swift */,
-				506C5A8E27FBFABD0011A5B7 /* BetterAddBirthdayViewController.swift */,
+				506C5A9427FFB1B80011A5B7 /* BottomSheet */,
+				506C5A9527FFB1C10011A5B7 /* AddBirthdayForm */,
 				5093F99C27D6ED6400378967 /* AddBirthdayViewController.swift */,
 				506C5A7927FA51D90011A5B7 /* PersonTableViewCell.swift */,
 			);
@@ -281,6 +290,27 @@
 				5068B66327F7EA2A00F1EEE5 /* CollectionViewCellDetailViewController.swift */,
 			);
 			path = OldHomeView;
+			sourceTree = "<group>";
+		};
+		506C5A9427FFB1B80011A5B7 /* BottomSheet */ = {
+			isa = PBXGroup;
+			children = (
+				506C5A8827FBE55E0011A5B7 /* AddBirthdayBottomSheetViewController.swift */,
+				506C5A8A27FBED5C0011A5B7 /* AddBirthdayBottomSheetTableViewCell.swift */,
+			);
+			path = BottomSheet;
+			sourceTree = "<group>";
+		};
+		506C5A9527FFB1C10011A5B7 /* AddBirthdayForm */ = {
+			isa = PBXGroup;
+			children = (
+				506C5A8E27FBFABD0011A5B7 /* BetterAddBirthdayViewController.swift */,
+				506C5A9027FF7C090011A5B7 /* AddBirthdayTextFieldCell.swift */,
+				506C5A9227FFA2150011A5B7 /* DatePickerCell.swift */,
+				506C5A9627FFB2000011A5B7 /* BirthdayCell.swift */,
+				506C5A9827FFB3A70011A5B7 /* YearToggleCell.swift */,
+			);
+			path = AddBirthdayForm;
 			sourceTree = "<group>";
 		};
 		5093F99927D6ED4100378967 /* Main */ = {
@@ -337,6 +367,7 @@
 		50DAC1AD27DBE6DD006098D6 /* Archives */ = {
 			isa = PBXGroup;
 			children = (
+				5068B65F27F3BA1C00F1EEE5 /* CustomGradientLayer.swift */,
 				506C5A8127FAA09B0011A5B7 /* OldHomeView */,
 				5068B64F27F2B12E00F1EEE5 /* CustomTabBar.swift */,
 				50DAC1A727DAF4D2006098D6 /* LogInSheetViewController.swift */,
@@ -498,15 +529,18 @@
 				5068B65027F2B12E00F1EEE5 /* CustomTabBar.swift in Sources */,
 				5066BA9827ED35EC008873BB /* FlipPresentAnimationController.swift in Sources */,
 				50DAC1AA27DAF4DF006098D6 /* SignUpSheetViewController.swift in Sources */,
+				506C5A9B27FFC0A60011A5B7 /* CustomPickerDataModel.swift in Sources */,
 				50DAC1A427DAEEB6006098D6 /* AppleSignInHelper.swift in Sources */,
 				5068B66627F829A200F1EEE5 /* PresentAnimator.swift in Sources */,
 				506C5A8027FA99D90011A5B7 /* SmallCollectionViewCell.swift in Sources */,
 				5056AF1F27D6B803008601FF /* AppDelegate.swift in Sources */,
+				506C5A9127FF7C090011A5B7 /* AddBirthdayTextFieldCell.swift in Sources */,
 				5093F99827D6ED3900378967 /* TabBarViewController.swift in Sources */,
 				5068B66827F82A4F00F1EEE5 /* DismissAnimator.swift in Sources */,
 				5093F9A827D71B2400378967 /* Extensions.swift in Sources */,
 				50DAC1B127DBEA44006098D6 /* SignOutCell.swift in Sources */,
 				506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */,
+				506C5A9727FFB2000011A5B7 /* BirthdayCell.swift in Sources */,
 				506C5A8927FBE55E0011A5B7 /* AddBirthdayBottomSheetViewController.swift in Sources */,
 				506C5A7E27FA90B10011A5B7 /* LargeCollectionViewCell.swift in Sources */,
 				50DAC1A627DAF237006098D6 /* EmailSignInHelper.swift in Sources */,
@@ -517,11 +551,13 @@
 				5068B65227F2B40300F1EEE5 /* TabBarBackgroundView.swift in Sources */,
 				506C5A8D27FBF1810011A5B7 /* AddBirthdayBottomSheetTableViewCellViewModel.swift in Sources */,
 				50DAC1A827DAF4D2006098D6 /* LogInSheetViewController.swift in Sources */,
+				506C5A9327FFA2150011A5B7 /* DatePickerCell.swift in Sources */,
 				5068B65A27F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift in Sources */,
 				506C5A7A27FA51D90011A5B7 /* PersonTableViewCell.swift in Sources */,
 				50DAC1A127DAEC71006098D6 /* BirthdayBuddyUser.swift in Sources */,
 				5068B65827F2C9E800F1EEE5 /* CollectionViewCell.swift in Sources */,
 				50DAC19D27DAE342006098D6 /* DatabaseManager.swift in Sources */,
+				506C5A9927FFB3A70011A5B7 /* YearToggleCell.swift in Sources */,
 				508EB38D27E2706700986FC8 /* FacebookSignInHelper.swift in Sources */,
 				5068B66027F3BA1C00F1EEE5 /* CustomGradientLayer.swift in Sources */,
 				5068B65C27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift in Sources */,

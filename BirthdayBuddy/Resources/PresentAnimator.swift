@@ -26,7 +26,7 @@ class PresentAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
         // 1) setup
-        guard let fromView = transitionContext.viewController(forKey: .from),
+        guard let _ = transitionContext.viewController(forKey: .from),
           let toView = transitionContext.viewController(forKey: .to) else {
             return
         }

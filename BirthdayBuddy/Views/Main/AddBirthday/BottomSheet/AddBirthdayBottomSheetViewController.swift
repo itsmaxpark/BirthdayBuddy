@@ -115,9 +115,9 @@ class AddBirthdayBottomSheetViewController: UIViewController, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = BetterAddBirthdayViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        
-        self.present(nav, animated: true)
+        // Dismiss the BottomSheet before presenting the AddBirthday VC
+        dismiss(animated: true)
+        let tabBarVC = self.presentingViewController as? TabBarViewController
+        tabBarVC?.presentAddBirthdayVC()
     }
 }

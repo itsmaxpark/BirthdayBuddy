@@ -86,6 +86,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         
         if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeaderView.identifier, for: indexPath) as? SectionHeaderView {
             sectionHeader.title.text = "Upcoming Birthdays"
+            sectionHeader.title.textColor = .label
             return sectionHeader
         }
         return UICollectionReusableView()

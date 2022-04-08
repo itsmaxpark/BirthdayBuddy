@@ -136,10 +136,6 @@ extension UIView {
             gradient.startPoint = CGPoint(x: 0.0, y: 0.1)
             gradient.endPoint = CGPoint(x: 0.75, y: 1)
             gradient.cornerRadius = 20
-            gradient.shadowColor = UIColor.white.cgColor
-            gradient.shadowOffset = CGSize(width: -10, height: 10)
-            gradient.shadowRadius = 4
-            gradient.shadowOpacity = 0.4
             gradient.masksToBounds = false
             layer.insertSublayer(gradient, at: 0)
             

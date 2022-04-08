@@ -88,5 +88,10 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         tabBar.unselectedItemTintColor = .white  // changes non selected item color
         tabBar.isTranslucent = true
     }
+    func presentAddBirthdayVC() {
+        let vc = BetterAddBirthdayViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        self.present(nav, animated: true)
+    }
 }
 
