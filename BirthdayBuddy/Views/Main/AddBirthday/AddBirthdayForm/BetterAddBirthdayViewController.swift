@@ -101,6 +101,8 @@ class BetterAddBirthdayViewController: UIViewController, UITableViewDelegate, UI
         tableView.delegate = self
         tableView.dataSource = self
         
+        self.setupHideKeyboardOnTap()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -132,6 +134,7 @@ class BetterAddBirthdayViewController: UIViewController, UITableViewDelegate, UI
             height: view.height - pictureBackgroundView.height
         )
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -159,6 +162,7 @@ class BetterAddBirthdayViewController: UIViewController, UITableViewDelegate, UI
                 fatalError()
             }
             cell.placeholder = placeholderText[indexPath.row]
+            
             return cell
         case 1:
             if birthdaySection.isOpen {
@@ -214,11 +218,23 @@ class BetterAddBirthdayViewController: UIViewController, UITableViewDelegate, UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        
         if indexPath.section == 1 && indexPath.row == 0 {
+            print("DidSelectRow Birthday Cell")
             tableView.deselectRow(at: indexPath, animated: true)
             
             birthdaySection.isOpen.toggle()
             tableView.reloadSections([indexPath.section], with: .none)
+        } else if indexPath.section == 0 {
+            if birthdaySection.isOpen {
+                print("Reloading Picker to hide it")
+                birthdaySection.isOpen.toggle()
+                tableView.reloadData()
+            }
+            print("DidSelectRow TextField")
+            guard let cell = tableView.cellForRow(at: indexPath) as? AddBirthdayTextFieldCell else { fatalError() }
+            cell.textField.isUserInteractionEnabled = true
+            cell.textField.becomeFirstResponder()
         }
     }
     

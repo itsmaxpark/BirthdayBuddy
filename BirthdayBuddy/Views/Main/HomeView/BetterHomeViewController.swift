@@ -42,7 +42,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositionalLayout())
         collectionView.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = .systemGray6
         view.addSubview(collectionView)
         
         collectionView.delegate = self

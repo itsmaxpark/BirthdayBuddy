@@ -24,10 +24,13 @@ class AddBirthdayTextFieldCell: UITableViewCell, UITextFieldDelegate {
         }
     }
     
+    var text: String?
+    
     let textField: UITextField = {
         let field = UITextField()
         field.translatesAutoresizingMaskIntoConstraints = false
         field.textColor = .systemGray
+        field.isUserInteractionEnabled = false
         return field
     }()
     
@@ -35,13 +38,24 @@ class AddBirthdayTextFieldCell: UITableViewCell, UITextFieldDelegate {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         textField.delegate = self
         contentView.addSubview(textField)
-        
+        selectionStyle = .none
+        addContraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError()
     }
-
+    
+    private func addContraints() {
+        var constraints = [NSLayoutConstraint]()
+        // add
+        constraints.append(textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20))
+        constraints.append(textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor))
+        constraints.append(textField.topAnchor.constraint(equalTo: contentView.topAnchor))
+        constraints.append(textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor))
+        //activate
+        NSLayoutConstraint.activate(constraints)
+    }
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -63,5 +77,13 @@ class AddBirthdayTextFieldCell: UITableViewCell, UITextFieldDelegate {
         return true
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        text = textField.text
+        textField.isUserInteractionEnabled = false
+    }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+//        textField.text = nil
+    }
 }
