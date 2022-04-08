@@ -13,8 +13,6 @@ class BetterAddBirthdayViewController: UIViewController, UITableViewDelegate, UI
     
     var persons: [Person]?
     
-    let placeholderText: [String] = ["First Name", "Last Name"]
-    
     var birthdayText: String = ""
     
     struct Section {
@@ -24,6 +22,13 @@ class BetterAddBirthdayViewController: UIViewController, UITableViewDelegate, UI
     var isSwitchOn: Bool = false
     
     var birthdaySection: Section = Section()
+    
+    var textFieldEntries: [String?] = [nil,nil]
+    
+    private var textFieldViewModels: [TextFieldCellViewModel] = [
+        TextFieldCellViewModel(text: nil, placeholder: "First Name"),
+        TextFieldCellViewModel(text: nil, placeholder: "Last Name"),
+    ]
     
     private let pictureBackgroundView: UIView = {
         let view = UIView()
@@ -161,7 +166,8 @@ class BetterAddBirthdayViewController: UIViewController, UITableViewDelegate, UI
             ) as? AddBirthdayTextFieldCell else {
                 fatalError()
             }
-            cell.placeholder = placeholderText[indexPath.row]
+            cell.delegate = self
+            cell.configure(with: textFieldViewModels[indexPath.row])
             
             return cell
         case 1:
@@ -248,7 +254,7 @@ class BetterAddBirthdayViewController: UIViewController, UITableViewDelegate, UI
         }
         return 44
     }
-    
+   
     func switchChanged(cell: YearToggleCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         guard let cell = tableView.cellForRow(at: indexPath) as? YearToggleCell else { fatalError() }
@@ -259,6 +265,7 @@ class BetterAddBirthdayViewController: UIViewController, UITableViewDelegate, UI
     
     func pickerViewDidChange(value: String) {
         self.birthdayText = value
+//        self.textFieldEntries
         tableView.reloadData()
         print(birthdayText)
     }
@@ -311,4 +318,16 @@ class BetterAddBirthdayViewController: UIViewController, UITableViewDelegate, UI
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
     }
+}
+
+extension BetterAddBirthdayViewController: TextFieldCellDelegate {
+    func didEditTextField(textField: UITextField) {
+        if textField.placeholder == "First Name" {
+            textFieldViewModels[0].text = textField.text
+        } else {
+            textFieldViewModels[1].text = textField.text
+        }
+    }
+    
+    
 }

@@ -42,6 +42,7 @@
 		506C5A9727FFB2000011A5B7 /* BirthdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A9627FFB2000011A5B7 /* BirthdayCell.swift */; };
 		506C5A9927FFB3A70011A5B7 /* YearToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A9827FFB3A70011A5B7 /* YearToggleCell.swift */; };
 		506C5A9B27FFC0A60011A5B7 /* CustomPickerDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A9A27FFC0A60011A5B7 /* CustomPickerDataModel.swift */; };
+		506C5A9D2800E84D0011A5B7 /* TextFieldCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A9C2800E84D0011A5B7 /* TextFieldCellViewModel.swift */; };
 		506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */; };
 		506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */; };
 		506D5B5D27D87325009A9F39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */; };
@@ -104,6 +105,7 @@
 		506C5A9627FFB2000011A5B7 /* BirthdayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayCell.swift; sourceTree = "<group>"; };
 		506C5A9827FFB3A70011A5B7 /* YearToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearToggleCell.swift; sourceTree = "<group>"; };
 		506C5A9A27FFC0A60011A5B7 /* CustomPickerDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerDataModel.swift; sourceTree = "<group>"; };
+		506C5A9C2800E84D0011A5B7 /* TextFieldCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCellViewModel.swift; sourceTree = "<group>"; };
 		506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenBackgroundView.swift; sourceTree = "<group>"; };
 		506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenButtonsView.swift; sourceTree = "<group>"; };
 		506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				5068B65927F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift */,
 				5068B65B27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift */,
 				506C5A8C27FBF1810011A5B7 /* AddBirthdayBottomSheetTableViewCellViewModel.swift */,
+				506C5A9C2800E84D0011A5B7 /* TextFieldCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				5066BA9627EA89DF008873BB /* GoogleSignInHelper.swift in Sources */,
 				5093F99D27D6ED6400378967 /* AddBirthdayViewController.swift in Sources */,
 				506C5A8F27FBFABD0011A5B7 /* BetterAddBirthdayViewController.swift in Sources */,
+				506C5A9D2800E84D0011A5B7 /* TextFieldCellViewModel.swift in Sources */,
 				5068B66A27F8F71C00F1EEE5 /* CustomAnimationController.swift in Sources */,
 				506C5A7C27FA889C0011A5B7 /* BetterHomeViewController.swift in Sources */,
 				506C5A8627FAC4460011A5B7 /* Person+CoreDataClass.swift in Sources */,

@@ -8,12 +8,14 @@
 import UIKit
 
 protocol TextFieldCellDelegate: AnyObject {
-    func didTapTextField(textField: UITextField)
+    func didEditTextField(textField: UITextField)
 }
 
 class AddBirthdayTextFieldCell: UITableViewCell, UITextFieldDelegate {
 
     static let identifier = "AddBirthdayTextFieldCell"
+    
+    weak var delegate: TextFieldCellDelegate?
     
     var placeholder: String? {
         didSet {
@@ -73,17 +75,23 @@ class AddBirthdayTextFieldCell: UITableViewCell, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        print(textField.text ?? "")
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        text = textField.text
+        print("Saved text: \(String(describing: textField.text))")
+        self.text = textField.text
         textField.isUserInteractionEnabled = false
+        self.delegate?.didEditTextField(textField: textField)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
 //        textField.text = nil
+    }
+    
+    func configure(with viewModel: TextFieldCellViewModel) {
+        textField.placeholder = viewModel.placeholder
+        textField.text = viewModel.text
     }
 }
