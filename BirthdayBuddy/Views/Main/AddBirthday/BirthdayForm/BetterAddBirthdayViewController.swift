@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol AddBirthdayViewControllerDelegate: AnyObject {
+    func refreshCollectionView()
+}
+
 class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
     
+    weak var delegate: AddBirthdayViewControllerDelegate?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var persons: [Person]?
     var birthdayText: String = ""
@@ -166,9 +171,10 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         } catch {
             print("Error saving to CoreData")
         }
-//        self.delegate?.refreshCollectionView()
         self.fetchPerson()
+        self.delegate?.refreshCollectionView()
         self.dismiss(animated: true)
+        
         // Repopulate persons array
     }
     @objc func didTapCancel() {

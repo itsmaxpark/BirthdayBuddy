@@ -69,7 +69,7 @@ class LargeCollectionViewCell: UICollectionViewCell {
         monthLabel.text = viewModel.name
         self.contentView.backgroundColor =  UIColor(
             red: 0,
-            green: CGFloat(viewModel.id)/12,
+            green: CGFloat(viewModel.id)/12*(0.8),
             blue: 1,
             alpha: 1
         )

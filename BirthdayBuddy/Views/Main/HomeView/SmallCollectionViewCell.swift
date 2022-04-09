@@ -111,7 +111,7 @@ class SmallCollectionViewCell: UICollectionViewCell {
         
         daysUntilBirthdayLabel.text = "\(person.daysLeft) \(person.daysLeft != 1 ? "days" : "day")"
         
-        cellView.backgroundColor = UIColor(red: 0, green: CGFloat(person.daysLeft)/365, blue: 1, alpha: 1)
+        cellView.backgroundColor = UIColor(red: 0, green: CGFloat(person.daysLeft)/365*(0.8), blue: 1, alpha: 1)
         guard let data = person.picture else {
             pictureView.image = UIImage(systemName: "person.crop.circle.fill")
             return

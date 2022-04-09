@@ -56,10 +56,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("TabBar viewWillAppear")
-        guard let vc = tabBarController?.selectedViewController as? BetterHomeViewController else { return }
-        print("Calling AddBirthday refreshCollectionView")
-        vc.collectionView.reloadData()
+        
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
@@ -94,8 +91,24 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     }
     func presentAddBirthdayVC() {
         let vc = BetterAddBirthdayViewController()
+        vc.delegate = self
         let nav = UINavigationController(rootViewController: vc)
         self.present(nav, animated: true)
+    }
+}
+
+extension TabBarViewController: AddBirthdayViewControllerDelegate {
+    func refreshCollectionView() {
+        guard let nav = viewControllers?[0] as? UINavigationController else {
+            print("Failed to get Nav")
+            return
+        }
+        guard let vc = nav.viewControllers.first as? BetterHomeViewController else {
+            print(nav.presentedViewController as Any)
+            return
+        }
+        vc.fetchPerson()
+        vc.collectionView.reloadData()
     }
 }
 
