@@ -166,7 +166,6 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         person.picture = imageData
         // Save object to CoreData
         
-        print("\(person.firstName) \(person.lastName) \(birthdayText) \(person.picture)")
         do {
             try self.context.save()
         } catch {

@@ -19,6 +19,7 @@ class SmallCollectionViewCell: UICollectionViewCell {
     private let pictureView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     private let nameLabel: UILabel = {
@@ -52,35 +53,30 @@ class SmallCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         cellView.frame = CGRect(
             x: 0,
             y: 0,
             width: contentView.bounds.width,
             height: contentView.bounds.height
         )
-        
         pictureView.frame = CGRect(
             x: cellView.left+10,
             y: (cellView.height-60)/2,
             width: 60,
             height: 60
         )
-        
         nameLabel.frame = CGRect(
             x: pictureView.right+10,
             y: 10,
             width: nameLabel.intrinsicContentSize.width,
             height: nameLabel.intrinsicContentSize.height
         )
-        
         birthdayLabel.frame = CGRect(
             x: nameLabel.left,
             y: nameLabel.bottom,
             width: birthdayLabel.intrinsicContentSize.width,
             height: birthdayLabel.intrinsicContentSize.height
         )
-        
         daysUntilBirthdayLabel.frame = CGRect(
             x: cellView.right-daysUntilBirthdayLabel.intrinsicContentSize.width-20,
             y: (cellView.height-daysUntilBirthdayLabel.intrinsicContentSize.height)/2,
@@ -100,7 +96,6 @@ class SmallCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(person: Person) {
-        
         guard
             let firstName = person.firstName,
             let lastName = person.lastName,
@@ -116,9 +111,9 @@ class SmallCollectionViewCell: UICollectionViewCell {
         daysUntilBirthdayLabel.text = "\(person.daysLeft) \(person.daysLeft != 1 ? "days" : "day")"
         guard let data = person.picture else {
             pictureView.image = UIImage(systemName: "person.crop.circle.fill")
-            pictureView.layer.cornerRadius = pictureView.width/2
             return
         }
         pictureView.image = UIImage(data: data)
+        pictureView.layer.cornerRadius = pictureView.width/2
     }
 }
