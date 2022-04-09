@@ -98,7 +98,6 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LargeCollectionViewCell.identifier, for: indexPath) as? LargeCollectionViewCell else {
                 fatalError()
             }
-            
             let model = viewModels[indexPath.row]
             for sublayer in cell.layer.sublayers! {
                 if let _ = sublayer as? CAGradientLayer { // Check only gradient layers
@@ -112,7 +111,6 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
                     cell.setGradientBackground(id: model.id)
                 }
             }
-            
             return cell
         } else {
             //Small Cells
@@ -130,6 +128,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
             return cell
         }
     }
+    
     func createCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
             let section = self.sections[sectionIndex]
@@ -183,7 +182,6 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func fetchPerson() {
         do {
-            
             let request = Person.fetchRequest() as NSFetchRequest<Person>
             
             let sort = NSSortDescriptor(key: "daysLeft", ascending: true)
@@ -193,14 +191,19 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
-            
         } catch {
             print("Error fetching Person")
         }
     }
-    
     func getCurrentMonth() -> Int {
         return Calendar.current.component(.month, from: Date())
     }
-    
 }
+
+//extension BetterHomeViewController: AddBirthdayDelegate {
+//    func refreshCollectionView() {
+//        print("refreshCollectionView")
+//        self.fetchPerson()
+//        self.collectionView.reloadData()
+//    }
+//}

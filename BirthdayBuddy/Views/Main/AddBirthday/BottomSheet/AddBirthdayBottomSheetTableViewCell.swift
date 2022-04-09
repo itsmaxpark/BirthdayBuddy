@@ -27,8 +27,6 @@ class AddBirthdayBottomSheetTableViewCell: UITableViewCell {
         contentView.addSubview(cellTextLabel)
         contentView.addSubview(iconView)
         contentView.backgroundColor = .systemBackground
-        
-        
     }
     
     required init?(coder: NSCoder) {

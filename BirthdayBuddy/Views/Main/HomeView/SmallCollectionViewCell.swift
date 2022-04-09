@@ -19,8 +19,6 @@ class SmallCollectionViewCell: UICollectionViewCell {
     private let pictureView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(systemName: "person.crop.circle.fill")
-
         return imageView
     }()
     private let nameLabel: UILabel = {
@@ -115,30 +113,12 @@ class SmallCollectionViewCell: UICollectionViewCell {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd"
         birthdayLabel.text = formatter.string(from: birthday)
-        
-//        let nextBirthday = getNextBirthday(date: birthday)
-//        let daysLeft = Calendar.current.numberOfDaysBetween(Date(), and: nextBirthday)
-//        person.daysLeft = Int64(daysLeft)
-        
         daysUntilBirthdayLabel.text = "\(person.daysLeft) \(person.daysLeft != 1 ? "days" : "day")"
+        guard let data = person.picture else {
+            pictureView.image = UIImage(systemName: "person.crop.circle.fill")
+            pictureView.layer.cornerRadius = pictureView.width/2
+            return
+        }
+        pictureView.image = UIImage(data: data)
     }
-    
-//    func getNextBirthday(date: Date) -> Date {
-//        // Get current date
-//        let currentDate = Calendar.current.dateComponents([.day, .month, .year], from: Date())
-//        // get birthday date
-//        var birthday = Calendar.current.dateComponents([.day,.month,.year], from: date)
-//        // set birthday year to current year
-//        birthday.year = currentDate.year
-//        // if birthday already happened this year, add 1 to year
-//        let numberOfDays = Calendar.current.dateComponents([.day], from: currentDate, to: birthday).day!
-//        if numberOfDays < 0 {
-//            birthday.year! += 1
-//        }
-//
-//        let nextBirthday = Calendar.current.date(from: birthday)
-//
-//        return nextBirthday!
-//
-//    }
 }

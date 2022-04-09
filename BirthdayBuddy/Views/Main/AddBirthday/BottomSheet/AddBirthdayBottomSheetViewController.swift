@@ -59,7 +59,6 @@ class AddBirthdayBottomSheetViewController: UIViewController, UITableViewDataSou
         tableView.dataSource = self
         
         closeButton.addTarget(self, action: #selector(didTapClose), for: .touchUpInside)
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidLayoutSubviews() {

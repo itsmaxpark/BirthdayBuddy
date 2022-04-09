@@ -8,7 +8,8 @@
 import UIKit
 
 protocol CustomPickerViewDelegate: AnyObject {
-    func pickerViewDidChange(value: String)
+    func pickerViewSetText(value: String)
+    func pickerViewSetDate(date: Date)
         
 }
 
@@ -120,7 +121,7 @@ class DatePickerCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
         if component == 0 || component == 2 { // if month or year changes, update number of days
             pickerView.reloadComponent(1)
         }
-        convertToText(pickerView)
+        convertToDate(pickerView)
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -135,18 +136,25 @@ class DatePickerCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
             return String(format: "%d", year-(row))
         }
     }
-    
-    func convertToText(_ pickerView: UIPickerView) {
+    func convertToDate(_ pickerView: UIPickerView) {
         let comps = Calendar.current.dateComponents([.day, .month, .year], from: Date())
         let month = pickerView.selectedRow(inComponent: 0)+1
         let day = pickerView.selectedRow(inComponent: 1)+1
         if showYear {
             let year = comps.year!-pickerView.selectedRow(inComponent: 2)
             let text = "\(month)/\(day)/\(year)"
-            customDelegate?.pickerViewDidChange(value: text)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yyyy"
+            let date = dateFormatter.date(from: text)
+            customDelegate?.pickerViewSetDate(date: date!)
+            customDelegate?.pickerViewSetText(value: text)
         } else {
             let text = "\(month)/\(day)"
-            customDelegate?.pickerViewDidChange(value: text)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM/dd"
+            let date = dateFormatter.date(from: text)
+            customDelegate?.pickerViewSetDate(date: date!)
+            customDelegate?.pickerViewSetText(value: text)
         }
     }
 }

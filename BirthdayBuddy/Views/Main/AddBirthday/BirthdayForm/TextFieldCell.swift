@@ -1,5 +1,5 @@
 //
-//  AddBirthdayTextFieldCell.swift
+//  TextFieldCell.swift
 //  BirthdayBuddy
 //
 //  Created by Max Park on 4/7/22.
@@ -11,9 +11,9 @@ protocol TextFieldCellDelegate: AnyObject {
     func didEditTextField(textField: UITextField)
 }
 
-class AddBirthdayTextFieldCell: UITableViewCell, UITextFieldDelegate {
+class TextFieldCell: UITableViewCell, UITextFieldDelegate {
 
-    static let identifier = "AddBirthdayTextFieldCell"
+    static let identifier = "TextFieldCell"
     
     weak var delegate: TextFieldCellDelegate?
     

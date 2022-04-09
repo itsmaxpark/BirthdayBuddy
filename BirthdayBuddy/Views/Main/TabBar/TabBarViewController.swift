@@ -47,20 +47,24 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         setViewControllers([nav1,vc2,nav3], animated: false)
         
         self.delegate = self
-        
         self.setupTabBar()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         presentWelcomeVC()
-        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("TabBar viewWillAppear")
+        guard let vc = tabBarController?.selectedViewController as? BetterHomeViewController else { return }
+        print("Calling AddBirthday refreshCollectionView")
+        vc.collectionView.reloadData()
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        
         // if add birthday tab is selected, present a modal vc
+        
         if viewController is AddBirthdayBottomSheetViewController {
             let vc = AddBirthdayBottomSheetViewController()
             if let sheet = vc.sheetPresentationController {

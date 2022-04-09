@@ -75,7 +75,6 @@ class YearToggleCell: UITableViewCell {
     }
     
     @objc func toggleSwitch() {
-        print("YearToggleCell: toggle switch")
         delegate?.switchChanged(cell: self)
     }
 }
