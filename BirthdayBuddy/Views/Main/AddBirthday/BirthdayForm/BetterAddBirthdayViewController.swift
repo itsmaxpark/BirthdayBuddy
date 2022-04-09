@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol AddBirthdayDelegate: AnyObject {
-    func refreshCollectionView()
-}
-
 class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -21,7 +17,6 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
     var birthdaySection: Section = Section()
     lazy var imagePicker = UIImagePickerController() // initialize only once
     var chosenImage: UIImage?
-    weak var delegate: AddBirthdayDelegate?
     struct Section {
         var isOpen: Bool = false
     }
@@ -185,7 +180,7 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         let actionSheet = UIAlertController(title: "Take or Choose Photo", message: nil, preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { action in
+        actionSheet.addAction(UIAlertAction(title: "Take Picture", style: .default, handler: { action in
             if UIImagePickerController.isSourceTypeAvailable(.camera) {
                 self.imagePicker.sourceType = .camera
                 self.present(self.imagePicker, animated: true)
@@ -193,7 +188,7 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
                 print("Camera not available")
             }
         }))
-        actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { action in
+        actionSheet.addAction(UIAlertAction(title: "Choose Picture", style: .default, handler: { action in
             self.imagePicker.sourceType = .photoLibrary
             self.present(self.imagePicker, animated: true)
         }))

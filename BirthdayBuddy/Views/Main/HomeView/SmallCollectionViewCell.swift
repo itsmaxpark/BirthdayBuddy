@@ -13,13 +13,13 @@ class SmallCollectionViewCell: UICollectionViewCell {
     private let cellView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 20
-        view.backgroundColor = .clear
         return view
     }()
     private let pictureView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 30
         return imageView
     }()
     private let nameLabel: UILabel = {
@@ -87,33 +87,44 @@ class SmallCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        // Need to reset SubLayer or else layers are used twice
-        for sublayer in self.layer.sublayers! {
-            if let _ = sublayer as? CAGradientLayer { // Check only gradient layers
-                sublayer.removeFromSuperlayer()
-           }
-        }
+        nameLabel.text = nil
+        birthdayLabel.text = nil
+        daysUntilBirthdayLabel.text = nil
+        pictureView.image = UIImage(systemName: "person.crop.circle.fill")
+        cellView.backgroundColor = .blue
     }
     
     func configure(person: Person) {
         guard
             let firstName = person.firstName,
-            let lastName = person.lastName,
+//            let lastName = person.lastName,
             let birthday = person.birthday
         else {
             return
         }
-        nameLabel.text = firstName+" "+lastName
+        nameLabel.text = "\(firstName) \(person.lastName ?? "")"
         
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd"
+        
         birthdayLabel.text = formatter.string(from: birthday)
+        
         daysUntilBirthdayLabel.text = "\(person.daysLeft) \(person.daysLeft != 1 ? "days" : "day")"
+        
+        cellView.backgroundColor = UIColor(red: 0, green: CGFloat(person.daysLeft)/365, blue: 1, alpha: 1)
         guard let data = person.picture else {
             pictureView.image = UIImage(systemName: "person.crop.circle.fill")
             return
         }
+        
         pictureView.image = UIImage(data: data)
-        pictureView.layer.cornerRadius = pictureView.width/2
+    }
+    
+    func configureReuse() {
+        nameLabel.text = nil
+        birthdayLabel.text = nil
+        daysUntilBirthdayLabel.text = nil
+        pictureView.image = UIImage(systemName: "person.crop.circle.fill")
+        cellView.backgroundColor = .blue
     }
 }

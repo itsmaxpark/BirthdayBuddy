@@ -32,6 +32,7 @@ class LargeCollectionViewCell: UICollectionViewCell {
         
         contentView.addSubview(monthLabel)
         contentView.addSubview(previewView)
+        contentView.layer.cornerRadius = 20
         // Shadow Layer
     }
     required init?(coder: NSCoder) {
@@ -66,6 +67,11 @@ class LargeCollectionViewCell: UICollectionViewCell {
     
     func configure(with viewModel: CollectionViewCellViewModel) {
         monthLabel.text = viewModel.name
-        
+        self.contentView.backgroundColor =  UIColor(
+            red: 0,
+            green: CGFloat(viewModel.id)/12,
+            blue: 1,
+            alpha: 1
+        )
     }
 }

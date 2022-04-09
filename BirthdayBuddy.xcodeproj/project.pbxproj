@@ -55,6 +55,7 @@
 		5093F99F27D6ED6A00378967 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99E27D6ED6A00378967 /* SettingsViewController.swift */; };
 		5093F9A327D7123200378967 /* IndieFlower-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5093F9A127D7123200378967 /* IndieFlower-Regular.ttf */; };
 		5093F9A827D71B2400378967 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F9A727D71B2400378967 /* Extensions.swift */; };
+		509A6E2228015BC900655DD9 /* DetailBirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A6E2128015BC900655DD9 /* DetailBirthdayViewController.swift */; };
 		50DAC19D27DAE342006098D6 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC19C27DAE342006098D6 /* DatabaseManager.swift */; };
 		50DAC1A127DAEC71006098D6 /* BirthdayBuddyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1A027DAEC71006098D6 /* BirthdayBuddyUser.swift */; };
 		50DAC1A427DAEEB6006098D6 /* AppleSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1A327DAEEB6006098D6 /* AppleSignInHelper.swift */; };
@@ -120,6 +121,7 @@
 		5093F9A127D7123200378967 /* IndieFlower-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IndieFlower-Regular.ttf"; sourceTree = "<group>"; };
 		5093F9A727D71B2400378967 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		5093F9A927D844B000378967 /* BirthdayBuddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BirthdayBuddy.entitlements; sourceTree = "<group>"; };
+		509A6E2128015BC900655DD9 /* DetailBirthdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBirthdayViewController.swift; sourceTree = "<group>"; };
 		50DAC19C27DAE342006098D6 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		50DAC1A027DAEC71006098D6 /* BirthdayBuddyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayBuddyUser.swift; sourceTree = "<group>"; };
 		50DAC1A327DAEEB6006098D6 /* AppleSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInHelper.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				506C5A7B27FA889C0011A5B7 /* BetterHomeViewController.swift */,
+				509A6E2128015BC900655DD9 /* DetailBirthdayViewController.swift */,
 				506C5A7D27FA90B10011A5B7 /* LargeCollectionViewCell.swift */,
 				506C5A7F27FA99D90011A5B7 /* SmallCollectionViewCell.swift */,
 				506C5A8227FAA1240011A5B7 /* SectionHeaderView.swift */,
@@ -558,6 +561,7 @@
 				50DAC19D27DAE342006098D6 /* DatabaseManager.swift in Sources */,
 				506C5A9927FFB3A70011A5B7 /* YearToggleCell.swift in Sources */,
 				506C5A9F28010A470011A5B7 /* CropViewController.swift in Sources */,
+				509A6E2228015BC900655DD9 /* DetailBirthdayViewController.swift in Sources */,
 				508EB38D27E2706700986FC8 /* FacebookSignInHelper.swift in Sources */,
 				5068B66027F3BA1C00F1EEE5 /* CustomGradientLayer.swift in Sources */,
 				5068B65C27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift in Sources */,

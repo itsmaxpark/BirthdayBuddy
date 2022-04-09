@@ -17,8 +17,6 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
     let sections = ["Large", "Small"]
     var collectionView: UICollectionView!
     
-    var dataSource = "" // Our Person Data Objects
-    
     public var selectedCell = UITableViewCell()
     
     private var viewModels: [CollectionViewCellViewModel] = [
@@ -99,33 +97,48 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
                 fatalError()
             }
             let model = viewModels[indexPath.row]
-            for sublayer in cell.layer.sublayers! {
-                if let _ = sublayer as? CAGradientLayer { // Check only gradient layers
-                    if sublayer.name != model.name { // need to update gradient since cell is reused
-                        sublayer.removeFromSuperlayer()
-                        cell.configure(with: model)
-                        cell.setGradientBackground(id: model.id)
-                    }
-                } else { // cell is not dequeued
-                    cell.configure(with: model)
-                    cell.setGradientBackground(id: model.id)
-                }
-            }
+            cell.configure(with: model)
             return cell
         } else {
             //Small Cells
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallCollectionViewCell.identifier, for: indexPath) as? SmallCollectionViewCell else {
                 fatalError()
             }
-            //Gradient Color is dependent on the month of the Person's birthday
+            //Gradient Color is dependent on the days left
             let person = persons?[indexPath.row]
-            let date = person?.birthday
-            let calendar = Calendar.current
-            let components = calendar.dateComponents([.month], from: date!)
-            let month = components.month
-            cell.setGradientBackground(id: month!)
+            cell.configureReuse()
             cell.configure(person: person!)
             return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 1 { // SmallCollectionViewCell
+            // select person
+            let person = self.persons![indexPath.row]
+            
+            // create alert
+            
+            let message = "Remove \(person.firstName ?? "") \(person.lastName ?? "") from Birthday Buddy"
+            let alert = UIAlertController(title: "Delete", message: message, preferredStyle: .alert)
+            let deleteButton = UIAlertAction(title: "Delete", style: .destructive) { action in
+                // remove person
+                self.context.delete(person)
+                // save data
+                do {
+                    try self.context.save()
+                } catch {
+                    print("Error deleting person")
+                }
+                // refetch data
+                self.fetchPerson()
+            }
+            let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alert.addAction(deleteButton)
+            alert.addAction(cancelButton)
+            
+            self.present(alert, animated: true)
         }
     }
     
@@ -199,11 +212,3 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         return Calendar.current.component(.month, from: Date())
     }
 }
-
-//extension BetterHomeViewController: AddBirthdayDelegate {
-//    func refreshCollectionView() {
-//        print("refreshCollectionView")
-//        self.fetchPerson()
-//        self.collectionView.reloadData()
-//    }
-//}
