@@ -102,7 +102,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
             }
             //Gradient Color is dependent on the days left
             let person = persons?[indexPath.row]
-            cell.configureReuse()
+//            cell.configureReuse()
             cell.configure(person: person!)
             
             return cell

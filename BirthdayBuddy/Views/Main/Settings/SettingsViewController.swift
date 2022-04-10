@@ -11,7 +11,9 @@ import FirebaseAuth
 class SettingsViewController: UIViewController {
     
     private let viewModels: [SettingsTableViewCellViewModel] = [
-        SettingsTableViewCellViewModel(text: "Sign Out")
+        SettingsTableViewCellViewModel(text: "Sign Out"),
+        SettingsTableViewCellViewModel(text: "Statistics"),
+        SettingsTableViewCellViewModel(text: "Delete All Birthdays")
     ]
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -49,8 +51,31 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 && indexPath.row == 0 {
-            SignOutHelper.signOut()
+        let index = indexPath.row
+        if index == 0 {
+            let alert = UIAlertController(title: "Sign Out", message: "Signing out of Birthday Buddy", preferredStyle: .alert)
+            let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let signOutButton = UIAlertAction(title: "Sign Out", style: .default, handler: { action in
+                SignOutHelper.signOut()
+            })
+            alert.addAction(signOutButton)
+            alert.addAction(cancelButton)
+            self.present(alert, animated: true)
+        } else if index == 1 {
+            let message = CoreDataManager.shared.getNumberOfBirthdays()
+            let alert = UIAlertController(title: "Statistics", message: message, preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "OK", style: .cancel)
+            alert.addAction(okButton)
+            self.present(alert, animated: true)
+        } else if index == 2 {
+            let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete all birthdays on Birthday Buddy?", preferredStyle: .alert)
+            let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let confirmButton = UIAlertAction(title: "Confirm", style: .destructive, handler: { action in
+                CoreDataManager.shared.deleteAllBirthdays()
+            })
+            alert.addAction(confirmButton)
+            alert.addAction(cancelButton)
+            self.present(alert, animated: true)
         }
     }
 }

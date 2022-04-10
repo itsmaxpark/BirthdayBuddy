@@ -12,22 +12,23 @@ class LargeCollectionViewCell: UICollectionViewCell {
     
     private let monthLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .white
+        label.textColor = .label
         label.textAlignment = .center
         label.font = UIFont.appFont(name: "IndieFlower", size: 50)
         return label
     }()
     private let previewView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
-        view.layer.opacity = 0.7
+        view.backgroundColor = .systemGray5
         view.clipsToBounds = true
         view.layer.cornerRadius = 20
         return view
     }()
     private let numberOfBirthdaysLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 25.0)
+        label.font = UIFont.appFont(name: "IndieFlower", size: 30)
+        label.textAlignment = .center
+        label.textColor = .label
         return label
     }()
     
@@ -37,7 +38,8 @@ class LargeCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(monthLabel)
         contentView.addSubview(previewView)
         contentView.layer.cornerRadius = 20
-        // Shadow Layer
+        
+        previewView.addSubview(numberOfBirthdaysLabel)
     }
     required init?(coder: NSCoder) {
         fatalError()
@@ -52,31 +54,43 @@ class LargeCollectionViewCell: UICollectionViewCell {
             height: monthLabel.intrinsicContentSize.height
         )
         previewView.frame = CGRect(
+            x: 10,
+            y: monthLabel.frame.maxY + 10,
+            width: contentView.width-20,
+            height: contentView.height-monthLabel.height-40
+        )
+        numberOfBirthdaysLabel.frame = CGRect(
             x: 20,
-            y: monthLabel.frame.maxY + 20,
-            width: contentView.width-40,
-            height: contentView.height-monthLabel.height-60
+            y: 5,
+            width: previewView.width-40,
+            height: 50
         )
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        // Need to reset SubLayer or else layers are used twice
-        for sublayer in self.layer.sublayers! {
-            if let _ = sublayer as? CAGradientLayer { // Check only gradient layers
-                sublayer.removeFromSuperlayer()
-           }
-        }
+        
     }
     
     func configure(with viewModel: CollectionViewCellViewModel) {
         monthLabel.text = viewModel.name
-//        numberOfBirthdaysLabel.text = "\()"
+//        let numOfBirthdays = CoreDataManager.shared.getBirthdaysForMonth(month: viewModel.id)
+//        var numOfBirthdaysText = ""
+//        switch numOfBirthdays {
+//        case 0:
+//            numOfBirthdaysText = "No birthdays this month"
+//        case 1:
+//            numOfBirthdaysText = "1 birthday this month"
+//        default:
+//            numOfBirthdaysText = "\(numOfBirthdays) birthdays this month"
+//        }
+//        numberOfBirthdaysLabel.text = numOfBirthdaysText
     }
+    
     func setBackground(with index: Int) {
         self.contentView.backgroundColor =  UIColor(
             red: 0,
-            green: 0.8-CGFloat(index)/12*(0.8),
+            green: 0.8-CGFloat(index)/12*(0.6),
             blue: 1,
             alpha: 1
         )
