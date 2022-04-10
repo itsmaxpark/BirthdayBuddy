@@ -17,7 +17,6 @@ class LargeCollectionViewCell: UICollectionViewCell {
         label.font = UIFont.appFont(name: "IndieFlower", size: 50)
         return label
     }()
-    
     private let previewView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -25,6 +24,11 @@ class LargeCollectionViewCell: UICollectionViewCell {
         view.clipsToBounds = true
         view.layer.cornerRadius = 20
         return view
+    }()
+    private let numberOfBirthdaysLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 25.0)
+        return label
     }()
     
     override init(frame: CGRect) {
@@ -67,9 +71,12 @@ class LargeCollectionViewCell: UICollectionViewCell {
     
     func configure(with viewModel: CollectionViewCellViewModel) {
         monthLabel.text = viewModel.name
+//        numberOfBirthdaysLabel.text = "\()"
+    }
+    func setBackground(with index: Int) {
         self.contentView.backgroundColor =  UIColor(
             red: 0,
-            green: CGFloat(viewModel.id)/12*(0.8),
+            green: 0.8-CGFloat(index)/12*(0.8),
             blue: 1,
             alpha: 1
         )

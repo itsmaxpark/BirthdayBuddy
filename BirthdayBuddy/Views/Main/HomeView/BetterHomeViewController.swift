@@ -20,7 +20,6 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
     public var selectedCell = UITableViewCell()
     
     private var viewModels: [CollectionViewCellViewModel] = [
-        
         CollectionViewCellViewModel(name: "January", id: 1),
         CollectionViewCellViewModel(name: "February", id: 2),
         CollectionViewCellViewModel(name: "March", id: 3),
@@ -40,7 +39,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositionalLayout())
         collectionView.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-        collectionView.backgroundColor = .systemGray6
+        collectionView.backgroundColor = .systemGray5
         view.addSubview(collectionView)
         
         collectionView.delegate = self
@@ -70,7 +69,6 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section{
         case 1:
@@ -79,9 +77,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
             return viewModels.count
         }
     }
-    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
         if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeaderView.identifier, for: indexPath) as? SectionHeaderView {
             sectionHeader.title.text = "Upcoming Birthdays"
             sectionHeader.title.textColor = .label
@@ -89,7 +85,6 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         }
         return UICollectionReusableView()
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
             //Large Cells
@@ -98,6 +93,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
             }
             let model = viewModels[indexPath.row]
             cell.configure(with: model)
+            cell.setBackground(with: indexPath.row)
             return cell
         } else {
             //Small Cells
@@ -108,6 +104,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
             let person = persons?[indexPath.row]
             cell.configureReuse()
             cell.configure(person: person!)
+            
             return cell
         }
     }

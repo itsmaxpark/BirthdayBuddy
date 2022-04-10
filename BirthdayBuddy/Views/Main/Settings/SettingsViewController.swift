@@ -10,9 +10,12 @@ import FirebaseAuth
 
 class SettingsViewController: UIViewController {
     
+    private let viewModels: [SettingsTableViewCellViewModel] = [
+        SettingsTableViewCellViewModel(text: "Sign Out")
+    ]
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(SignOutCell.self, forCellReuseIdentifier: SignOutCell.identifier)
+        tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifier)
         return tableView
     }()
 
@@ -23,32 +26,26 @@ class SettingsViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .blue
-        
-        
+        tableView.backgroundColor = .systemGray5
     }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
     }
-    
 }
 
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return viewModels.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SignOutCell.identifier, for: indexPath) as? SignOutCell else {
-            return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: SettingsTableViewCell.identifier,
+            for: indexPath
+        ) as? SettingsTableViewCell else {
+            fatalError()
         }
+        cell.configure(viewModel: viewModels[indexPath.row])
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
