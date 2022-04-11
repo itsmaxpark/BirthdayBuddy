@@ -25,16 +25,19 @@ class SmallCollectionViewCell: UICollectionViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 25.0)
+        label.textColor = .black
         return label
     }()
     private let birthdayLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20.0)
+        label.textColor = .black
         return label
     }()
     private let daysUntilBirthdayLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.italicSystemFont(ofSize: 20.0)
+        label.textColor = .black
         return label
     }()
     
@@ -111,7 +114,7 @@ class SmallCollectionViewCell: UICollectionViewCell {
         
         daysUntilBirthdayLabel.text = "\(person.daysLeft) \(person.daysLeft != 1 ? "days" : "day")"
         
-        cellView.backgroundColor = UIColor(red: 0, green: 0.8-(CGFloat(person.daysLeft)/365*(0.6)), blue: 1, alpha: 1)
+        cellView.backgroundColor = UIColor(named: "Light Blue")
         guard let data = person.picture else {
             pictureView.image = UIImage(systemName: "person.crop.circle.fill")
             return

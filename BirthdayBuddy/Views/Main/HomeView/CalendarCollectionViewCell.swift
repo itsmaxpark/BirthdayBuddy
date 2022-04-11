@@ -15,20 +15,23 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .label
-        label.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: UIFont.systemFontSize+5)
         label.textAlignment = .center
+        label.layer.borderWidth = 2
+        label.layer.cornerRadius = 10
+        
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-//        backgroundColor = .label
-        contentView.layer.borderColor = UIColor.label.cgColor
+        backgroundColor = .white
+        contentView.layer.borderColor = UIColor.white.cgColor
         contentView.layer.borderWidth = CGFloat(2)
         contentView.layer.cornerRadius = 10
-        contentView.layer.backgroundColor = UIColor.systemGray5.cgColor
+        contentView.layer.backgroundColor = UIColor.white.cgColor
         contentView.addSubview(dateLabel)
     }
     
@@ -38,36 +41,30 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        dateLabel.frame = contentView.frame
+        dateLabel.frame = CGRect(
+            x: 8,
+            y: 2,
+            width: contentView.width-16,
+            height: contentView.height-4
+        )
     }
     
     func configure(with date: CalendarDay, with index: Int) {
-        if isActive {
-            contentView.layer.backgroundColor = UIColor.clear.cgColor
-            dateLabel.font = UIFont.boldSystemFont(ofSize: UIFont.systemFontSize+5)
-        } else {
-            contentView.layer.backgroundColor = UIColor.systemGray5.cgColor
-            dateLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
-        }
+        // Reset to Default Cell
+        dateLabel.layer.backgroundColor = UIColor.white.cgColor
+        dateLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
+        dateLabel.text = date.number
+        dateLabel.layer.borderColor = UIColor.white.cgColor
+        self.contentView.isHidden = true
+        
         if date.isWithinDisplayedMonth {
             self.contentView.isHidden = false
-        } else {
-            self.contentView.isHidden = true
         }
-        if Calendar.current.isDateInToday(date.date) {
-            dateLabel.textColor = .systemRed
-            contentView.layer.borderColor = UIColor.systemRed.cgColor
-        } else {
-            dateLabel.textColor = .label
-            contentView.layer.borderColor = .none
-            contentView.layer.borderColor = UIColor.label.cgColor
+        if isActive { // Current cell is a birthday
+            dateLabel.layer.backgroundColor = UIColor(named: "Light Blue")?.cgColor
         }
-        dateLabel.text = date.number
-        self.backgroundColor =  UIColor(
-            red: 0,
-            green: 0.8-CGFloat(index)/12*(0.6),
-            blue: 1,
-            alpha: 1
-        )
+        if Calendar.current.isDateInToday(date.date) { // Current cell is today's date
+            dateLabel.layer.borderColor = UIColor.systemRed.cgColor
+        }
     }
 }

@@ -119,7 +119,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
                 }
                 let model = viewModels[indexPath.row]
                 cell.configure(with: model)
-                cell.setBackground(with: indexPath.row)
+//                cell.setBackground(with: indexPath.row)
                 
                 return cell
             } else {

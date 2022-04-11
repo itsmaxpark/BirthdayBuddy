@@ -12,26 +12,18 @@ class LargeCollectionViewCell: UICollectionViewCell {
     
     private let monthLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .label
+        label.textColor = .black
         label.textAlignment = .center
-//        label.font = UIFont.appFont(name: "IndieFlower", size: 50)
         label.font = UIFont.appFont(name: "Rubik", size: 50)
         return label
     }()
     private let previewView: UIView = {
         let view = UIView()
-        view.backgroundColor = .clear
+        view.backgroundColor = .white
+        view.tintColor = .white
+        view.layer.cornerRadius = 10
         view.clipsToBounds = true
-//        view.layer.cornerRadius = 10
-//        view.layer.borderColor = UIColor.label.cgColor
         return view
-    }()
-    private let numberOfBirthdaysLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.appFont(name: "IndieFlower", size: 30)
-        label.textAlignment = .center
-        label.textColor = .label
-        return label
     }()
     private let calendarCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -59,27 +51,21 @@ class LargeCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         monthLabel.frame = CGRect(
             x: (contentView.width/2) - (monthLabel.intrinsicContentSize.width/2),
-            y: 20,
+            y: 10,
             width: monthLabel.intrinsicContentSize.width,
             height: monthLabel.intrinsicContentSize.height
         )
         previewView.frame = CGRect(
             x: 10,
-            y: monthLabel.frame.maxY + 10,
+            y: monthLabel.frame.maxY + 20,
             width: contentView.width-20,
             height: contentView.height-monthLabel.height-40
         )
-//        numberOfBirthdaysLabel.frame = CGRect(
-//            x: 20,
-//            y: 5,
-//            width: previewView.width-40,
-//            height: 50
-//        )
         calendarCollectionView.frame = CGRect(
             x: 0,
-            y: 0,
+            y: 10,
             width: previewView.width,
-            height: previewView.height
+            height: previewView.height-10
         )
         
     }
@@ -91,17 +77,7 @@ class LargeCollectionViewCell: UICollectionViewCell {
     
     func configure(with viewModel: CollectionViewCellViewModel) {
         monthLabel.text = viewModel.name.uppercased()
-//        let numOfBirthdays = CoreDataManager.shared.getBirthdaysForMonth(month: viewModel.id)
-//        var numOfBirthdaysText = ""
-//        switch numOfBirthdays {
-//        case 0:
-//            numOfBirthdaysText = "No birthdays this month"
-//        case 1:
-//            numOfBirthdaysText = "1 birthday this month"
-//        default:
-//            numOfBirthdaysText = "\(numOfBirthdays) birthdays this month"
-//        }
-//        numberOfBirthdaysLabel.text = numOfBirthdaysText
+        self.contentView.backgroundColor = UIColor(named: "Light Blue")
     }
     
     func setBackground(with index: Int) {
