@@ -36,7 +36,7 @@ class SmallCollectionViewCell: UICollectionViewCell {
     }()
     private let daysUntilBirthdayLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.italicSystemFont(ofSize: 20.0)
+        label.font = UIFont.systemFont(ofSize: 20.0)
         label.textColor = .black
         return label
     }()
@@ -81,8 +81,8 @@ class SmallCollectionViewCell: UICollectionViewCell {
             height: birthdayLabel.intrinsicContentSize.height
         )
         daysUntilBirthdayLabel.frame = CGRect(
-            x: cellView.right-daysUntilBirthdayLabel.intrinsicContentSize.width-20,
-            y: (cellView.height-daysUntilBirthdayLabel.intrinsicContentSize.height)/2,
+            x: cellView.right-daysUntilBirthdayLabel.intrinsicContentSize.width-10,
+            y: birthdayLabel.top,
             width: daysUntilBirthdayLabel.intrinsicContentSize.width,
             height: daysUntilBirthdayLabel.intrinsicContentSize.height
         )
@@ -96,7 +96,21 @@ class SmallCollectionViewCell: UICollectionViewCell {
         pictureView.image = UIImage(systemName: "person.crop.circle.fill")
         cellView.backgroundColor = .blue
     }
-    
+    func getNextBirthday(date: Date) -> Date {
+        // Get current date
+        let currentDate = Calendar.current.dateComponents([.day, .month, .year], from: Date())
+        // get birthday date
+        var birthday = Calendar.current.dateComponents([.day,.month,.year], from: date)
+        // set birthday year to current year
+        birthday.year = currentDate.year
+        // if birthday already happened this year, add 1 to year
+        let numberOfDays = Calendar.current.dateComponents([.day], from: currentDate, to: birthday).day!
+        if numberOfDays < 0 {
+            birthday.year! += 1
+        }
+        let nextBirthday = Calendar.current.date(from: birthday)
+        return nextBirthday!
+    }
     func configure(person: Person) {
         guard
             let firstName = person.firstName,
@@ -111,7 +125,9 @@ class SmallCollectionViewCell: UICollectionViewCell {
         
         birthdayLabel.text = formatter.string(from: birthday)
         
-        daysUntilBirthdayLabel.text = "\(person.daysLeft) \(person.daysLeft != 1 ? "days" : "day")"
+        let nextBirthday = getNextBirthday(date: person.birthday!)
+        let daysLeft = Calendar.current.numberOfDaysBetween(Date(), and: nextBirthday)
+        daysUntilBirthdayLabel.text = configureDaysLeftText(daysLeft: daysLeft)
         
         cellView.backgroundColor = UIColor(named: "Light Blue")
         guard let data = person.picture else {
@@ -128,5 +144,15 @@ class SmallCollectionViewCell: UICollectionViewCell {
         daysUntilBirthdayLabel.text = nil
         pictureView.image = UIImage(systemName: "person.crop.circle.fill")
         cellView.backgroundColor = .blue
+    }
+    func configureDaysLeftText(daysLeft: Int) -> String {
+        switch daysLeft {
+        case 0:
+            return "🎂 Today"
+        case 1:
+            return "🎉 Tomorrow"
+        default:
+            return "\(daysLeft) days"
+        }
     }
 }

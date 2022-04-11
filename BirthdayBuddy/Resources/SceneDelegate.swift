@@ -29,7 +29,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            window.rootViewController = WelcomeViewController()
 //        }
         window.rootViewController = TabBarViewController()
-       
         window.makeKeyAndVisible()
         self.window = window
     }
