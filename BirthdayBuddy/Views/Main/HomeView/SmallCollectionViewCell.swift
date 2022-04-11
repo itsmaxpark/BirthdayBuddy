@@ -100,7 +100,6 @@ class SmallCollectionViewCell: UICollectionViewCell {
     func configure(person: Person) {
         guard
             let firstName = person.firstName,
-//            let lastName = person.lastName,
             let birthday = person.birthday
         else {
             return
@@ -108,7 +107,7 @@ class SmallCollectionViewCell: UICollectionViewCell {
         nameLabel.text = "\(firstName) \(person.lastName ?? "")"
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd"
+        formatter.dateFormat = "MMMM d"
         
         birthdayLabel.text = formatter.string(from: birthday)
         

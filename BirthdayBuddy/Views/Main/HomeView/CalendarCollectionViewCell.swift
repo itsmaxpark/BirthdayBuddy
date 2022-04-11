@@ -52,19 +52,21 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     func configure(with date: CalendarDay, with index: Int) {
         // Reset to Default Cell
         dateLabel.layer.backgroundColor = UIColor.white.cgColor
+        dateLabel.textColor = .black
         dateLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
         dateLabel.text = date.number
         dateLabel.layer.borderColor = UIColor.white.cgColor
-        self.contentView.isHidden = true
+        self.contentView.isHidden = false
         
-        if date.isWithinDisplayedMonth {
-            self.contentView.isHidden = false
-        }
-        if isActive { // Current cell is a birthday
-            dateLabel.layer.backgroundColor = UIColor(named: "Light Blue")?.cgColor
-        }
-        if Calendar.current.isDateInToday(date.date) { // Current cell is today's date
-            dateLabel.layer.borderColor = UIColor.systemRed.cgColor
+        if !date.isWithinDisplayedMonth {
+            dateLabel.textColor = .lightGray
+        } else {
+            if isActive { // Current cell is a birthday
+                dateLabel.layer.backgroundColor = UIColor(named: "Light Blue")?.cgColor
+            }
+            if Calendar.current.isDateInToday(date.date) { // Current cell is today's date
+                dateLabel.layer.borderColor = UIColor.systemRed.cgColor
+            }
         }
     }
 }

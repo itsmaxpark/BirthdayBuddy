@@ -46,7 +46,7 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
     }()
     private let changePictureButton: UIButton = {
         let button = UIButton()
-        button.titleLabel?.font = UIFont.appFont(name: "IndieFlower", size: 24)
+        button.titleLabel?.font = UIFont.appFont(name: "Rubik", size: 20)
         button.setTitle("Change Photo", for: .normal)
         button.setTitleColor(UIColor.systemBlue, for: .normal)
         button.layer.cornerRadius = 20
