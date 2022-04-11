@@ -14,14 +14,16 @@ class LargeCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = .label
         label.textAlignment = .center
-        label.font = UIFont.appFont(name: "IndieFlower", size: 50)
+//        label.font = UIFont.appFont(name: "IndieFlower", size: 50)
+        label.font = UIFont.appFont(name: "Rubik", size: 50)
         return label
     }()
     private let previewView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray5
+        view.backgroundColor = .clear
         view.clipsToBounds = true
-        view.layer.cornerRadius = 20
+//        view.layer.cornerRadius = 10
+//        view.layer.borderColor = UIColor.label.cgColor
         return view
     }()
     private let numberOfBirthdaysLabel: UILabel = {
@@ -31,6 +33,14 @@ class LargeCollectionViewCell: UICollectionViewCell {
         label.textColor = .label
         return label
     }()
+    private let calendarCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        view.register(CalendarCollectionViewCell.self, forCellWithReuseIdentifier: CalendarCollectionViewCell.identifier)
+        return view
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,7 +49,7 @@ class LargeCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(previewView)
         contentView.layer.cornerRadius = 20
         
-        previewView.addSubview(numberOfBirthdaysLabel)
+        previewView.addSubview(calendarCollectionView)
     }
     required init?(coder: NSCoder) {
         fatalError()
@@ -59,12 +69,19 @@ class LargeCollectionViewCell: UICollectionViewCell {
             width: contentView.width-20,
             height: contentView.height-monthLabel.height-40
         )
-        numberOfBirthdaysLabel.frame = CGRect(
-            x: 20,
-            y: 5,
-            width: previewView.width-40,
-            height: 50
+//        numberOfBirthdaysLabel.frame = CGRect(
+//            x: 20,
+//            y: 5,
+//            width: previewView.width-40,
+//            height: 50
+//        )
+        calendarCollectionView.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: previewView.width,
+            height: previewView.height
         )
+        
     }
     
     override func prepareForReuse() {
@@ -73,7 +90,7 @@ class LargeCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with viewModel: CollectionViewCellViewModel) {
-        monthLabel.text = viewModel.name
+        monthLabel.text = viewModel.name.uppercased()
 //        let numOfBirthdays = CoreDataManager.shared.getBirthdaysForMonth(month: viewModel.id)
 //        var numOfBirthdaysText = ""
 //        switch numOfBirthdays {
@@ -94,5 +111,14 @@ class LargeCollectionViewCell: UICollectionViewCell {
             blue: 1,
             alpha: 1
         )
+    }
+}
+
+extension LargeCollectionViewCell {
+    func setCollectionViewDataSourceDelegate(dataSourceDelegate: UICollectionViewDataSource & UICollectionViewDelegate, forRow row: Int) {
+        calendarCollectionView.delegate = dataSourceDelegate
+        calendarCollectionView.dataSource = dataSourceDelegate
+        calendarCollectionView.tag = row
+        calendarCollectionView.reloadData()
     }
 }
