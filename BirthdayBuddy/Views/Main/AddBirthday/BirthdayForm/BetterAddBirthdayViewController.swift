@@ -23,6 +23,8 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
     var birthdaySection: Section = Section()
     lazy var imagePicker = UIImagePickerController() // initialize only once
     var chosenImage: UIImage?
+    var chosenPerson: Person?
+    var isEditModeOn: Bool = false
     struct Section {
         var isOpen: Bool = false
     }
@@ -63,6 +65,7 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         table.register(BirthdayCell.self, forCellReuseIdentifier: BirthdayCell.identifier)
         table.register(YearToggleCell.self, forCellReuseIdentifier: YearToggleCell.identifier)
         table.register(NotificationsCell.self, forCellReuseIdentifier: NotificationsCell.identifier)
+        table.register(DeleteButtonCell.self, forCellReuseIdentifier: DeleteButtonCell.identifier)
         table.sectionHeaderHeight = 0 // space between sections
         table.tableHeaderView = UIView(
             frame: CGRect(x: 0, y: 0, width: table.frame.width, height: CGFloat.leastNormalMagnitude)
@@ -90,7 +93,11 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didTapDone))
+        if isEditModeOn {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(didTapSave))
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didTapDone))
+        }
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancel))
         
         view.addSubview(pictureBackgroundView)
@@ -102,6 +109,10 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         tableView.delegate = self
         tableView.dataSource = self
         self.setupHideKeyboardOnTap()
+        
+        if isEditModeOn {
+            editModeSetup()
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -143,13 +154,33 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
             self.persons = try context.fetch(Person.fetchRequest())
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.delegate?.refreshCollectionView()
             }
         } catch {
             print("Error fetching Person")
         }
     }
+    func editModeSetup() {
+        guard let person = chosenPerson else { return }
+        // 1. Setup picture
+        guard let data = person.picture else {
+            pictureView.image = UIImage(systemName: "person.crop.circle.fill")
+            return
+        }
+        pictureView.image = UIImage(data: data)
+        // 2. Setup Text Fields
+        textFieldViewModels[0].text = person.firstName
+        textFieldViewModels[1].text = person.lastName
+        // 3. Setup Birthday Cell
+        self.birthdayText = ""
+        // 4. Setup DatePickerCell
+//        birthdaySection.isOpen = true
+    }
     
 // MARK: Selectors
+    @objc func didTapSave() {
+        
+    }
     @objc func didTapDone() {
         // Create new person object
         guard let field = textFieldViewModels[0].text, !field.isEmpty else {
@@ -159,6 +190,7 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         let person = Person(context: self.context)
         person.firstName = textFieldViewModels[0].text
         person.lastName = textFieldViewModels[1].text
+        print("Birthday date before save: \(birthdayDate)")
         person.birthday = birthdayDate
         
         let nextBirthday = getNextBirthday(date: person.birthday!)
@@ -177,14 +209,13 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
             print("Error saving to CoreData")
         }
         self.fetchPerson()
-        self.delegate?.refreshCollectionView()
+//        self.delegate?.refreshCollectionView()
         if self.isNotificationSwitchOn {
             NotificationManager.shared.createBirthdayNotification(person: person)
         } else {
             print("No notifications created")
         }
         self.dismiss(animated: true)
-        
         // Repopulate persons array
     }
     @objc func didTapCancel() {
@@ -216,6 +247,9 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
 // MARK: TableView Methods
 extension BetterAddBirthdayViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
+        if isEditModeOn {
+            return 4
+        }
         return 3
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -263,6 +297,10 @@ extension BetterAddBirthdayViewController: UITableViewDelegate, UITableViewDataS
                     ) as? DatePickerCell else {
                         fatalError()
                     }
+                    if isEditModeOn {
+                        guard let date = chosenPerson?.birthday else { fatalError() }
+                        cell.setupEditMode(date: date)
+                    }
                     cell.customDelegate = self
                     cell.isYearShowing = self.isCalendarSwitchOn
                     return cell
@@ -286,11 +324,20 @@ extension BetterAddBirthdayViewController: UITableViewDelegate, UITableViewDataS
                 cell.configure(date: birthdayText)
                 return cell
             }
-        default:
+        case 2: // Notifications Cell
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: NotificationsCell.identifier,
                 for: indexPath
             ) as? NotificationsCell else {
+                fatalError()
+            }
+            cell.delegate = self
+            return cell
+        default:
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: DeleteButtonCell.identifier,
+                for: indexPath
+            ) as? DeleteButtonCell else {
                 fatalError()
             }
             cell.delegate = self
@@ -380,6 +427,7 @@ extension BetterAddBirthdayViewController: TextFieldCellDelegate {
         }
     }
 }
+// MARK: YearToggleDelegate
 extension BetterAddBirthdayViewController: YearToggleCellDelegate {
     func switchChanged(cell: YearToggleCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
@@ -389,6 +437,7 @@ extension BetterAddBirthdayViewController: YearToggleCellDelegate {
         tableView.reloadData()
     }
 }
+// MARK: NotificationsCellDelegate
 extension BetterAddBirthdayViewController: NotificationsCellDelegate {
     func switchChanged(cell: NotificationsCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
@@ -398,3 +447,34 @@ extension BetterAddBirthdayViewController: NotificationsCellDelegate {
         tableView.reloadData()
     }
 }
+// MARK: DeleteButtonDelegate
+extension BetterAddBirthdayViewController: DeleteButtonCellDelegate {
+    func didTapDelete(cell: DeleteButtonCell) {
+        guard let person = self.chosenPerson else { return }
+        // create alert
+        
+        let message = "Remove \(person.firstName ?? "") \(person.lastName ?? "") from Birthday Buddy"
+        let alert = UIAlertController(title: "Delete", message: message, preferredStyle: .alert)
+        let deleteButton = UIAlertAction(title: "Delete", style: .destructive) { action in
+            // remove person
+            self.context.delete(person)
+            // save data
+            do {
+                try self.context.save()
+            } catch {
+                print("Error deleting person")
+            }
+            // refetch data
+            self.fetchPerson()
+            print("Birthday was deleted")
+            self.dismiss(animated: true)
+        }
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(deleteButton)
+        alert.addAction(cancelButton)
+        
+        self.present(alert, animated: true)
+    }
+}
+

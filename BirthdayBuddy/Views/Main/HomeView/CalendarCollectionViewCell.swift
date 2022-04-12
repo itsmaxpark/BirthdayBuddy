@@ -33,6 +33,8 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 10
         contentView.layer.backgroundColor = UIColor.white.cgColor
         contentView.addSubview(dateLabel)
+        contentView.clipsToBounds = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     required init?(coder: NSCoder) {

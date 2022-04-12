@@ -13,6 +13,7 @@
 		505A97F7280505AF00951937 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A97F6280505AF00951937 /* NotificationManager.swift */; };
 		505A97FD2805291300951937 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A97FC2805291300951937 /* Person+CoreDataProperties.swift */; };
 		505A97FF28052FDF00951937 /* NotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A97FE28052FDF00951937 /* NotificationsCell.swift */; };
+		505A9801280551BB00951937 /* DeleteButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A9800280551BB00951937 /* DeleteButtonCell.swift */; };
 		5066BA9627EA89DF008873BB /* GoogleSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5066BA9527EA89DF008873BB /* GoogleSignInHelper.swift */; };
 		5066BA9827ED35EC008873BB /* FlipPresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5066BA9727ED35EC008873BB /* FlipPresentAnimationController.swift */; };
 		5066BA9A27ED3748008873BB /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5066BA9927ED3748008873BB /* AnimationHelper.swift */; };
@@ -86,6 +87,7 @@
 		505A97F6280505AF00951937 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		505A97FC2805291300951937 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Person+CoreDataProperties.swift"; path = "/Users/max/Desktop/App Portfolio/BirthdayBuddy/BirthdayBuddy/Models/Person/Person+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		505A97FE28052FDF00951937 /* NotificationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCell.swift; sourceTree = "<group>"; };
+		505A9800280551BB00951937 /* DeleteButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButtonCell.swift; sourceTree = "<group>"; };
 		5066BA9527EA89DF008873BB /* GoogleSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInHelper.swift; sourceTree = "<group>"; };
 		5066BA9727ED35EC008873BB /* FlipPresentAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipPresentAnimationController.swift; sourceTree = "<group>"; };
 		5066BA9927ED3748008873BB /* AnimationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationHelper.swift; sourceTree = "<group>"; };
@@ -334,8 +336,8 @@
 				506C5A9227FFA2150011A5B7 /* DatePickerCell.swift */,
 				506C5A9627FFB2000011A5B7 /* BirthdayCell.swift */,
 				506C5A9827FFB3A70011A5B7 /* YearToggleCell.swift */,
-				506C5A9E28010A470011A5B7 /* CropViewController.swift */,
 				505A97FE28052FDF00951937 /* NotificationsCell.swift */,
+				505A9800280551BB00951937 /* DeleteButtonCell.swift */,
 			);
 			path = BirthdayForm;
 			sourceTree = "<group>";
@@ -394,6 +396,7 @@
 		50DAC1AD27DBE6DD006098D6 /* Archives */ = {
 			isa = PBXGroup;
 			children = (
+				506C5A9E28010A470011A5B7 /* CropViewController.swift */,
 				5068B65F27F3BA1C00F1EEE5 /* CustomGradientLayer.swift */,
 				506C5A8127FAA09B0011A5B7 /* OldHomeView */,
 				5068B64F27F2B12E00F1EEE5 /* CustomTabBar.swift */,
@@ -540,6 +543,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				505A9801280551BB00951937 /* DeleteButtonCell.swift in Sources */,
 				5068B66427F7EA2A00F1EEE5 /* CollectionViewCellDetailViewController.swift in Sources */,
 				5068B66227F6D38D00F1EEE5 /* CustomCollectionViewFlowLayout.swift in Sources */,
 				5066BA9A27ED3748008873BB /* AnimationHelper.swift in Sources */,

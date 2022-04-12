@@ -32,7 +32,6 @@ class DatePickerCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
             reloadDate()
         }
     }
-    
     private let datePicker: UIPickerView = {
         let picker = UIPickerView()
         picker.translatesAutoresizingMaskIntoConstraints = false
@@ -137,6 +136,7 @@ class DatePickerCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
         }
     }
     func convertToDate(_ pickerView: UIPickerView) {
+        print("Convert TO Date")
         let comps = Calendar.current.dateComponents([.day, .month, .year], from: Date())
         let month = pickerView.selectedRow(inComponent: 0)+1
         let day = pickerView.selectedRow(inComponent: 1)+1
@@ -153,8 +153,21 @@ class DatePickerCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MM/dd"
             let date = dateFormatter.date(from: text)
+            var dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date!)
+            dateComponents.year = 1000
+            let newDate = Calendar.current.date(from: dateComponents)
+            print("New date: \(newDate!)")
             customDelegate?.pickerViewSetDate(date: date!)
             customDelegate?.pickerViewSetText(value: text)
         }
+    }
+    func setupEditMode(date: Date) {
+        print("Setup edit mode")
+        let components = Calendar.current.dateComponents([.day, .month, .year], from: date)
+        guard let month = components.month else { return }
+        guard let day = components.day else { return }
+        datePicker.selectRow(month-1, inComponent: 0, animated: true)
+        datePicker.selectRow(day-1, inComponent: 1, animated: true)
+        convertToDate(datePicker)
     }
 }

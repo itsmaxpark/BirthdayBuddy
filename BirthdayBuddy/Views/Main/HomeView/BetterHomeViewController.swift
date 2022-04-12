@@ -31,7 +31,6 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         CollectionViewCellViewModel(name: "December", id: 12),
     ]
     
-    var calendarViewModels: [[[UIColor]]] = [[[]]]
     private let calendar = Calendar(identifier: .gregorian)
     private lazy var dateFormatter: DateFormatter = {
       let dateFormatter = DateFormatter()
@@ -163,32 +162,16 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 { // SmallCollectionViewCell
-            // select person
+            // Present AddBirthdayViewController in Edit Mode
             let person = self.persons![indexPath.row]
-            // create alert
-            let message = "Remove \(person.firstName ?? "") \(person.lastName ?? "") from Birthday Buddy"
-            let alert = UIAlertController(title: "Delete", message: message, preferredStyle: .alert)
-            let deleteButton = UIAlertAction(title: "Delete", style: .destructive) { action in
-                // remove person
-                self.context.delete(person)
-                // save data
-                do {
-                    try self.context.save()
-                } catch {
-                    print("Error deleting person")
-                }
-                // refetch data
-                self.fetchPerson()
-            }
-            let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            
-            alert.addAction(deleteButton)
-            alert.addAction(cancelButton)
-            
-            self.present(alert, animated: true)
+            let vc = BetterAddBirthdayViewController()
+            vc.delegate = self
+            vc.chosenPerson = person
+            vc.isEditModeOn = true
+            let nav = UINavigationController(rootViewController: vc)
+            present(nav, animated: true)
         }
     }
-    
     
     func createCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
@@ -282,14 +265,14 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         return Calendar.current.component(.year, from: Date())
     }
 }
+// MARK: Flow Layout
 extension BetterHomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.width/7, height: collectionView.height/6)
     }
 }
-
+// MARK: CalendarSetup
 extension BetterHomeViewController {
-    
     enum CalendarDataError: Error {
         case metadataGeneration
     }
@@ -410,9 +393,15 @@ extension BetterHomeViewController {
         return false
     }
 }
-
+// MARK: Selectors
 extension BetterHomeViewController {
     @objc func didTapBell() {
         NotificationManager.shared.getAllNotifications()
+    }
+}
+
+extension BetterHomeViewController: AddBirthdayViewControllerDelegate {
+    func refreshCollectionView() {
+        self.fetchPerson()
     }
 }

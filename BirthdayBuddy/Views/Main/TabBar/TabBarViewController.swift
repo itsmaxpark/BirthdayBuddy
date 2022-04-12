@@ -120,6 +120,7 @@ extension TabBarViewController: AddBirthdayViewControllerDelegate {
             print(nav.presentedViewController as Any)
             return
         }
+    
         vc.fetchPerson()
         vc.collectionView.reloadData()
     }
