@@ -126,7 +126,8 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
             } else {
                 //Small Cells
                 guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: SmallCollectionViewCell.identifier, for: indexPath
+                    withReuseIdentifier: SmallCollectionViewCell.identifier,
+                    for: indexPath
                 ) as? SmallCollectionViewCell else {
                     fatalError()
                 }
@@ -268,7 +269,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
 // MARK: Flow Layout
 extension BetterHomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.width/7, height: collectionView.height/6)
+        return CGSize(width: floor(collectionView.bounds.width/7), height: collectionView.height/6)
     }
 }
 // MARK: CalendarSetup

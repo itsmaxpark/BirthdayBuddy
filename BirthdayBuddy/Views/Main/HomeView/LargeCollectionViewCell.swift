@@ -29,6 +29,7 @@ class LargeCollectionViewCell: UICollectionViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(CalendarCollectionViewCell.self, forCellWithReuseIdentifier: CalendarCollectionViewCell.identifier)
         return view
@@ -128,7 +129,7 @@ class LargeCollectionViewCell: UICollectionViewCell {
         calendarCollectionView.frame = CGRect(
             x: 0,
             y: 20,
-            width: previewView.width,
+            width: floor(previewView.width/7)*7,
             height: previewView.height-20
         )
         sundayLabel.frame = CGRect(

@@ -20,7 +20,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         label.textAlignment = .center
         label.layer.borderWidth = 2
         label.layer.cornerRadius = 10
-        
+        label.layer.masksToBounds = true
         return label
     }()
     
@@ -28,13 +28,8 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         backgroundColor = .white
-        contentView.layer.borderColor = UIColor.white.cgColor
-        contentView.layer.borderWidth = CGFloat(2)
-        contentView.layer.cornerRadius = 10
         contentView.layer.backgroundColor = UIColor.white.cgColor
         contentView.addSubview(dateLabel)
-        contentView.clipsToBounds = false
-        contentView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     required init?(coder: NSCoder) {
@@ -58,7 +53,6 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         dateLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
         dateLabel.text = date.number
         dateLabel.layer.borderColor = UIColor.white.cgColor
-        self.contentView.isHidden = false
         
         if !date.isWithinDisplayedMonth {
             dateLabel.textColor = .lightGray
