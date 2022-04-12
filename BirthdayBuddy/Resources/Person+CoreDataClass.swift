@@ -11,5 +11,13 @@ import CoreData
 
 @objc(Person)
 public class Person: NSManagedObject {
-
+    func getDetails() {
+        print("""
+              Created New Person Object:
+              \(String(describing: self.firstName)) \(self.lastName ?? "")
+              \(String(describing: self.birthday?.description))
+              \(String(describing: self.id))
+              \(self.daysLeft)
+              """)
+    }
 }

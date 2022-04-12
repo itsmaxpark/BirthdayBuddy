@@ -18,7 +18,8 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
     var persons: [Person]?
     var birthdayText: String = ""
     var birthdayDate: Date = Date()
-    var isSwitchOn: Bool = false
+    var isCalendarSwitchOn: Bool = false
+    var isNotificationSwitchOn: Bool = true
     var birthdaySection: Section = Section()
     lazy var imagePicker = UIImagePickerController() // initialize only once
     var chosenImage: UIImage?
@@ -61,6 +62,7 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         table.register(DatePickerCell.self, forCellReuseIdentifier: DatePickerCell.identifier)
         table.register(BirthdayCell.self, forCellReuseIdentifier: BirthdayCell.identifier)
         table.register(YearToggleCell.self, forCellReuseIdentifier: YearToggleCell.identifier)
+        table.register(NotificationsCell.self, forCellReuseIdentifier: NotificationsCell.identifier)
         table.sectionHeaderHeight = 0 // space between sections
         table.tableHeaderView = UIView(
             frame: CGRect(x: 0, y: 0, width: table.frame.width, height: CGFloat.leastNormalMagnitude)
@@ -149,7 +151,6 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
     
 // MARK: Selectors
     @objc func didTapDone() {
-        // save to core date
         // Create new person object
         guard let field = textFieldViewModels[0].text, !field.isEmpty else {
             alertFirstName()
@@ -159,21 +160,29 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         person.firstName = textFieldViewModels[0].text
         person.lastName = textFieldViewModels[1].text
         person.birthday = birthdayDate
+        
         let nextBirthday = getNextBirthday(date: person.birthday!)
         let daysLeft = Calendar.current.numberOfDaysBetween(Date(), and: nextBirthday)
         person.daysLeft = Int64(daysLeft)
+        
         let imageData = self.chosenImage?.jpegData(compressionQuality: 1.0)
         person.picture = imageData
-        // Save object to CoreData
         
+        person.id = UUID()
+        // Save object to CoreData
         do {
             try self.context.save()
+            print(person.getDetails())
         } catch {
             print("Error saving to CoreData")
         }
         self.fetchPerson()
         self.delegate?.refreshCollectionView()
-        NotificationManager.shared.createBirthdayNotification(person: person)
+        if self.isNotificationSwitchOn {
+            NotificationManager.shared.createBirthdayNotification(person: person)
+        } else {
+            print("No notifications created")
+        }
         self.dismiss(animated: true)
         
         // Repopulate persons array
@@ -207,18 +216,20 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
 // MARK: TableView Methods
 extension BetterAddBirthdayViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return 2
-        default:
+        case 1:
             if birthdaySection.isOpen {
                 return 3 // 3 table cells are needed to account for the title section
             } else {
                 return 1
             }
+        default:
+            return 1
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -253,7 +264,7 @@ extension BetterAddBirthdayViewController: UITableViewDelegate, UITableViewDataS
                         fatalError()
                     }
                     cell.customDelegate = self
-                    cell.isYearShowing = self.isSwitchOn
+                    cell.isYearShowing = self.isCalendarSwitchOn
                     return cell
                 default: // YearToggleCell
                     guard let cell = tableView.dequeueReusableCell(
@@ -276,7 +287,14 @@ extension BetterAddBirthdayViewController: UITableViewDelegate, UITableViewDataS
                 return cell
             }
         default:
-            return UITableViewCell()
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: NotificationsCell.identifier,
+                for: indexPath
+            ) as? NotificationsCell else {
+                fatalError()
+            }
+            cell.delegate = self
+            return cell
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -367,7 +385,16 @@ extension BetterAddBirthdayViewController: YearToggleCellDelegate {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         guard let cell = tableView.cellForRow(at: indexPath) as? YearToggleCell else { fatalError() }
         cell.isOn.toggle()
-        self.isSwitchOn.toggle()
+        self.isCalendarSwitchOn.toggle()
+        tableView.reloadData()
+    }
+}
+extension BetterAddBirthdayViewController: NotificationsCellDelegate {
+    func switchChanged(cell: NotificationsCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        guard let cell = tableView.cellForRow(at: indexPath) as? NotificationsCell else { fatalError() }
+        cell.isOn.toggle()
+        self.isNotificationSwitchOn.toggle()
         tableView.reloadData()
     }
 }

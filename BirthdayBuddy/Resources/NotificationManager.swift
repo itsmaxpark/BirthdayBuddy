@@ -32,15 +32,15 @@ class NotificationManager: ObservableObject {
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         
         // 4. Create a request
-        let uuidString = UUID().uuidString
+        guard let uuidString = person.id?.uuidString else { return }
         let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
-        
         // 5. Register the request
         center.add(request) { error in
             if let error = error {
                 print("Error reistering request with Notification Center: \(error)")
             } else {
                 print("NotificationManager: New Notification Created")
+                print("Notifcation with id\(uuidString)")
             }
         }
     }
@@ -71,9 +71,10 @@ class NotificationManager: ObservableObject {
     func getAllNotifications() {
         let center = UNUserNotificationCenter.current()
         center.getPendingNotificationRequests { requests in
-            for request in requests {
-                print(request.trigger)
-            }
+            print("There are \(requests.count) active notifications")
+//            for request in requests {
+//                print(request.trigger as Any)
+//            }
         }
     }
 }

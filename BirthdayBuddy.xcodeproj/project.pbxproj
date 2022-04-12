@@ -11,6 +11,8 @@
 		5056AF2127D6B803008601FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5056AF2027D6B803008601FF /* SceneDelegate.swift */; };
 		5056AF2827D6B803008601FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5056AF2727D6B803008601FF /* Assets.xcassets */; };
 		505A97F7280505AF00951937 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A97F6280505AF00951937 /* NotificationManager.swift */; };
+		505A97FD2805291300951937 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A97FC2805291300951937 /* Person+CoreDataProperties.swift */; };
+		505A97FF28052FDF00951937 /* NotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A97FE28052FDF00951937 /* NotificationsCell.swift */; };
 		5066BA9627EA89DF008873BB /* GoogleSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5066BA9527EA89DF008873BB /* GoogleSignInHelper.swift */; };
 		5066BA9827ED35EC008873BB /* FlipPresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5066BA9727ED35EC008873BB /* FlipPresentAnimationController.swift */; };
 		5066BA9A27ED3748008873BB /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5066BA9927ED3748008873BB /* AnimationHelper.swift */; };
@@ -33,7 +35,6 @@
 		506C5A8027FA99D90011A5B7 /* SmallCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A7F27FA99D90011A5B7 /* SmallCollectionViewCell.swift */; };
 		506C5A8327FAA1240011A5B7 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8227FAA1240011A5B7 /* SectionHeaderView.swift */; };
 		506C5A8627FAC4460011A5B7 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8527FAC4460011A5B7 /* Person+CoreDataClass.swift */; };
-		506C5A8727FAC4460011A5B7 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8427FAC4460011A5B7 /* Person+CoreDataProperties.swift */; };
 		506C5A8927FBE55E0011A5B7 /* AddBirthdayBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8827FBE55E0011A5B7 /* AddBirthdayBottomSheetViewController.swift */; };
 		506C5A8B27FBED5C0011A5B7 /* AddBirthdayBottomSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8A27FBED5C0011A5B7 /* AddBirthdayBottomSheetTableViewCell.swift */; };
 		506C5A8D27FBF1810011A5B7 /* AddBirthdayBottomSheetTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8C27FBF1810011A5B7 /* AddBirthdayBottomSheetTableViewCellViewModel.swift */; };
@@ -83,6 +84,8 @@
 		5056AF2727D6B803008601FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5056AF2C27D6B803008601FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		505A97F6280505AF00951937 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		505A97FC2805291300951937 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Person+CoreDataProperties.swift"; path = "/Users/max/Desktop/App Portfolio/BirthdayBuddy/BirthdayBuddy/Models/Person/Person+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		505A97FE28052FDF00951937 /* NotificationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCell.swift; sourceTree = "<group>"; };
 		5066BA9527EA89DF008873BB /* GoogleSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInHelper.swift; sourceTree = "<group>"; };
 		5066BA9727ED35EC008873BB /* FlipPresentAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipPresentAnimationController.swift; sourceTree = "<group>"; };
 		5066BA9927ED3748008873BB /* AnimationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationHelper.swift; sourceTree = "<group>"; };
@@ -104,7 +107,6 @@
 		506C5A7D27FA90B10011A5B7 /* LargeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeCollectionViewCell.swift; sourceTree = "<group>"; };
 		506C5A7F27FA99D90011A5B7 /* SmallCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCollectionViewCell.swift; sourceTree = "<group>"; };
 		506C5A8227FAA1240011A5B7 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
-		506C5A8427FAC4460011A5B7 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Person+CoreDataProperties.swift"; path = "/Users/max/Desktop/App Portfolio/BirthdayBuddy/BirthdayBuddy/Resources/Person+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		506C5A8527FAC4460011A5B7 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Person+CoreDataClass.swift"; path = "/Users/max/Desktop/App Portfolio/BirthdayBuddy/BirthdayBuddy/Resources/Person+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		506C5A8827FBE55E0011A5B7 /* AddBirthdayBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBirthdayBottomSheetViewController.swift; sourceTree = "<group>"; };
 		506C5A8A27FBED5C0011A5B7 /* AddBirthdayBottomSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBirthdayBottomSheetTableViewCell.swift; sourceTree = "<group>"; };
@@ -290,7 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				506C5A8527FAC4460011A5B7 /* Person+CoreDataClass.swift */,
-				506C5A8427FAC4460011A5B7 /* Person+CoreDataProperties.swift */,
+				505A97FC2805291300951937 /* Person+CoreDataProperties.swift */,
 			);
 			path = Person;
 			sourceTree = "<group>";
@@ -333,6 +335,7 @@
 				506C5A9627FFB2000011A5B7 /* BirthdayCell.swift */,
 				506C5A9827FFB3A70011A5B7 /* YearToggleCell.swift */,
 				506C5A9E28010A470011A5B7 /* CropViewController.swift */,
+				505A97FE28052FDF00951937 /* NotificationsCell.swift */,
 			);
 			path = BirthdayForm;
 			sourceTree = "<group>";
@@ -542,12 +545,12 @@
 				5066BA9A27ED3748008873BB /* AnimationHelper.swift in Sources */,
 				509A6E262802B78000655DD9 /* CoreDataManager.swift in Sources */,
 				5093F99627D6EB4800378967 /* WelcomeViewController.swift in Sources */,
-				506C5A8727FAC4460011A5B7 /* Person+CoreDataProperties.swift in Sources */,
 				5066BA9627EA89DF008873BB /* GoogleSignInHelper.swift in Sources */,
 				5093F99D27D6ED6400378967 /* AddBirthdayViewController.swift in Sources */,
 				509A6E2C2803C35B00655DD9 /* CalendarDay.swift in Sources */,
 				506C5A8F27FBFABD0011A5B7 /* BetterAddBirthdayViewController.swift in Sources */,
 				509A6E2E2803C45900655DD9 /* MonthMetadata.swift in Sources */,
+				505A97FD2805291300951937 /* Person+CoreDataProperties.swift in Sources */,
 				506C5A9D2800E84D0011A5B7 /* TextFieldCellViewModel.swift in Sources */,
 				5068B66A27F8F71C00F1EEE5 /* CustomAnimationController.swift in Sources */,
 				506C5A7C27FA889C0011A5B7 /* BetterHomeViewController.swift in Sources */,
@@ -562,6 +565,7 @@
 				505A97F7280505AF00951937 /* NotificationManager.swift in Sources */,
 				506C5A8027FA99D90011A5B7 /* SmallCollectionViewCell.swift in Sources */,
 				5056AF1F27D6B803008601FF /* AppDelegate.swift in Sources */,
+				505A97FF28052FDF00951937 /* NotificationsCell.swift in Sources */,
 				506C5A9127FF7C090011A5B7 /* TextFieldCell.swift in Sources */,
 				5093F99827D6ED3900378967 /* TabBarViewController.swift in Sources */,
 				5068B66827F82A4F00F1EEE5 /* DismissAnimator.swift in Sources */,
