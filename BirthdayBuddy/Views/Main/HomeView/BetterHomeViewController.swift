@@ -46,7 +46,9 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositionalLayout())
         collectionView.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-        collectionView.backgroundColor = .systemGray5
+        collectionView.backgroundColor = .tertiarySystemBackground
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bell.fill"), style: .plain, target: self, action: #selector(didTapBell))
         view.addSubview(collectionView)
         
         collectionView.delegate = self
@@ -56,9 +58,9 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         collectionView.register(LargeCollectionViewCell.self, forCellWithReuseIdentifier: LargeCollectionViewCell.identifier)
         collectionView.register(SmallCollectionViewCell.self, forCellWithReuseIdentifier: SmallCollectionViewCell.identifier)
         
-        fetchPerson()
         self.viewModels.rotate(array: &self.viewModels, k: -(getCurrentMonth()-1)) // rotate viewModels so that first month is current month
         
+        fetchPerson()
         collectionView.reloadData()
         
     }
@@ -409,3 +411,8 @@ extension BetterHomeViewController {
     }
 }
 
+extension BetterHomeViewController {
+    @objc func didTapBell() {
+        NotificationManager.shared.getAllNotifications()
+    }
+}

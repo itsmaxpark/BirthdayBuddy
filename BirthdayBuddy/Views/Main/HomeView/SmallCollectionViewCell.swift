@@ -19,25 +19,32 @@ class SmallCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 30
+        imageView.layer.cornerRadius = 15
         return imageView
+    }()
+    private let infoView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 0
+        return view
     }()
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 25.0)
+        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
         label.textColor = .black
         return label
     }()
     private let birthdayLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20.0)
-        label.textColor = .black
+        label.textColor = .darkGray
         return label
     }()
     private let daysUntilBirthdayLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20.0)
-        label.textColor = .black
+        label.textColor = .darkGray
         return label
     }()
     
@@ -46,6 +53,7 @@ class SmallCollectionViewCell: UICollectionViewCell {
         
         addSubview(cellView)
         cellView.addSubview(pictureView)
+        cellView.addSubview(infoView)
         cellView.addSubview(nameLabel)
         cellView.addSubview(birthdayLabel)
         cellView.addSubview(daysUntilBirthdayLabel)
@@ -68,10 +76,16 @@ class SmallCollectionViewCell: UICollectionViewCell {
             width: 60,
             height: 60
         )
+        infoView.frame = CGRect(
+            x: pictureView.right+5,
+            y: 5,
+            width: contentView.width-pictureView.width-20,
+            height: contentView.height-10
+        )
         nameLabel.frame = CGRect(
             x: pictureView.right+10,
             y: 10,
-            width: 200,
+            width: cellView.width-pictureView.right-40 ,
             height: nameLabel.intrinsicContentSize.height
         )
         birthdayLabel.frame = CGRect(
@@ -112,6 +126,11 @@ class SmallCollectionViewCell: UICollectionViewCell {
         return nextBirthday!
     }
     func configure(person: Person) {
+        
+        cellView.backgroundColor = UIColor(named: "Light Blue")
+        infoView.backgroundColor = .clear
+        infoView.layer.cornerRadius = 20
+        
         guard
             let firstName = person.firstName,
             let birthday = person.birthday
@@ -122,19 +141,16 @@ class SmallCollectionViewCell: UICollectionViewCell {
         
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM d"
-        
         birthdayLabel.text = formatter.string(from: birthday)
         
         let nextBirthday = getNextBirthday(date: person.birthday!)
         let daysLeft = Calendar.current.numberOfDaysBetween(Date(), and: nextBirthday)
         daysUntilBirthdayLabel.text = configureDaysLeftText(daysLeft: daysLeft)
         
-        cellView.backgroundColor = UIColor(named: "Light Blue")
         guard let data = person.picture else {
             pictureView.image = UIImage(systemName: "person.crop.circle.fill")
             return
         }
-        
         pictureView.image = UIImage(data: data)
     }
     

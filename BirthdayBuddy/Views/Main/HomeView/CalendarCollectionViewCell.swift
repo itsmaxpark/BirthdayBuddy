@@ -65,7 +65,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
                 dateLabel.layer.backgroundColor = UIColor(named: "Light Blue")?.cgColor
             }
             if Calendar.current.isDateInToday(date.date) { // Current cell is today's date
-                dateLabel.layer.borderColor = UIColor.systemRed.cgColor
+                dateLabel.layer.borderColor = UIColor.black.cgColor
             }
         }
     }

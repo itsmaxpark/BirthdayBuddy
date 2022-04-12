@@ -10,6 +10,7 @@
 		5056AF1F27D6B803008601FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5056AF1E27D6B803008601FF /* AppDelegate.swift */; };
 		5056AF2127D6B803008601FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5056AF2027D6B803008601FF /* SceneDelegate.swift */; };
 		5056AF2827D6B803008601FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5056AF2727D6B803008601FF /* Assets.xcassets */; };
+		505A97F7280505AF00951937 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A97F6280505AF00951937 /* NotificationManager.swift */; };
 		5066BA9627EA89DF008873BB /* GoogleSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5066BA9527EA89DF008873BB /* GoogleSignInHelper.swift */; };
 		5066BA9827ED35EC008873BB /* FlipPresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5066BA9727ED35EC008873BB /* FlipPresentAnimationController.swift */; };
 		5066BA9A27ED3748008873BB /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5066BA9927ED3748008873BB /* AnimationHelper.swift */; };
@@ -81,6 +82,7 @@
 		5056AF2027D6B803008601FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5056AF2727D6B803008601FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5056AF2C27D6B803008601FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		505A97F6280505AF00951937 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		5066BA9527EA89DF008873BB /* GoogleSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInHelper.swift; sourceTree = "<group>"; };
 		5066BA9727ED35EC008873BB /* FlipPresentAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipPresentAnimationController.swift; sourceTree = "<group>"; };
 		5066BA9927ED3748008873BB /* AnimationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationHelper.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				50DAC19C27DAE342006098D6 /* DatabaseManager.swift */,
 				5093F9A727D71B2400378967 /* Extensions.swift */,
 				5093F9A027D7123200378967 /* Fonts */,
+				505A97F6280505AF00951937 /* NotificationManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -556,6 +559,7 @@
 				506C5A9B27FFC0A60011A5B7 /* CustomPickerDataModel.swift in Sources */,
 				50DAC1A427DAEEB6006098D6 /* AppleSignInHelper.swift in Sources */,
 				5068B66627F829A200F1EEE5 /* PresentAnimator.swift in Sources */,
+				505A97F7280505AF00951937 /* NotificationManager.swift in Sources */,
 				506C5A8027FA99D90011A5B7 /* SmallCollectionViewCell.swift in Sources */,
 				5056AF1F27D6B803008601FF /* AppDelegate.swift in Sources */,
 				506C5A9127FF7C090011A5B7 /* TextFieldCell.swift in Sources */,

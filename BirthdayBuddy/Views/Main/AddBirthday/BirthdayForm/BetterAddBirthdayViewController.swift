@@ -173,6 +173,7 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         }
         self.fetchPerson()
         self.delegate?.refreshCollectionView()
+        NotificationManager.shared.createBirthdayNotification(person: person)
         self.dismiss(animated: true)
         
         // Repopulate persons array
