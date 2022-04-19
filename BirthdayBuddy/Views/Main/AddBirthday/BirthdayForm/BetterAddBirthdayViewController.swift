@@ -173,20 +173,28 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         }
     }
     func editModeSetup() {
-        guard let person = chosenPerson else { return }
-        // 1. Setup picture
-        guard let data = person.picture else {
-            pictureView.image = UIImage(systemName: "person.crop.circle.fill")
+        print("EditModeSetup")
+        guard let person = chosenPerson else {
+            print("Failed to get person")
             return
         }
-        pictureView.image = UIImage(data: data)
+        print(person)
+        // 1. Setup picture
+        let data = person.picture
+        if data == nil {
+            pictureView.image = UIImage(systemName: "person.crop.circle.fill")
+        } else {
+            pictureView.image = UIImage(data: data!)
+        }
         // 2. Setup Text Fields
         textFieldViewModels[0].text = person.firstName
         textFieldViewModels[1].text = person.lastName
         // 3. Setup Birthday Cell
-        self.birthdayText = ""
+//        self.birthdayText = ""
+        birthdayDate = person.birthday
         // 4. Setup DatePickerCell
 //        birthdaySection.isOpen = true
+        print("EditModeSetup End")
     }
     
 // MARK: Selectors
@@ -310,11 +318,7 @@ extension BetterAddBirthdayViewController: UITableViewDelegate, UITableViewDataS
                     ) as? DatePickerCell else {
                         fatalError()
                     }
-                    if isEditModeOn {
-                        guard let date = chosenPerson?.birthday else { fatalError() }
-                        cell.setupEditMode(date: date)
-                    }
-                    print("Inside birthday section is open")
+                    print("Inside birthday section is open\n")
                     cell.customDelegate = self
                     cell.showYear = isCalendarSwitchOn
                     cell.setupDatePicker(date: self.birthdayDate ?? Date())

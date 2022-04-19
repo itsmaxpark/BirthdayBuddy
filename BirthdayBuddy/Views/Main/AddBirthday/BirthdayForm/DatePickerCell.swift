@@ -135,11 +135,12 @@ class DatePickerCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
         guard let day = components.day else { return }
         datePicker.selectRow(month-1, inComponent: 0, animated: true)
         datePicker.selectRow(day-1, inComponent: 1, animated: true)
-        refreshBirthdayText()
+//        refreshBirthdayText()
     }
     func setupDatePicker(date: Date) {
         print("Setup Date Picker")
         self.initialDate = date
+        print(initialDate)
         let components = Calendar.current.dateComponents([.day, .month, .year], from: date)
         guard let month = components.month else { return }
         guard let day = components.day else { return }
@@ -158,13 +159,14 @@ class DatePickerCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
         var year = Calendar.current.component(.year, from: .now)
         let month = datePicker.selectedRow(inComponent: 0)+1
         let day = datePicker.selectedRow(inComponent: 1)+1
+        var components = Calendar.current.dateComponents([.day, .month, .year], from: initialDate!)
+        components.month = month
+        components.day = day
         if showYear {
             year -= datePicker.selectedRow(inComponent: 2)
+            components.year = year
         }
-        let text = showYear ? "\(month)/\(day)/\(year)" : "\(month)/\(day)"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = showYear ? "MM/dd/yyyy" : "MM/dd"
-        initialDate = dateFormatter.date(from: text)
+        initialDate = Calendar.current.date(from: components)
         customDelegate?.pickerViewSetDate(date: initialDate!)
     }
 }
