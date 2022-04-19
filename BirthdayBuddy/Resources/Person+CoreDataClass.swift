@@ -13,7 +13,7 @@ import CoreData
 public class Person: NSManagedObject {
     func getDetails() {
         print("""
-              Created New Person Object:
+              Person Object Details:
               \(String(describing: self.firstName)) \(self.lastName ?? "")
               \(String(describing: self.birthday?.description))
               \(String(describing: self.id))

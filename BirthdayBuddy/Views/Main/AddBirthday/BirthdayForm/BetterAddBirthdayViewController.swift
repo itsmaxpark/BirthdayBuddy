@@ -186,20 +186,54 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         } else {
             pictureView.image = UIImage(data: data!)
         }
+        chosenImage = pictureView.image
         // 2. Setup Text Fields
         textFieldViewModels[0].text = person.firstName
         textFieldViewModels[1].text = person.lastName
         // 3. Setup Birthday Cell
-//        self.birthdayText = ""
         birthdayDate = person.birthday
         // 4. Setup DatePickerCell
-//        birthdaySection.isOpen = true
         print("EditModeSetup End")
     }
     
 // MARK: Selectors
     @objc func didTapSave() {
+        print("Did Tap Save Button")
+        guard let field = textFieldViewModels[0].text, !field.isEmpty else {
+            alertFirstName()
+            return
+        }
+        guard let person = chosenPerson else {
+            print("Failed to get person")
+            return
+        }
+        person.firstName = textFieldViewModels[0].text
+        person.lastName = textFieldViewModels[1].text
+        print("Birthday date before save: \(birthdayDate!)")
+        person.birthday = birthdayDate
         
+        let nextBirthday = getNextBirthday(date: person.birthday!)
+        let daysLeft = Calendar.current.numberOfDaysBetween(Date(), and: nextBirthday)
+        person.daysLeft = Int64(daysLeft)
+        
+        let imageData = self.chosenImage?.jpegData(compressionQuality: 1.0)
+        person.picture = imageData
+        
+        // Save object to CoreData
+        do {
+            try self.context.save()
+            print(person.getDetails())
+        } catch {
+            print("Error saving to CoreData")
+        }
+        self.fetchPerson()
+        if self.isNotificationSwitchOn {
+            NotificationManager.shared.createBirthdayNotification(person: person)
+        } else {
+            print("No notifications created")
+        }
+        self.dismiss(animated: true)
+        // Repopulate persons array
     }
     @objc func didTapDone() {
         // Create new person object
@@ -229,7 +263,6 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
             print("Error saving to CoreData")
         }
         self.fetchPerson()
-//        self.delegate?.refreshCollectionView()
         if self.isNotificationSwitchOn {
             NotificationManager.shared.createBirthdayNotification(person: person)
         } else {
