@@ -16,8 +16,19 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
     weak var delegate: AddBirthdayViewControllerDelegate?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var persons: [Person]?
-    var birthdayText: String = ""
-    var birthdayDate: Date = Date()
+    var birthdayText: String?
+    var birthdayDate: Date? {
+        didSet {
+            print("BirthdayDate: \(birthdayDate!)")
+            if isCalendarSwitchOn {
+                birthdayText = birthdayDate?.getString(components: [.month, .day, .year]) ?? ""
+            } else {
+                birthdayText = birthdayDate?.getString(components: [.month, .day]) ?? ""
+            }
+            print("BirthdayText: \(birthdayText ?? "")")
+            tableView.reloadData()
+        }
+    }
     var isCalendarSwitchOn: Bool = false
     var isNotificationSwitchOn: Bool = true
     var birthdaySection: Section = Section()
@@ -109,6 +120,7 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         tableView.delegate = self
         tableView.dataSource = self
         self.setupHideKeyboardOnTap()
+        birthdayDate = Date()
         
         if isEditModeOn {
             editModeSetup()
@@ -190,7 +202,7 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         let person = Person(context: self.context)
         person.firstName = textFieldViewModels[0].text
         person.lastName = textFieldViewModels[1].text
-        print("Birthday date before save: \(birthdayDate)")
+        print("Birthday date before save: \(birthdayDate!)")
         person.birthday = birthdayDate
         
         let nextBirthday = getNextBirthday(date: person.birthday!)
@@ -288,7 +300,8 @@ extension BetterAddBirthdayViewController: UITableViewDelegate, UITableViewDataS
                     ) as? BirthdayCell else {
                         fatalError()
                     }
-                    cell.configure(date: birthdayText)
+                    // change birthday text based on year toggle
+                    cell.configure(date: birthdayText ?? "")
                     return cell
                 case 1: // DatePickerCell
                     guard let cell = tableView.dequeueReusableCell(
@@ -301,8 +314,11 @@ extension BetterAddBirthdayViewController: UITableViewDelegate, UITableViewDataS
                         guard let date = chosenPerson?.birthday else { fatalError() }
                         cell.setupEditMode(date: date)
                     }
+                    print("Inside birthday section is open")
                     cell.customDelegate = self
-                    cell.isYearShowing = self.isCalendarSwitchOn
+                    cell.showYear = isCalendarSwitchOn
+                    cell.setupDatePicker(date: self.birthdayDate ?? Date())
+//                    cell.refreshBirthdayText()
                     return cell
                 default: // YearToggleCell
                     guard let cell = tableView.dequeueReusableCell(
@@ -321,7 +337,7 @@ extension BetterAddBirthdayViewController: UITableViewDelegate, UITableViewDataS
                 ) as? BirthdayCell else {
                     fatalError()
                 }
-                cell.configure(date: birthdayText)
+                cell.configure(date: birthdayText ?? "")
                 return cell
             }
         case 2: // Notifications Cell
@@ -345,11 +361,11 @@ extension BetterAddBirthdayViewController: UITableViewDelegate, UITableViewDataS
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 && indexPath.row == 0 {
+        if indexPath.section == 1 && indexPath.row == 0 { // BirthdayCell
             tableView.deselectRow(at: indexPath, animated: true)
             birthdaySection.isOpen.toggle()
             tableView.reloadSections([indexPath.section], with: .none)
-        } else if indexPath.section == 0 {
+        } else if indexPath.section == 0 { // close birthday section when tapping outside
             if birthdaySection.isOpen {
                 birthdaySection.isOpen.toggle()
                 tableView.reloadData()
@@ -377,10 +393,6 @@ extension BetterAddBirthdayViewController {
 }
 // MARK: CustomPickerViewDelegate
 extension BetterAddBirthdayViewController: CustomPickerViewDelegate {
-    func pickerViewSetText(value: String) {
-        self.birthdayText = value
-        tableView.reloadData()
-    }
     func pickerViewSetDate(date: Date) {
         self.birthdayDate = date
     }
@@ -430,19 +442,13 @@ extension BetterAddBirthdayViewController: TextFieldCellDelegate {
 // MARK: YearToggleDelegate
 extension BetterAddBirthdayViewController: YearToggleCellDelegate {
     func switchChanged(cell: YearToggleCell) {
-        guard let indexPath = tableView.indexPath(for: cell) else { return }
-        guard let cell = tableView.cellForRow(at: indexPath) as? YearToggleCell else { fatalError() }
-        cell.isOn.toggle()
-        self.isCalendarSwitchOn.toggle()
-        tableView.reloadData()
+        isCalendarSwitchOn.toggle()
+        pickerViewSetDate(date: birthdayDate!) // refresh date text when year is toggled
     }
 }
 // MARK: NotificationsCellDelegate
 extension BetterAddBirthdayViewController: NotificationsCellDelegate {
     func switchChanged(cell: NotificationsCell) {
-        guard let indexPath = tableView.indexPath(for: cell) else { return }
-        guard let cell = tableView.cellForRow(at: indexPath) as? NotificationsCell else { fatalError() }
-        cell.isOn.toggle()
         self.isNotificationSwitchOn.toggle()
         tableView.reloadData()
     }

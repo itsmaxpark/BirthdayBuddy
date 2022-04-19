@@ -70,6 +70,7 @@ class BirthdayCell: UITableViewCell {
     }
     
     func configure(date: String) {
+        print("Configuring BDayCell Text")
         dateTextLabel.text = date
     }
 }
