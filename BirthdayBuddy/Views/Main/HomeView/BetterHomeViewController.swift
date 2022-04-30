@@ -224,22 +224,55 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         
         return layoutSection
     }
-    
+    /// fetches all Person models sorted by daysLeft, sets up the Calendar, and saves an array of models
     func fetchPerson() {
         do {
+            updateDaysLeft()
             let request = Person.fetchRequest() as NSFetchRequest<Person>
             
             let sort = NSSortDescriptor(key: "daysLeft", ascending: true)
             request.sortDescriptors = [sort]
             
-            self.persons = try context.fetch(request)
-            self.getMonthData()
+            persons = try context.fetch(request)
+            getMonthData()
             DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                collectionView.reloadData()
             }
         } catch {
             print("Error fetching Person")
         }
+    }
+    
+    /// fetches all Person models, updates daysLeft attribute, saves back to Core Data
+    func updateDaysLeft() {
+        do {
+            let request = Person.fetchRequest() as NSFetchRequest<Person>
+            let personModels = try context.fetch(request)
+            for person in personModels {
+                let nextBirthday = getNextBirthday(date: person.birthday!)
+                let daysLeft = Calendar.current.numberOfDaysBetween(Date(), and: nextBirthday)
+                person.daysLeft = Int64(daysLeft)
+            }
+            try self.context.save()
+        } catch {
+            print("Error fetching Person")
+        }
+    }
+    func getNextBirthday(date: Date) -> Date {
+        // Get current date
+        let currentDate = Calendar.current.dateComponents([.day, .month, .year], from: Date())
+        // get birthday date
+        var birthday = Calendar.current.dateComponents([.day,.month,.year], from: date)
+        // set birthday year to current year
+        birthday.year = currentDate.year
+        // if birthday already happened this year, add 1 to year
+        let numberOfDays = Calendar.current.dateComponents([.day], from: currentDate, to: birthday).day!
+        if numberOfDays < 0 {
+            birthday.year! += 1
+        }
+        let nextBirthday = Calendar.current.date(from: birthday)
+        
+        return nextBirthday!
     }
     func getMonthData() {
         var newMonthData: [[CalendarDay]] = []

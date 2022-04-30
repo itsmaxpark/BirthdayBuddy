@@ -306,11 +306,9 @@ class AddBirthdayViewController: UIViewController {
         if numberOfDays < 0 {
             birthday.year! += 1
         }
-        
         let nextBirthday = Calendar.current.date(from: birthday)
         
         return nextBirthday!
-        
     }
 }
 

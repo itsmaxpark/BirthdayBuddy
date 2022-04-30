@@ -154,13 +154,6 @@ class SmallCollectionViewCell: UICollectionViewCell {
         pictureView.image = UIImage(data: data)
     }
     
-    func configureReuse() {
-        nameLabel.text = nil
-        birthdayLabel.text = nil
-        daysUntilBirthdayLabel.text = nil
-        pictureView.image = UIImage(systemName: "person.crop.circle.fill")
-        cellView.backgroundColor = .blue
-    }
     func configureDaysLeftText(daysLeft: Int) -> String {
         switch daysLeft {
         case 0:

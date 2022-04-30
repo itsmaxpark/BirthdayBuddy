@@ -30,6 +30,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         backgroundColor = .white
         contentView.layer.backgroundColor = UIColor.white.cgColor
         contentView.addSubview(dateLabel)
+        isUserInteractionEnabled = false
     }
     
     required init?(coder: NSCoder) {
