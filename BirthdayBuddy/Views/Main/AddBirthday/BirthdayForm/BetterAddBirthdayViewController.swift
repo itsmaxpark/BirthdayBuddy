@@ -19,13 +19,11 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
     var birthdayText: String?
     var birthdayDate: Date? {
         didSet {
-            print("BirthdayDate: \(birthdayDate!)")
             if isCalendarSwitchOn {
                 birthdayText = birthdayDate?.getString(components: [.month, .day, .year]) ?? ""
             } else {
                 birthdayText = birthdayDate?.getString(components: [.month, .day]) ?? ""
             }
-            print("BirthdayText: \(birthdayText ?? "")")
             tableView.reloadData()
         }
     }
@@ -173,7 +171,6 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         }
     }
     func editModeSetup() {
-        print("EditModeSetup")
         guard let person = chosenPerson else {
             print("Failed to get person")
             return
@@ -185,15 +182,14 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
             pictureView.image = UIImage(systemName: "person.crop.circle.fill")
         } else {
             pictureView.image = UIImage(data: data!)
+            chosenImage = pictureView.image
         }
-        chosenImage = pictureView.image
         // 2. Setup Text Fields
         textFieldViewModels[0].text = person.firstName
         textFieldViewModels[1].text = person.lastName
         // 3. Setup Birthday Cell
         birthdayDate = person.birthday
         // 4. Setup DatePickerCell
-        print("EditModeSetup End")
     }
     
 // MARK: Selectors
@@ -216,7 +212,7 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         let daysLeft = Calendar.current.numberOfDaysBetween(Date(), and: nextBirthday)
         person.daysLeft = Int64(daysLeft)
         
-        let imageData = self.chosenImage?.jpegData(compressionQuality: 1.0)
+        let imageData = chosenImage?.jpegData(compressionQuality: 1.0)
         person.picture = imageData
         
         // Save object to CoreData
@@ -499,6 +495,8 @@ extension BetterAddBirthdayViewController: DeleteButtonCellDelegate {
         let message = "Remove \(person.firstName ?? "") \(person.lastName ?? "") from Birthday Buddy"
         let alert = UIAlertController(title: "Delete", message: message, preferredStyle: .alert)
         let deleteButton = UIAlertAction(title: "Delete", style: .destructive) { action in
+            // remove notification
+            NotificationManager.shared.removeNotification(person: person)
             // remove person
             self.context.delete(person)
             // save data

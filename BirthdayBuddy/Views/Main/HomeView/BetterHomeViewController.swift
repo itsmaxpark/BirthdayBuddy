@@ -120,8 +120,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
                 }
                 let model = viewModels[indexPath.row]
                 cell.configure(with: model)
-//                cell.setBackground(with: indexPath.row)
-                
+
                 return cell
             } else {
                 //Small Cells
@@ -164,7 +163,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 { // SmallCollectionViewCell
             // Present AddBirthdayViewController in Edit Mode
-            let person = self.persons![indexPath.row]
+            let person = persons![indexPath.row]
             let vc = BetterAddBirthdayViewController()
             vc.delegate = self
             vc.chosenPerson = person
@@ -236,7 +235,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
             persons = try context.fetch(request)
             getMonthData()
             DispatchQueue.main.async {
-                collectionView.reloadData()
+                self.collectionView.reloadData()
             }
         } catch {
             print("Error fetching Person")

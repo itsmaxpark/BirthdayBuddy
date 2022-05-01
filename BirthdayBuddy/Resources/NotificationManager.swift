@@ -72,9 +72,15 @@ class NotificationManager: ObservableObject {
         let center = UNUserNotificationCenter.current()
         center.getPendingNotificationRequests { requests in
             print("There are \(requests.count) active notifications")
-//            for request in requests {
-//                print(request.trigger as Any)
-//            }
         }
+    }
+    func removeNotification(person: Person) {
+        let center = UNUserNotificationCenter.current()
+        
+        guard let uuidString = person.id?.uuidString else { return }
+        
+        center.removePendingNotificationRequests(withIdentifiers: [uuidString])
+        center.removeDeliveredNotifications(withIdentifiers: [uuidString])
+        print("Notification removed")
     }
 }
