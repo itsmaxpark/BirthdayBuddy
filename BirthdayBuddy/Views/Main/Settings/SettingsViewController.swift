@@ -13,6 +13,7 @@ class SettingsViewController: UIViewController {
     private let viewModels: [SettingsTableViewCellViewModel] = [
         SettingsTableViewCellViewModel(text: "Sign Out"),
         SettingsTableViewCellViewModel(text: "Statistics"),
+        SettingsTableViewCellViewModel(text: "Remove Delivered Notifications"),
         SettingsTableViewCellViewModel(text: "Delete All Birthdays")
     ]
     private let tableView: UITableView = {
@@ -55,7 +56,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         if index == 0 {
             let alert = UIAlertController(title: "Sign Out", message: "Signing out of Birthday Buddy", preferredStyle: .alert)
             let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            let signOutButton = UIAlertAction(title: "Sign Out", style: .default, handler: { action in
+            let signOutButton = UIAlertAction(title: "Sign Out", style: .default, handler: { _ in
                 SignOutHelper.signOut()
             })
             alert.addAction(signOutButton)
@@ -68,9 +69,19 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             alert.addAction(okButton)
             self.present(alert, animated: true)
         } else if index == 2 {
+            let message = NotificationManager.shared.getNumberOfDeliveredNotifications()
+            let alert = UIAlertController(title: "Remove Pending Notifications", message: message, preferredStyle: .alert)
+            let confirmButton = UIAlertAction(title: "Confirm", style: .destructive, handler: { _ in
+                NotificationManager.shared.removeAllPendingNotifications()
+            })
+            let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alert.addAction(confirmButton)
+            alert.addAction(cancelButton)
+            self.present(alert, animated: true)
+        } else if index == 3 {
             let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete all birthdays on Birthday Buddy?", preferredStyle: .alert)
             let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            let confirmButton = UIAlertAction(title: "Confirm", style: .destructive, handler: { action in
+            let confirmButton = UIAlertAction(title: "Confirm", style: .destructive, handler: { _ in
                 CoreDataManager.shared.deleteAllBirthdays()
             })
             alert.addAction(confirmButton)

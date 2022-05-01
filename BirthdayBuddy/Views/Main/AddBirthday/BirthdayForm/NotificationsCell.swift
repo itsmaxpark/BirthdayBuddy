@@ -78,4 +78,8 @@ class NotificationsCell: UITableViewCell {
     @objc func toggleSwitch() {
         delegate?.switchChanged(cell: self)
     }
+    
+    func configure(_ hasNotifications: Bool) {
+        switchView.isOn = hasNotifications
+    }
 }

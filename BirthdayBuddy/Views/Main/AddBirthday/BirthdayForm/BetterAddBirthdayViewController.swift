@@ -175,7 +175,6 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
             print("Failed to get person")
             return
         }
-        print(person)
         // 1. Setup picture
         let data = person.picture
         if data == nil {
@@ -189,7 +188,8 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         textFieldViewModels[1].text = person.lastName
         // 3. Setup Birthday Cell
         birthdayDate = person.birthday
-        // 4. Setup DatePickerCell
+        // 4. Setup Notifications Cell
+        isNotificationSwitchOn = person.hasNotifications
     }
     
 // MARK: Selectors
@@ -215,19 +215,23 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         let imageData = chosenImage?.jpegData(compressionQuality: 1.0)
         person.picture = imageData
         
+        if isNotificationSwitchOn {
+            print("Has notifications")
+            NotificationManager.shared.createBirthdayNotification(person: person)
+            person.hasNotifications = true
+        } else {
+            print("No notifications created")
+            NotificationManager.shared.removeNotification(person: person)
+            person.hasNotifications = false
+        }
         // Save object to CoreData
         do {
             try self.context.save()
-            print(person.getDetails())
+//            print(person.getDetails())
         } catch {
             print("Error saving to CoreData")
         }
-        self.fetchPerson()
-        if self.isNotificationSwitchOn {
-            NotificationManager.shared.createBirthdayNotification(person: person)
-        } else {
-            print("No notifications created")
-        }
+        fetchPerson()
         self.dismiss(animated: true)
         // Repopulate persons array
     }
@@ -251,19 +255,22 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         person.picture = imageData
         
         person.id = UUID()
+        
+        if isNotificationSwitchOn {
+            NotificationManager.shared.createBirthdayNotification(person: person)
+            person.hasNotifications = true
+        } else {
+            print("No notifications created")
+            person.hasNotifications = false
+        }
         // Save object to CoreData
         do {
             try self.context.save()
-            print(person.getDetails())
+//            print(person.getDetails())
         } catch {
             print("Error saving to CoreData")
         }
         self.fetchPerson()
-        if self.isNotificationSwitchOn {
-            NotificationManager.shared.createBirthdayNotification(person: person)
-        } else {
-            print("No notifications created")
-        }
         self.dismiss(animated: true)
         // Repopulate persons array
     }
@@ -381,6 +388,9 @@ extension BetterAddBirthdayViewController: UITableViewDelegate, UITableViewDataS
                 fatalError()
             }
             cell.delegate = self
+            if isEditModeOn {
+                cell.configure(isNotificationSwitchOn)
+            }
             return cell
         default:
             guard let cell = tableView.dequeueReusableCell(
@@ -482,7 +492,7 @@ extension BetterAddBirthdayViewController: YearToggleCellDelegate {
 // MARK: NotificationsCellDelegate
 extension BetterAddBirthdayViewController: NotificationsCellDelegate {
     func switchChanged(cell: NotificationsCell) {
-        self.isNotificationSwitchOn.toggle()
+        isNotificationSwitchOn.toggle()
         tableView.reloadData()
     }
 }
