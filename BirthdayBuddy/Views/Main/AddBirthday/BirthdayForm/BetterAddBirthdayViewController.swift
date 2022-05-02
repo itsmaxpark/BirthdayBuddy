@@ -263,10 +263,11 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
             print("No notifications created")
             person.hasNotifications = false
         }
+        // Save to Firebase Database
+        DatabaseManager.shared.addBirthday(for: person)
         // Save object to CoreData
         do {
             try self.context.save()
-//            print(person.getDetails())
         } catch {
             print("Error saving to CoreData")
         }
