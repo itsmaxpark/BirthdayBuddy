@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
 
 protocol AddBirthdayViewControllerDelegate: AnyObject {
     func refreshCollectionView()
@@ -34,6 +36,14 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
     var chosenImage: UIImage?
     var chosenPerson: Person?
     var isEditModeOn: Bool = false
+    
+    private let birthdayRef: DatabaseReference = {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            fatalError()
+        }
+        let ref = DatabaseManager.shared.usersRef.child("\(uid)/birthdays")
+        return ref
+    }()
     struct Section {
         var isOpen: Bool = false
     }
@@ -157,18 +167,29 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         if self.chosenImage != nil {
             pictureView.image = self.chosenImage
         }
+//        birthdayRef.observe(.value) { snapshot in
+//            var newPersons: [Person] = []
+//            for child in snapshot.children {
+//                if let snapshot = child as? DataSnapshot,
+//                   let person = Person(snapshot: snapshot) {
+//                    newPersons.append(person)
+//                }
+//            }
+//            self.persons = newPersons
+////            self.tableView.reloadData()
+//        }
     }
     
     func fetchPerson() {
-        do {
-            self.persons = try context.fetch(Person.fetchRequest())
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.delegate?.refreshCollectionView()
-            }
-        } catch {
-            print("Error fetching Person")
-        }
+//        do {
+//            self.persons = try context.fetch(Person.fetchRequest())
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//                self.delegate?.refreshCollectionView()
+//            }
+//        } catch {
+//            print("Error fetching Person")
+//        }
     }
     func editModeSetup() {
         guard let person = chosenPerson else {
@@ -199,7 +220,7 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
             alertFirstName()
             return
         }
-        guard let person = chosenPerson else {
+        guard var person = chosenPerson else {
             print("Failed to get person")
             return
         }
@@ -241,20 +262,20 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
             alertFirstName()
             return
         }
-        let person = Person(context: self.context)
-        person.firstName = textFieldViewModels[0].text
-        person.lastName = textFieldViewModels[1].text
+        let firstName = textFieldViewModels[0].text
+        let lastName = textFieldViewModels[1].text
         print("Birthday date before save: \(birthdayDate!)")
-        person.birthday = birthdayDate
+        let birthday = birthdayDate
+        
+        let imageData = self.chosenImage?.jpegData(compressionQuality: 1.0)
+        
+        let id = UUID()
+        
+        var person = Person(birthday: birthday, firstName: firstName, lastName: lastName, picture: imageData, id: id)
         
         let nextBirthday = getNextBirthday(date: person.birthday!)
         let daysLeft = Calendar.current.numberOfDaysBetween(Date(), and: nextBirthday)
         person.daysLeft = Int64(daysLeft)
-        
-        let imageData = self.chosenImage?.jpegData(compressionQuality: 1.0)
-        person.picture = imageData
-        
-        person.id = UUID()
         
         if isNotificationSwitchOn {
             NotificationManager.shared.createBirthdayNotification(person: person)
@@ -263,14 +284,9 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
             print("No notifications created")
             person.hasNotifications = false
         }
-        // Save to Firebase Database
+//        // Save to Firebase Database
         DatabaseManager.shared.addBirthday(for: person)
-        // Save object to CoreData
-        do {
-            try self.context.save()
-        } catch {
-            print("Error saving to CoreData")
-        }
+        
         self.fetchPerson()
         self.dismiss(animated: true)
         // Repopulate persons array
@@ -509,7 +525,7 @@ extension BetterAddBirthdayViewController: DeleteButtonCellDelegate {
             // remove notification
             NotificationManager.shared.removeNotification(person: person)
             // remove person
-            self.context.delete(person)
+//            self.context.delete(person)
             // save data
             do {
                 try self.context.save()

@@ -7,6 +7,8 @@
 
 import UIKit
 import CoreData
+import FirebaseAuth
+import FirebaseDatabase
 
 class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -30,6 +32,16 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         CollectionViewCellViewModel(name: "November", id: 11),
         CollectionViewCellViewModel(name: "December", id: 12),
     ]
+    
+    private let birthdayRef: DatabaseReference = {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            fatalError()
+        }
+        let ref = DatabaseManager.shared.usersRef.child("\(uid)/birthdays")
+        return ref
+    }()
+    
+    private var refObservers: [DatabaseHandle] = []
     
     private let calendar = Calendar(identifier: .gregorian)
     private lazy var dateFormatter: DateFormatter = {
@@ -59,7 +71,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         
         self.viewModels.rotate(array: &self.viewModels, k: -(getCurrentMonth()-1)) // rotate viewModels so that first month is current month
         
-        fetchPerson()
+//        fetchPerson()
         collectionView.reloadData()
         
     }
@@ -70,8 +82,16 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Refetch data because a new birthday may be added on viewWillAppear
-        fetchPerson()
-        self.collectionView.reloadData()
+        
+        fetchPerson { [weak self] in
+            self?.collectionView.reloadData()
+            print("Completion Handler")
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        refObservers.forEach(birthdayRef.removeObserver(withHandle:))
+        refObservers = []
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -130,8 +150,10 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
                 ) as? SmallCollectionViewCell else {
                     fatalError()
                 }
-                let person = persons?[indexPath.row]
-                cell.configure(person: person!)
+                guard let person = persons?[indexPath.row] else { fatalError() }
+//                person.picture = fetchPicture(for: person)
+//                print("Picture cellforrowat: \(person.picture as Any)")
+                cell.configure(person: person)
                 
                 return cell
             }
@@ -224,38 +246,79 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         return layoutSection
     }
     /// fetches all Person models sorted by daysLeft, sets up the Calendar, and saves an array of models
-    func fetchPerson() {
-        do {
-            updateDaysLeft()
-            let request = Person.fetchRequest() as NSFetchRequest<Person>
-            
-            let sort = NSSortDescriptor(key: "daysLeft", ascending: true)
-            request.sortDescriptors = [sort]
-            
-            persons = try context.fetch(request)
-            getMonthData()
+    func fetchPerson(_ completion: @escaping () -> Void) {
+        // add listener when database changes
+        var newPersons: [Person] = []
+        let completed = birthdayRef.observe(.value) { snapshot in
+            for child in snapshot.children {
+                if let snapshot = child as? DataSnapshot,
+                   var person = Person(snapshot: snapshot) {
+//                    guard let uid = Auth.auth().currentUser?.uid else { return }
+                    self.fetchPicture(for: person) { imageData in 
+                        person.picture = imageData
+                        newPersons.append(person)
+                    }
+                } else {
+                    print("Error creating person object with snapshot")
+                }
+            }
+            self.persons = newPersons
+            print(self.persons as Any)
+            completion()
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
-        } catch {
-            print("Error fetching Person")
         }
+        refObservers.append(completed)
+        //            updateDaysLeft()
+        getMonthData()
+    }
+    
+    func fetchPicture(for person: Person, _ completion: @escaping (_ imageData: Data?) -> Void) {
+        guard let personID = person.id else { return }
+        
+        // Check if pictureURL exists
+        var imageData: Data?
+        self.birthdayRef.child("\(personID)/pictureURL").observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                guard let urlString = snapshot.value as? String else {
+                    print("error getting url")
+                    return
+                }
+                guard let url = URL(string: urlString) else {
+                    print("error converting string to url")
+                    return
+                }
+                print("url: \(url)")
+                let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                    guard let data = data, error == nil else {
+                        print(error?.localizedDescription as Any)
+                        return
+                    }
+                    imageData = data
+                    print("picture: \(data)")
+                }
+                task.resume()
+            }
+        }
+        completion(imageData)
+        
     }
     
     /// fetches all Person models, updates daysLeft attribute, saves back to Core Data
     func updateDaysLeft() {
-        do {
-            let request = Person.fetchRequest() as NSFetchRequest<Person>
-            let personModels = try context.fetch(request)
-            for person in personModels {
-                let nextBirthday = getNextBirthday(date: person.birthday!)
-                let daysLeft = Calendar.current.numberOfDaysBetween(Date(), and: nextBirthday)
-                person.daysLeft = Int64(daysLeft)
-            }
-            try self.context.save()
-        } catch {
-            print("Error fetching Person")
-        }
+//        do {
+//            let request = Person.fetchRequest() as NSFetchRequest<Person>
+//            let personModels = try context.fetch(request)
+//            for person in personModels {
+//                let nextBirthday = getNextBirthday(date: person.birthday!)
+//                let daysLeft = Calendar.current.numberOfDaysBetween(Date(), and: nextBirthday)
+//                person.daysLeft = Int64(daysLeft)
+//            }
+//            try self.context.save()
+//        } catch {
+//            print("Error fetching Person")
+//        }
     }
     func getNextBirthday(date: Date) -> Date {
         // Get current date
@@ -416,13 +479,13 @@ extension BetterHomeViewController {
         return false
     }
     func checkIfDateExists(date: Date) -> Bool {
-        guard let allPersons = self.persons else { fatalError() }
-        for person in allPersons {
-            let birthday = person.birthday!
-            if isSameMonthAndDay(date1: date, date2: birthday) {
-                return true
-            }
-        }
+//        guard let allPersons = self.persons else { fatalError() }
+//        for person in allPersons {
+//            let birthday = person.birthday!
+//            if isSameMonthAndDay(date1: date, date2: birthday) {
+//                return true
+//            }
+//        }
         return false
     }
 }
@@ -435,6 +498,8 @@ extension BetterHomeViewController {
 
 extension BetterHomeViewController: AddBirthdayViewControllerDelegate {
     func refreshCollectionView() {
-        self.fetchPerson()
+        fetchPerson { [weak self] in
+            self?.collectionView.reloadData()
+        }
     }
 }

@@ -148,6 +148,7 @@ class SmallCollectionViewCell: UICollectionViewCell {
         daysUntilBirthdayLabel.text = configureDaysLeftText(daysLeft: daysLeft)
         
         guard let data = person.picture else {
+            print("Using default picture")
             pictureView.image = UIImage(systemName: "person.crop.circle.fill")
             return
         }

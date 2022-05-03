@@ -121,8 +121,9 @@ extension TabBarViewController: AddBirthdayViewControllerDelegate {
             return
         }
     
-        vc.fetchPerson()
-        vc.collectionView.reloadData()
+        vc.fetchPerson { 
+            vc.collectionView.reloadData()
+        }
     }
 }
 
