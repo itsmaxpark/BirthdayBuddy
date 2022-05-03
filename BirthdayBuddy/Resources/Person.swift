@@ -11,14 +11,15 @@ import CoreData
 import FirebaseDatabase
 
 struct Person {
-    public var birthday: Date?
-    public var daysLeft: Int64
-    public var firstName: String?
-    public var lastName: String?
-    public var picture: Data?
-    public var id: UUID?
-    public var hasNotifications: Bool
-    public var pictureURL: String?
+    var birthday: Date?
+    var daysLeft: Int64
+    var firstName: String?
+    var lastName: String?
+    var picture: Data?
+    var id: UUID?
+    var hasNotifications: Bool
+    var pictureURL: String?
+    var ref: DatabaseReference?
     
     func getDetails() {
         print("""
@@ -39,6 +40,7 @@ struct Person {
         self.id = id
         self.hasNotifications = true
         self.daysLeft = 0
+        self.ref = nil
     }
     
     init?(snapshot: DataSnapshot) {
@@ -86,5 +88,6 @@ struct Person {
         self.picture = picture
         self.id = UUID(uuidString: snapshot.key)
         self.hasNotifications = hasNotifications
+        self.ref = snapshot.ref
     }
 }

@@ -167,29 +167,11 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         if self.chosenImage != nil {
             pictureView.image = self.chosenImage
         }
-//        birthdayRef.observe(.value) { snapshot in
-//            var newPersons: [Person] = []
-//            for child in snapshot.children {
-//                if let snapshot = child as? DataSnapshot,
-//                   let person = Person(snapshot: snapshot) {
-//                    newPersons.append(person)
-//                }
-//            }
-//            self.persons = newPersons
-////            self.tableView.reloadData()
-//        }
     }
     
     func fetchPerson() {
-//        do {
-//            self.persons = try context.fetch(Person.fetchRequest())
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//                self.delegate?.refreshCollectionView()
-//            }
-//        } catch {
-//            print("Error fetching Person")
-//        }
+        print("Refreshing collection view")
+        self.delegate?.refreshCollectionView()
     }
     func editModeSetup() {
         guard let person = chosenPerson else {
@@ -525,13 +507,9 @@ extension BetterAddBirthdayViewController: DeleteButtonCellDelegate {
             // remove notification
             NotificationManager.shared.removeNotification(person: person)
             // remove person
-//            self.context.delete(person)
+            
             // save data
-            do {
-                try self.context.save()
-            } catch {
-                print("Error deleting person")
-            }
+            
             // refetch data
             self.fetchPerson()
             print("Birthday was deleted")

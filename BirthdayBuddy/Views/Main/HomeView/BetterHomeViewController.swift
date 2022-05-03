@@ -33,13 +33,11 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         CollectionViewCellViewModel(name: "December", id: 12),
     ]
     
-    private let birthdayRef: DatabaseReference = {
-        guard let uid = Auth.auth().currentUser?.uid else {
-            fatalError()
-        }
-        let ref = DatabaseManager.shared.usersRef.child("\(uid)/birthdays")
-        return ref
-    }()
+//    private let birthdayRef: DatabaseReference = {
+//        let uid = Auth.auth().currentUser?.uid
+//        let ref = DatabaseManager.shared.usersRef.child("\(uid!)/birthdays")
+//        return ref
+//    }()
     
     private var refObservers: [DatabaseHandle] = []
     
@@ -83,14 +81,15 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         super.viewWillAppear(animated)
         // Refetch data because a new birthday may be added on viewWillAppear
         
-        fetchPerson { [weak self] in
-            self?.collectionView.reloadData()
-            print("Completion Handler")
+        fetchPerson { newPersons in
+            self.persons = newPersons
+            self.collectionView.reloadData()
+            print("Collection View reloaded")
         }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        refObservers.forEach(birthdayRef.removeObserver(withHandle:))
+//        refObservers.forEach(birthdayRef.removeObserver(withHandle:))
         refObservers = []
     }
     
@@ -151,8 +150,6 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
                     fatalError()
                 }
                 guard let person = persons?[indexPath.row] else { fatalError() }
-//                person.picture = fetchPicture(for: person)
-//                print("Picture cellforrowat: \(person.picture as Any)")
                 cell.configure(person: person)
                 
                 return cell
@@ -246,27 +243,34 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         return layoutSection
     }
     /// fetches all Person models sorted by daysLeft, sets up the Calendar, and saves an array of models
-    func fetchPerson(_ completion: @escaping () -> Void) {
+    func fetchPerson(_ completion: @escaping (([Person]) -> Void)) {
         // add listener when database changes
+        print("Fetching Person")
         var newPersons: [Person] = []
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let birthdayRef = DatabaseManager.shared.usersRef.child("\(uid)/birthdays")
+        
+        let group = DispatchGroup()
+        
         let completed = birthdayRef.observe(.value) { snapshot in
             for child in snapshot.children {
                 if let snapshot = child as? DataSnapshot,
                    var person = Person(snapshot: snapshot) {
-//                    guard let uid = Auth.auth().currentUser?.uid else { return }
-                    self.fetchPicture(for: person) { imageData in 
-                        person.picture = imageData
+                    // fetch picture from database storage
+                    group.enter()
+                    self.fetchPicture(for: person) { data in
+                        person.picture = data
                         newPersons.append(person)
+                        group.leave()
                     }
                 } else {
                     print("Error creating person object with snapshot")
+                    group.leave()
+                    
                 }
             }
-            self.persons = newPersons
-            print(self.persons as Any)
-            completion()
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
+            group.notify(queue: .main) {
+                completion(newPersons)
             }
         }
         refObservers.append(completed)
@@ -274,12 +278,19 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         getMonthData()
     }
     
-    func fetchPicture(for person: Person, _ completion: @escaping (_ imageData: Data?) -> Void) {
-        guard let personID = person.id else { return }
-        
+    func fetchPicture(for person: Person, completion: @escaping ((Data?) -> Void)) {
+        guard let personID = person.id else {
+            print("error geting person id")
+            return
+        }
         // Check if pictureURL exists
         var imageData: Data?
-        self.birthdayRef.child("\(personID)/pictureURL").observeSingleEvent(of: .value) { snapshot in
+        guard let uid = Auth.auth().currentUser?.uid else {
+            print("error getting uid")
+            return
+        }
+        let birthdayRef = DatabaseManager.shared.usersRef.child("\(uid)/birthdays")
+        birthdayRef.child("\(personID)/pictureURL").observeSingleEvent(of: .value) { snapshot in
             if snapshot.exists() {
                 guard let urlString = snapshot.value as? String else {
                     print("error getting url")
@@ -289,20 +300,19 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
                     print("error converting string to url")
                     return
                 }
-                print("url: \(url)")
                 let task = URLSession.shared.dataTask(with: url) { data, response, error in
                     guard let data = data, error == nil else {
                         print(error?.localizedDescription as Any)
                         return
                     }
                     imageData = data
-                    print("picture: \(data)")
+                    completion(imageData)
                 }
                 task.resume()
+            } else {
+                completion(nil)
             }
         }
-        completion(imageData)
-        
     }
     
     /// fetches all Person models, updates daysLeft attribute, saves back to Core Data
@@ -498,8 +508,9 @@ extension BetterHomeViewController {
 
 extension BetterHomeViewController: AddBirthdayViewControllerDelegate {
     func refreshCollectionView() {
-        fetchPerson { [weak self] in
-            self?.collectionView.reloadData()
+        fetchPerson { newPersons in
+            self.persons = newPersons
+            self.collectionView.reloadData()
         }
     }
 }

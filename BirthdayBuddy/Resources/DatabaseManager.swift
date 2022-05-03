@@ -52,27 +52,12 @@ extension DatabaseManager {
         guard let imageData = person.picture else {
             print("Unable to retrieve image data")
             birthdaysRef.child("pictureURL").setValue(nil)
-//            birthdaysRef.setValue(["pictureURL": nil])
             return
         }
-//        imageRef.putData(imageData) { snapshot in
-//            // When the image has successfully uploaded, we get it's download URL
-//            snapshot.reference.downloadURL { url, error in
-//                if error != nil {
-//                    fatalError("Error retrieving download url")
-//                }
-//                // Write the download URL to the Realtime Database
-//                birthdaysRef.child("pictureURL").setValue(url?.absoluteString)
-//                print("PutData ")
-//            }
-//        }
         // Save Image reference to Cloud Storage
         guard let personID = person.id else { return }
         let imageRef = storageRef.child("pictures/\(uid)/\(personID).jpg")
-        print(imageRef)
-        print("Putting data image")
-        let uploadTask = imageRef.putData(imageData, metadata: nil) { metedata, error in
-            print("Inside putting image data")
+        imageRef.putData(imageData, metadata: nil) { metedata, error in
             if error != nil {
                 print(error?.localizedDescription as Any)
                 fatalError("Error saving image to firebase")
