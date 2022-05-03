@@ -72,6 +72,57 @@ extension DatabaseManager {
             }
         }
     }
+    
+    public func updateBirthday(for person: Person) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            fatalError("Unable to retrieve current user uid")
+        }
+        // users -> current user uid -> birthdays -> person
+        let birthdaysRef = usersRef.child("\(uid)/birthdays/\(person.id as AnyObject)")
+        // Convert NSDate to Double Interval
+        let personBirthday = person.birthday?.timeIntervalSince1970
+        // Add person to database
+        birthdaysRef.updateChildValues([
+            "birthday": personBirthday as AnyObject,
+            "daysLeft": person.daysLeft as AnyObject,
+            "firstName": person.firstName as AnyObject,
+            "lastName": person.lastName as AnyObject,
+            "hasNotifications": person.hasNotifications as AnyObject,
+            "pictureURL" : " "
+        ])
+        guard let imageData = person.picture else {
+            print("Unable to retrieve image data")
+            birthdaysRef.updateChildValues(["pictureURL" : nil])
+            return
+        }
+        // Save Image reference to Cloud Storage
+        guard let personID = person.id else { return }
+        let imageRef = storageRef.child("pictures/\(uid)/\(personID).jpg")
+        imageRef.delete()
+        imageRef.putData(imageData, metadata: nil) { metedata, error in
+            if error != nil {
+                print(error?.localizedDescription as Any)
+                fatalError("Error saving image to firebase")
+            }
+            imageRef.downloadURL { url, error in
+                if error != nil {
+                    fatalError("Error retrieving download url")
+                }
+                guard let url = url else { return }
+                birthdaysRef.updateChildValues(["pictureURL" : url.absoluteString])
+                print("saved picture url to birthday path")
+            }
+        }
+    }
+    
+    public func deletePicture(for person: Person) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            fatalError("Unable to retrieve current user uid")
+        }
+        guard let personID = person.id else { return }
+        let imageRef = storageRef.child("pictures/\(uid)/\(personID).jpg")
+        imageRef.delete()
+    }
 }
 
 

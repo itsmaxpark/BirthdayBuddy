@@ -196,6 +196,7 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
     }
     
 // MARK: Selectors
+    /// Save selector used when updating a Person model
     @objc func didTapSave() {
         print("Did Tap Save Button")
         guard let field = textFieldViewModels[0].text, !field.isEmpty else {
@@ -208,7 +209,6 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         }
         person.firstName = textFieldViewModels[0].text
         person.lastName = textFieldViewModels[1].text
-        print("Birthday date before save: \(birthdayDate!)")
         person.birthday = birthdayDate
         
         let nextBirthday = getNextBirthday(date: person.birthday!)
@@ -228,17 +228,19 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
             person.hasNotifications = false
         }
         // Save object to CoreData
-        do {
-            try self.context.save()
-//            print(person.getDetails())
-        } catch {
-            print("Error saving to CoreData")
-        }
-        fetchPerson()
+//        do {
+//            try self.context.save()
+////            print(person.getDetails())
+//        } catch {
+//            print("Error saving to CoreData")
+//        }
+        // Update data in Firebase
+        DatabaseManager.shared.updateBirthday(for: person)
         self.dismiss(animated: true)
         // Repopulate persons array
     }
     @objc func didTapDone() {
+        print("Did tap Done button")
         // Create new person object
         guard let field = textFieldViewModels[0].text, !field.isEmpty else {
             alertFirstName()
@@ -246,11 +248,8 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         }
         let firstName = textFieldViewModels[0].text
         let lastName = textFieldViewModels[1].text
-        print("Birthday date before save: \(birthdayDate!)")
         let birthday = birthdayDate
-        
         let imageData = self.chosenImage?.jpegData(compressionQuality: 1.0)
-        
         let id = UUID()
         
         var person = Person(birthday: birthday, firstName: firstName, lastName: lastName, picture: imageData, id: id)
@@ -266,12 +265,10 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
             print("No notifications created")
             person.hasNotifications = false
         }
-//        // Save to Firebase Database
+        // Save to Firebase Database
         DatabaseManager.shared.addBirthday(for: person)
-        
-        self.fetchPerson()
+//        self.fetchPerson()
         self.dismiss(animated: true)
-        // Repopulate persons array
     }
     @objc func didTapCancel() {
         // Dismisses the bottomSheet view controller with BetterAddBirthdayVC
@@ -507,11 +504,9 @@ extension BetterAddBirthdayViewController: DeleteButtonCellDelegate {
             // remove notification
             NotificationManager.shared.removeNotification(person: person)
             // remove person
-            
-            // save data
-            
-            // refetch data
-            self.fetchPerson()
+            person.ref?.removeValue()
+            // remove image from firebase storage
+            DatabaseManager.shared.deletePicture(for: person)
             print("Birthday was deleted")
             self.dismiss(animated: true)
         }

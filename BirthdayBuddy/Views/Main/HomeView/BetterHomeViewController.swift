@@ -69,8 +69,11 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         
         self.viewModels.rotate(array: &self.viewModels, k: -(getCurrentMonth()-1)) // rotate viewModels so that first month is current month
         
-//        fetchPerson()
-        collectionView.reloadData()
+        fetchPerson { newPersons in
+            self.persons = newPersons
+            self.collectionView.reloadData()
+            print("Collection View reloaded")
+        }
         
     }
     
@@ -192,56 +195,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
-    func createCompositionalLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
-            let section = self.sections[sectionIndex]
-            
-            switch section {
-            case "Small":
-                return self.createSmallSection(using: section)
-            default:
-                return self.createLargeSection(using: section)
-            }
-        }
-        
-        let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 20
-        layout.configuration = config
-        return layout
-    }
     
-    func createLargeSection(using section: String) -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-        
-        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-        layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
-        
-        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.93), heightDimension: .estimated(350))
-        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitems: [layoutItem])
-        
-        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-        layoutSection.orthogonalScrollingBehavior = .groupPagingCentered
-        return layoutSection
-    }
-    
-    func createSmallSection(using section: String) -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.25))
-        
-        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-        layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5)
-        
-        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.93), heightDimension: .fractionalWidth(0.75))
-        let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: layoutGroupSize, subitems: [layoutItem])
-        
-        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-        layoutSection.orthogonalScrollingBehavior = .groupPagingCentered
-        
-        let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.93), heightDimension: .estimated(40))
-        let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-        layoutSection.boundarySupplementaryItems = [layoutSectionHeader]
-        
-        return layoutSection
-    }
     /// fetches all Person models sorted by daysLeft, sets up the Calendar, and saves an array of models
     func fetchPerson(_ completion: @escaping (([Person]) -> Void)) {
         // add listener when database changes
@@ -253,6 +207,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         let group = DispatchGroup()
         
         let completed = birthdayRef.observe(.value) { snapshot in
+            print("Value changed")
             for child in snapshot.children {
                 if let snapshot = child as? DataSnapshot,
                    var person = Person(snapshot: snapshot) {
@@ -330,51 +285,63 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
 //            print("Error fetching Person")
 //        }
     }
-    func getNextBirthday(date: Date) -> Date {
-        // Get current date
-        let currentDate = Calendar.current.dateComponents([.day, .month, .year], from: Date())
-        // get birthday date
-        var birthday = Calendar.current.dateComponents([.day,.month,.year], from: date)
-        // set birthday year to current year
-        birthday.year = currentDate.year
-        // if birthday already happened this year, add 1 to year
-        let numberOfDays = Calendar.current.dateComponents([.day], from: currentDate, to: birthday).day!
-        if numberOfDays < 0 {
-            birthday.year! += 1
-        }
-        let nextBirthday = Calendar.current.date(from: birthday)
-        
-        return nextBirthday!
-    }
-    func getMonthData() {
-        var newMonthData: [[CalendarDay]] = []
-        for month in 1...12 {
-            var dateComponents = DateComponents()
-            dateComponents.month = month
-            if month < getCurrentMonth() {
-                dateComponents.year = getCurrentYear() + 1
-            } else {
-                dateComponents.year = getCurrentYear()
-            }
-            let calendar = Calendar(identifier: .gregorian)
-            let date = calendar.date(from: dateComponents)
-            let newMonth = self.generateDaysInMonth(for: date!)
-            newMonthData.append(newMonth)
-        }
-        self.monthData = newMonthData
-        self.monthData.rotate(array: &self.monthData, k: -(getCurrentMonth()-1))
-    }
-    func getCurrentMonth() -> Int {
-        return Calendar.current.component(.month, from: Date())
-    }
-    func getCurrentYear() -> Int {
-        return Calendar.current.component(.year, from: Date())
-    }
+
 }
+
 // MARK: Flow Layout
 extension BetterHomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: floor(collectionView.bounds.width/7), height: collectionView.height/6)
+    }
+    func createCompositionalLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
+            let section = self.sections[sectionIndex]
+            
+            switch section {
+            case "Small":
+                return self.createSmallSection(using: section)
+            default:
+                return self.createLargeSection(using: section)
+            }
+        }
+        
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 20
+        layout.configuration = config
+        return layout
+    }
+    
+    func createLargeSection(using section: String) -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        
+        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
+        layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
+        
+        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.93), heightDimension: .estimated(350))
+        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitems: [layoutItem])
+        
+        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
+        layoutSection.orthogonalScrollingBehavior = .groupPagingCentered
+        return layoutSection
+    }
+    
+    func createSmallSection(using section: String) -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.25))
+        
+        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
+        layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5)
+        
+        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.93), heightDimension: .fractionalWidth(0.75))
+        let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: layoutGroupSize, subitems: [layoutItem])
+        
+        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
+        layoutSection.orthogonalScrollingBehavior = .groupPagingCentered
+        
+        let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.93), heightDimension: .estimated(40))
+        let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        layoutSection.boundarySupplementaryItems = [layoutSectionHeader]
+        
+        return layoutSection
     }
 }
 // MARK: CalendarSetup
@@ -497,6 +464,46 @@ extension BetterHomeViewController {
 //            }
 //        }
         return false
+    }
+    func getNextBirthday(date: Date) -> Date {
+        // Get current date
+        let currentDate = Calendar.current.dateComponents([.day, .month, .year], from: Date())
+        // get birthday date
+        var birthday = Calendar.current.dateComponents([.day,.month,.year], from: date)
+        // set birthday year to current year
+        birthday.year = currentDate.year
+        // if birthday already happened this year, add 1 to year
+        let numberOfDays = Calendar.current.dateComponents([.day], from: currentDate, to: birthday).day!
+        if numberOfDays < 0 {
+            birthday.year! += 1
+        }
+        let nextBirthday = Calendar.current.date(from: birthday)
+        
+        return nextBirthday!
+    }
+    func getMonthData() {
+        var newMonthData: [[CalendarDay]] = []
+        for month in 1...12 {
+            var dateComponents = DateComponents()
+            dateComponents.month = month
+            if month < getCurrentMonth() {
+                dateComponents.year = getCurrentYear() + 1
+            } else {
+                dateComponents.year = getCurrentYear()
+            }
+            let calendar = Calendar(identifier: .gregorian)
+            let date = calendar.date(from: dateComponents)
+            let newMonth = self.generateDaysInMonth(for: date!)
+            newMonthData.append(newMonth)
+        }
+        self.monthData = newMonthData
+        self.monthData.rotate(array: &self.monthData, k: -(getCurrentMonth()-1))
+    }
+    func getCurrentMonth() -> Int {
+        return Calendar.current.component(.month, from: Date())
+    }
+    func getCurrentYear() -> Int {
+        return Calendar.current.component(.year, from: Date())
     }
 }
 // MARK: Selectors
