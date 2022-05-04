@@ -122,6 +122,7 @@ extension DatabaseManager {
         guard let personID = person.id else { return }
         let imageRef = storageRef.child("pictures/\(uid)/\(personID).jpg")
         imageRef.delete()
+        
     }
 }
 

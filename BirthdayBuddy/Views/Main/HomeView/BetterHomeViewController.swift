@@ -14,7 +14,11 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    var persons: [Person]?
+    var persons: [Person]? {
+        didSet {
+            print("person count: \(persons?.count ?? 0)")
+        }
+    }
     let sections = ["Large", "Small"]
     var collectionView: UICollectionView!
     
@@ -68,13 +72,6 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         collectionView.register(SmallCollectionViewCell.self, forCellWithReuseIdentifier: SmallCollectionViewCell.identifier)
         
         self.viewModels.rotate(array: &self.viewModels, k: -(getCurrentMonth()-1)) // rotate viewModels so that first month is current month
-        
-        fetchPerson { newPersons in
-            self.persons = newPersons
-            self.collectionView.reloadData()
-            print("Collection View reloaded")
-        }
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -85,9 +82,10 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         // Refetch data because a new birthday may be added on viewWillAppear
         
         fetchPerson { newPersons in
-            self.persons = newPersons
+//            self.persons = []
+//            self.persons = newPersons
+            print("Inside Completion handler")
             self.collectionView.reloadData()
-            print("Collection View reloaded")
         }
     }
     
@@ -199,36 +197,49 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
     /// fetches all Person models sorted by daysLeft, sets up the Calendar, and saves an array of models
     func fetchPerson(_ completion: @escaping (([Person]) -> Void)) {
         // add listener when database changes
+        print()
         print("Fetching Person")
         var newPersons: [Person] = []
+//        persons = []
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let birthdayRef = DatabaseManager.shared.usersRef.child("\(uid)/birthdays")
         
-        let group = DispatchGroup()
-        
-        let completed = birthdayRef.observe(.value) { snapshot in
+        birthdayRef
+            .queryOrdered(byChild: "daysLeft")
+            .observeSingleEvent(of: .value) { snapshot in
             print("Value changed")
+            let group = DispatchGroup()
             for child in snapshot.children {
                 if let snapshot = child as? DataSnapshot,
                    var person = Person(snapshot: snapshot) {
                     // fetch picture from database storage
                     group.enter()
+                    print("ENTER")
+                    
                     self.fetchPicture(for: person) { data in
+                        print("Fetched picture")
                         person.picture = data
                         newPersons.append(person)
+                        
+                        print("LEAVE")
                         group.leave()
                     }
                 } else {
                     print("Error creating person object with snapshot")
+                    print("LEAVE")
                     group.leave()
-                    
                 }
             }
             group.notify(queue: .main) {
+                //                self.persons = []
+                print("NOTIFY")
+//                print(newPersons)
+                self.persons = newPersons
                 completion(newPersons)
+                print("Collection reloaded in dispatch group")
             }
         }
-        refObservers.append(completed)
+//        refObservers.append(completed)
         //            updateDaysLeft()
         getMonthData()
     }
@@ -516,7 +527,9 @@ extension BetterHomeViewController {
 extension BetterHomeViewController: AddBirthdayViewControllerDelegate {
     func refreshCollectionView() {
         fetchPerson { newPersons in
-            self.persons = newPersons
+            print("RefreshCollectionView fetchperson")
+//            self.persons = []
+//            self.persons = newPersons
             self.collectionView.reloadData()
         }
     }

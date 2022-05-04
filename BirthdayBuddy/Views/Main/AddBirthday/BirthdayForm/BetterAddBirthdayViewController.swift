@@ -267,6 +267,7 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         }
         // Save to Firebase Database
         DatabaseManager.shared.addBirthday(for: person)
+        self.delegate?.refreshCollectionView()
 //        self.fetchPerson()
         self.dismiss(animated: true)
     }
@@ -507,6 +508,8 @@ extension BetterAddBirthdayViewController: DeleteButtonCellDelegate {
             person.ref?.removeValue()
             // remove image from firebase storage
             DatabaseManager.shared.deletePicture(for: person)
+            // refresh collection view
+            self.delegate?.refreshCollectionView()
             print("Birthday was deleted")
             self.dismiss(animated: true)
         }

@@ -27,7 +27,7 @@ class NotificationManager: ObservableObject {
         
         // 3. Create a notification trigger
         let date = self.configureNotificationTime(date: person.birthday!)
-        print("Date: \(date)")
+//        print("Date: \(date)")
         let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         
@@ -39,8 +39,8 @@ class NotificationManager: ObservableObject {
             if let error = error {
                 print("Error reistering request with Notification Center: \(error)")
             } else {
-                print("NotificationManager: New Notification Created")
-                print("Notifcation with id\(uuidString)")
+//                print("NotificationManager: New Notification Created")
+//                print("Notifcation with id\(uuidString)")
             }
         }
     }
@@ -60,7 +60,7 @@ class NotificationManager: ObservableObject {
             // Set notification for the next year
             notificationDateComponents.year = getCurrentYear()+1
             notificationDate = Calendar.current.date(from: notificationDateComponents)
-            print("Notification is set for next year")
+//            print("Notification is set for next year")
         }
         
         return notificationDate!
@@ -81,7 +81,7 @@ class NotificationManager: ObservableObject {
         
         center.removePendingNotificationRequests(withIdentifiers: [uuidString])
         center.removeDeliveredNotifications(withIdentifiers: [uuidString])
-        print("Notification removed")
+//        print("Notification removed")
     }
     func getNumberOfDeliveredNotifications() -> String {
         let center = UNUserNotificationCenter.current()
