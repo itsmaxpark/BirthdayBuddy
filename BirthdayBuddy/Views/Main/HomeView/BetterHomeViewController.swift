@@ -199,6 +199,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         // add listener when database changes
         print()
         print("Fetching Person")
+        getMonthData()
         var newPersons: [Person] = []
 //        persons = []
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -241,7 +242,6 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         }
 //        refObservers.append(completed)
         //            updateDaysLeft()
-        getMonthData()
     }
     
     func fetchPicture(for person: Person, completion: @escaping ((Data?) -> Void)) {
@@ -493,6 +493,7 @@ extension BetterHomeViewController {
         return nextBirthday!
     }
     func getMonthData() {
+        print("Getting Month Data")
         var newMonthData: [[CalendarDay]] = []
         for month in 1...12 {
             var dateComponents = DateComponents()

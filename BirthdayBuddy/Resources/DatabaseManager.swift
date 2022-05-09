@@ -22,11 +22,19 @@ class DatabaseManager {
 extension DatabaseManager {
     /// Insert new user to database
     public func addUser(for user: BirthdayBuddyUser) {
-        usersRef.child(user.id).setValue([
-            "first_name": user.firstName,
-            "last_name": user.lastName,
-            "email": user.emailAddress
-        ])
+        
+        database.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.hasChild(user.id){
+                print("Account already exists")
+            } else {
+                print("Account does not exist")
+                self.usersRef.child(user.id).setValue([
+                    "first_name": user.firstName,
+                    "last_name": user.lastName,
+                    "email": user.emailAddress
+                ])
+            }
+        })
     }
     
     public func addBirthday(for person: Person) {
