@@ -164,15 +164,18 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
             let monthRow = indexPath.section
             let monthColumn = indexPath.item
             
-            let cellMonth: [CalendarDay] = self.monthData[monthIndex]
-            let cellPosition = (monthRow*7) + monthColumn
-            let cellDay: CalendarDay = cellMonth[cellPosition]
-            if cellDay.isSelected {
-                cell.isActive = true
-            } else {
-                cell.isActive = false
+            let isIndexValid = monthData.indices.contains(monthIndex)
+            if isIndexValid {
+                let cellMonth = self.monthData[monthIndex]
+                let cellPosition = (monthRow*7) + monthColumn
+                let cellDay: CalendarDay = cellMonth[cellPosition]
+                if cellDay.isSelected {
+                    cell.isActive = true
+                } else {
+                    cell.isActive = false
+                }
+                cell.configure(with: cellDay)
             }
-            cell.configure(with: cellDay, with: monthIndex)
             
             return cell
         }
@@ -197,7 +200,6 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         // add listener when database changes
         print()
         print("Fetching Person")
-        getMonthData()
         var newPersons: [Person] = []
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let birthdayRef = DatabaseManager.shared.usersRef.child("\(uid)/birthdays")
@@ -233,6 +235,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
                     print("NOTIFY")
                     self.persons = newPersons
                     self.persons?.sort(by: { $0.daysLeft < $1.daysLeft })
+                    self.getMonthData()
                     completion(newPersons)
                 }
             }
@@ -258,7 +261,6 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
                     print("error getting url")
                     return
                 }
-                print("URLString: \(urlString)")
                 guard let url = URL(string: urlString) else {
                     print("fetchPicture: error converting string to url")
                     return
@@ -464,13 +466,13 @@ extension BetterHomeViewController {
         return false
     }
     func checkIfDateExists(date: Date) -> Bool {
-//        guard let allPersons = self.persons else { fatalError() }
-//        for person in allPersons {
-//            let birthday = person.birthday!
-//            if isSameMonthAndDay(date1: date, date2: birthday) {
-//                return true
-//            }
-//        }
+        guard let allPersons = self.persons else { fatalError() }
+        for person in allPersons {
+            let birthday = person.birthday!
+            if isSameMonthAndDay(date1: date, date2: birthday) {
+                return true
+            }
+        }
         return false
     }
     func getNextBirthday(date: Date) -> Date {

@@ -47,7 +47,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         )
     }
     
-    func configure(with date: CalendarDay, with index: Int) {
+    func configure(with date: CalendarDay) {
         // Reset to Default Cell
         dateLabel.layer.backgroundColor = UIColor.white.cgColor
         dateLabel.textColor = .black
