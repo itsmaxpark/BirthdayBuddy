@@ -22,31 +22,31 @@ class CoreDataManager {
     }
     
     func fetchPerson() {
-        do {
-            let request = Person.fetchRequest() as NSFetchRequest<Person>
-            
-            let sort = NSSortDescriptor(key: "daysLeft", ascending: true)
-            request.sortDescriptors = [sort]
-            
-            self.persons = try context.fetch(request)
-        } catch {
-            print("Error fetching Person")
-        }
+//        do {
+////            let request = Person.fetchRequest() as NSFetchRequest<Person>
+//
+//            let sort = NSSortDescriptor(key: "daysLeft", ascending: true)
+////            request.sortDescriptors = [sort]
+//
+////            self.persons = try context.fetch(request)
+//        } catch {
+//            print("Error fetching Person")
+//        }
     }
     
     func deleteAllBirthdays() {
-        for person in self.persons {
+//        for person in self.persons {
             // remove person
-            self.context.delete(person)
+//            self.context.delete(person)
             // save data
-            do {
-                try self.context.save()
-            } catch {
-                print("Error deleting person")
-            }
+//            do {
+//                try self.context.save()
+//            } catch {
+//                print("Error deleting person")
+//            }
             // refetch data
             self.fetchPerson()
-        }
+//        }
     }
     
     /// returns the number of birthdays associated with an account

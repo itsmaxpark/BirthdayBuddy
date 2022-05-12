@@ -32,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             didFinishLaunchingWithOptions: launchOptions
         )
         
+        Database.database().isPersistenceEnabled = true
+        
         return true
     }
     

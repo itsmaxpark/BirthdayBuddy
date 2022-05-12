@@ -46,7 +46,18 @@ class GoogleSignInHelper {
                     let firstName = nameComponents[0]
                     let lastName = nameComponents[1]
                     
-                    DatabaseManager.shared.addUser(for: BirthdayBuddyUser(id: userID, firstName: firstName, lastName: lastName, emailAddress: email))
+                    Auth.auth().fetchSignInMethods(forEmail: email) { providers, error in
+                        if error != nil {
+                            print(error?.localizedDescription as Any)
+                        }
+                        if let providers = providers, providers.contains("google.com") {
+                            DatabaseManager.shared.addUser(for: BirthdayBuddyUser(id: userID, firstName: firstName, lastName: lastName, emailAddress: email))
+                        } else {
+                            fatalError()
+                        }
+                        
+                    }
+                    
                     
                     WelcomeViewController.login()
                     print("GoogleSignInHelper: Logged In")

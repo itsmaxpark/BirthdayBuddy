@@ -7,12 +7,18 @@
 
 import UIKit
 import CoreData
+import FirebaseAuth
+import FirebaseDatabase
 
 class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    var persons: [Person]?
+    var persons: [Person]? {
+        didSet {
+            print("person count: \(persons?.count ?? 0)")
+        }
+    }
     let sections = ["Large", "Small"]
     var collectionView: UICollectionView!
     
@@ -30,6 +36,14 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         CollectionViewCellViewModel(name: "November", id: 11),
         CollectionViewCellViewModel(name: "December", id: 12),
     ]
+    
+//    private let birthdayRef: DatabaseReference = {
+//        let uid = Auth.auth().currentUser?.uid
+//        let ref = DatabaseManager.shared.usersRef.child("\(uid!)/birthdays")
+//        return ref
+//    }()
+    
+    private var refObservers: [DatabaseHandle] = []
     
     private let calendar = Calendar(identifier: .gregorian)
     private lazy var dateFormatter: DateFormatter = {
@@ -58,10 +72,6 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         collectionView.register(SmallCollectionViewCell.self, forCellWithReuseIdentifier: SmallCollectionViewCell.identifier)
         
         self.viewModels.rotate(array: &self.viewModels, k: -(getCurrentMonth()-1)) // rotate viewModels so that first month is current month
-        
-        fetchPerson()
-        collectionView.reloadData()
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -70,8 +80,16 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Refetch data because a new birthday may be added on viewWillAppear
-        fetchPerson()
-        self.collectionView.reloadData()
+        
+        fetchPerson { newPersons in
+            print("Inside Completion handler")
+            self.collectionView.reloadData()
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+//        refObservers.forEach(birthdayRef.removeObserver(withHandle:))
+        refObservers = []
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -130,8 +148,8 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
                 ) as? SmallCollectionViewCell else {
                     fatalError()
                 }
-                let person = persons?[indexPath.row]
-                cell.configure(person: person!)
+                guard let person = persons?[indexPath.row] else { fatalError() }
+                cell.configure(person: person)
                 
                 return cell
             }
@@ -146,15 +164,18 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
             let monthRow = indexPath.section
             let monthColumn = indexPath.item
             
-            let cellMonth: [CalendarDay] = self.monthData[monthIndex]
-            let cellPosition = (monthRow*7) + monthColumn
-            let cellDay: CalendarDay = cellMonth[cellPosition]
-            if cellDay.isSelected {
-                cell.isActive = true
-            } else {
-                cell.isActive = false
+            let isIndexValid = monthData.indices.contains(monthIndex)
+            if isIndexValid {
+                let cellMonth = self.monthData[monthIndex]
+                let cellPosition = (monthRow*7) + monthColumn
+                let cellDay: CalendarDay = cellMonth[cellPosition]
+                if cellDay.isSelected {
+                    cell.isActive = true
+                } else {
+                    cell.isActive = false
+                }
+                cell.configure(with: cellDay)
             }
-            cell.configure(with: cellDay, with: monthIndex)
             
             return cell
         }
@@ -173,6 +194,115 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
+    
+    /// fetches all Person models sorted by daysLeft, sets up the Calendar, and saves an array of models
+    func fetchPerson(_ completion: @escaping (([Person]) -> Void)) {
+        // add listener when database changes
+        print()
+        print("Fetching Person")
+        var newPersons: [Person] = []
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let birthdayRef = DatabaseManager.shared.usersRef.child("\(uid)/birthdays")
+        
+        birthdayRef
+            .queryOrdered(byChild: "daysLeft")
+            .observeSingleEvent(of: .value) { snapshot in
+                print("Value changed")
+                let group = DispatchGroup()
+                for child in snapshot.children {
+                    if let snapshot = child as? DataSnapshot,
+                       var person = Person(snapshot: snapshot) {
+                        // fetch picture from database storage
+                        group.enter()
+                        print("ENTER")
+                        
+                        self.fetchPicture(for: person) { data in
+                            print("Fetched picture")
+                            person.picture = data
+                            newPersons.append(person)
+                            
+                            print("LEAVE")
+                            group.leave()
+                        }
+                    } else {
+                        print("Error creating person object with snapshot")
+                        print("LEAVE")
+                        group.leave()
+                    }
+                }
+                
+                group.notify(queue: .main) {
+                    print("NOTIFY")
+                    self.persons = newPersons
+                    self.persons?.sort(by: { $0.daysLeft < $1.daysLeft })
+                    self.getMonthData()
+                    completion(newPersons)
+                }
+            }
+//        refObservers.append(completed)
+        //            updateDaysLeft()
+    }
+    
+    func fetchPicture(for person: Person, completion: @escaping ((Data?) -> Void)) {
+        guard let personID = person.id else {
+            print("error geting person id")
+            return
+        }
+        // Check if pictureURL exists
+        var imageData: Data?
+        guard let uid = Auth.auth().currentUser?.uid else {
+            print("error getting uid")
+            return
+        }
+        let birthdayRef = DatabaseManager.shared.usersRef.child("\(uid)/birthdays")
+        birthdayRef.child("\(personID)/pictureURL").observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                guard let urlString = snapshot.value as? String else {
+                    print("error getting url")
+                    return
+                }
+                guard let url = URL(string: urlString) else {
+                    print("fetchPicture: error converting string to url")
+                    return
+                }
+                let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                    guard let data = data, error == nil else {
+                        print(error?.localizedDescription as Any)
+                        return
+                    }
+                    imageData = data
+                    completion(imageData)
+                }
+                task.resume()
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
+    /// fetches all Person models, updates daysLeft attribute, saves back to Core Data
+    func updateDaysLeft() {
+//        do {
+//            let request = Person.fetchRequest() as NSFetchRequest<Person>
+//            let personModels = try context.fetch(request)
+//            for person in personModels {
+//                let nextBirthday = getNextBirthday(date: person.birthday!)
+//                let daysLeft = Calendar.current.numberOfDaysBetween(Date(), and: nextBirthday)
+//                person.daysLeft = Int64(daysLeft)
+//            }
+//            try self.context.save()
+//        } catch {
+//            print("Error fetching Person")
+//        }
+    }
+
+}
+
+// MARK: Flow Layout
+extension BetterHomeViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: floor(collectionView.bounds.width/7), height: collectionView.height/6)
+    }
     func createCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
             let section = self.sections[sectionIndex]
@@ -222,86 +352,6 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         layoutSection.boundarySupplementaryItems = [layoutSectionHeader]
         
         return layoutSection
-    }
-    /// fetches all Person models sorted by daysLeft, sets up the Calendar, and saves an array of models
-    func fetchPerson() {
-        do {
-            updateDaysLeft()
-            let request = Person.fetchRequest() as NSFetchRequest<Person>
-            
-            let sort = NSSortDescriptor(key: "daysLeft", ascending: true)
-            request.sortDescriptors = [sort]
-            
-            persons = try context.fetch(request)
-            getMonthData()
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        } catch {
-            print("Error fetching Person")
-        }
-    }
-    
-    /// fetches all Person models, updates daysLeft attribute, saves back to Core Data
-    func updateDaysLeft() {
-        do {
-            let request = Person.fetchRequest() as NSFetchRequest<Person>
-            let personModels = try context.fetch(request)
-            for person in personModels {
-                let nextBirthday = getNextBirthday(date: person.birthday!)
-                let daysLeft = Calendar.current.numberOfDaysBetween(Date(), and: nextBirthday)
-                person.daysLeft = Int64(daysLeft)
-            }
-            try self.context.save()
-        } catch {
-            print("Error fetching Person")
-        }
-    }
-    func getNextBirthday(date: Date) -> Date {
-        // Get current date
-        let currentDate = Calendar.current.dateComponents([.day, .month, .year], from: Date())
-        // get birthday date
-        var birthday = Calendar.current.dateComponents([.day,.month,.year], from: date)
-        // set birthday year to current year
-        birthday.year = currentDate.year
-        // if birthday already happened this year, add 1 to year
-        let numberOfDays = Calendar.current.dateComponents([.day], from: currentDate, to: birthday).day!
-        if numberOfDays < 0 {
-            birthday.year! += 1
-        }
-        let nextBirthday = Calendar.current.date(from: birthday)
-        
-        return nextBirthday!
-    }
-    func getMonthData() {
-        var newMonthData: [[CalendarDay]] = []
-        for month in 1...12 {
-            var dateComponents = DateComponents()
-            dateComponents.month = month
-            if month < getCurrentMonth() {
-                dateComponents.year = getCurrentYear() + 1
-            } else {
-                dateComponents.year = getCurrentYear()
-            }
-            let calendar = Calendar(identifier: .gregorian)
-            let date = calendar.date(from: dateComponents)
-            let newMonth = self.generateDaysInMonth(for: date!)
-            newMonthData.append(newMonth)
-        }
-        self.monthData = newMonthData
-        self.monthData.rotate(array: &self.monthData, k: -(getCurrentMonth()-1))
-    }
-    func getCurrentMonth() -> Int {
-        return Calendar.current.component(.month, from: Date())
-    }
-    func getCurrentYear() -> Int {
-        return Calendar.current.component(.year, from: Date())
-    }
-}
-// MARK: Flow Layout
-extension BetterHomeViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: floor(collectionView.bounds.width/7), height: collectionView.height/6)
     }
 }
 // MARK: CalendarSetup
@@ -425,6 +475,47 @@ extension BetterHomeViewController {
         }
         return false
     }
+    func getNextBirthday(date: Date) -> Date {
+        // Get current date
+        let currentDate = Calendar.current.dateComponents([.day, .month, .year], from: Date())
+        // get birthday date
+        var birthday = Calendar.current.dateComponents([.day,.month,.year], from: date)
+        // set birthday year to current year
+        birthday.year = currentDate.year
+        // if birthday already happened this year, add 1 to year
+        let numberOfDays = Calendar.current.dateComponents([.day], from: currentDate, to: birthday).day!
+        if numberOfDays < 0 {
+            birthday.year! += 1
+        }
+        let nextBirthday = Calendar.current.date(from: birthday)
+        
+        return nextBirthday!
+    }
+    func getMonthData() {
+        print("Getting Month Data")
+        var newMonthData: [[CalendarDay]] = []
+        for month in 1...12 {
+            var dateComponents = DateComponents()
+            dateComponents.month = month
+            if month < getCurrentMonth() {
+                dateComponents.year = getCurrentYear() + 1
+            } else {
+                dateComponents.year = getCurrentYear()
+            }
+            let calendar = Calendar(identifier: .gregorian)
+            let date = calendar.date(from: dateComponents)
+            let newMonth = self.generateDaysInMonth(for: date!)
+            newMonthData.append(newMonth)
+        }
+        self.monthData = newMonthData
+        self.monthData.rotate(array: &self.monthData, k: -(getCurrentMonth()-1))
+    }
+    func getCurrentMonth() -> Int {
+        return Calendar.current.component(.month, from: Date())
+    }
+    func getCurrentYear() -> Int {
+        return Calendar.current.component(.year, from: Date())
+    }
 }
 // MARK: Selectors
 extension BetterHomeViewController {
@@ -435,6 +526,11 @@ extension BetterHomeViewController {
 
 extension BetterHomeViewController: AddBirthdayViewControllerDelegate {
     func refreshCollectionView() {
-        self.fetchPerson()
+        fetchPerson { newPersons in
+            print("RefreshCollectionView fetchperson")
+//            self.persons = []
+//            self.persons = newPersons
+            self.collectionView.reloadData()
+        }
     }
 }

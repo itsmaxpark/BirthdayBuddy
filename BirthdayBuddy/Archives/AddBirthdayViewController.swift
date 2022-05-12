@@ -172,16 +172,16 @@ class AddBirthdayViewController: UIViewController {
     }
     
     func fetchPerson() {
-        do {
-            self.persons = try context.fetch(Person.fetchRequest())
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-            
-        } catch {
-            print("Error fetching Person")
-        }
+//        do {
+//            self.persons = try context.fetch(Person.fetchRequest())
+//            
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//            
+//        } catch {
+//            print("Error fetching Person")
+//        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -269,19 +269,19 @@ class AddBirthdayViewController: UIViewController {
             return
         }
         
-        let person = Person(context: self.context)
-        person.firstName = firstNameField.text
-        person.lastName = lastNameField.text
-        person.birthday = datePicker.date
-        let nextBirthday = getNextBirthday(date: person.birthday!)
-        let daysLeft = Calendar.current.numberOfDaysBetween(Date(), and: nextBirthday)
-        person.daysLeft = Int64(daysLeft)
-        // Save object to CoreData
-        do {
-            try self.context.save()
-        } catch {
-            print("Error saving to CoreData")
-        }
+//        let person = Person(context: self.context)
+//        person.firstName = firstNameField.text
+//        person.lastName = lastNameField.text
+//        person.birthday = datePicker.date
+//        let nextBirthday = getNextBirthday(date: person.birthday!)
+//        let daysLeft = Calendar.current.numberOfDaysBetween(Date(), and: nextBirthday)
+//        person.daysLeft = Int64(daysLeft)
+//        // Save object to CoreData
+//        do {
+//            try self.context.save()
+//        } catch {
+//            print("Error saving to CoreData")
+//        }
         
         // Repopulate persons array
         self.fetchPerson()
@@ -358,13 +358,13 @@ extension AddBirthdayViewController: UITableViewDataSource, UITableViewDelegate 
         
         let deleteButton = UIAlertAction(title: "Delete", style: .destructive) { action in
             // remove person
-            self.context.delete(person)
-            // save data
-            do {
-                try self.context.save()
-            } catch {
-                print("Error deleting person")
-            }
+//            self.context.delete(person)
+//            // save data
+//            do {
+//                try self.context.save()
+//            } catch {
+//                print("Error deleting person")
+//            }
             // refetch data
             self.fetchPerson()
         }
