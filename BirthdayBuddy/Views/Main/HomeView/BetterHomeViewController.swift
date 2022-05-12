@@ -82,8 +82,6 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         // Refetch data because a new birthday may be added on viewWillAppear
         
         fetchPerson { newPersons in
-//            self.persons = []
-//            self.persons = newPersons
             print("Inside Completion handler")
             self.collectionView.reloadData()
         }
@@ -201,45 +199,43 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         print("Fetching Person")
         getMonthData()
         var newPersons: [Person] = []
-//        persons = []
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let birthdayRef = DatabaseManager.shared.usersRef.child("\(uid)/birthdays")
         
         birthdayRef
             .queryOrdered(byChild: "daysLeft")
             .observeSingleEvent(of: .value) { snapshot in
-            print("Value changed")
-            let group = DispatchGroup()
-            for child in snapshot.children {
-                if let snapshot = child as? DataSnapshot,
-                   var person = Person(snapshot: snapshot) {
-                    // fetch picture from database storage
-                    group.enter()
-                    print("ENTER")
-                    
-                    self.fetchPicture(for: person) { data in
-                        print("Fetched picture")
-                        person.picture = data
-                        newPersons.append(person)
+                print("Value changed")
+                let group = DispatchGroup()
+                for child in snapshot.children {
+                    if let snapshot = child as? DataSnapshot,
+                       var person = Person(snapshot: snapshot) {
+                        // fetch picture from database storage
+                        group.enter()
+                        print("ENTER")
                         
+                        self.fetchPicture(for: person) { data in
+                            print("Fetched picture")
+                            person.picture = data
+                            newPersons.append(person)
+                            
+                            print("LEAVE")
+                            group.leave()
+                        }
+                    } else {
+                        print("Error creating person object with snapshot")
                         print("LEAVE")
                         group.leave()
                     }
-                } else {
-                    print("Error creating person object with snapshot")
-                    print("LEAVE")
-                    group.leave()
+                }
+                
+                group.notify(queue: .main) {
+                    print("NOTIFY")
+                    self.persons = newPersons
+                    self.persons?.sort(by: { $0.daysLeft < $1.daysLeft })
+                    completion(newPersons)
                 }
             }
-            group.notify(queue: .main) {
-                //                self.persons = []
-                print("NOTIFY")
-//                print(newPersons)
-                self.persons = newPersons
-                completion(newPersons)
-                print("Collection reloaded in dispatch group")
-            }
-        }
 //        refObservers.append(completed)
         //            updateDaysLeft()
     }
