@@ -262,8 +262,9 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
                     print("error getting url")
                     return
                 }
+                print("URLString: \(urlString)")
                 guard let url = URL(string: urlString) else {
-                    print("error converting string to url")
+                    print("fetchPicture: error converting string to url")
                     return
                 }
                 let task = URLSession.shared.dataTask(with: url) { data, response, error in

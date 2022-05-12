@@ -227,15 +227,17 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
             NotificationManager.shared.removeNotification(person: person)
             person.hasNotifications = false
         }
-        // Save object to CoreData
-//        do {
-//            try self.context.save()
-////            print(person.getDetails())
-//        } catch {
-//            print("Error saving to CoreData")
-//        }
         // Update data in Firebase
-        DatabaseManager.shared.updateBirthday(for: person)
+        DatabaseManager.shared.updateBirthday(for: person) { result in
+            switch result {
+            case .success():
+                print("didTapSave: updateBirthday was successful")
+                self.delegate?.refreshCollectionView()
+                self.dismiss(animated: true)
+            case .failure(let error):
+                print("didTapSave: \(error.localizedDescription)")
+            }
+        }
         self.dismiss(animated: true)
         // Repopulate persons array
     }
@@ -266,10 +268,17 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
             person.hasNotifications = false
         }
         // Save to Firebase Database
-        DatabaseManager.shared.addBirthday(for: person)
-        self.delegate?.refreshCollectionView()
-//        self.fetchPerson()
-        self.dismiss(animated: true)
+        print("didTapDone: Saving to firebase")
+        DatabaseManager.shared.addBirthday(for: person) { result in
+            switch result {
+            case .success():
+                print("didTapDone: addBirthday was successful")
+                self.delegate?.refreshCollectionView()
+                self.dismiss(animated: true)
+            case .failure(let error):
+                print("didTapDone: \(error.localizedDescription)")
+            }
+        }
     }
     @objc func didTapCancel() {
         // Dismisses the bottomSheet view controller with BetterAddBirthdayVC

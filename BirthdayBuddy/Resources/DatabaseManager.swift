@@ -37,7 +37,7 @@ extension DatabaseManager {
         })
     }
     
-    public func addBirthday(for person: Person) {
+    public func addBirthday(for person: Person, completion: @escaping ((Result<Void, Error>) -> Void)) {
         guard let uid = Auth.auth().currentUser?.uid else {
             fatalError("Unable to retrieve current user uid")
         }
@@ -58,30 +58,32 @@ extension DatabaseManager {
         ])
         
         guard let imageData = person.picture else {
-            print("Unable to retrieve image data")
+            print("New person has no picture")
             birthdaysRef.child("pictureURL").setValue(nil)
-            return
+            completion(.success(()))
+            return 
         }
         // Save Image reference to Cloud Storage
         guard let personID = person.id else { return }
         let imageRef = storageRef.child("pictures/\(uid)/\(personID).jpg")
         imageRef.putData(imageData, metadata: nil) { metedata, error in
-            if error != nil {
-                print(error?.localizedDescription as Any)
-                fatalError("Error saving image to firebase")
+            if let error = error {
+                completion(.failure(error))
             }
             imageRef.downloadURL { url, error in
-                if error != nil {
-                    fatalError("Error retrieving download url")
+                if let error = error {
+                    completion(.failure(error))
                 }
                 guard let url = url else { return }
+                print("addBirthday: Setting picture URL value")
                 birthdaysRef.child("pictureURL").setValue(url.absoluteString)
-                print("saved picture url to birthday path")
+                completion(.success(()))
+                print("addBirthday: saved picture url to birthday path")
             }
         }
     }
     
-    public func updateBirthday(for person: Person) {
+    public func updateBirthday(for person: Person, completion: @escaping ((Result<Void, Error>) -> Void)) {
         guard let uid = Auth.auth().currentUser?.uid else {
             fatalError("Unable to retrieve current user uid")
         }
@@ -101,6 +103,7 @@ extension DatabaseManager {
         guard let imageData = person.picture else {
             print("Unable to retrieve image data")
             birthdaysRef.updateChildValues(["pictureURL" : nil])
+            completion(.success(()))
             return
         }
         // Save Image reference to Cloud Storage
@@ -108,16 +111,16 @@ extension DatabaseManager {
         let imageRef = storageRef.child("pictures/\(uid)/\(personID).jpg")
         imageRef.delete()
         imageRef.putData(imageData, metadata: nil) { metedata, error in
-            if error != nil {
-                print(error?.localizedDescription as Any)
-                fatalError("Error saving image to firebase")
+            if let error = error {
+                completion(.failure(error))
             }
             imageRef.downloadURL { url, error in
-                if error != nil {
-                    fatalError("Error retrieving download url")
+                if let error = error {
+                    completion(.failure(error))
                 }
                 guard let url = url else { return }
                 birthdaysRef.updateChildValues(["pictureURL" : url.absoluteString])
+                completion(.success(()))
                 print("saved picture url to birthday path")
             }
         }
