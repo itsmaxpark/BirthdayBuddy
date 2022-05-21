@@ -14,22 +14,10 @@
 		505A97FF28052FDF00951937 /* NotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A97FE28052FDF00951937 /* NotificationsCell.swift */; };
 		505A9801280551BB00951937 /* DeleteButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A9800280551BB00951937 /* DeleteButtonCell.swift */; };
 		5066BA9627EA89DF008873BB /* GoogleSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5066BA9527EA89DF008873BB /* GoogleSignInHelper.swift */; };
-		5066BA9827ED35EC008873BB /* FlipPresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5066BA9727ED35EC008873BB /* FlipPresentAnimationController.swift */; };
-		5066BA9A27ED3748008873BB /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5066BA9927ED3748008873BB /* AnimationHelper.swift */; };
-		5068B65027F2B12E00F1EEE5 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B64F27F2B12E00F1EEE5 /* CustomTabBar.swift */; };
 		5068B65227F2B40300F1EEE5 /* TabBarBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65127F2B40300F1EEE5 /* TabBarBackgroundView.swift */; };
-		5068B65627F2C7E800F1EEE5 /* CarouselViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65527F2C7E800F1EEE5 /* CarouselViewCell.swift */; };
-		5068B65827F2C9E800F1EEE5 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65727F2C9E800F1EEE5 /* CollectionViewCell.swift */; };
 		5068B65A27F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65927F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift */; };
 		5068B65C27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65B27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift */; };
-		5068B66027F3BA1C00F1EEE5 /* CustomGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65F27F3BA1C00F1EEE5 /* CustomGradientLayer.swift */; };
-		5068B66227F6D38D00F1EEE5 /* CustomCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66127F6D38D00F1EEE5 /* CustomCollectionViewFlowLayout.swift */; };
-		5068B66427F7EA2A00F1EEE5 /* CollectionViewCellDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66327F7EA2A00F1EEE5 /* CollectionViewCellDetailViewController.swift */; };
-		5068B66627F829A200F1EEE5 /* PresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66527F829A200F1EEE5 /* PresentAnimator.swift */; };
-		5068B66827F82A4F00F1EEE5 /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66727F82A4F00F1EEE5 /* DismissAnimator.swift */; };
-		5068B66A27F8F71C00F1EEE5 /* CustomAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66927F8F71C00F1EEE5 /* CustomAnimationController.swift */; };
 		5068B66D27F90FC400F1EEE5 /* BirthdayBuddy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5068B66B27F90FC400F1EEE5 /* BirthdayBuddy.xcdatamodeld */; };
-		506C5A7A27FA51D90011A5B7 /* PersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A7927FA51D90011A5B7 /* PersonTableViewCell.swift */; };
 		506C5A7C27FA889C0011A5B7 /* BetterHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A7B27FA889C0011A5B7 /* BetterHomeViewController.swift */; };
 		506C5A7E27FA90B10011A5B7 /* LargeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A7D27FA90B10011A5B7 /* LargeCollectionViewCell.swift */; };
 		506C5A8027FA99D90011A5B7 /* SmallCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A7F27FA99D90011A5B7 /* SmallCollectionViewCell.swift */; };
@@ -45,15 +33,12 @@
 		506C5A9927FFB3A70011A5B7 /* YearToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A9827FFB3A70011A5B7 /* YearToggleCell.swift */; };
 		506C5A9B27FFC0A60011A5B7 /* CustomPickerDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A9A27FFC0A60011A5B7 /* CustomPickerDataModel.swift */; };
 		506C5A9D2800E84D0011A5B7 /* TextFieldCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A9C2800E84D0011A5B7 /* TextFieldCellViewModel.swift */; };
-		506C5A9F28010A470011A5B7 /* CropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A9E28010A470011A5B7 /* CropViewController.swift */; };
 		506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */; };
 		506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */; };
 		506D5B5D27D87325009A9F39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */; };
 		508EB38D27E2706700986FC8 /* FacebookSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508EB38C27E2706700986FC8 /* FacebookSignInHelper.swift */; };
 		5093F99627D6EB4800378967 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99527D6EB4800378967 /* WelcomeViewController.swift */; };
 		5093F99827D6ED3900378967 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99727D6ED3900378967 /* TabBarViewController.swift */; };
-		5093F99B27D6ED5700378967 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99A27D6ED5700378967 /* HomeViewController.swift */; };
-		5093F99D27D6ED6400378967 /* AddBirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99C27D6ED6400378967 /* AddBirthdayViewController.swift */; };
 		5093F99F27D6ED6A00378967 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99E27D6ED6A00378967 /* SettingsViewController.swift */; };
 		5093F9A327D7123200378967 /* IndieFlower-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5093F9A127D7123200378967 /* IndieFlower-Regular.ttf */; };
 		5093F9A827D71B2400378967 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F9A727D71B2400378967 /* Extensions.swift */; };
@@ -68,8 +53,6 @@
 		50DAC1A127DAEC71006098D6 /* BirthdayBuddyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1A027DAEC71006098D6 /* BirthdayBuddyUser.swift */; };
 		50DAC1A427DAEEB6006098D6 /* AppleSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1A327DAEEB6006098D6 /* AppleSignInHelper.swift */; };
 		50DAC1A627DAF237006098D6 /* EmailSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1A527DAF237006098D6 /* EmailSignInHelper.swift */; };
-		50DAC1A827DAF4D2006098D6 /* LogInSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1A727DAF4D2006098D6 /* LogInSheetViewController.swift */; };
-		50DAC1AA27DAF4DF006098D6 /* SignUpSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1A927DAF4DF006098D6 /* SignUpSheetViewController.swift */; };
 		50DAC1B127DBEA44006098D6 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1B027DBEA43006098D6 /* SettingsTableViewCell.swift */; };
 		50DAC1B327DBEC97006098D6 /* SignOutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1B227DBEC97006098D6 /* SignOutHelper.swift */; };
 		50DAC1B527DC0E79006098D6 /* CustomDesigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DAC1B427DC0E79006098D6 /* CustomDesigns.swift */; };
@@ -87,22 +70,10 @@
 		505A97FE28052FDF00951937 /* NotificationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCell.swift; sourceTree = "<group>"; };
 		505A9800280551BB00951937 /* DeleteButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButtonCell.swift; sourceTree = "<group>"; };
 		5066BA9527EA89DF008873BB /* GoogleSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInHelper.swift; sourceTree = "<group>"; };
-		5066BA9727ED35EC008873BB /* FlipPresentAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipPresentAnimationController.swift; sourceTree = "<group>"; };
-		5066BA9927ED3748008873BB /* AnimationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationHelper.swift; sourceTree = "<group>"; };
-		5068B64F27F2B12E00F1EEE5 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		5068B65127F2B40300F1EEE5 /* TabBarBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarBackgroundView.swift; sourceTree = "<group>"; };
-		5068B65527F2C7E800F1EEE5 /* CarouselViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewCell.swift; sourceTree = "<group>"; };
-		5068B65727F2C9E800F1EEE5 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		5068B65927F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewCellViewModel.swift; sourceTree = "<group>"; };
 		5068B65B27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellViewModel.swift; sourceTree = "<group>"; };
-		5068B65F27F3BA1C00F1EEE5 /* CustomGradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGradientLayer.swift; sourceTree = "<group>"; };
-		5068B66127F6D38D00F1EEE5 /* CustomCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
-		5068B66327F7EA2A00F1EEE5 /* CollectionViewCellDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellDetailViewController.swift; sourceTree = "<group>"; };
-		5068B66527F829A200F1EEE5 /* PresentAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentAnimator.swift; sourceTree = "<group>"; };
-		5068B66727F82A4F00F1EEE5 /* DismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
-		5068B66927F8F71C00F1EEE5 /* CustomAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimationController.swift; sourceTree = "<group>"; };
 		5068B66C27F90FC400F1EEE5 /* BirthdayBuddy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BirthdayBuddy.xcdatamodel; sourceTree = "<group>"; };
-		506C5A7927FA51D90011A5B7 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell.swift; sourceTree = "<group>"; };
 		506C5A7B27FA889C0011A5B7 /* BetterHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterHomeViewController.swift; sourceTree = "<group>"; };
 		506C5A7D27FA90B10011A5B7 /* LargeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeCollectionViewCell.swift; sourceTree = "<group>"; };
 		506C5A7F27FA99D90011A5B7 /* SmallCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -118,15 +89,12 @@
 		506C5A9827FFB3A70011A5B7 /* YearToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearToggleCell.swift; sourceTree = "<group>"; };
 		506C5A9A27FFC0A60011A5B7 /* CustomPickerDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerDataModel.swift; sourceTree = "<group>"; };
 		506C5A9C2800E84D0011A5B7 /* TextFieldCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCellViewModel.swift; sourceTree = "<group>"; };
-		506C5A9E28010A470011A5B7 /* CropViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropViewController.swift; sourceTree = "<group>"; };
 		506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenBackgroundView.swift; sourceTree = "<group>"; };
 		506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenButtonsView.swift; sourceTree = "<group>"; };
 		506D5B5C27D87325009A9F39 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		508EB38C27E2706700986FC8 /* FacebookSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookSignInHelper.swift; sourceTree = "<group>"; };
 		5093F99527D6EB4800378967 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		5093F99727D6ED3900378967 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		5093F99A27D6ED5700378967 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		5093F99C27D6ED6400378967 /* AddBirthdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBirthdayViewController.swift; sourceTree = "<group>"; };
 		5093F99E27D6ED6A00378967 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5093F9A127D7123200378967 /* IndieFlower-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IndieFlower-Regular.ttf"; sourceTree = "<group>"; };
 		5093F9A727D71B2400378967 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -142,8 +110,6 @@
 		50DAC1A027DAEC71006098D6 /* BirthdayBuddyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayBuddyUser.swift; sourceTree = "<group>"; };
 		50DAC1A327DAEEB6006098D6 /* AppleSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInHelper.swift; sourceTree = "<group>"; };
 		50DAC1A527DAF237006098D6 /* EmailSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSignInHelper.swift; sourceTree = "<group>"; };
-		50DAC1A727DAF4D2006098D6 /* LogInSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInSheetViewController.swift; sourceTree = "<group>"; };
-		50DAC1A927DAF4DF006098D6 /* SignUpSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSheetViewController.swift; sourceTree = "<group>"; };
 		50DAC1B027DBEA43006098D6 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		50DAC1B227DBEC97006098D6 /* SignOutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutHelper.swift; sourceTree = "<group>"; };
 		50DAC1B427DC0E79006098D6 /* CustomDesigns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDesigns.swift; sourceTree = "<group>"; };
@@ -256,7 +222,6 @@
 				5056AF2027D6B803008601FF /* SceneDelegate.swift */,
 				5056AF2727D6B803008601FF /* Assets.xcassets */,
 				509A6E252802B78000655DD9 /* CoreDataManager.swift */,
-				5068B66927F8F71C00F1EEE5 /* CustomAnimationController.swift */,
 				50DAC1B427DC0E79006098D6 /* CustomDesigns.swift */,
 				50DAC19C27DAE342006098D6 /* DatabaseManager.swift */,
 				5093F9A727D71B2400378967 /* Extensions.swift */,
@@ -303,17 +268,6 @@
 				506C5A9527FFB1C10011A5B7 /* BirthdayForm */,
 			);
 			path = AddBirthday;
-			sourceTree = "<group>";
-		};
-		506C5A8127FAA09B0011A5B7 /* OldHomeView */ = {
-			isa = PBXGroup;
-			children = (
-				5093F99A27D6ED5700378967 /* HomeViewController.swift */,
-				5068B65527F2C7E800F1EEE5 /* CarouselViewCell.swift */,
-				5068B65727F2C9E800F1EEE5 /* CollectionViewCell.swift */,
-				5068B66327F7EA2A00F1EEE5 /* CollectionViewCellDetailViewController.swift */,
-			);
-			path = OldHomeView;
 			sourceTree = "<group>";
 		};
 		506C5A9427FFB1B80011A5B7 /* BottomSheet */ = {
@@ -393,19 +347,6 @@
 		50DAC1AD27DBE6DD006098D6 /* Archives */ = {
 			isa = PBXGroup;
 			children = (
-				506C5A9E28010A470011A5B7 /* CropViewController.swift */,
-				5068B65F27F3BA1C00F1EEE5 /* CustomGradientLayer.swift */,
-				506C5A8127FAA09B0011A5B7 /* OldHomeView */,
-				5068B64F27F2B12E00F1EEE5 /* CustomTabBar.swift */,
-				50DAC1A727DAF4D2006098D6 /* LogInSheetViewController.swift */,
-				50DAC1A927DAF4DF006098D6 /* SignUpSheetViewController.swift */,
-				5066BA9927ED3748008873BB /* AnimationHelper.swift */,
-				5066BA9727ED35EC008873BB /* FlipPresentAnimationController.swift */,
-				5093F99C27D6ED6400378967 /* AddBirthdayViewController.swift */,
-				506C5A7927FA51D90011A5B7 /* PersonTableViewCell.swift */,
-				5068B66127F6D38D00F1EEE5 /* CustomCollectionViewFlowLayout.swift */,
-				5068B66527F829A200F1EEE5 /* PresentAnimator.swift */,
-				5068B66727F82A4F00F1EEE5 /* DismissAnimator.swift */,
 			);
 			path = Archives;
 			sourceTree = "<group>";
@@ -541,34 +482,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				505A9801280551BB00951937 /* DeleteButtonCell.swift in Sources */,
-				5068B66427F7EA2A00F1EEE5 /* CollectionViewCellDetailViewController.swift in Sources */,
-				5068B66227F6D38D00F1EEE5 /* CustomCollectionViewFlowLayout.swift in Sources */,
-				5066BA9A27ED3748008873BB /* AnimationHelper.swift in Sources */,
 				509A6E262802B78000655DD9 /* CoreDataManager.swift in Sources */,
 				5093F99627D6EB4800378967 /* WelcomeViewController.swift in Sources */,
 				5066BA9627EA89DF008873BB /* GoogleSignInHelper.swift in Sources */,
-				5093F99D27D6ED6400378967 /* AddBirthdayViewController.swift in Sources */,
 				509A6E2C2803C35B00655DD9 /* CalendarDay.swift in Sources */,
 				506C5A8F27FBFABD0011A5B7 /* BetterAddBirthdayViewController.swift in Sources */,
 				509A6E2E2803C45900655DD9 /* MonthMetadata.swift in Sources */,
 				506C5A9D2800E84D0011A5B7 /* TextFieldCellViewModel.swift in Sources */,
-				5068B66A27F8F71C00F1EEE5 /* CustomAnimationController.swift in Sources */,
 				506C5A7C27FA889C0011A5B7 /* BetterHomeViewController.swift in Sources */,
 				506C5A8627FAC4460011A5B7 /* Person.swift in Sources */,
-				5068B65027F2B12E00F1EEE5 /* CustomTabBar.swift in Sources */,
-				5066BA9827ED35EC008873BB /* FlipPresentAnimationController.swift in Sources */,
-				50DAC1AA27DAF4DF006098D6 /* SignUpSheetViewController.swift in Sources */,
 				509A6E24280231EF00655DD9 /* SettingsTableViewCellViewModel.swift in Sources */,
 				506C5A9B27FFC0A60011A5B7 /* CustomPickerDataModel.swift in Sources */,
 				50DAC1A427DAEEB6006098D6 /* AppleSignInHelper.swift in Sources */,
-				5068B66627F829A200F1EEE5 /* PresentAnimator.swift in Sources */,
 				505A97F7280505AF00951937 /* NotificationManager.swift in Sources */,
 				506C5A8027FA99D90011A5B7 /* SmallCollectionViewCell.swift in Sources */,
 				5056AF1F27D6B803008601FF /* AppDelegate.swift in Sources */,
 				505A97FF28052FDF00951937 /* NotificationsCell.swift in Sources */,
 				506C5A9127FF7C090011A5B7 /* TextFieldCell.swift in Sources */,
 				5093F99827D6ED3900378967 /* TabBarViewController.swift in Sources */,
-				5068B66827F82A4F00F1EEE5 /* DismissAnimator.swift in Sources */,
 				5093F9A827D71B2400378967 /* Extensions.swift in Sources */,
 				50DAC1B127DBEA44006098D6 /* SettingsTableViewCell.swift in Sources */,
 				506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */,
@@ -580,27 +511,20 @@
 				506C5A8B27FBED5C0011A5B7 /* AddBirthdayBottomSheetTableViewCell.swift in Sources */,
 				5056AF2127D6B803008601FF /* SceneDelegate.swift in Sources */,
 				50DAC1B327DBEC97006098D6 /* SignOutHelper.swift in Sources */,
-				5068B65627F2C7E800F1EEE5 /* CarouselViewCell.swift in Sources */,
 				5068B65227F2B40300F1EEE5 /* TabBarBackgroundView.swift in Sources */,
 				509A6E2A2803A58800655DD9 /* CalendarCollectionViewCell.swift in Sources */,
 				506C5A8D27FBF1810011A5B7 /* AddBirthdayBottomSheetTableViewCellViewModel.swift in Sources */,
-				50DAC1A827DAF4D2006098D6 /* LogInSheetViewController.swift in Sources */,
 				506C5A9327FFA2150011A5B7 /* DatePickerCell.swift in Sources */,
 				5068B65A27F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift in Sources */,
-				506C5A7A27FA51D90011A5B7 /* PersonTableViewCell.swift in Sources */,
 				50DAC1A127DAEC71006098D6 /* BirthdayBuddyUser.swift in Sources */,
-				5068B65827F2C9E800F1EEE5 /* CollectionViewCell.swift in Sources */,
 				50DAC19D27DAE342006098D6 /* DatabaseManager.swift in Sources */,
 				506C5A9927FFB3A70011A5B7 /* YearToggleCell.swift in Sources */,
-				506C5A9F28010A470011A5B7 /* CropViewController.swift in Sources */,
 				509A6E2228015BC900655DD9 /* DetailBirthdayViewController.swift in Sources */,
 				508EB38D27E2706700986FC8 /* FacebookSignInHelper.swift in Sources */,
-				5068B66027F3BA1C00F1EEE5 /* CustomGradientLayer.swift in Sources */,
 				5068B65C27F2CD1F00F1EEE5 /* CollectionViewCellViewModel.swift in Sources */,
 				50DAC1B527DC0E79006098D6 /* CustomDesigns.swift in Sources */,
 				506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */,
 				5068B66D27F90FC400F1EEE5 /* BirthdayBuddy.xcdatamodeld in Sources */,
-				5093F99B27D6ED5700378967 /* HomeViewController.swift in Sources */,
 				506C5A8327FAA1240011A5B7 /* SectionHeaderView.swift in Sources */,
 				5093F99F27D6ED6A00378967 /* SettingsViewController.swift in Sources */,
 			);
@@ -661,7 +585,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -717,7 +641,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -740,6 +664,8 @@
 				DEVELOPMENT_TEAM = C5L746M7FW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BirthdayBuddy/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"Allow Birthday Buddy to Access Camera\"";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"Allow Birthday Buddy to Access Photo Library\"";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -772,6 +698,8 @@
 				DEVELOPMENT_TEAM = C5L746M7FW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BirthdayBuddy/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"Allow Birthday Buddy to Access Camera\"";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"Allow Birthday Buddy to Access Photo Library\"";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

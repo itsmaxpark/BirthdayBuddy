@@ -18,6 +18,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: UIFont.systemFontSize+5)
         label.textAlignment = .center
+        label.layer.borderColor = UIColor.white.cgColor
         label.layer.borderWidth = 2
         label.layer.cornerRadius = 10
         label.layer.masksToBounds = true

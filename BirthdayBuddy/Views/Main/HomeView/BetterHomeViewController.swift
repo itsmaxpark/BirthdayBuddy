@@ -12,13 +12,7 @@ import FirebaseDatabase
 
 class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    var persons: [Person]? {
-        didSet {
-            print("person count: \(persons?.count ?? 0)")
-        }
-    }
+    var persons: [Person]?
     let sections = ["Large", "Small"]
     var collectionView: UICollectionView!
     
@@ -37,14 +31,6 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         CollectionViewCellViewModel(name: "December", id: 12),
     ]
     
-//    private let birthdayRef: DatabaseReference = {
-//        let uid = Auth.auth().currentUser?.uid
-//        let ref = DatabaseManager.shared.usersRef.child("\(uid!)/birthdays")
-//        return ref
-//    }()
-    
-    private var refObservers: [DatabaseHandle] = []
-    
     private let calendar = Calendar(identifier: .gregorian)
     private lazy var dateFormatter: DateFormatter = {
       let dateFormatter = DateFormatter()
@@ -60,8 +46,8 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositionalLayout())
         collectionView.autoresizingMask = [.flexibleWidth,.flexibleHeight]
         collectionView.backgroundColor = .tertiarySystemBackground
+        collectionView.alwaysBounceVertical = false
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bell.fill"), style: .plain, target: self, action: #selector(didTapBell))
         view.addSubview(collectionView)
         
         collectionView.delegate = self
@@ -72,6 +58,11 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         collectionView.register(SmallCollectionViewCell.self, forCellWithReuseIdentifier: SmallCollectionViewCell.identifier)
         
         self.viewModels.rotate(array: &self.viewModels, k: -(getCurrentMonth()-1)) // rotate viewModels so that first month is current month
+        
+        if let settingsNavVC = self.tabBarController?.viewControllers?[2] as? UINavigationController,
+           let settingsVC = settingsNavVC.viewControllers[0] as? SettingsViewController {
+                settingsVC.delegate = self
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -80,16 +71,9 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Refetch data because a new birthday may be added on viewWillAppear
-        
         fetchPerson { newPersons in
-            print("Inside Completion handler")
             self.collectionView.reloadData()
         }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-//        refObservers.forEach(birthdayRef.removeObserver(withHandle:))
-        refObservers = []
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -198,8 +182,6 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
     /// fetches all Person models sorted by daysLeft, sets up the Calendar, and saves an array of models
     func fetchPerson(_ completion: @escaping (([Person]) -> Void)) {
         // add listener when database changes
-        print()
-        print("Fetching Person")
         var newPersons: [Person] = []
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let birthdayRef = DatabaseManager.shared.usersRef.child("\(uid)/birthdays")
@@ -207,40 +189,29 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
         birthdayRef
             .queryOrdered(byChild: "daysLeft")
             .observeSingleEvent(of: .value) { snapshot in
-                print("Value changed")
                 let group = DispatchGroup()
                 for child in snapshot.children {
                     if let snapshot = child as? DataSnapshot,
                        var person = Person(snapshot: snapshot) {
                         // fetch picture from database storage
                         group.enter()
-                        print("ENTER")
-                        
                         self.fetchPicture(for: person) { data in
-                            print("Fetched picture")
                             person.picture = data
                             newPersons.append(person)
-                            
-                            print("LEAVE")
                             group.leave()
                         }
                     } else {
-                        print("Error creating person object with snapshot")
-                        print("LEAVE")
                         group.leave()
                     }
                 }
                 
                 group.notify(queue: .main) {
-                    print("NOTIFY")
                     self.persons = newPersons
                     self.persons?.sort(by: { $0.daysLeft < $1.daysLeft })
                     self.getMonthData()
                     completion(newPersons)
                 }
             }
-//        refObservers.append(completed)
-        //            updateDaysLeft()
     }
     
     func fetchPicture(for person: Person, completion: @escaping ((Data?) -> Void)) {
@@ -279,29 +250,12 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
             }
         }
     }
-    
-    /// fetches all Person models, updates daysLeft attribute, saves back to Core Data
-    func updateDaysLeft() {
-//        do {
-//            let request = Person.fetchRequest() as NSFetchRequest<Person>
-//            let personModels = try context.fetch(request)
-//            for person in personModels {
-//                let nextBirthday = getNextBirthday(date: person.birthday!)
-//                let daysLeft = Calendar.current.numberOfDaysBetween(Date(), and: nextBirthday)
-//                person.daysLeft = Int64(daysLeft)
-//            }
-//            try self.context.save()
-//        } catch {
-//            print("Error fetching Person")
-//        }
-    }
-
 }
 
 // MARK: Flow Layout
 extension BetterHomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: floor(collectionView.bounds.width/7), height: collectionView.height/6)
+        return CGSize(width: floor(collectionView.bounds.width/7), height: floor(collectionView.bounds.height/6))
     }
     func createCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
@@ -327,7 +281,7 @@ extension BetterHomeViewController: UICollectionViewDelegateFlowLayout {
         let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
         layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
         
-        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.93), heightDimension: .estimated(350))
+        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.93), heightDimension: .estimated(view.height*0.4))
         let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitems: [layoutItem])
         
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
@@ -341,7 +295,7 @@ extension BetterHomeViewController: UICollectionViewDelegateFlowLayout {
         let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
         layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5)
         
-        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.93), heightDimension: .fractionalWidth(0.75))
+        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.93), heightDimension: .fractionalWidth(0.70))
         let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: layoutGroupSize, subitems: [layoutItem])
         
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
@@ -492,7 +446,6 @@ extension BetterHomeViewController {
         return nextBirthday!
     }
     func getMonthData() {
-        print("Getting Month Data")
         var newMonthData: [[CalendarDay]] = []
         for month in 1...12 {
             var dateComponents = DateComponents()
@@ -517,20 +470,17 @@ extension BetterHomeViewController {
         return Calendar.current.component(.year, from: Date())
     }
 }
-// MARK: Selectors
-extension BetterHomeViewController {
-    @objc func didTapBell() {
-        NotificationManager.shared.getAllNotifications()
-    }
-}
 
 extension BetterHomeViewController: AddBirthdayViewControllerDelegate {
     func refreshCollectionView() {
         fetchPerson { newPersons in
-            print("RefreshCollectionView fetchperson")
-//            self.persons = []
-//            self.persons = newPersons
             self.collectionView.reloadData()
         }
+    }
+}
+
+extension BetterHomeViewController: SettingsViewControllerDelegate {
+    func getNumberOfBirthdays() -> String {
+        return "There are \(persons!.count) birthdays on your account"
     }
 }

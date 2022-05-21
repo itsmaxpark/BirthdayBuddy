@@ -19,7 +19,7 @@ class NotificationsCell: UITableViewCell {
     
     private let cellTextLabel: UILabel = {
         let label = UILabel()
-        label.text = "Get Notifications"
+        label.text = "Notifications"
         label.textColor = .label
         return label
     }()

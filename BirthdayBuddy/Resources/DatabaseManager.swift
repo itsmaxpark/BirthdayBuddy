@@ -101,7 +101,6 @@ extension DatabaseManager {
             "pictureURL" : " "
         ])
         guard let imageData = person.picture else {
-            print("Unable to retrieve image data")
             birthdaysRef.updateChildValues(["pictureURL" : nil])
             completion(.success(()))
             return

@@ -20,12 +20,8 @@ class SmallCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 15
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
-    }()
-    private let infoView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 0
-        return view
     }()
     private let nameLabel: UILabel = {
         let label = UILabel()
@@ -33,18 +29,21 @@ class SmallCollectionViewCell: UICollectionViewCell {
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     private let birthdayLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20.0)
         label.textColor = .darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     private let daysUntilBirthdayLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20.0)
         label.textColor = .darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -53,7 +52,6 @@ class SmallCollectionViewCell: UICollectionViewCell {
         
         addSubview(cellView)
         cellView.addSubview(pictureView)
-        cellView.addSubview(infoView)
         cellView.addSubview(nameLabel)
         cellView.addSubview(birthdayLabel)
         cellView.addSubview(daysUntilBirthdayLabel)
@@ -70,36 +68,36 @@ class SmallCollectionViewCell: UICollectionViewCell {
             width: contentView.bounds.width,
             height: contentView.bounds.height
         )
-        pictureView.frame = CGRect(
-            x: cellView.left+10,
-            y: (cellView.height-60)/2,
-            width: 60,
-            height: 60
-        )
-        infoView.frame = CGRect(
-            x: pictureView.right+5,
-            y: 5,
-            width: contentView.width-pictureView.width-20,
-            height: contentView.height-10
-        )
-        nameLabel.frame = CGRect(
-            x: pictureView.right+10,
-            y: 10,
-            width: cellView.width-pictureView.right-40 ,
-            height: nameLabel.intrinsicContentSize.height
-        )
-        birthdayLabel.frame = CGRect(
-            x: nameLabel.left,
-            y: nameLabel.bottom,
-            width: birthdayLabel.intrinsicContentSize.width,
-            height: birthdayLabel.intrinsicContentSize.height
-        )
-        daysUntilBirthdayLabel.frame = CGRect(
-            x: cellView.right-daysUntilBirthdayLabel.intrinsicContentSize.width-10,
-            y: birthdayLabel.top,
-            width: daysUntilBirthdayLabel.intrinsicContentSize.width,
-            height: daysUntilBirthdayLabel.intrinsicContentSize.height
-        )
+        let pictureViewConstraints = [
+            pictureView.centerYAnchor.constraint(equalTo: cellView.centerYAnchor),
+            pictureView.heightAnchor.constraint(equalTo: cellView.heightAnchor, constant: -10),
+            pictureView.widthAnchor.constraint(equalTo: cellView.heightAnchor, constant: -10),
+            pictureView.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 5)
+        ]
+        NSLayoutConstraint.activate(pictureViewConstraints)
+        
+        let nameLabelConstraints = [
+            nameLabel.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 10),
+            nameLabel.bottomAnchor.constraint(equalTo: birthdayLabel.topAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: 10),
+            nameLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 300)
+        ]
+        NSLayoutConstraint.activate(nameLabelConstraints)
+        
+        let birthdayLabelConstraints = [
+            birthdayLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10),
+            birthdayLabel.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -10),
+            birthdayLabel.leadingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: 10)
+        ]
+        NSLayoutConstraint.activate(birthdayLabelConstraints)
+        
+        let daysUntilBirthdayLabelConstraints = [
+            daysUntilBirthdayLabel.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -10),
+            daysUntilBirthdayLabel.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -10),
+            daysUntilBirthdayLabel.leadingAnchor.constraint(equalTo: birthdayLabel.trailingAnchor, constant: 10),
+        ]
+        NSLayoutConstraint.activate(daysUntilBirthdayLabelConstraints)
+        
     }
     
     override func prepareForReuse() {
@@ -128,8 +126,6 @@ class SmallCollectionViewCell: UICollectionViewCell {
     func configure(person: Person) {
         
         cellView.backgroundColor = UIColor(named: "Light Blue")
-        infoView.backgroundColor = .clear
-        infoView.layer.cornerRadius = 20
         
         guard
             let firstName = person.firstName,

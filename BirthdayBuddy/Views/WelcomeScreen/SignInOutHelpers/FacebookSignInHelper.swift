@@ -16,7 +16,7 @@ class FacebookSignInHelper {
     func performSignIn(with view: WelcomeScreenButtonsView) {
         let loginManager = LoginManager()
         loginManager.logIn(permissions: ["email","public_profile"], from: view.findViewController()) { result, error in
-            guard error == nil, let token = result?.token?.tokenString else {
+            guard error == nil else {
                 print("FacebookSignInHelper: Encountered Error - \(String(describing: error))")
                 return
             }
@@ -24,6 +24,7 @@ class FacebookSignInHelper {
                 print("FacebookSignInHelper: Login Cancelled")
                 return
             }
+            let token = AccessToken.current!.tokenString
             let facebookRequest = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], tokenString: token, version: nil, httpMethod: .get)
             
             facebookRequest.start { _, result, error in
@@ -41,6 +42,7 @@ class FacebookSignInHelper {
                 
                 let firstName = nameComponents[0]
                 let lastName = nameComponents[1]
+                
                 let credential = FacebookAuthProvider.credential(withAccessToken: token)
                 
                 Auth.auth().fetchSignInMethods(forEmail: email) { fetchResult, error in

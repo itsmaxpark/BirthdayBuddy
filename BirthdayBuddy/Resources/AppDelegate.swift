@@ -20,7 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseConfiguration().setLoggerLevel(FirebaseLoggerLevel.min)
         FirebaseApp.configure()
-        
+        Database.database().isPersistenceEnabled = true
+        Profile.enableUpdatesOnAccessTokenChange(true)
         if let user = Auth.auth().currentUser {
             print("You have signed back in as \(user.uid) using \(user.email ?? "Unknown Email")")
             
@@ -32,7 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             didFinishLaunchingWithOptions: launchOptions
         )
         
-        Database.database().isPersistenceEnabled = true
         
         return true
     }

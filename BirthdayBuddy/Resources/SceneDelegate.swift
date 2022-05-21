@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -21,17 +22,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
     
-//        if WelcomeViewController.isLoggedIn {
-//            print("SceneDelegate: Showing TabBarViewController")
-//            window.rootViewController = TabBarViewController()
-//        } else {
-//            print("SceneDelegate: Showing WelcomeViewController")
-//            window.rootViewController = WelcomeViewController()
-//        }
         window.rootViewController = TabBarViewController()
         window.makeKeyAndVisible()
         self.window = window
     }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+          guard let url = URLContexts.first?.url else {
+              return
+          }
+          let _ = ApplicationDelegate.shared.application(
+              UIApplication.shared,
+              open: url,
+              sourceApplication: nil,
+              annotation: [UIApplication.OpenURLOptionsKey.annotation])
+      }
     
     func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
         guard let window = self.window else {

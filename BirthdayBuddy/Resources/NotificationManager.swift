@@ -38,9 +38,6 @@ class NotificationManager: ObservableObject {
         center.add(request) { error in
             if let error = error {
                 print("Error reistering request with Notification Center: \(error)")
-            } else {
-//                print("NotificationManager: New Notification Created")
-//                print("Notifcation with id\(uuidString)")
             }
         }
     }
@@ -81,7 +78,6 @@ class NotificationManager: ObservableObject {
         
         center.removePendingNotificationRequests(withIdentifiers: [uuidString])
         center.removeDeliveredNotifications(withIdentifiers: [uuidString])
-//        print("Notification removed")
     }
     func getNumberOfDeliveredNotifications() -> String {
         let center = UNUserNotificationCenter.current()

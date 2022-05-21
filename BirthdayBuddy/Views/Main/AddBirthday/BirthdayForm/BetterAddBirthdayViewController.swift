@@ -37,13 +37,6 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
     var chosenPerson: Person?
     var isEditModeOn: Bool = false
     
-    private let birthdayRef: DatabaseReference = {
-        guard let uid = Auth.auth().currentUser?.uid else {
-            fatalError()
-        }
-        let ref = DatabaseManager.shared.usersRef.child("\(uid)/birthdays")
-        return ref
-    }()
     struct Section {
         var isOpen: Bool = false
     }
@@ -56,6 +49,7 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
     private let pictureBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     private let pictureView: UIImageView = {
@@ -64,6 +58,7 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         imageView.image = UIImage(systemName: "person.crop.circle.fill")
         imageView.layer.cornerRadius = 60
         imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     private let changePictureButton: UIButton = {
@@ -71,9 +66,10 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         button.titleLabel?.font = UIFont.appFont(name: "Rubik", size: 20)
         button.setTitle("Change Photo", for: .normal)
         button.setTitleColor(UIColor.systemBlue, for: .normal)
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = 10
         button.layer.borderColor = UIColor.systemBlue.cgColor
         button.layer.borderWidth = 2.0
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     private let tableView: UITableView = {
@@ -137,24 +133,30 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        pictureBackgroundView.frame = CGRect(
-            x: 0,
-            y: navigationController?.navigationBar.bottom ?? 5,
-            width: view.bounds.width,
-            height: view.bounds.height/5 + 20
-        )
-        pictureView.frame = CGRect(
-            x: pictureBackgroundView.center.x-60,
-            y: pictureBackgroundView.center.y-140,
-            width: 120,
-            height: 120
-        )
-        changePictureButton.frame = CGRect(
-            x: pictureView.left-20,
-            y: pictureView.bottom+10,
-            width: 160,
-            height: 40
-        )
+        let pictureBackgroundViewConstraints = [
+            pictureBackgroundView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            pictureBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            pictureBackgroundView.widthAnchor.constraint(equalToConstant: view.width),
+            pictureBackgroundView.heightAnchor.constraint(equalToConstant: view.height/4)
+        ]
+        NSLayoutConstraint.activate(pictureBackgroundViewConstraints)
+        
+        let pictureViewConstraints = [
+            pictureView.topAnchor.constraint(equalTo: pictureBackgroundView.topAnchor, constant: 20),
+            pictureView.centerXAnchor.constraint(equalTo: pictureBackgroundView.centerXAnchor),
+            pictureView.widthAnchor.constraint(equalToConstant: view.width/3),
+            pictureView.heightAnchor.constraint(equalToConstant: view.width/3)
+        ]
+        NSLayoutConstraint.activate(pictureViewConstraints)
+        
+        let changePictureButtonConstraints = [
+            changePictureButton.centerXAnchor.constraint(equalTo: pictureView.centerXAnchor, constant: 0),
+            changePictureButton.topAnchor.constraint(equalTo: pictureView.bottomAnchor, constant: 10),
+            changePictureButton.bottomAnchor.constraint(equalTo: pictureBackgroundView.bottomAnchor, constant: -10),
+            changePictureButton.widthAnchor.constraint(equalTo: pictureView.widthAnchor, multiplier: 1.2),
+        ]
+        NSLayoutConstraint.activate(changePictureButtonConstraints)
+        
         tableView.frame = CGRect(
             x: 0,
             y: pictureBackgroundView.bottom,
@@ -170,7 +172,6 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
     }
     
     func fetchPerson() {
-        print("Refreshing collection view")
         self.delegate?.refreshCollectionView()
     }
     func editModeSetup() {
@@ -198,7 +199,6 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
 // MARK: Selectors
     /// Save selector used when updating a Person model
     @objc func didTapSave() {
-        print("Did Tap Save Button")
         guard let field = textFieldViewModels[0].text, !field.isEmpty else {
             alertFirstName()
             return
@@ -207,8 +207,8 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
             print("Failed to get person")
             return
         }
-        person.firstName = textFieldViewModels[0].text
-        person.lastName = textFieldViewModels[1].text
+        person.firstName = textFieldViewModels[0].text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        person.lastName = textFieldViewModels[1].text?.trimmingCharacters(in: .whitespacesAndNewlines)
         person.birthday = birthdayDate
         
         let nextBirthday = getNextBirthday(date: person.birthday!)
@@ -219,11 +219,9 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         person.picture = imageData
         
         if isNotificationSwitchOn {
-            print("Has notifications")
             NotificationManager.shared.createBirthdayNotification(person: person)
             person.hasNotifications = true
         } else {
-            print("No notifications created")
             NotificationManager.shared.removeNotification(person: person)
             person.hasNotifications = false
         }
@@ -231,7 +229,6 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         DatabaseManager.shared.updateBirthday(for: person) { result in
             switch result {
             case .success():
-                print("didTapSave: updateBirthday was successful")
                 self.delegate?.refreshCollectionView()
                 self.dismiss(animated: true)
             case .failure(let error):
@@ -242,14 +239,13 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         // Repopulate persons array
     }
     @objc func didTapDone() {
-        print("Did tap Done button")
         // Create new person object
         guard let field = textFieldViewModels[0].text, !field.isEmpty else {
             alertFirstName()
             return
         }
-        let firstName = textFieldViewModels[0].text
-        let lastName = textFieldViewModels[1].text
+        let firstName = textFieldViewModels[0].text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let lastName = textFieldViewModels[1].text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let birthday = birthdayDate
         let imageData = self.chosenImage?.jpegData(compressionQuality: 1.0)
         let id = UUID()
@@ -264,17 +260,17 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
             NotificationManager.shared.createBirthdayNotification(person: person)
             person.hasNotifications = true
         } else {
-            print("No notifications created")
             person.hasNotifications = false
         }
         // Save to Firebase Database
-        print("didTapDone: Saving to firebase")
         DatabaseManager.shared.addBirthday(for: person) { result in
             switch result {
             case .success():
-                print("didTapDone: addBirthday was successful")
                 self.delegate?.refreshCollectionView()
-                self.dismiss(animated: true)
+                self.dismiss(animated: true) {
+                    print("in dismiss")
+                    self.navigationController!.popToRootViewController(animated: true)
+                }
             case .failure(let error):
                 print("didTapDone: \(error.localizedDescription)")
             }
@@ -360,7 +356,6 @@ extension BetterAddBirthdayViewController: UITableViewDelegate, UITableViewDataS
                     ) as? DatePickerCell else {
                         fatalError()
                     }
-                    print("Inside birthday section is open\n")
                     cell.customDelegate = self
                     cell.showYear = isCalendarSwitchOn
                     cell.setupDatePicker(date: self.birthdayDate ?? Date())
@@ -472,12 +467,6 @@ extension BetterAddBirthdayViewController: UIImagePickerControllerDelegate {
         self.dismiss(animated: true)
     }
 }
-// MARK: CropViewControllerDelegate
-extension BetterAddBirthdayViewController: CropViewControllerDelegate {
-    func didCropImage(image: UIImage?) {
-        self.chosenImage = image
-    }
-}
 // MARK: TextFieldCellDelegate
 extension BetterAddBirthdayViewController: TextFieldCellDelegate {
     func didEditTextField(textField: UITextField) {
@@ -519,7 +508,6 @@ extension BetterAddBirthdayViewController: DeleteButtonCellDelegate {
             DatabaseManager.shared.deletePicture(for: person)
             // refresh collection view
             self.delegate?.refreshCollectionView()
-            print("Birthday was deleted")
             self.dismiss(animated: true)
         }
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

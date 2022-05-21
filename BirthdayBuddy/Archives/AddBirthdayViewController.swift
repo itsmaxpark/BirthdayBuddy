@@ -167,23 +167,6 @@ class AddBirthdayViewController: UIViewController {
         
     }
     
-    @objc func didTapPicture() {
-        print("Picture tapped")
-    }
-    
-    func fetchPerson() {
-//        do {
-//            self.persons = try context.fetch(Person.fetchRequest())
-//            
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//            
-//        } catch {
-//            print("Error fetching Person")
-//        }
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

@@ -24,7 +24,6 @@ class DatePickerCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
     var showYear: Bool = false {
         didSet {
             datePicker.reloadAllComponents()
-            print("showYear is \(showYear)")
         }
     }
     
@@ -83,7 +82,6 @@ class DatePickerCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
                 if showYear {
                     let selectedYear = pickerView.selectedRow(inComponent: 2)
                     year = comps.year!-selectedYear
-                    print(year)
                 }
             }
             var selectMonthComps = DateComponents()
@@ -129,7 +127,6 @@ class DatePickerCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
         }
     }
     func setupEditMode(date: Date) {
-        print("Setup edit mode")
         let components = Calendar.current.dateComponents([.day, .month, .year], from: date)
         guard let month = components.month else { return }
         guard let day = components.day else { return }
@@ -138,9 +135,7 @@ class DatePickerCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
 //        refreshBirthdayText()
     }
     func setupDatePicker(date: Date) {
-        print("Setup Date Picker")
         self.initialDate = date
-        print(initialDate)
         let components = Calendar.current.dateComponents([.day, .month, .year], from: date)
         guard let month = components.month else { return }
         guard let day = components.day else { return }
@@ -155,7 +150,6 @@ class DatePickerCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
         }
     }
     func refreshBirthdayText() {
-        print("Refresh Birthday Text")
         var year = Calendar.current.component(.year, from: .now)
         let month = datePicker.selectedRow(inComponent: 0)+1
         let day = datePicker.selectedRow(inComponent: 1)+1

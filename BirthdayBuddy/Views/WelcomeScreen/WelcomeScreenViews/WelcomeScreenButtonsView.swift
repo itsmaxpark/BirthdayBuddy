@@ -348,9 +348,7 @@ class WelcomeScreenButtonsView: UIView {
             alertPasswordLength()
             return
         }
-        print("WelcomeScreenButtonsView: Calling emailsigninhelper")
         EmailSignInHelper.shared.performCreateUser(firstName: firstName, lastName: lastName, email: email, password: password, view: self) { [weak self] in
-            print("WelcomeScreenButtonsView: completion handler")
             self?.didTapReturn()
             self?.alertUserRegistered()
         }

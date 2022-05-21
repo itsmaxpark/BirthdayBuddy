@@ -79,15 +79,13 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print("Saved text: \(String(describing: textField.text))")
-        self.text = textField.text
+        self.text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         textField.isUserInteractionEnabled = false
         self.delegate?.didEditTextField(textField: textField)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-//        textField.text = nil
     }
     
     func configure(with viewModel: TextFieldCellViewModel) {

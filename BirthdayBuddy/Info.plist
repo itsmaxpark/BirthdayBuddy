@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>&quot;Allow Birthday Buddy to Access Camera&quot;</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>&quot;Allow Birthday Buddy to Access Photo Library&quot;</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
