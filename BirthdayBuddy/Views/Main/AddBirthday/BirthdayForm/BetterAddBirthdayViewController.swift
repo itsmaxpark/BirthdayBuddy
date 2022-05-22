@@ -74,6 +74,7 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
     }()
     private let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
+        table.translatesAutoresizingMaskIntoConstraints = false
         table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         table.register(TextFieldCell.self, forCellReuseIdentifier: TextFieldCell.identifier)
         table.register(DatePickerCell.self, forCellReuseIdentifier: DatePickerCell.identifier)
@@ -117,7 +118,7 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
         
         view.addSubview(pictureBackgroundView)
         pictureBackgroundView.addSubview(pictureView)
-        pictureBackgroundView.addSubview(changePictureButton)
+        view.addSubview(changePictureButton)
         changePictureButton.addTarget(self, action: #selector(didTapChange), for: .touchUpInside)
         
         view.addSubview(tableView)
@@ -133,36 +134,29 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let pictureBackgroundViewConstraints = [
-            pictureBackgroundView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pictureBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            pictureBackgroundView.widthAnchor.constraint(equalToConstant: view.width),
-            pictureBackgroundView.heightAnchor.constraint(equalToConstant: view.height/4)
-        ]
-        NSLayoutConstraint.activate(pictureBackgroundViewConstraints)
         
         let pictureViewConstraints = [
-            pictureView.topAnchor.constraint(equalTo: pictureBackgroundView.topAnchor, constant: 20),
-            pictureView.centerXAnchor.constraint(equalTo: pictureBackgroundView.centerXAnchor),
+            pictureView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            pictureView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pictureView.widthAnchor.constraint(equalToConstant: view.width/3),
-            pictureView.heightAnchor.constraint(equalToConstant: view.width/3)
+            pictureView.heightAnchor.constraint(equalToConstant: view.width/3),
         ]
         NSLayoutConstraint.activate(pictureViewConstraints)
         
         let changePictureButtonConstraints = [
-            changePictureButton.centerXAnchor.constraint(equalTo: pictureView.centerXAnchor, constant: 0),
+            changePictureButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
             changePictureButton.topAnchor.constraint(equalTo: pictureView.bottomAnchor, constant: 10),
-            changePictureButton.bottomAnchor.constraint(equalTo: pictureBackgroundView.bottomAnchor, constant: -10),
             changePictureButton.widthAnchor.constraint(equalTo: pictureView.widthAnchor, multiplier: 1.2),
         ]
         NSLayoutConstraint.activate(changePictureButtonConstraints)
         
-        tableView.frame = CGRect(
-            x: 0,
-            y: pictureBackgroundView.bottom,
-            width: view.width,
-            height: view.height - pictureBackgroundView.height
-        )
+        let tableViewConstraints = [
+            tableView.topAnchor.constraint(equalTo: changePictureButton.bottomAnchor, constant: 20),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+            tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+        ]
+        NSLayoutConstraint.activate(tableViewConstraints)
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

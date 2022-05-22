@@ -15,13 +15,13 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
         label.font = UIFont.systemFont(ofSize: UIFont.systemFontSize+5)
         label.textAlignment = .center
         label.layer.borderColor = UIColor.white.cgColor
         label.layer.borderWidth = 2
         label.layer.cornerRadius = 10
         label.layer.masksToBounds = true
+        label.textColor = .black
         return label
     }()
     
@@ -29,7 +29,6 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         backgroundColor = .white
-        contentView.layer.backgroundColor = UIColor.white.cgColor
         contentView.addSubview(dateLabel)
         isUserInteractionEnabled = false
     }
@@ -38,12 +37,17 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         fatalError()
     }
     
+    override func prepareForReuse() {
+        dateLabel.layer.backgroundColor = UIColor.white.cgColor
+        dateLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
+        dateLabel.layer.borderColor = UIColor.white.cgColor
+    }
     override func layoutSubviews() {
         super.layoutSubviews()
         dateLabel.frame = CGRect(
-            x: 8,
+            x: 6,
             y: 2,
-            width: contentView.width-16,
+            width: contentView.width-12,
             height: contentView.height-4
         )
     }
@@ -51,10 +55,10 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     func configure(with date: CalendarDay) {
         // Reset to Default Cell
         dateLabel.layer.backgroundColor = UIColor.white.cgColor
-        dateLabel.textColor = .black
         dateLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
         dateLabel.text = date.number
         dateLabel.layer.borderColor = UIColor.white.cgColor
+        dateLabel.textColor = .black
         
         if !date.isWithinDisplayedMonth {
             dateLabel.textColor = .lightGray

@@ -30,6 +30,8 @@ class SmallCollectionViewCell: UICollectionViewCell {
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.minimumScaleFactor = 0.5
+        label.numberOfLines = 0
         return label
     }()
     private let birthdayLabel: UILabel = {
@@ -37,6 +39,8 @@ class SmallCollectionViewCell: UICollectionViewCell {
         label.font = UIFont.systemFont(ofSize: 20.0)
         label.textColor = .darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0
         return label
     }()
     private let daysUntilBirthdayLabel: UILabel = {
@@ -44,6 +48,10 @@ class SmallCollectionViewCell: UICollectionViewCell {
         label.font = UIFont.systemFont(ofSize: 20.0)
         label.textColor = .darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .right
+        label.minimumScaleFactor = 0.5
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0
         return label
     }()
     
@@ -77,22 +85,24 @@ class SmallCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate(pictureViewConstraints)
         
         let nameLabelConstraints = [
-            nameLabel.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 10),
-            nameLabel.bottomAnchor.constraint(equalTo: birthdayLabel.topAnchor),
+            nameLabel.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 5),
+//            nameLabel.bottomAnchor.constraint(equalTo: birthdayLabel.topAnchor),
             nameLabel.leadingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: 10),
-            nameLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 300)
+            nameLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 300),
+            nameLabel.heightAnchor.constraint(equalTo: cellView.heightAnchor, multiplier: 0.4)
         ]
         NSLayoutConstraint.activate(nameLabelConstraints)
         
         let birthdayLabelConstraints = [
-            birthdayLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10),
-            birthdayLabel.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -10),
-            birthdayLabel.leadingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: 10)
+            birthdayLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 0),
+            birthdayLabel.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -5),
+            birthdayLabel.leadingAnchor.constraint(equalTo: pictureView.trailingAnchor, constant: 10),
+            birthdayLabel.widthAnchor.constraint(equalTo: cellView.widthAnchor, multiplier: 0.3),
         ]
         NSLayoutConstraint.activate(birthdayLabelConstraints)
         
         let daysUntilBirthdayLabelConstraints = [
-            daysUntilBirthdayLabel.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -10),
+            daysUntilBirthdayLabel.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -5),
             daysUntilBirthdayLabel.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -10),
             daysUntilBirthdayLabel.leadingAnchor.constraint(equalTo: birthdayLabel.trailingAnchor, constant: 10),
         ]

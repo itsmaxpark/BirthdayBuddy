@@ -57,6 +57,7 @@ class WelcomeScreenBackgroundView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(named: "BirthdayBuddyLogoTransparent")
+//        ?.withTintColor(UIColor(named: "Light Blue") ?? UIColor.clear)
 
         return imageView
         
@@ -88,9 +89,9 @@ class WelcomeScreenBackgroundView: UIView {
         super.layoutSubviews()
         
         let circleDiameter: CGFloat = 800
-        let logoSize: CGFloat = 260
-        let topCircleHeight: CGFloat = 188 // 188 pixels of the top circle is showing
-        let bottomCircleHeight:CGFloat = 344 // 344 pixels of the bottom circle is showing
+        let logoSize: CGFloat = height * 0.28
+        let topCircleHeight: CGFloat = height * 0.2 // 188 pixels of the top circle is showing
+        let bottomCircleHeight:CGFloat = height * 0.37 // 344 pixels of the bottom circle is showing
         
         // Background
         topCircleView.frame = CGRect(
@@ -113,7 +114,7 @@ class WelcomeScreenBackgroundView: UIView {
         )
         birthdayBuddyTextLabel.frame = CGRect(
             x: (width-birthdayBuddyTextLabel.intrinsicContentSize.width)/2,
-            y: (topCircleHeight-20)/2,
+            y: (topCircleHeight-birthdayBuddyTextLabel.intrinsicContentSize.height)/2,
             width: birthdayBuddyTextLabel.intrinsicContentSize.width,
             height: birthdayBuddyTextLabel.intrinsicContentSize.height
         )

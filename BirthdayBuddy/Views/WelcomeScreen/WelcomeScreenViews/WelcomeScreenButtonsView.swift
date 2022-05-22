@@ -23,6 +23,7 @@ class WelcomeScreenButtonsView: UIView {
         let button = UIButton()
         button.titleLabel?.font = UIFont.appFont(name: "IndieFlower", size: 36)
         button.setTitle("Log In", for: .normal)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
     }()
     private let signInAppleButton: UIButton = {
@@ -32,16 +33,17 @@ class WelcomeScreenButtonsView: UIView {
         let font = UIFont.boldSystemFont(ofSize: 19)
         let config = CustomDesigns.shared.createCustomButtonConfig(text: text, font: font, image: image ?? UIImage(), insets: insets)
         let button = UIButton(configuration: config, primaryAction: nil)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
     }()
     private let signInGoogleButton: UIButton = {
         let text = "Continue with Google"
         let image = UIImage(named: "googleLogo")?.resizeImageTo(size: CGSize(width: 22, height: 22))
         let insets = NSDirectionalEdgeInsets(top: 2, leading: 10, bottom: 2, trailing: 20)
-//        let font = UIFont.appFont(name: "Roboto-Medium", size: 19)
         let font = UIFont.boldSystemFont(ofSize: 19)
         let config = CustomDesigns.shared.createCustomButtonConfig(text: text, font: font, image: image ?? UIImage(), insets: insets)
         let button = UIButton(configuration: config, primaryAction: nil)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
     }()
     private let signInFacebookButton: UIButton = {
@@ -51,6 +53,7 @@ class WelcomeScreenButtonsView: UIView {
         let font = UIFont.boldSystemFont(ofSize: 19)
         let config = CustomDesigns.shared.createCustomButtonConfig(text: text, font: font, image: image ?? UIImage(), insets: insets)
         let button = UIButton(configuration: config, primaryAction: nil)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
     }()
     
@@ -173,85 +176,93 @@ class WelcomeScreenButtonsView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        let bottomCircleHeight: CGFloat = height * 0.37 < 330 ? height*0.38 : 330 * (height/926)
+        var buttonWidth: CGFloat = width < 390 ? width*0.8 : width*0.74
+        buttonWidth = width == 320 ? width*0.9 : buttonWidth
+        let buttonHeightMultiplier: CGFloat = height < 700 ? 0.75 : 1
+        let buttonHeight: CGFloat = buttonWidth * 0.14 * buttonHeightMultiplier
+        let textFieldHeight: CGFloat = buttonWidth * 0.14
+        let padding: CGFloat = ([844, 812] as Array<CGFloat>).contains(height) ? 10 : 0
+        
         signUpButton.frame = CGRect(
             x: (width-signUpButton.intrinsicContentSize.width)/2,
-            y: height-330,
+            y: height - bottomCircleHeight + padding,
             width: signUpButton.intrinsicContentSize.width,
-            height: signUpButton.intrinsicContentSize.height
+            height: signUpButton.intrinsicContentSize.height * buttonHeightMultiplier
         )
         signInAppleButton.frame = CGRect(
-            x: (width-300)/2,
+            x: (width-buttonWidth)/2,
             y: signUpButton.bottom,
-            width: 300,
-            height: 44
+            width: buttonWidth,
+            height: buttonHeight
         )
         signInGoogleButton.frame = CGRect(
-            x: (width-300)/2,
+            x: (width-buttonWidth)/2,
             y: signInAppleButton.bottom+10,
-            width: 300,
-            height: 44
+            width: buttonWidth,
+            height: buttonHeight
         )
         signInFacebookButton.frame = CGRect(
-            x: (width-300)/2,
+            x: (width-buttonWidth)/2,
             y: signInGoogleButton.bottom+10,
-            width: 300,
-            height: 44
+            width: buttonWidth,
+            height: buttonHeight
         )
         logInButton.frame = CGRect(
             x: (width-logInButton.intrinsicContentSize.width)/2,
-            y: height-100,
+            y: signInFacebookButton.bottom,
             width: logInButton.intrinsicContentSize.width,
-            height: logInButton.intrinsicContentSize.height
+            height: logInButton.intrinsicContentSize.height * buttonHeightMultiplier
         )
         
         returnButton.frame = CGRect(
             x: (width-returnButton.intrinsicContentSize.width)/2,
-            y: height-330,
+            y: height - bottomCircleHeight + padding,
             width: returnButton.intrinsicContentSize.width,
-            height: returnButton.intrinsicContentSize.height
+            height: returnButton.intrinsicContentSize.height * buttonHeightMultiplier
         )
         emailTextField.frame = CGRect(
-            x: (width-300)/2,
+            x: (width-buttonWidth)/2,
             y: returnButton.bottom,
-            width: 300,
-            height: 44
+            width: buttonWidth,
+            height: textFieldHeight
         )
         passwordTextField.frame = CGRect(
-            x: (width-300)/2,
+            x: (width-buttonWidth)/2,
             y: emailTextField.bottom+10,
-            width: 300,
-            height: 44
+            width: buttonWidth,
+            height: textFieldHeight
         )
         enterButton.frame = CGRect(
             x: (width-enterButton.intrinsicContentSize.width)/2,
-            y: height-100,
+            y: height-100 * buttonHeightMultiplier,
             width: enterButton.intrinsicContentSize.width,
-            height: enterButton.intrinsicContentSize.height
+            height: enterButton.intrinsicContentSize.height * buttonHeightMultiplier
         )
         
         registerButton.frame = CGRect(
             x: (width-registerButton.intrinsicContentSize.width)/2,
             y: height-100,
             width: registerButton.intrinsicContentSize.width,
-            height: registerButton.intrinsicContentSize.height
+            height: registerButton.intrinsicContentSize.height * buttonHeightMultiplier
         )
         firstNameField.frame = CGRect(
-            x: (width-300)/2,
+            x: (width-buttonWidth)/2,
             y: returnButton.bottom,
-            width: 300,
-            height: 44
+            width: buttonWidth,
+            height: textFieldHeight
         )
         lastNameField.frame = CGRect(
-            x: (width-300)/2,
+            x: (width-buttonWidth)/2,
             y: emailTextField.bottom+10,
-            width: 300,
-            height: 44
+            width: buttonWidth,
+            height: textFieldHeight
         )
         nextButton.frame = CGRect(
             x: (width-registerButton.intrinsicContentSize.width)/2,
-            y: height-100,
+            y: height-100 * buttonHeightMultiplier,
             width: registerButton.intrinsicContentSize.width,
-            height: registerButton.intrinsicContentSize.height
+            height: registerButton.intrinsicContentSize.height * buttonHeightMultiplier
         )
     }
     

@@ -15,6 +15,7 @@ class LargeCollectionViewCell: UICollectionViewCell {
         label.textColor = .black
         label.textAlignment = .center
         label.font = UIFont.appFont(name: "Rubik", size: 50)
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     private let previewView: UIView = {
@@ -37,58 +38,58 @@ class LargeCollectionViewCell: UICollectionViewCell {
     }()
     private let sundayLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
         label.textAlignment = .center
         label.text = "SUN"
         label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textColor = .black
         return label
     }()
     private let mondayLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
         label.textAlignment = .center
         label.text = "MON"
         label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textColor = .black
         return label
     }()
     private let tuesdayLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
         label.textAlignment = .center
         label.text = "TUE"
         label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textColor = .black
         return label
     }()
     private let wednesdayLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
         label.textAlignment = .center
         label.text = "WED"
         label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textColor = .black
         return label
     }()
     private let thursdayLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
         label.textAlignment = .center
         label.text = "THU"
         label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textColor = .black
         return label
     }()
     private let fridayLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
         label.textAlignment = .center
         label.text = "FRI"
         label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textColor = .black
         return label
     }()
     private let satudayLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
         label.textAlignment = .center
         label.text = "SAT"
         label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -119,7 +120,7 @@ class LargeCollectionViewCell: UICollectionViewCell {
             x: (contentView.width/2) - (monthLabel.intrinsicContentSize.width/2),
             y: 10,
             width: monthLabel.intrinsicContentSize.width,
-            height: monthLabel.intrinsicContentSize.height
+            height: contentView.height/5
         )
         previewView.frame = CGRect(
             x: 10,
