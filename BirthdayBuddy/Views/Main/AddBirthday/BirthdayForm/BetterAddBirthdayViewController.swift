@@ -201,6 +201,8 @@ class BetterAddBirthdayViewController: UIViewController, UITextFieldDelegate, UI
             print("Failed to get person")
             return
         }
+        
+        
         person.firstName = textFieldViewModels[0].text?.trimmingCharacters(in: .whitespacesAndNewlines)
         person.lastName = textFieldViewModels[1].text?.trimmingCharacters(in: .whitespacesAndNewlines)
         person.birthday = birthdayDate
