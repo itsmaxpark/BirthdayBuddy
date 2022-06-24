@@ -11,18 +11,19 @@ import FirebaseAuth
 import FirebaseStorage
 
 class DatabaseManager {
+    
     static let shared = DatabaseManager()
+    
     public let database = Database.database().reference()
     public let usersRef = Database.database().reference().child("users")
     public let storageRef = Storage.storage().reference()
     public let storage = Storage.storage()
 }
-// MARK: - Account Management
 
+// MARK: - Account Management
 extension DatabaseManager {
     /// Insert new user to database
     public func addUser(for user: BirthdayBuddyUser) {
-        
         database.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.hasChild(user.id){
                 print("Account already exists")

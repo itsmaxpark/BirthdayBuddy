@@ -10,26 +10,13 @@ import CoreData
 import FirebaseAuth
 import FirebaseDatabase
 
-class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var persons: [Person]?
-    let sections = ["Large", "Small"]
-    var collectionView: UICollectionView!
+    private var persons: [Person]?
+    private let sections = ["Large", "Small"]
+    public var collectionView: UICollectionView!
     
-    private var viewModels: [CollectionViewCellViewModel] = [
-        CollectionViewCellViewModel(name: "January", id: 1),
-        CollectionViewCellViewModel(name: "February", id: 2),
-        CollectionViewCellViewModel(name: "March", id: 3),
-        CollectionViewCellViewModel(name: "April", id: 4),
-        CollectionViewCellViewModel(name: "May", id: 5),
-        CollectionViewCellViewModel(name: "June", id: 6),
-        CollectionViewCellViewModel(name: "July", id: 7),
-        CollectionViewCellViewModel(name: "August", id: 8),
-        CollectionViewCellViewModel(name: "September", id: 9),
-        CollectionViewCellViewModel(name: "October", id: 10),
-        CollectionViewCellViewModel(name: "November", id: 11),
-        CollectionViewCellViewModel(name: "December", id: 12),
-    ]
+    private var viewModels = CalendarMonthViewModels.viewModels
     
     private let calendar = Calendar(identifier: .gregorian)
     private lazy var dateFormatter: DateFormatter = {
@@ -253,7 +240,7 @@ class BetterHomeViewController: UIViewController, UICollectionViewDelegate, UICo
 }
 
 // MARK: Flow Layout
-extension BetterHomeViewController: UICollectionViewDelegateFlowLayout {
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: floor(collectionView.bounds.width/7), height: floor(collectionView.bounds.height/6))
     }
@@ -309,7 +296,7 @@ extension BetterHomeViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 // MARK: CalendarSetup
-extension BetterHomeViewController {
+extension HomeViewController {
     enum CalendarDataError: Error {
         case metadataGeneration
     }
@@ -471,7 +458,7 @@ extension BetterHomeViewController {
     }
 }
 
-extension BetterHomeViewController: AddBirthdayViewControllerDelegate {
+extension HomeViewController: AddBirthdayViewControllerDelegate {
     func refreshCollectionView() {
         fetchPerson { newPersons in
             self.collectionView.reloadData()
@@ -479,7 +466,7 @@ extension BetterHomeViewController: AddBirthdayViewControllerDelegate {
     }
 }
 
-extension BetterHomeViewController: SettingsViewControllerDelegate {
+extension HomeViewController: SettingsViewControllerDelegate {
     func getNumberOfBirthdays() -> String {
         return "There are \(persons!.count) birthdays on your account"
     }

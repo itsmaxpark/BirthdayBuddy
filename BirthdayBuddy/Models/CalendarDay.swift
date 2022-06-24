@@ -8,6 +8,7 @@
 import Foundation
 
 struct CalendarDay {
+    
   let date: Date
   let number: String
   let isSelected: Bool

@@ -183,7 +183,7 @@ class LargeCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func configure(with viewModel: CollectionViewCellViewModel) {
+    func configure(with viewModel: CalendarMonthViewModel) {
         monthLabel.text = viewModel.name
         self.contentView.backgroundColor = UIColor(named: "Light Blue")
     }

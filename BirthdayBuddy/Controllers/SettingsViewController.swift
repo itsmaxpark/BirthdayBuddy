@@ -71,7 +71,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete all birthdays on your account?", preferredStyle: .alert)
             let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             let confirmButton = UIAlertAction(title: "Confirm", style: .destructive, handler: { _ in
-                CoreDataManager.shared.deleteAllBirthdays()
+//                CoreDataManager.shared.deleteAllBirthdays()
             })
             alert.addAction(confirmButton)
             alert.addAction(cancelButton)

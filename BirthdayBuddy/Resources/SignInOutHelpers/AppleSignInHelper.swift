@@ -10,6 +10,8 @@ import CryptoKit
 import AuthenticationServices
 import FirebaseAuth
 
+fileprivate var currentNonce: String?
+
 class AppleSignInHelper {
     
     static let shared = AppleSignInHelper()
@@ -32,21 +34,15 @@ class AppleSignInHelper {
         let nonce = randomNonceString()
         request.nonce = sha256(nonce)
         currentNonce = nonce
-        print("Nonce \(currentNonce!)")
         
         return request
-        
     }
 }
 
-fileprivate var currentNonce: String?
-
 extension WelcomeScreenButtonsView: ASAuthorizationControllerDelegate {
+    
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        
-        guard let error = error as? ASAuthorizationError else {
-            return
-        }
+        guard let error = error as? ASAuthorizationError else { return }
         
         switch error.code {
         case .canceled:
@@ -67,7 +63,6 @@ extension WelcomeScreenButtonsView: ASAuthorizationControllerDelegate {
     }
     
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             guard let nonce = currentNonce else {
                 fatalError("Invalid State: A login callback was received, but no login request was sent")
@@ -82,12 +77,12 @@ extension WelcomeScreenButtonsView: ASAuthorizationControllerDelegate {
             }
             
             UserDefaults.standard.set(appleIDCredential.user, forKey: "appleAuthorizedUserIdKey")
-           
+            
             print("Creating credentials")
             let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
             
             Auth.auth().signIn(with: credential) { authResult, error in
-
+                
                 guard let result = authResult else {
                     print("AppleSignInHelper: Error creating a new user")
                     return
@@ -124,8 +119,7 @@ extension WelcomeScreenButtonsView: ASAuthorizationControllerPresentationContext
 // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
 private func randomNonceString(length: Int = 32) -> String {
     precondition(length > 0)
-    let charset: [Character] =
-    Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+    let charset: [Character] = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
     var result = ""
     var remainingLength = length
     
