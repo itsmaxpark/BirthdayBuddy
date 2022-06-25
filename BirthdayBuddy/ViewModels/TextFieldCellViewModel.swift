@@ -8,6 +8,7 @@
 import Foundation
 
 struct TextFieldCellViewModel {
+    
     var text: String?
     let placeholder: String
 }

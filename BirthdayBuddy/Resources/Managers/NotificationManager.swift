@@ -10,7 +10,9 @@ import UserNotifications
 
 
 class NotificationManager: ObservableObject {
+    
   static let shared = NotificationManager()
+    
   var settings: UNNotificationSettings?
 
     func createBirthdayNotification(person: Person) {
@@ -41,6 +43,7 @@ class NotificationManager: ObservableObject {
             }
         }
     }
+    
     func configureNotificationTime(date: Date) -> Date {
         let birthdayDateComponents = Calendar.current.dateComponents([.month, .day], from: date)
         var notificationDateComponents = DateComponents()
@@ -62,15 +65,18 @@ class NotificationManager: ObservableObject {
         
         return notificationDate!
     }
+    
     func getCurrentYear() -> Int {
         return Calendar.current.component(.year, from: Date())
     }
+    
     func getAllNotifications() {
         let center = UNUserNotificationCenter.current()
         center.getPendingNotificationRequests { requests in
             print("There are \(requests.count) active notifications")
         }
     }
+    
     func removeNotification(person: Person) {
         let center = UNUserNotificationCenter.current()
         
@@ -79,6 +85,7 @@ class NotificationManager: ObservableObject {
         center.removePendingNotificationRequests(withIdentifiers: [uuidString])
         center.removeDeliveredNotifications(withIdentifiers: [uuidString])
     }
+    
     func getNumberOfDeliveredNotifications() -> String {
         let center = UNUserNotificationCenter.current()
         var message = ""
@@ -98,10 +105,12 @@ class NotificationManager: ObservableObject {
         }
         return message
     }
+    
     func removeAllDeliveredNotifications() {
         let center = UNUserNotificationCenter.current()
         center.removeAllDeliveredNotifications()
     }
+    
     func removeAllPendingNotifications() {
         let center = UNUserNotificationCenter.current()
         center.removeAllPendingNotificationRequests()

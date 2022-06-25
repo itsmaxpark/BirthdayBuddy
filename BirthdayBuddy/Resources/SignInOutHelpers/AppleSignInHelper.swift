@@ -95,14 +95,14 @@ extension WelcomeScreenButtonsView: ASAuthorizationControllerDelegate {
                 guard let fullName = appleIDCredential.fullName else { return }
                 
                 guard let firstName = fullName.givenName else {
-                    WelcomeViewController.login()
+                    WelcomeVC.login()
                     print("Signing in using Apple Credentials")
                     return }
                 guard let lastName = fullName.familyName else { return }
                 print("Saving apple user to database")
                 DatabaseManager.shared.addUser(for: BirthdayBuddyUser(id: userID, firstName: firstName, lastName: lastName, emailAddress: email))
                 
-                WelcomeViewController.login()
+                WelcomeVC.login()
                 print("Signing in using Apple Credentials")
             }
         }

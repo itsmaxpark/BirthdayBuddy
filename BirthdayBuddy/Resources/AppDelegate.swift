@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let user = Auth.auth().currentUser {
             print("You have signed back in as \(user.uid) using \(user.email ?? "Unknown Email")")
             
-            WelcomeViewController.login()
+            WelcomeVC.login()
         }
         
         ApplicationDelegate.shared.application(

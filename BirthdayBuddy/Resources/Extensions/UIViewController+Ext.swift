@@ -28,6 +28,13 @@ extension UIViewController {
         view.addGestureRecognizer(tap)
     }
     
+    func presentBBAlert(title: String, message: String, buttonTitle: String) {
+        let alertVC = BBAlertVC(title: title, message: message, buttonTitle: buttonTitle)
+        alertVC.modalPresentationStyle = .overFullScreen
+        alertVC.modalTransitionStyle = .crossDissolve
+        present(alertVC, animated: true)
+    }
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }

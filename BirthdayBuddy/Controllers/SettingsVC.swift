@@ -12,15 +12,15 @@ protocol SettingsViewControllerDelegate: AnyObject {
     func getNumberOfBirthdays() -> String
 }
 
-class SettingsViewController: UIViewController {
+class SettingsVC: UIViewController {
     
     weak var delegate: SettingsViewControllerDelegate?
     
-    private let viewModels: [SettingsTableViewCellViewModel] = [
-        SettingsTableViewCellViewModel(text: "Statistics", color: .white),
+    private let viewModels: [SettingsCellViewModel] = [
+        SettingsCellViewModel(text: "Statistics", color: .white),
 //        SettingsTableViewCellViewModel(text: "Remove Delivered Notifications"),
-        SettingsTableViewCellViewModel(text: "Delete All Birthdays", color: .white),
-        SettingsTableViewCellViewModel(text: "Sign Out", color: .systemRed),
+        SettingsCellViewModel(text: "Delete All Birthdays", color: .white),
+        SettingsCellViewModel(text: "Sign Out", color: .systemRed),
     ]
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -31,12 +31,12 @@ class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.addSubview(tableView)
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .systemGray5
+        
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -44,7 +44,7 @@ class SettingsViewController: UIViewController {
     }
 }
 
-extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
+extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
     }

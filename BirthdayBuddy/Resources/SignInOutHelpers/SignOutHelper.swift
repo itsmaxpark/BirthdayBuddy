@@ -41,8 +41,8 @@ class SignOutHelper {
         do {
             try firebaseAuth.signOut()
             print("SignOutHelper: Firebase sign out successful")
-            WelcomeViewController.isLoggedIn = false
-            let vc = TabBarViewController()
+            WelcomeVC.isLoggedIn = false
+            let vc = TabBarVC()
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(vc)
             vc.presentWelcomeVC()
             

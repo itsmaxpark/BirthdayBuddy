@@ -42,7 +42,7 @@ class SettingsTableViewCell: UITableViewCell {
         )
     }
     
-    func configure(viewModel: SettingsTableViewCellViewModel) {
+    func configure(viewModel: SettingsCellViewModel) {
         cellTextLabel.text = viewModel.text
         cellTextLabel.textColor = viewModel.color
     }

@@ -8,5 +8,6 @@
 import UIKit
 
 enum Image {
-    
+    static let xMark = UIImage(systemName: "xmark")!
+    static let checkmark = UIImage(systemName: "checkmark.circle")!
 }

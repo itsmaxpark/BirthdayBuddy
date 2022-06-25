@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class WelcomeViewController: UIViewController {
+class WelcomeVC: UIViewController {
     
     static var isLoggedIn: Bool = false
     
@@ -39,13 +39,13 @@ class WelcomeViewController: UIViewController {
     }
     
     public static func login() {
-        WelcomeViewController.presentTabBarVC()
-        WelcomeViewController.isLoggedIn = true
+        WelcomeVC.presentTabBarVC()
+        WelcomeVC.isLoggedIn = true
     }
     
     private static func presentTabBarVC() {
         print("Presenting Tab Bar VC after successful login")
-        let vc = TabBarViewController()
+        let vc = TabBarVC()
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(vc, animated: true)
         
     }

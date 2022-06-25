@@ -52,7 +52,7 @@ class AddBirthdayBottomSheetTableViewCell: UITableViewCell {
         
     }
     
-    func configure(viewModel: AddBirthdayBottomSheetTableViewCellViewModel) {
+    func configure(viewModel: BottomSheetCellViewModel) {
         cellTextLabel.text = viewModel.text
         cellTextLabel.textColor = viewModel.textColor
         cellTextLabel.font = UIFont.systemFont(ofSize: viewModel.fontSize)

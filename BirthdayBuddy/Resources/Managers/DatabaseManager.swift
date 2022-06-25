@@ -135,6 +135,62 @@ extension DatabaseManager {
         imageRef.delete()
         
     }
+    
+    func fetchPerson(_ completion: @escaping (([Person]) -> Void)) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        var newPersons: [Person] = []
+        let birthdayRef = DatabaseManager.shared.usersRef.child("\(uid)/birthdays")
+        
+        birthdayRef
+            .queryOrdered(byChild: "daysLeft")
+            .observeSingleEvent(of: .value) { snapshot in
+                let group = DispatchGroup()
+                
+                for child in snapshot.children {
+                    if let snapshot = child as? DataSnapshot, var person = Person(snapshot: snapshot) {
+                        group.enter()
+                        self.fetchPicture(for: person) { data in
+                            person.picture = data
+                            newPersons.append(person)
+                            group.leave()
+                        }
+                    } else {
+                        group.leave()
+                    }
+                }
+                
+                group.notify(queue: .main) {
+                    newPersons.sort(by: { $0.daysLeft < $1.daysLeft })
+                    completion(newPersons)
+                }
+            }
+    }
+    
+    func fetchPicture(for person: Person, completion: @escaping ((Data?) -> Void)) {
+        guard let personID = person.id else { return }
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        var imageData: Data?
+        let birthdayRef = DatabaseManager.shared.usersRef.child("\(uid)/birthdays")
+        
+        birthdayRef.child("\(personID)/pictureURL").observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                guard let urlString = snapshot.value as? String else { return }
+                guard let url = URL(string: urlString) else { return }
+                
+                let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                    guard let data = data, error == nil else { return }
+                    
+                    imageData = data
+                    completion(imageData)
+                }
+                task.resume()
+            } else {
+                completion(nil)
+            }
+        }
+    }
 }
 
 

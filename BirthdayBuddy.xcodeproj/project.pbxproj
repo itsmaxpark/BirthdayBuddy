@@ -17,15 +17,15 @@
 		5068B65227F2B40300F1EEE5 /* TabBarBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65127F2B40300F1EEE5 /* TabBarBackgroundView.swift */; };
 		5068B65A27F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65927F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift */; };
 		5068B65C27F2CD1F00F1EEE5 /* CalendarMonthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068B65B27F2CD1F00F1EEE5 /* CalendarMonthViewModel.swift */; };
-		506C5A7C27FA889C0011A5B7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A7B27FA889C0011A5B7 /* HomeViewController.swift */; };
+		506C5A7C27FA889C0011A5B7 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A7B27FA889C0011A5B7 /* HomeVC.swift */; };
 		506C5A7E27FA90B10011A5B7 /* LargeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A7D27FA90B10011A5B7 /* LargeCollectionViewCell.swift */; };
 		506C5A8027FA99D90011A5B7 /* SmallCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A7F27FA99D90011A5B7 /* SmallCollectionViewCell.swift */; };
 		506C5A8327FAA1240011A5B7 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8227FAA1240011A5B7 /* SectionHeaderView.swift */; };
 		506C5A8627FAC4460011A5B7 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8527FAC4460011A5B7 /* Person.swift */; };
-		506C5A8927FBE55E0011A5B7 /* AddBirthdayBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8827FBE55E0011A5B7 /* AddBirthdayBottomSheetViewController.swift */; };
+		506C5A8927FBE55E0011A5B7 /* BottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8827FBE55E0011A5B7 /* BottomSheetVC.swift */; };
 		506C5A8B27FBED5C0011A5B7 /* AddBirthdayBottomSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8A27FBED5C0011A5B7 /* AddBirthdayBottomSheetTableViewCell.swift */; };
-		506C5A8D27FBF1810011A5B7 /* AddBirthdayBottomSheetTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8C27FBF1810011A5B7 /* AddBirthdayBottomSheetTableViewCellViewModel.swift */; };
-		506C5A8F27FBFABD0011A5B7 /* BetterAddBirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8E27FBFABD0011A5B7 /* BetterAddBirthdayViewController.swift */; };
+		506C5A8D27FBF1810011A5B7 /* BottomSheetCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8C27FBF1810011A5B7 /* BottomSheetCellViewModel.swift */; };
+		506C5A8F27FBFABD0011A5B7 /* AddBirthdayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A8E27FBFABD0011A5B7 /* AddBirthdayVC.swift */; };
 		506C5A9127FF7C090011A5B7 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A9027FF7C090011A5B7 /* TextFieldCell.swift */; };
 		506C5A9327FFA2150011A5B7 /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A9227FFA2150011A5B7 /* DatePickerCell.swift */; };
 		506C5A9727FFB2000011A5B7 /* BirthdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C5A9627FFB2000011A5B7 /* BirthdayCell.swift */; };
@@ -43,11 +43,18 @@
 		5091433E2865809A00268B79 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5091433D2865809A00268B79 /* UIView+Ext.swift */; };
 		50914340286580C200268B79 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5091433F286580C200268B79 /* UIImage+Ext.swift */; };
 		509143422865813A00268B79 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509143412865813A00268B79 /* Constants.swift */; };
-		5093F99627D6EB4800378967 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99527D6EB4800378967 /* WelcomeViewController.swift */; };
-		5093F99827D6ED3900378967 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99727D6ED3900378967 /* TabBarViewController.swift */; };
-		5093F99F27D6ED6A00378967 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99E27D6ED6A00378967 /* SettingsViewController.swift */; };
+		509143492866AB8D00268B79 /* CustomDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509143482866AB8D00268B79 /* CustomDateFormatter.swift */; };
+		5091434B2866B66B00268B79 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5091434A2866B66B00268B79 /* CalendarManager.swift */; };
+		5091434D2866BD7C00268B79 /* BBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5091434C2866BD7C00268B79 /* BBView.swift */; };
+		5091434F2866BE1E00268B79 /* BBLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5091434E2866BE1E00268B79 /* BBLabel.swift */; };
+		509143512866BEE600268B79 /* BBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509143502866BEE600268B79 /* BBButton.swift */; };
+		509143532866C38900268B79 /* BBAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509143522866C38900268B79 /* BBAlertVC.swift */; };
+		509143552866C3C100268B79 /* BBAlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509143542866C3C100268B79 /* BBAlertContainerView.swift */; };
+		5093F99627D6EB4800378967 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99527D6EB4800378967 /* WelcomeVC.swift */; };
+		5093F99827D6ED3900378967 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99727D6ED3900378967 /* TabBarVC.swift */; };
+		5093F99F27D6ED6A00378967 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99E27D6ED6A00378967 /* SettingsVC.swift */; };
 		5093F9A327D7123200378967 /* IndieFlower-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5093F9A127D7123200378967 /* IndieFlower-Regular.ttf */; };
-		509A6E24280231EF00655DD9 /* SettingsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A6E23280231EF00655DD9 /* SettingsTableViewCellViewModel.swift */; };
+		509A6E24280231EF00655DD9 /* SettingsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A6E23280231EF00655DD9 /* SettingsCellViewModel.swift */; };
 		509A6E282802BC1B00655DD9 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A6E272802BC1B00655DD9 /* StatisticsViewController.swift */; };
 		509A6E2A2803A58800655DD9 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A6E292803A58800655DD9 /* CalendarCollectionViewCell.swift */; };
 		509A6E2C2803C35B00655DD9 /* CalendarDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A6E2B2803C35B00655DD9 /* CalendarDay.swift */; };
@@ -76,15 +83,15 @@
 		5068B65127F2B40300F1EEE5 /* TabBarBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarBackgroundView.swift; sourceTree = "<group>"; };
 		5068B65927F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewCellViewModel.swift; sourceTree = "<group>"; };
 		5068B65B27F2CD1F00F1EEE5 /* CalendarMonthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthViewModel.swift; sourceTree = "<group>"; };
-		506C5A7B27FA889C0011A5B7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		506C5A7B27FA889C0011A5B7 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		506C5A7D27FA90B10011A5B7 /* LargeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeCollectionViewCell.swift; sourceTree = "<group>"; };
 		506C5A7F27FA99D90011A5B7 /* SmallCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCollectionViewCell.swift; sourceTree = "<group>"; };
 		506C5A8227FAA1240011A5B7 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		506C5A8527FAC4460011A5B7 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Person.swift; path = "/Users/max/Desktop/App Portfolio/BirthdayBuddy/BirthdayBuddy/Resources/Person.swift"; sourceTree = "<absolute>"; };
-		506C5A8827FBE55E0011A5B7 /* AddBirthdayBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBirthdayBottomSheetViewController.swift; sourceTree = "<group>"; };
+		506C5A8827FBE55E0011A5B7 /* BottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVC.swift; sourceTree = "<group>"; };
 		506C5A8A27FBED5C0011A5B7 /* AddBirthdayBottomSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBirthdayBottomSheetTableViewCell.swift; sourceTree = "<group>"; };
-		506C5A8C27FBF1810011A5B7 /* AddBirthdayBottomSheetTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBirthdayBottomSheetTableViewCellViewModel.swift; sourceTree = "<group>"; };
-		506C5A8E27FBFABD0011A5B7 /* BetterAddBirthdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterAddBirthdayViewController.swift; sourceTree = "<group>"; };
+		506C5A8C27FBF1810011A5B7 /* BottomSheetCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetCellViewModel.swift; sourceTree = "<group>"; };
+		506C5A8E27FBFABD0011A5B7 /* AddBirthdayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBirthdayVC.swift; sourceTree = "<group>"; };
 		506C5A9027FF7C090011A5B7 /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		506C5A9227FFA2150011A5B7 /* DatePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
 		506C5A9627FFB2000011A5B7 /* BirthdayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayCell.swift; sourceTree = "<group>"; };
@@ -102,12 +109,19 @@
 		5091433D2865809A00268B79 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		5091433F286580C200268B79 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		509143412865813A00268B79 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		5093F99527D6EB4800378967 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		5093F99727D6ED3900378967 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		5093F99E27D6ED6A00378967 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		509143482866AB8D00268B79 /* CustomDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDateFormatter.swift; sourceTree = "<group>"; };
+		5091434A2866B66B00268B79 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
+		5091434C2866BD7C00268B79 /* BBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBView.swift; sourceTree = "<group>"; };
+		5091434E2866BE1E00268B79 /* BBLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBLabel.swift; sourceTree = "<group>"; };
+		509143502866BEE600268B79 /* BBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBButton.swift; sourceTree = "<group>"; };
+		509143522866C38900268B79 /* BBAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBAlertVC.swift; sourceTree = "<group>"; };
+		509143542866C3C100268B79 /* BBAlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBAlertContainerView.swift; sourceTree = "<group>"; };
+		5093F99527D6EB4800378967 /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
+		5093F99727D6ED3900378967 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
+		5093F99E27D6ED6A00378967 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		5093F9A127D7123200378967 /* IndieFlower-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IndieFlower-Regular.ttf"; sourceTree = "<group>"; };
 		5093F9A927D844B000378967 /* BirthdayBuddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BirthdayBuddy.entitlements; sourceTree = "<group>"; };
-		509A6E23280231EF00655DD9 /* SettingsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		509A6E23280231EF00655DD9 /* SettingsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellViewModel.swift; sourceTree = "<group>"; };
 		509A6E272802BC1B00655DD9 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		509A6E292803A58800655DD9 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		509A6E2B2803C35B00655DD9 /* CalendarDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDay.swift; sourceTree = "<group>"; };
@@ -192,6 +206,9 @@
 			children = (
 				509143442865841A00268B79 /* Cells */,
 				509143432865840A00268B79 /* Custom Views */,
+				5091434E2866BE1E00268B79 /* BBLabel.swift */,
+				509143502866BEE600268B79 /* BBButton.swift */,
+				509143522866C38900268B79 /* BBAlertVC.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -203,6 +220,7 @@
 				506C5A8527FAC4460011A5B7 /* Person.swift */,
 				509A6E2B2803C35B00655DD9 /* CalendarDay.swift */,
 				509A6E2D2803C45900655DD9 /* MonthMetadata.swift */,
+				509143482866AB8D00268B79 /* CustomDateFormatter.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -212,9 +230,9 @@
 			children = (
 				5068B65927F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift */,
 				5068B65B27F2CD1F00F1EEE5 /* CalendarMonthViewModel.swift */,
-				506C5A8C27FBF1810011A5B7 /* AddBirthdayBottomSheetTableViewCellViewModel.swift */,
+				506C5A8C27FBF1810011A5B7 /* BottomSheetCellViewModel.swift */,
 				506C5A9C2800E84D0011A5B7 /* TextFieldCellViewModel.swift */,
-				509A6E23280231EF00655DD9 /* SettingsTableViewCellViewModel.swift */,
+				509A6E23280231EF00655DD9 /* SettingsCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -240,6 +258,7 @@
 			children = (
 				50DAC19C27DAE342006098D6 /* DatabaseManager.swift */,
 				505A97F6280505AF00951937 /* NotificationManager.swift */,
+				5091434A2866B66B00268B79 /* CalendarManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -265,6 +284,8 @@
 				506C5A8227FAA1240011A5B7 /* SectionHeaderView.swift */,
 				506D5B5A27D864D1009A9F39 /* WelcomeScreenButtonsView.swift */,
 				506D5B5827D8616B009A9F39 /* WelcomeScreenBackgroundView.swift */,
+				5091434C2866BD7C00268B79 /* BBView.swift */,
+				509143542866C3C100268B79 /* BBAlertContainerView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -290,12 +311,12 @@
 		509143452865844200268B79 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5093F99527D6EB4800378967 /* WelcomeViewController.swift */,
-				5093F99727D6ED3900378967 /* TabBarViewController.swift */,
-				506C5A7B27FA889C0011A5B7 /* HomeViewController.swift */,
-				506C5A8827FBE55E0011A5B7 /* AddBirthdayBottomSheetViewController.swift */,
-				506C5A8E27FBFABD0011A5B7 /* BetterAddBirthdayViewController.swift */,
-				5093F99E27D6ED6A00378967 /* SettingsViewController.swift */,
+				5093F99527D6EB4800378967 /* WelcomeVC.swift */,
+				5093F99727D6ED3900378967 /* TabBarVC.swift */,
+				506C5A7B27FA889C0011A5B7 /* HomeVC.swift */,
+				506C5A8827FBE55E0011A5B7 /* BottomSheetVC.swift */,
+				506C5A8E27FBFABD0011A5B7 /* AddBirthdayVC.swift */,
+				5093F99E27D6ED6A00378967 /* SettingsVC.swift */,
 				509A6E272802BC1B00655DD9 /* StatisticsViewController.swift */,
 			);
 			path = Controllers;
@@ -442,17 +463,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				509143552866C3C100268B79 /* BBAlertContainerView.swift in Sources */,
 				505A9801280551BB00951937 /* DeleteButtonCell.swift in Sources */,
-				5093F99627D6EB4800378967 /* WelcomeViewController.swift in Sources */,
+				5093F99627D6EB4800378967 /* WelcomeVC.swift in Sources */,
 				5066BA9627EA89DF008873BB /* GoogleSignInHelper.swift in Sources */,
 				509A6E2C2803C35B00655DD9 /* CalendarDay.swift in Sources */,
-				506C5A8F27FBFABD0011A5B7 /* BetterAddBirthdayViewController.swift in Sources */,
+				506C5A8F27FBFABD0011A5B7 /* AddBirthdayVC.swift in Sources */,
 				509A6E2E2803C45900655DD9 /* MonthMetadata.swift in Sources */,
+				5091434F2866BE1E00268B79 /* BBLabel.swift in Sources */,
 				509143422865813A00268B79 /* Constants.swift in Sources */,
 				506C5A9D2800E84D0011A5B7 /* TextFieldCellViewModel.swift in Sources */,
-				506C5A7C27FA889C0011A5B7 /* HomeViewController.swift in Sources */,
+				506C5A7C27FA889C0011A5B7 /* HomeVC.swift in Sources */,
 				506C5A8627FAC4460011A5B7 /* Person.swift in Sources */,
-				509A6E24280231EF00655DD9 /* SettingsTableViewCellViewModel.swift in Sources */,
+				509A6E24280231EF00655DD9 /* SettingsCellViewModel.swift in Sources */,
 				50DAC1A427DAEEB6006098D6 /* AppleSignInHelper.swift in Sources */,
 				505A97F7280505AF00951937 /* NotificationManager.swift in Sources */,
 				509143362865804F00268B79 /* UIViewController+Ext.swift in Sources */,
@@ -460,14 +483,16 @@
 				5056AF1F27D6B803008601FF /* AppDelegate.swift in Sources */,
 				505A97FF28052FDF00951937 /* NotificationsCell.swift in Sources */,
 				506C5A9127FF7C090011A5B7 /* TextFieldCell.swift in Sources */,
-				5093F99827D6ED3900378967 /* TabBarViewController.swift in Sources */,
+				509143512866BEE600268B79 /* BBButton.swift in Sources */,
+				5093F99827D6ED3900378967 /* TabBarVC.swift in Sources */,
 				50DAC1B127DBEA44006098D6 /* SettingsTableViewCell.swift in Sources */,
 				506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */,
 				506C5A9727FFB2000011A5B7 /* BirthdayCell.swift in Sources */,
 				5091433C2865808600268B79 /* UIFont+Ext.swift in Sources */,
-				506C5A8927FBE55E0011A5B7 /* AddBirthdayBottomSheetViewController.swift in Sources */,
+				506C5A8927FBE55E0011A5B7 /* BottomSheetVC.swift in Sources */,
 				506C5A7E27FA90B10011A5B7 /* LargeCollectionViewCell.swift in Sources */,
 				5091433A2865807B00268B79 /* Array+Ext.swift in Sources */,
+				5091434D2866BD7C00268B79 /* BBView.swift in Sources */,
 				509A6E282802BC1B00655DD9 /* StatisticsViewController.swift in Sources */,
 				50DAC1A627DAF237006098D6 /* EmailSignInHelper.swift in Sources */,
 				509143322865801E00268B79 /* Date+Ext.swift in Sources */,
@@ -475,9 +500,10 @@
 				5056AF2127D6B803008601FF /* SceneDelegate.swift in Sources */,
 				50DAC1B327DBEC97006098D6 /* SignOutHelper.swift in Sources */,
 				509143382865806300268B79 /* Calendar+Ext.swift in Sources */,
+				5091434B2866B66B00268B79 /* CalendarManager.swift in Sources */,
 				5068B65227F2B40300F1EEE5 /* TabBarBackgroundView.swift in Sources */,
 				509A6E2A2803A58800655DD9 /* CalendarCollectionViewCell.swift in Sources */,
-				506C5A8D27FBF1810011A5B7 /* AddBirthdayBottomSheetTableViewCellViewModel.swift in Sources */,
+				506C5A8D27FBF1810011A5B7 /* BottomSheetCellViewModel.swift in Sources */,
 				506C5A9327FFA2150011A5B7 /* DatePickerCell.swift in Sources */,
 				50914340286580C200268B79 /* UIImage+Ext.swift in Sources */,
 				5068B65A27F2CCD000F1EEE5 /* CarouselViewCellViewModel.swift in Sources */,
@@ -487,10 +513,12 @@
 				508EB38D27E2706700986FC8 /* FacebookSignInHelper.swift in Sources */,
 				5068B65C27F2CD1F00F1EEE5 /* CalendarMonthViewModel.swift in Sources */,
 				50DAC1B527DC0E79006098D6 /* CustomDesigns.swift in Sources */,
+				509143532866C38900268B79 /* BBAlertVC.swift in Sources */,
+				509143492866AB8D00268B79 /* CustomDateFormatter.swift in Sources */,
 				506D5B5927D8616B009A9F39 /* WelcomeScreenBackgroundView.swift in Sources */,
 				5091433E2865809A00268B79 /* UIView+Ext.swift in Sources */,
 				506C5A8327FAA1240011A5B7 /* SectionHeaderView.swift in Sources */,
-				5093F99F27D6ED6A00378967 /* SettingsViewController.swift in Sources */,
+				5093F99F27D6ED6A00378967 /* SettingsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

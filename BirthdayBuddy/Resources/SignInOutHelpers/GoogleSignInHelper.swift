@@ -59,7 +59,7 @@ class GoogleSignInHelper {
                     }
                     
                     
-                    WelcomeViewController.login()
+                    WelcomeVC.login()
                     print("GoogleSignInHelper: Logged In")
                 }
             }

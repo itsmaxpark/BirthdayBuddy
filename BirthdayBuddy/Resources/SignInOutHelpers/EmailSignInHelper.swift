@@ -106,7 +106,7 @@ class EmailSignInHelper {
             let userID = result.user.uid
             print("EmailSignInHelper: User successfully signed In - \(userID)")
             
-            WelcomeViewController.login()
+            WelcomeVC.login()
             print("EmailSignInHelper: Signing in using Email Credentials")
         }
         

@@ -9,11 +9,13 @@ import Foundation
 import UIKit
 
 struct CalendarMonthViewModel {
+    
     let name: String
     let id: Int
 }
 
 enum CalendarMonthViewModels {
+    
     static let viewModels: [CalendarMonthViewModel] = [
         CalendarMonthViewModel(name: "January", id: 1),
         CalendarMonthViewModel(name: "February", id: 2),

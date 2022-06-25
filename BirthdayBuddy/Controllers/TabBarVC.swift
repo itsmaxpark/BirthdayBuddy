@@ -7,11 +7,11 @@
 
 import UIKit
 
-class TabBarViewController: UITabBarController {
+class TabBarVC: UITabBarController {
     
-    private var betterHomeVC = HomeViewController()
-    private var addBirthdayBottomSheetVC = AddBirthdayBottomSheetViewController()
-    private var settingsVC = SettingsViewController()
+    private var homeVC = HomeVC()
+    private var addBirthdayBottomSheetVC = BottomSheetVC()
+    private var settingsVC = SettingsVC()
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -33,16 +33,17 @@ class TabBarViewController: UITabBarController {
     private func configureNavVC() {
         let config = UIImage.SymbolConfiguration(scale: .large)
         
-        let betterHomeNavVC = UINavigationController(rootViewController: betterHomeVC)
+        let betterHomeNavVC = UINavigationController(rootViewController: homeVC)
         let settingsNavVC = UINavigationController(rootViewController: settingsVC)
         
-        betterHomeVC.title = "Birthday Buddy"
+        homeVC.title = "Birthday Buddy"
         betterHomeNavVC.navigationBar.prefersLargeTitles = false
         betterHomeNavVC.navigationItem.largeTitleDisplayMode = .never
         betterHomeNavVC.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
         betterHomeNavVC.tabBarItem.image = UIImage(systemName: "house.fill")!.withBaselineOffset(fromBottom: 6)
         
         settingsVC.title = "Settings"
+        settingsVC.delegate = self
         settingsNavVC.title = "SettingsViewController"
         settingsNavVC.navigationBar.prefersLargeTitles = true
         settingsNavVC.navigationItem.largeTitleDisplayMode = .always
@@ -70,15 +71,15 @@ class TabBarViewController: UITabBarController {
     }
     
     public func presentWelcomeVC() {
-        if !WelcomeViewController.isLoggedIn {
-            let vc = WelcomeViewController()
+        if !WelcomeVC.isLoggedIn {
+            let vc = WelcomeVC()
             let nav = UINavigationController(rootViewController: vc)
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(nav)
         }
     }
     
     public func presentAddBirthdayVC() {
-        let vc = BetterAddBirthdayViewController()
+        let vc = AddBirthdayVC()
         vc.delegate = self
         let nav = UINavigationController(rootViewController: vc)
         self.present(nav, animated: true)
@@ -86,11 +87,11 @@ class TabBarViewController: UITabBarController {
 }
 
 // MARK: - Tab Bar Delegate
-extension TabBarViewController: UITabBarControllerDelegate {
+extension TabBarVC: UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        if viewController is AddBirthdayBottomSheetViewController {
-            let vc = AddBirthdayBottomSheetViewController()
+        if viewController is BottomSheetVC {
+            let vc = BottomSheetVC()
             if let sheet = vc.sheetPresentationController {
                 sheet.detents = [.medium()]
             }
@@ -102,16 +103,20 @@ extension TabBarViewController: UITabBarControllerDelegate {
 }
 
 // MARK: - Add Birthday VC Delegate
-extension TabBarViewController: AddBirthdayViewControllerDelegate {
+extension TabBarVC: AddBirthdayViewControllerDelegate {
     
     func refreshCollectionView() {
         guard let nav = viewControllers?[0] as? UINavigationController else { return }
-        guard let vc = nav.viewControllers.first as? HomeViewController else { return }
-        
-        vc.fetchPerson { _ in
-            // Might not be on main thread
-            vc.collectionView.reloadData()
-        }
+        guard let vc = nav.viewControllers.first as? HomeVC else { return }
+        vc.collectionView.reloadData()
+    }
+}
+
+// MARK: - Settings VC Delegate
+extension TabBarVC: SettingsViewControllerDelegate {
+    
+    func getNumberOfBirthdays() -> String {
+        homeVC.getNumberOfBirthdays()
     }
 }
 

@@ -7,7 +7,8 @@
 
 import UIKit
 
-struct SettingsTableViewCellViewModel {
+struct SettingsCellViewModel {
+    
     let text: String?
     let color: UIColor
 }

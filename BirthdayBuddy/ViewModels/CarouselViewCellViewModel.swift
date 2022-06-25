@@ -8,5 +8,6 @@
 import Foundation
 
 struct CarouselViewCellViewModel {
+    
     let viewModels: [CalendarMonthViewModel]
 }

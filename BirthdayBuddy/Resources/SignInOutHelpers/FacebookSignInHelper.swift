@@ -69,7 +69,7 @@ class FacebookSignInHelper {
                             guard let result = authResult, error == nil else { return }
                             let userID = result.user.uid
                             DatabaseManager.shared.addUser(for: BirthdayBuddyUser(id: userID, firstName: firstName, lastName: lastName, emailAddress: email))
-                            WelcomeViewController.login()
+                            WelcomeVC.login()
                             print("FacebookSignInHelper: Logged In")
                         }
                     }

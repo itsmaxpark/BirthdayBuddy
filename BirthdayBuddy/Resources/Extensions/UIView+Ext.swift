@@ -46,4 +46,8 @@ extension UIView {
             return nil
         }
     }
+    
+    func addSubviews(_ views: UIView...) {
+        for view in views { addSubview(view) }
+    }
 }
