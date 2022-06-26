@@ -50,6 +50,8 @@
 		509143512866BEE600268B79 /* BBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509143502866BEE600268B79 /* BBButton.swift */; };
 		509143532866C38900268B79 /* BBAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509143522866C38900268B79 /* BBAlertVC.swift */; };
 		509143552866C3C100268B79 /* BBAlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509143542866C3C100268B79 /* BBAlertContainerView.swift */; };
+		509143572867B9AF00268B79 /* BBImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509143562867B9AF00268B79 /* BBImageView.swift */; };
+		509143592867BDCC00268B79 /* BBTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509143582867BDCC00268B79 /* BBTextField.swift */; };
 		5093F99627D6EB4800378967 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99527D6EB4800378967 /* WelcomeVC.swift */; };
 		5093F99827D6ED3900378967 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99727D6ED3900378967 /* TabBarVC.swift */; };
 		5093F99F27D6ED6A00378967 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093F99E27D6ED6A00378967 /* SettingsVC.swift */; };
@@ -116,6 +118,8 @@
 		509143502866BEE600268B79 /* BBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBButton.swift; sourceTree = "<group>"; };
 		509143522866C38900268B79 /* BBAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBAlertVC.swift; sourceTree = "<group>"; };
 		509143542866C3C100268B79 /* BBAlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBAlertContainerView.swift; sourceTree = "<group>"; };
+		509143562867B9AF00268B79 /* BBImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBImageView.swift; sourceTree = "<group>"; };
+		509143582867BDCC00268B79 /* BBTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBTextField.swift; sourceTree = "<group>"; };
 		5093F99527D6EB4800378967 /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		5093F99727D6ED3900378967 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		5093F99E27D6ED6A00378967 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
@@ -209,6 +213,8 @@
 				5091434E2866BE1E00268B79 /* BBLabel.swift */,
 				509143502866BEE600268B79 /* BBButton.swift */,
 				509143522866C38900268B79 /* BBAlertVC.swift */,
+				509143562867B9AF00268B79 /* BBImageView.swift */,
+				509143582867BDCC00268B79 /* BBTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -476,6 +482,7 @@
 				506C5A7C27FA889C0011A5B7 /* HomeVC.swift in Sources */,
 				506C5A8627FAC4460011A5B7 /* Person.swift in Sources */,
 				509A6E24280231EF00655DD9 /* SettingsCellViewModel.swift in Sources */,
+				509143592867BDCC00268B79 /* BBTextField.swift in Sources */,
 				50DAC1A427DAEEB6006098D6 /* AppleSignInHelper.swift in Sources */,
 				505A97F7280505AF00951937 /* NotificationManager.swift in Sources */,
 				509143362865804F00268B79 /* UIViewController+Ext.swift in Sources */,
@@ -484,6 +491,7 @@
 				505A97FF28052FDF00951937 /* NotificationsCell.swift in Sources */,
 				506C5A9127FF7C090011A5B7 /* TextFieldCell.swift in Sources */,
 				509143512866BEE600268B79 /* BBButton.swift in Sources */,
+				509143572867B9AF00268B79 /* BBImageView.swift in Sources */,
 				5093F99827D6ED3900378967 /* TabBarVC.swift in Sources */,
 				50DAC1B127DBEA44006098D6 /* SettingsTableViewCell.swift in Sources */,
 				506D5B5B27D864D1009A9F39 /* WelcomeScreenButtonsView.swift in Sources */,

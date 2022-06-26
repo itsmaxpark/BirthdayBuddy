@@ -17,8 +17,9 @@ class BBView: UIView {
         fatalError()
     }
     
-    convenience init(backgroundColor: UIColor) {
+    convenience init(backgroundColor: UIColor, isAutoLayoutOff: Bool) {
         self.init(frame: .zero)
         self.backgroundColor = backgroundColor
+        self.translatesAutoresizingMaskIntoConstraints = isAutoLayoutOff
     }
 }

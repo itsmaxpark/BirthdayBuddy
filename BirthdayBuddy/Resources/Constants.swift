@@ -10,4 +10,5 @@ import UIKit
 enum Image {
     static let xMark = UIImage(systemName: "xmark")!
     static let checkmark = UIImage(systemName: "checkmark.circle")!
+    static let person = UIImage(systemName: "person.crop.circle.fill")!
 }

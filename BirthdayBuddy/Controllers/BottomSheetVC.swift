@@ -11,7 +11,7 @@ class BottomSheetVC: UIViewController {
     
     private let cellViewModel = BottomSheetCellViewModels.viewModels
     
-    private let headerView = BBView(backgroundColor: .systemBackground)
+    private let headerView = BBView(backgroundColor: .systemBackground, isAutoLayoutOff: true)
     private let headerTextLabel = BBLabel(text: "Create New", font: .systemFont(ofSize: 15), textColor: .systemGray)
     private let closeButton = BBButton(image: Image.xMark, contentMode: .scaleAspectFill)
     private let tableView = UITableView()

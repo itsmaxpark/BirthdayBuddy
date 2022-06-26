@@ -35,6 +35,7 @@ class HomeVC: UIViewController {
             self.persons = newPersons
             self.monthData = CalendarManager.shared.getMonthData()
             self.collectionView.reloadData()
+            print(self.persons as Any)
         })
     }
     

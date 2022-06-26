@@ -150,6 +150,7 @@ extension DatabaseManager {
                 for child in snapshot.children {
                     if let snapshot = child as? DataSnapshot, var person = Person(snapshot: snapshot) {
                         group.enter()
+                        print(person)
                         self.fetchPicture(for: person) { data in
                             person.picture = data
                             newPersons.append(person)

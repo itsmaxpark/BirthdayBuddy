@@ -22,16 +22,15 @@ class AddBirthdayVC: UIViewController, UITextFieldDelegate, UINavigationControll
     weak var delegate: AddBirthdayViewControllerDelegate?
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var persons: [Person]?
-    var isCalendarSwitchOn: Bool = false
-    var isNotificationSwitchOn: Bool = true
-    var birthdaySection: Section = Section()
-    var chosenPerson: Person?
-    var isEditModeOn: Bool = false
-    lazy var imagePicker = UIImagePickerController()
-    var chosenImage: UIImage?
-    var birthdayText: String?
-    var birthdayDate: Date? {
+    private var textFieldViewModels = TextFieldCellViewModels.viewModels
+    private var persons: [Person]?
+    private var birthdaySection: Section = Section()
+    private var isCalendarSwitchOn: Bool = false
+    private var isNotificationSwitchOn: Bool = true
+    private var imagePicker = UIImagePickerController()
+    private var chosenImage: UIImage?
+    private var birthdayText: String?
+    private var birthdayDate: Date?  = Date() {
         didSet {
             if isCalendarSwitchOn {
                 birthdayText = birthdayDate?.getString(components: [.month, .day, .year]) ?? ""
@@ -42,39 +41,15 @@ class AddBirthdayVC: UIViewController, UITextFieldDelegate, UINavigationControll
         }
     }
     
-    private var textFieldViewModels: [TextFieldCellViewModel] = [
-        TextFieldCellViewModel(text: nil, placeholder: "First Name"),
-        TextFieldCellViewModel(text: nil, placeholder: "Last Name"),
-    ]
+    public var chosenPerson: Person?
+    public var isEditModeOn: Bool = false
     
     // MARK: - UI Components
-    private let pictureBackgroundView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemBackground
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private let pictureView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(systemName: "person.crop.circle.fill")
-        imageView.layer.cornerRadius = 60
-        imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    private let changePictureButton: UIButton = {
-        let button = UIButton()
-        button.titleLabel?.font = UIFont.appFont(name: "Rubik", size: 20)
-        button.setTitle("Change Photo", for: .normal)
-        button.setTitleColor(UIColor.systemBlue, for: .normal)
-        button.layer.cornerRadius = 10
-        button.layer.borderColor = UIColor.systemBlue.cgColor
-        button.layer.borderWidth = 2.0
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+    private let pictureBackgroundView = BBView(backgroundColor: .systemBackground, isAutoLayoutOff: false)
+    private let pictureView = BBImageView(image: Image.person, cornerRadius: 60, clipsToBounds: true, contentMode: .scaleAspectFill)
+    private let changePictureButton = BBButton(titleColor: .systemBlue, title: "Change Photo", font: UIFont.appFont(name: "Rubik", size: 20))
+    private let firstNameField = BBTextField(placeholder: "First Name")
+    private let lastNameField = BBTextField(placeholder: "Last Name")
     private let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -91,51 +66,41 @@ class AddBirthdayVC: UIViewController, UITextFieldDelegate, UINavigationControll
         ) // topmost header
         return table
     }()
-    private let firstNameField: UITextField = {
-        let field = UITextField()
-        field.placeholder = "First Name"
-        field.translatesAutoresizingMaskIntoConstraints = false
-        field.textColor = .systemGray
-        return field
-    }()
-    private let lastNameField: UITextField = {
-        let field = UITextField()
-        field.placeholder = "Last Name"
-        field.translatesAutoresizingMaskIntoConstraints = false
-        field.textColor = .systemGray
-        return field
-    }()
     
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureVC()
+        configureUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.chosenImage != nil {
+            pictureView.image = self.chosenImage
+        }
+    }
+    
+    private func configureVC() {
         view.backgroundColor = .systemBackground
+        self.setupHideKeyboardOnTap()
         
         if isEditModeOn {
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(didTapSave))
+            editModeSetup()
         } else {
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didTapDone))
         }
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancel))
-        
-        view.addSubview(pictureBackgroundView)
-        pictureBackgroundView.addSubview(pictureView)
-        view.addSubview(changePictureButton)
-        changePictureButton.addTarget(self, action: #selector(didTapChange), for: .touchUpInside)
-        
-        view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
-        self.setupHideKeyboardOnTap()
-        birthdayDate = Date()
-        
-        if isEditModeOn {
-            editModeSetup()
-        }
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    private func configureUI() {
+        view.addSubviews(pictureBackgroundView, changePictureButton, tableView)
+        pictureBackgroundView.addSubview(pictureView)
+        changePictureButton.addTarget(self, action: #selector(didTapChange), for: .touchUpInside)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         
         NSLayoutConstraint.activate([
             pictureView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -152,48 +117,32 @@ class AddBirthdayVC: UIViewController, UITextFieldDelegate, UINavigationControll
             tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
         ])
     }
-                                    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if self.chosenImage != nil {
-            pictureView.image = self.chosenImage
-        }
-    }
     
-    func fetchPerson() {
+    private func fetchPerson() {
         self.delegate?.refreshCollectionView()
     }
     
-    func editModeSetup() {
-        guard let person = chosenPerson else {
-            print("Failed to get person")
-            return
-        }
-        // 1. Setup picture
+    private func editModeSetup() {
+        guard let person = chosenPerson else { return }
         let data = person.picture
+        
         if data == nil {
             pictureView.image = UIImage(systemName: "person.crop.circle.fill")
         } else {
             pictureView.image = UIImage(data: data!)
             chosenImage = pictureView.image
         }
-        // 2. Setup Text Fields
         textFieldViewModels[0].text = person.firstName
         textFieldViewModels[1].text = person.lastName
-        // 3. Setup Birthday Cell
         birthdayDate = person.birthday
-        // 4. Setup Notifications Cell
         isNotificationSwitchOn = person.hasNotifications
     }
     
 // MARK: - Selectors
-    @objc func didTapSave() {
+    @objc private func didTapSave() {
+        guard var person = chosenPerson else { return }
         guard let field = textFieldViewModels[0].text, !field.isEmpty else {
             presentBBAlert(title: "Whoops", message: "Please enter a first name", buttonTitle: "Ok")
-            return
-        }
-        guard var person = chosenPerson else {
-            print("Failed to get person")
             return
         }
         
@@ -221,20 +170,19 @@ class AddBirthdayVC: UIViewController, UITextFieldDelegate, UINavigationControll
             case .success():
                 self.delegate?.refreshCollectionView()
                 self.dismiss(animated: true)
-            case .failure(let error):
-                print("didTapSave: \(error.localizedDescription)")
+            case .failure(_):
+                break
             }
         }
         self.dismiss(animated: true)
-        // Repopulate persons array
     }
     
-    @objc func didTapDone() {
-        // Create new person object
+    @objc private func didTapDone() {
         guard let field = textFieldViewModels[0].text, !field.isEmpty else {
             presentBBAlert(title: "Whoops", message: "Please enter a first name", buttonTitle: "Ok")
             return
         }
+        
         let firstName = textFieldViewModels[0].text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let lastName = textFieldViewModels[1].text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let birthday = birthdayDate
@@ -269,28 +217,28 @@ class AddBirthdayVC: UIViewController, UITextFieldDelegate, UINavigationControll
     }
     
     @objc func didTapCancel() {
-        // Dismisses the bottomSheet view controller with BetterAddBirthdayVC
         self.dismiss(animated: true)
     }
     
     @objc func didTapChange() {
-        
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         let actionSheet = UIAlertController(title: "Take or Choose Photo", message: nil, preferredStyle: .actionSheet)
+        
         actionSheet.addAction(UIAlertAction(title: "Take Picture", style: .default, handler: { action in
             if UIImagePickerController.isSourceTypeAvailable(.camera) {
                 self.imagePicker.sourceType = .camera
                 self.present(self.imagePicker, animated: true)
-            } else {
-                print("Camera not available")
             }
         }))
+        
         actionSheet.addAction(UIAlertAction(title: "Choose Picture", style: .default, handler: { action in
             self.imagePicker.sourceType = .photoLibrary
             self.present(self.imagePicker, animated: true)
         }))
+        
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
         self.present(actionSheet, animated: true)
     }
 }
@@ -304,96 +252,62 @@ extension AddBirthdayVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0:
-            return 2
-        case 1:
-            if birthdaySection.isOpen {
-                return 3 // 3 table cells are needed to account for the title section
-            } else {
-                return 1
-            }
-        default:
-            return 1
+        case 0: return 2
+        case 1: if birthdaySection.isOpen { return 3 } else { return 1 }
+        default: return 1
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: TextFieldCell.identifier,
-                for: indexPath
-            ) as? TextFieldCell else {
-                fatalError()
-            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldCell.identifier, for: indexPath) as! TextFieldCell
             cell.delegate = self
             cell.configure(with: textFieldViewModels[indexPath.row])
+            
             return cell
+            
         case 1:
             if birthdaySection.isOpen {
                 switch indexPath.row {
                 case 0: // BirthdayCell
-                    guard let cell = tableView.dequeueReusableCell(
-                        withIdentifier: BirthdayCell.identifier,
-                        for: indexPath
-                    ) as? BirthdayCell else {
-                        fatalError()
-                    }
-                    // change birthday text based on year toggle
+                    let cell = tableView.dequeueReusableCell(withIdentifier: BirthdayCell.identifier, for: indexPath) as! BirthdayCell
                     cell.configure(date: birthdayText ?? "")
+                    
                     return cell
+                    
                 case 1: // DatePickerCell
-                    guard let cell = tableView.dequeueReusableCell(
-                        withIdentifier: DatePickerCell.identifier,
-                        for: indexPath
-                    ) as? DatePickerCell else {
-                        fatalError()
-                    }
+                    let cell = tableView.dequeueReusableCell(withIdentifier: DatePickerCell.identifier, for: indexPath) as! DatePickerCell
                     cell.customDelegate = self
                     cell.showYear = isCalendarSwitchOn
                     cell.setupDatePicker(date: self.birthdayDate ?? Date())
-//                    cell.refreshBirthdayText()
+                    
                     return cell
+                    
                 default: // YearToggleCell
-                    guard let cell = tableView.dequeueReusableCell(
-                        withIdentifier: YearToggleCell.identifier,
-                        for: indexPath
-                    ) as? YearToggleCell else {
-                        fatalError()
-                    }
+                    let cell = tableView.dequeueReusableCell(withIdentifier: YearToggleCell.identifier, for: indexPath) as! YearToggleCell
                     cell.delegate = self
+                    
                     return cell
                 }
             } else {
-                guard let cell = tableView.dequeueReusableCell(
-                    withIdentifier: BirthdayCell.identifier,
-                    for: indexPath
-                ) as? BirthdayCell else {
-                    fatalError()
-                }
+                let cell = tableView.dequeueReusableCell(withIdentifier: BirthdayCell.identifier, for: indexPath) as! BirthdayCell
                 cell.configure(date: birthdayText ?? "")
+                
                 return cell
             }
+            
         case 2: // Notifications Cell
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: NotificationsCell.identifier,
-                for: indexPath
-            ) as? NotificationsCell else {
-                fatalError()
-            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: NotificationsCell.identifier, for: indexPath) as! NotificationsCell
             cell.delegate = self
-            if isEditModeOn {
-                cell.configure(isNotificationSwitchOn)
-            }
+            if isEditModeOn { cell.configure(isNotificationSwitchOn) }
+            
             return cell
+            
         default:
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: DeleteButtonCell.identifier,
-                for: indexPath
-            ) as? DeleteButtonCell else {
-                fatalError()
-            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: DeleteButtonCell.identifier, for: indexPath) as! DeleteButtonCell
             cell.delegate = self
+            
             return cell
         }
     }
@@ -408,54 +322,56 @@ extension AddBirthdayVC: UITableViewDelegate, UITableViewDataSource {
                 birthdaySection.isOpen.toggle()
                 tableView.reloadData()
             }
-            guard let cell = tableView.cellForRow(at: indexPath) as? TextFieldCell else { fatalError() }
+            let cell = tableView.cellForRow(at: indexPath) as! TextFieldCell
             cell.textField.isUserInteractionEnabled = true
             cell.textField.becomeFirstResponder()
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 1 && birthdaySection.isOpen && indexPath.row == 1 {
-            return 200
-        }
+        if indexPath.section == 1 && birthdaySection.isOpen && indexPath.row == 1 { return 200 }
         return 44
     }
 }
 
 // MARK: - CustomPickerViewDelegate
 extension AddBirthdayVC: CustomPickerViewDelegate {
+    
     func pickerViewSetDate(date: Date) {
         self.birthdayDate = date
     }
+    
     func getNextBirthday(date: Date) -> Date {
-        // Get current date
         let currentDate = Calendar.current.dateComponents([.day, .month, .year], from: Date())
-        // get birthday date
         var birthday = Calendar.current.dateComponents([.day,.month,.year], from: date)
-        // set birthday year to current year
         birthday.year = currentDate.year
-        // if birthday already happened this year, add 1 to year
         let numberOfDays = Calendar.current.dateComponents([.day], from: currentDate, to: birthday).day!
         if numberOfDays < 0 {
             birthday.year! += 1
         }
         let nextBirthday = Calendar.current.date(from: birthday)
+        
         return nextBirthday!
     }
 }
-// MARK: UIImagePickerControllerDelegate
+
+// MARK: - UIImagePickerControllerDelegate
 extension AddBirthdayVC: UIImagePickerControllerDelegate {
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         self.chosenImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
         self.pictureView.image = self.chosenImage
         self.dismiss(animated: true)
     }
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true)
     }
 }
-// MARK: TextFieldCellDelegate
+
+// MARK: - TextFieldCellDelegate
 extension AddBirthdayVC: TextFieldCellDelegate {
+    
     func didEditTextField(textField: UITextField) {
         if textField.placeholder == "First Name" {
             textFieldViewModels[0].text = textField.text
@@ -464,25 +380,29 @@ extension AddBirthdayVC: TextFieldCellDelegate {
         }
     }
 }
-// MARK: YearToggleDelegate
+// MARK: - YearToggleDelegate
 extension AddBirthdayVC: YearToggleCellDelegate {
+    
     func switchChanged(cell: YearToggleCell) {
         isCalendarSwitchOn.toggle()
         pickerViewSetDate(date: birthdayDate!) // refresh date text when year is toggled
     }
 }
-// MARK: NotificationsCellDelegate
+
+// MARK: - NotificationsCellDelegate
 extension AddBirthdayVC: NotificationsCellDelegate {
+    
     func switchChanged(cell: NotificationsCell) {
         isNotificationSwitchOn.toggle()
         tableView.reloadData()
     }
 }
-// MARK: DeleteButtonDelegate
+
+// MARK: - DeleteButtonDelegate
 extension AddBirthdayVC: DeleteButtonCellDelegate {
+    
     func didTapDelete(cell: DeleteButtonCell) {
         guard let person = self.chosenPerson else { return }
-        // create alert
         
         let message = "Remove \(person.firstName ?? "") \(person.lastName ?? "") from Birthday Buddy"
         let alert = UIAlertController(title: "Delete", message: message, preferredStyle: .alert)

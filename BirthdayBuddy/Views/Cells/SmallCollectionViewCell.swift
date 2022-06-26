@@ -153,8 +153,7 @@ class SmallCollectionViewCell: UICollectionViewCell {
         let daysLeft = Calendar.current.numberOfDaysBetween(Date(), and: nextBirthday)
         daysUntilBirthdayLabel.text = configureDaysLeftText(daysLeft: daysLeft)
         
-        guard let data = person.picture else {
-            pictureView.image = UIImage(systemName: "person.crop.circle.fill")
+        guard let data = person.picture else { pictureView.image = Image.person
             return
         }
         pictureView.image = UIImage(data: data)

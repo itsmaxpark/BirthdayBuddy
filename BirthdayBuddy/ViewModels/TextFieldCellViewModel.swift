@@ -12,3 +12,12 @@ struct TextFieldCellViewModel {
     var text: String?
     let placeholder: String
 }
+
+enum TextFieldCellViewModels {
+    
+    static let viewModels: [TextFieldCellViewModel] = [
+        TextFieldCellViewModel(text: nil, placeholder: "First Name"),
+        TextFieldCellViewModel(text: nil, placeholder: "Last Name"),
+    ]
+}
+

@@ -29,6 +29,18 @@ class BBButton: UIButton {
         set(color: color, title: title, image: image)
     }
     
+    convenience init(titleColor: UIColor, title: String, font: UIFont) {
+        self.init(frame: .zero)
+        self.titleLabel?.font = font
+        self.setTitle(title, for: .normal)
+        self.setTitleColor(titleColor, for: .normal)
+        
+        self.layer.cornerRadius = 10
+        self.layer.borderWidth = 2.0
+        self.layer.borderColor = UIColor.systemBlue.cgColor
+        self.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     private func configure() {
         configuration = .tinted()
         configuration?.cornerStyle = .medium
@@ -45,3 +57,11 @@ class BBButton: UIButton {
         configuration?.imagePlacement = .leading
     }
 }
+
+//button.titleLabel?.font = UIFont.appFont(name: "Rubik", size: 20)
+//button.setTitle("Change Photo", for: .normal)
+//button.setTitleColor(UIColor.systemBlue, for: .normal)
+//button.layer.cornerRadius = 10
+//button.layer.borderColor = UIColor.systemBlue.cgColor
+//button.layer.borderWidth = 2.0
+//button.translatesAutoresizingMaskIntoConstraints = false
