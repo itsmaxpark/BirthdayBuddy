@@ -1,14 +1,7 @@
 
-# Birthday Buddy
-<br />
-<p align="center">
-  <a href="https://github.com/itsmaxpark/BirthdayBuddy/edit/main/README.md">
-    <img src="images/App IconsAppIconNew.png" alt="Logo" width="160" height="160">
-  </a>
-  <p align="center">
-    A birthday reminder app to never forget the important dates of your friends and family. Offers realtime cloud database synchronization and notification alerts. Written in Swift and UIKit programmatically with no storyboards.
-  </p>
-</p>
+# BirthdayBuddy
+
+### Screen Shots
 
 <p align="row">
   <img src= "images/welcome.png" width="400" >
@@ -19,23 +12,55 @@
   <img src= "images/edit_birthday.png" width="400" >
 </p>
 
-## Features
+---
 
-- [x] Feature 1
-- [x] Feature 2
-- [x] Feature 3
-- [x] Feature 4
-- [x] Feature 5
+### Table of Contents
 
-## Requirements
+- [Description](#description)
+- [How To Use](#how-to-use)
+- [Author Info](#author-info)
 
-- iOS 15.5+
-- Xcode 13.3
+---
 
-## Installation
+## Description
 
+- A simple reminder app for birthdays
 
-## Meta
+- Each birthday can have an associated profile picture
 
-Max Park – [@_maxpark](https://twitter.com/_maxpark) – itsmaxpark@gmail.com
+- Alerts user when today is a birthday by using User Notifications
 
+- Project was completed using 100% programmatic UI (No Storyboard)
+
+- MVC design pattern
+
+#### Frameworks
+
+- UIKit
+- Firebase Database and User Authentication (Google, Facebook, Apple, Email)
+- UserNotifications
+- NotificationCenter
+
+---
+
+### What I Learned:
+- How to make a custom Date Picker and Calendar
+- Collection Views with Compositional Layouts
+- When to use notifications/observers vs. delegates/protocols
+- Setting up autolayout to work with all iPhone devices
+- How to manage disk and network usage with Firebase
+- Switching from a CoreData model to Firebase
+---
+
+## How To Use
+
+- Clone the project and run it on Xcode 13 or above
+- Will soon upload to TestFlight and then App Store
+---
+
+## Author Info
+
+- Twitter - [@_maxpark](https://twitter.com/_maxpark)
+- Website - [LinkedIn: Max Park](https://www.linkedin.com/in/itsmaxpark/)
+
+[Back To The Top](#BirthdayBuddy)
