@@ -11,10 +11,12 @@
 </p>
 
 <p align="row">
-  <img src= "images/welcome.png" width="250" >
-  <img src= "images/home1.png" width="250" >
-  <img src= "images/home2.png" width="250" >
-  <img src= "images/edit_birthday.png" width="250" >
+  <img src= "images/welcome.png" width="400" >
+  <img src= "images/home1.png" width="400" >
+</p>
+<p align="row">
+  <img src= "images/home2.png" width="400" >
+  <img src= "images/edit_birthday.png" width="400" >
 </p>
 
 ## Features
