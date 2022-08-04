@@ -27,13 +27,13 @@
 
 ## Requirements
 
-- iOS 14.0+
-- Xcode 7.3
+- iOS 15.5+
+- Xcode 13.3
 
 ## Installation
 
 
 ## Meta
 
-Your Name – [@_maxpark](https://twitter.com/_maxpark) – itsmaxpark@gmail.com
+Max Park – [@_maxpark](https://twitter.com/_maxpark) – itsmaxpark@gmail.com
 
